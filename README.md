@@ -1,2 +1,2 @@
 # api
-Resoures for the Bungie.Net API
+Resources for the Bungie.Net API
