@@ -61,6 +61,8 @@ The API itself is currently offline in anticipation of the release of Destiny 2.
 - Grab [openapi.json](https://github.com/Bungie-net/api/blob/master/openapi.json) for the OpenAPI 3.0.0 specs
 - Grab [openapi-2.json](https://github.com/Bungie-net/api/blob/master/openapi-2.json) for the 2.0.0 specs
 
+NOTE: There are currently bugs in the generated documentation: it worked well enough to build the HTML documentation you'll see at the links above, but users are reporting a variety of issues - and in some cases, missing data - when they go to generate clients.  I will be looking into those issues this weekend!
+
 # Extension Properties on OpenAPI Specs (or, how to generate much cooler clients for the BNet API if you want to take the time to do so)
 
 - **x-mapped-definition** = This property has hash identifiers that map to a Manifest Database definition.  This property will reveal which type of Manifest Database definition it points to.  If it's a uint32, it points to a single definition.  If it's a List<uint32>, each value points to a different definition.  If it's a Dictionary<uint32, X>, its' keys point to different definitions.
