@@ -29,8 +29,21 @@ This section will be added to as time goes by - we're working with it as we go!
 
 - ### Component-based Destiny Requests
   - [Destiny2.GetProfile](https://bungie-net.github.io/multi/operation_get_Destiny2-GetProfile.html#operation_get_Destiny2-GetProfile), [Destiny2.GetCharacter](https://bungie-net.github.io/multi/operation_get_Destiny2-GetCharacter.html#operation_get_Destiny2-GetCharacter), and [Destiny2.GetItem](https://bungie-net.github.io/multi/operation_get_Destiny2-GetItem.html#operation_get_Destiny2-GetItem) are now the fundamental building blocks of Destiny data, replacing our large and disparate specialized endpoints.
-  - GetCharacter and GetItem are provided 
+  - GetCharacter and GetItem are provided for situations where you know the specific character or item you're looking at in your UI, but we fully anticipate that most calls will be made through GetProfile.  At any layer of depth, you can now get any data for the layer below by passing the components you want returned in the ?components= querystring parameter of the method.  (NOTE: I would link to DestinyComponentType here, but I just noticed it's not being output yet.  I will fix that in the morning.  In the meantime, you can infer the components by examining the Response objects from the methods linked above)
+  - For example, you can pass the CharacterInventories component to GetProfile, and you will receive the full inventory for all characters (provided that they have granted you permission to access that data, in the same way as in Destiny 1: our privacy policies and settings have not changed since D1, and still apply to D2 data).
+  - In this way, my hope is that we can reduce the number of round trips you're currently having to make, while letting you control how much bandwidth you use up.  Ask for only the components that you need!
 
+- ### Milestones
+  - Advisors have disappeared, but in their place are ["Milestones"](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Milestones-DestinyMilestoneDefinition.html#schema_Destiny-Definitions-Milestones-DestinyMilestoneDefinition).  Mirroring the game's concept of Milestones, these reflect all of the activities that a player can do in game.  Essentially these become Advisors with matching Definition data, which reduces the payload we have to return in live requests and makes including Milestone information as part of a Profile or Character request more feasible.
+  - We will, as we did with Advisors, tack on additional data that we can associate with the Milestone where possible and add to it over time.
+  - Milestones will, like Advisors, continue to evolve over time - and, like Advisors, I will probably come to regret how I implemented our view of them.  But for now, I feel hopeful.
+  - Like Advisors, there are "Public" Milestones: views of what can be done in the game right now agnostic to an individual player's state.  For this information, you will want to seek out [Destiny2.GetPublicMilestones](https://bungie-net.github.io/multi/operation_get_Destiny2-GetPublicMilestones.html#operation_get_Destiny2-GetPublicMilestones).
+  
+- ### The Near-Deprecation of Talent Grids
+
+- ### The Ascent of Sockets for Item Customization
+
+- ### (more to be filled in)
 
 # What Endpoints are not ready?
 
