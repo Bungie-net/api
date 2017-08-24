@@ -6,24 +6,28 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+# The State of the API
+
+The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
+
 # Swagger/OpenAPI Specs
 
-- Grab openapi.json for the OpenAPI 3.0.0 specs
-- Grab openapi-2.json for the 2.0.0 specs
+- Grab [openapi.json](https://github.com/Bungie-net/api/blob/master/openapi.json) for the OpenAPI 3.0.0 specs
+- Grab [openapi-2.json](https://github.com/Bungie-net/api/blob/master/openapi-2.json) for the 2.0.0 specs
 
 # Extension Properties on OpenAPI Specs
 
-- x-mapped-definition = This property has hash identifiers that map to a Manifest Database definition.  This property will reveal which type of Manifest Database definition it points to.  If it's a uint32, it points to a single definition.  If it's a List<uint32>, each value points to a different definition.  If it's a Dictionary<uint32, X>, its' keys point to different definitions.
+- **x-mapped-definition** = This property has hash identifiers that map to a Manifest Database definition.  This property will reveal which type of Manifest Database definition it points to.  If it's a uint32, it points to a single definition.  If it's a List<uint32>, each value points to a different definition.  If it's a Dictionary<uint32, X>, its' keys point to different definitions.
 
-- x-mobile-manifest-name = If populated, this is the name of the Mobile Manifest table that holds this data as a first-class entity.  The existence of this field implies that this entity is a first-order Destiny Definition aggregate.
+- **x-mobile-manifest-name** = If populated, this is the name of the Mobile Manifest table that holds this data as a first-class entity.  The existence of this field implies that this entity is a first-order Destiny Definition aggregate.
 
-- x-enum-values = I really hate that the OpenAPI spec doesn't have a way to tell you both the identifier and the numeric value of an enum, much less documentation for enum values, so I added this extension as a way to return that info.  It'll give you way more than the basically useless base "enum" property.
+- **x-enum-values** = I really hate that the OpenAPI spec doesn't have a way to tell you both the identifier and the numeric value of an enum, much less documentation for enum values, so I added this extension as a way to return that info.  It'll give you way more than the basically useless base "enum" property.
 
-- x-destiny-component-type-dependency = A new concept in the Destiny 2 API is "Components".  You will see that our Destiny Profile/Character calls have been mostly simplified down to just GetProfile/GetCharacter/GetItem.  This simplification is made possible by Components, which are identifiers you pass into the requests to specify how much data you want back.  An entity with this property will only be returned if you've passed the named Component Identifier into the GetProfile/GetCharacter/GetItem methods.
+- **x-destiny-component-type-dependency** = A new concept in the Destiny 2 API is "Components".  You will see that our Destiny Profile/Character calls have been mostly simplified down to just GetProfile/GetCharacter/GetItem.  This simplification is made possible by Components, which are identifiers you pass into the requests to specify how much data you want back.  An entity with this property will only be returned if you've passed the named Component Identifier into the GetProfile/GetCharacter/GetItem methods.
 
-- x-dictionary-key = OpenAPI didn't have a good way for me to specify that the key of a dictionary was actually meant to be something other than a string (even if always encoded as a string in JSON).  This extension property lets me tell you what it *really* is, so you can strongly type it and convert it if desired.
+- **x-dictionary-key** = OpenAPI didn't have a good way for me to specify that the key of a dictionary was actually meant to be something other than a string (even if always encoded as a string in JSON).  This extension property lets me tell you what it *really* is, so you can strongly type it and convert it if desired.
 
-- x-preview = This boolean indicates that the Operation in question is not yet ready for prime time.  You will have to read the documentation to find out just *how* not ready it is, at least for now.
+- **x-preview** = This boolean indicates that the Operation in question is not yet ready for prime time.  You will have to read the documentation to find out just *how* not ready it is, at least for now.
 
 # What's new in the API?
 
@@ -59,13 +63,25 @@ This section will be added to as time goes by - we're working with it as we go!
 - ### Stats (working, but may have bugs)
   - Stats are pretty much in working order, and as you will see their endpoints have not really changed at all.  These *should* be functioning as desired, but I mark them as Pending because they have not been given as thorough of a review for edge cases as the other Destiny features, because BNet itself isn't currently exposing any stats related features.  This is another high-priority task for future improvements of the site, which will also bring about improvements to the API as a result when our attention can be turned back to it as a team.
 
-# The State of the API
-
-The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
-
 # FAQ
 
 - Certain APIs are marked as PENDING in the documentation, what does that mean?
--- This may mean that their tentative contracts are being exposed in the documentation for review, or that they're going to be live but in a "Beta" state.  Look at the description of the specific endpoint for details.
+  - This may mean that their tentative contracts are being exposed in the documentation for review, or that they're going to be live but in a "Beta" state.  Look at the description of the specific endpoint for details.
 
+- Can you provide documentation for the specific stat properties and modes that will be returned?
+  - For the time being, we can't reveal that data.  I apologize for the inconvenience!
 
+- How do I do X?  What does Feature/Property Z mean?
+  - If you've got specific questions, please add a [Question](https://github.com/Bungie-net/api/labels/question) to our Issues list!  We'll try to answer as time allows, and we'll use this input to improve our documentation!
+  
+- I have suggestions on how to improve the API/alternative ways I'd like to see the data returned!  Where can I submit that input?
+  - Add an [Enhancement](https://github.com/Bungie-net/api/labels/enhancement) request to our Issues list!  As time allows, we'll comb through them.  This will be particularly useful for Pending endpoints like Vendors, where there's still time to improve on the contracts before we turn them on.
+  - Ideally, I'd like to see these become a place where the dev community as a whole can debate on the benefits and drawbacks of a change to the API, which will help us all to make the experience better for everyone.
+  - It'll be a bit harder to make contract-adjusting changes to endpoints that are already release ready, but we can discuss ways to extend it.  If the enhancement is compelling enough, it may even be worth versioning the API.  But we're going to try to avoid that if at all possible.
+  
+- I've found a bug!
+  - Please start up a [Bug](https://github.com/Bungie-net/api/labels/bug) in the Issues list!  It'll give us a good place to organize bugs that are reported, and to report back on them when they are fixed.
+  - Note that the API is only part of the work that we do, and we have ongoing Bungie.Net feature work that sometimes pulls us away from the API: as such, Bugs may take a while to be resolved depending on other issues on our plate.  But my hope is that this location will help to make community-located bugs more exposed and easier to track, which should help us in our own prioritization of tasks!
+  
+- I need technical support for the game! (or Please give me loot!)
+  - None of us here have access to the specialized support tools required to diagnose in-game issues and/or give sweet/phat lootz.  Please hit up the #Help forums on Bungie.net if you have technical support questions aside from the API itself!
