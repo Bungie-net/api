@@ -10,26 +10,19 @@ This section will be added to as time goes by - we're working with it as we go!
 
 The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
 
-# Swagger/OpenAPI Specs
+# I'm New to the API.  What can I do with it?
+- (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
 
-- Grab [openapi.json](https://github.com/Bungie-net/api/blob/master/openapi.json) for the OpenAPI 3.0.0 specs
-- Grab [openapi-2.json](https://github.com/Bungie-net/api/blob/master/openapi-2.json) for the 2.0.0 specs
+# How do I register to use the API?
+- (TODO: Move registration documentation to wiki)
 
-# Extension Properties on OpenAPI Specs
+# Are there any restrictions on the API?
+- (TODO: Pay more attention to the man behind the curtain.  Also write about the throttles etc...)
 
-- **x-mapped-definition** = This property has hash identifiers that map to a Manifest Database definition.  This property will reveal which type of Manifest Database definition it points to.  If it's a uint32, it points to a single definition.  If it's a List<uint32>, each value points to a different definition.  If it's a Dictionary<uint32, X>, its' keys point to different definitions.
+# What about the Destiny 1 API?
+- It is alive and well, under the /d1/Platform/Destiny/ root URL.  We unfortunately don't have the time to write documentation for the D1 API, but community member Lowlines made [this fantastic documentation](http://destinydevs.github.io/BungieNetPlatform/docs/Getting-Started).  Buy him a beer sometime, or name your first kid after him or something.  Or donate to him if he accepts donations, which he should because the work he did in D1 was totally boss.
 
-- **x-mobile-manifest-name** = If populated, this is the name of the Mobile Manifest table that holds this data as a first-class entity.  The existence of this field implies that this entity is a first-order Destiny Definition aggregate.
-
-- **x-enum-values** = I really hate that the OpenAPI spec doesn't have a way to tell you both the identifier and the numeric value of an enum, much less documentation for enum values, so I added this extension as a way to return that info.  It'll give you way more than the basically useless base "enum" property.
-
-- **x-destiny-component-type-dependency** = A new concept in the Destiny 2 API is "Components".  You will see that our Destiny Profile/Character calls have been mostly simplified down to just GetProfile/GetCharacter/GetItem.  This simplification is made possible by Components, which are identifiers you pass into the requests to specify how much data you want back.  An entity with this property will only be returned if you've passed the named Component Identifier into the GetProfile/GetCharacter/GetItem methods.
-
-- **x-dictionary-key** = OpenAPI didn't have a good way for me to specify that the key of a dictionary was actually meant to be something other than a string (even if always encoded as a string in JSON).  This extension property lets me tell you what it *really* is, so you can strongly type it and convert it if desired.
-
-- **x-preview** = This boolean indicates that the Operation in question is not yet ready for prime time.  You will have to read the documentation to find out just *how* not ready it is, at least for now.
-
-# What's new in the API?
+# I'm a Destiny 1 API Veteran.  What's new in the API?
 
 - ### Component-based Destiny Requests
   - [Destiny2.GetProfile](https://bungie-net.github.io/multi/operation_get_Destiny2-GetProfile.html#operation_get_Destiny2-GetProfile), [Destiny2.GetCharacter](https://bungie-net.github.io/multi/operation_get_Destiny2-GetCharacter.html#operation_get_Destiny2-GetCharacter), and [Destiny2.GetItem](https://bungie-net.github.io/multi/operation_get_Destiny2-GetItem.html#operation_get_Destiny2-GetItem) are now the fundamental building blocks of Destiny data, replacing our large and disparate specialized endpoints.
@@ -53,7 +46,7 @@ The API itself is currently offline in anticipation of the release of Destiny 2.
   - In the place of Talent Grids, the notion of Sockets and Plugs are now the primary means of customization of items.
   - Read more in [DestinyItemSocketBlockDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyItemSocketBlockDefinition.html#schema_Destiny-Definitions-DestinyItemSocketBlockDefinition) and its children, as well as [DestinyItemPlugDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Items-DestinyItemPlugDefinition.html#schema_Destiny-Definitions-Items-DestinyItemPlugDefinition) to find out how Sockets and Plugs work.  (to note, both of these are child properties of [DestinyInventoryItemDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyInventoryItemDefinition.html#schema_Destiny-Definitions-DestinyInventoryItemDefinition), that old venerable bolt-on of functionality.
 
-- ### (more to be filled in)
+- ### (Add more... probably redirect this to a set of wiki pages)
 
 # What Endpoints are not ready?
 
@@ -62,6 +55,25 @@ The API itself is currently offline in anticipation of the release of Destiny 2.
 
 - ### Stats (working, but may have bugs)
   - Stats are pretty much in working order, and as you will see their endpoints have not really changed at all.  These *should* be functioning as desired, but I mark them as Pending because they have not been given as thorough of a review for edge cases as the other Destiny features, because BNet itself isn't currently exposing any stats related features.  This is another high-priority task for future improvements of the site, which will also bring about improvements to the API as a result when our attention can be turned back to it as a team.
+  
+# Swagger/OpenAPI Specs (or, how to generate your own clients for the BNet API)
+
+- Grab [openapi.json](https://github.com/Bungie-net/api/blob/master/openapi.json) for the OpenAPI 3.0.0 specs
+- Grab [openapi-2.json](https://github.com/Bungie-net/api/blob/master/openapi-2.json) for the 2.0.0 specs
+
+# Extension Properties on OpenAPI Specs (or, how to generate much cooler clients for the BNet API if you want to take the time to do so)
+
+- **x-mapped-definition** = This property has hash identifiers that map to a Manifest Database definition.  This property will reveal which type of Manifest Database definition it points to.  If it's a uint32, it points to a single definition.  If it's a List<uint32>, each value points to a different definition.  If it's a Dictionary<uint32, X>, its' keys point to different definitions.
+
+- **x-mobile-manifest-name** = If populated, this is the name of the Mobile Manifest table that holds this data as a first-class entity.  The existence of this field implies that this entity is a first-order Destiny Definition aggregate.
+
+- **x-enum-values** = I really hate that the OpenAPI spec doesn't have a way to tell you both the identifier and the numeric value of an enum, much less documentation for enum values, so I added this extension as a way to return that info.  It'll give you way more than the basically useless base "enum" property.
+
+- **x-destiny-component-type-dependency** = A new concept in the Destiny 2 API is "Components".  You will see that our Destiny Profile/Character calls have been mostly simplified down to just GetProfile/GetCharacter/GetItem.  This simplification is made possible by Components, which are identifiers you pass into the requests to specify how much data you want back.  An entity with this property will only be returned if you've passed the named Component Identifier into the GetProfile/GetCharacter/GetItem methods.
+
+- **x-dictionary-key** = OpenAPI didn't have a good way for me to specify that the key of a dictionary was actually meant to be something other than a string (even if always encoded as a string in JSON).  This extension property lets me tell you what it *really* is, so you can strongly type it and convert it if desired.
+
+- **x-preview** = This boolean indicates that the Operation in question is not yet ready for prime time.  You will have to read the documentation to find out just *how* not ready it is, at least for now.
 
 # FAQ
 
