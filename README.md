@@ -40,8 +40,14 @@ This section will be added to as time goes by - we're working with it as we go!
   - Like Advisors, there are "Public" Milestones: views of what can be done in the game right now agnostic to an individual player's state.  For this information, you will want to seek out [Destiny2.GetPublicMilestones](https://bungie-net.github.io/multi/operation_get_Destiny2-GetPublicMilestones.html#operation_get_Destiny2-GetPublicMilestones).
   
 - ### The Near-Deprecation of Talent Grids
+  - In an act that I can only describe as Benevolence, the designers turned away from Talent Grids like they were going to turn into a pillar of salt.
+  - Unfortunately, Talent Grids aren't dead entirely.  Items may still have them, and they have even more rules stacked on top of how they work now, to support the one place where they currently are still being used: Character Builds/Subclasses.
+  - Please see [DestinyTalentGridDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyTalentGridDefinition.html#schema_Destiny-Definitions-DestinyTalentGridDefinition) to delve into the abyss.
+  - Eventually, I would like to create a derivative definition of this specifically for Builds in an attempt to simplify what you have to understand: but I did not find time to do so before release (and I'm not 100% confident that I'd be able to remove enough complexity for it to be worth it to create a derivative definition).
 
 - ### The Ascent of Sockets for Item Customization
+  - In the place of Talent Grids, the notion of Sockets and Plugs are now the primary means of customization of items.
+  - Read more in [DestinyItemSocketBlockDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyItemSocketBlockDefinition.html#schema_Destiny-Definitions-DestinyItemSocketBlockDefinition) and its children, as well as [DestinyItemPlugDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Items-DestinyItemPlugDefinition.html#schema_Destiny-Definitions-Items-DestinyItemPlugDefinition) to find out how Sockets and Plugs work.  (to note, both of these are child properties of [DestinyInventoryItemDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyInventoryItemDefinition.html#schema_Destiny-Definitions-DestinyInventoryItemDefinition), that old venerable bolt-on of functionality.
 
 - ### (more to be filled in)
 
