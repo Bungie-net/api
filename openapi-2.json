@@ -1,5 +1,5 @@
 {
-  "swagger": "2.0.0",
+  "swagger": "2.0",
   "info": {
     "title": "Bungie.Net API",
     "description": "These endpoints constitute the functionality exposed by Bungie.net, both for more traditional website functionality and for connectivity to Bungie video games and their related functionality.",
