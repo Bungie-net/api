@@ -101,3 +101,9 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   
 - I need technical support for the game! (or Please give me loot!)
   - None of us here have access to the specialized support tools required to diagnose in-game issues and/or give sweet/phat lootz.  Please hit up the #Help forums on Bungie.net if you have technical support questions aside from the API itself!
+
+- Will I be denied access to GetProfile/GetCharacter/GetItem if I lack OAuth scopes?
+ - You will *not* be denied results if you don't have particular scopes, but components will be denied to you.  I don't have a good way of encoding this in the spec at the moment, but I will look into doing so in the future (potentially as an extension property, as there's no good way to encode partial success due to OAuth scopes):
+ - These components are restricted by OAuth scope:
+  - ReadDestinyVendorsAndAdvisors is required for characterActivities, characterProgressions, kiosks and characterKiosks
+  - ReadDestinyInventoryAndVault is required for profileCurrencies, profileInventory, characterInventories and vendorReceipts
