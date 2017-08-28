@@ -34,10 +34,6 @@
             "in": "path",
             "description": "The requested Bungie.net membership id.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -87,10 +83,6 @@
             "in": "path",
             "description": "The requested Bungie.net membership id.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -142,9 +134,6 @@
             "name": "q",
             "in": "query",
             "description": "",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -152,9 +141,6 @@
             "in": "path",
             "description": "The search string.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -249,10 +235,6 @@
             "in": "path",
             "description": "The membership ID of the target user.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -261,9 +243,17 @@
             "in": "path",
             "description": "Type of the supplied membership ID.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -358,10 +348,6 @@
             "in": "path",
             "description": "The ID of the member for whom partnerships should be returned.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -414,19 +400,25 @@
             "in": "path",
             "description": "A category filter",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsCategoryFiltersEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "8",
+              "16",
+              "32",
+              "64",
+              "128"
+            ]
           },
           {
             "name": "group",
             "in": "path",
             "description": "The group, if any.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -434,9 +426,6 @@
             "name": "locales",
             "in": "query",
             "description": "Comma seperated list of locales posts must match to return in the result list. Default 'en'",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -444,10 +433,6 @@
             "in": "path",
             "description": "Zero paged page number",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -456,10 +441,6 @@
             "in": "path",
             "description": "Unused",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -468,26 +449,38 @@
             "in": "path",
             "description": "A date filter.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsQuickDateEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsSortEnum"
-            }
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ]
           },
           {
             "name": "tagstring",
             "in": "query",
             "description": "The tags to search, if any.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -536,17 +529,24 @@
             "in": "path",
             "description": "The category filter.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsCategoryFiltersEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "8",
+              "16",
+              "32",
+              "64",
+              "128"
+            ]
           },
           {
             "name": "locales",
             "in": "query",
             "description": "Comma seperated list of locales posts must match to return in the result list. Default 'en'",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -554,10 +554,6 @@
             "in": "path",
             "description": "Zero base page",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -566,18 +562,33 @@
             "in": "path",
             "description": "The date filter.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsQuickDateEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsSortEnum"
-            }
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7"
+            ]
           }
         ],
         "responses": {
@@ -625,9 +636,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "type": "boolean"
-            },
             "type": "boolean"
           },
           {
@@ -635,10 +643,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -647,10 +651,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -659,10 +659,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "uint64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint64"
           },
@@ -671,10 +667,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -683,18 +675,12 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "type": "boolean"
-            },
             "type": "boolean"
           },
           {
             "name": "showbanned",
             "in": "query",
             "description": "If this value is not null or empty, banned posts are requested to be returned",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -702,9 +688,12 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumPostSortEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           }
         ],
         "responses": {
@@ -752,10 +741,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "uint64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint64"
           },
@@ -764,10 +749,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -776,10 +757,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -788,10 +765,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -800,18 +773,12 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "type": "boolean"
-            },
             "type": "boolean"
           },
           {
             "name": "showbanned",
             "in": "query",
             "description": "If this value is not null or empty, banned posts are requested to be returned",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -819,9 +786,12 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumPostSortEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           }
         ],
         "responses": {
@@ -869,10 +839,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "uint64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint64"
           },
@@ -880,9 +846,6 @@
             "name": "showbanned",
             "in": "query",
             "description": "If this value is not null or empty, banned posts are requested to be returned",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -931,10 +894,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "uint64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint64"
           },
@@ -942,9 +901,6 @@
             "name": "showbanned",
             "in": "query",
             "description": "If this value is not null or empty, banned posts are requested to be returned",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -993,10 +949,6 @@
             "in": "path",
             "description": "",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1046,9 +998,6 @@
             "name": "partialtag",
             "in": "query",
             "description": "The partial tag input to generate suggestions from.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -1100,10 +1049,6 @@
             "in": "path",
             "description": "The post id of the topic that has the poll.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1153,10 +1098,6 @@
             "in": "path",
             "description": "The post id of the recruitment topic you wish to join.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1214,10 +1155,6 @@
             "in": "path",
             "description": "The post id of the recruitment topic you wish to leave.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1275,10 +1212,6 @@
             "in": "path",
             "description": "The id of the user you wish to kick.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1287,10 +1220,6 @@
             "in": "path",
             "description": "The post id of the recruitment topic you wish to join.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1348,10 +1277,6 @@
             "in": "path",
             "description": "The post id of the recruitment topic to approve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1493,9 +1418,6 @@
             "in": "path",
             "description": "The full gamertag or PSN id of the player. Spaces and case are ignored.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -1503,9 +1425,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type, or All.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -1555,12 +1485,6 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.DestinyComponentType"
-              }
-            },
             "type": "array"
           },
           {
@@ -1568,10 +1492,6 @@
             "in": "path",
             "description": "Destiny membership ID.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1580,9 +1500,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -1631,10 +1559,6 @@
             "in": "path",
             "description": "ID of the character.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1642,12 +1566,6 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.DestinyComponentType"
-              }
-            },
             "type": "array"
           },
           {
@@ -1655,10 +1573,6 @@
             "in": "path",
             "description": "Destiny membership ID.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1667,9 +1581,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -1718,10 +1640,6 @@
             "in": "path",
             "description": "A valid group id of clan.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -1771,12 +1689,6 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.DestinyComponentType"
-              }
-            },
             "type": "array"
           },
           {
@@ -1784,10 +1696,6 @@
             "in": "path",
             "description": "The membership ID of the destiny profile.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1796,10 +1704,6 @@
             "in": "path",
             "description": "The Instance ID of the destiny item.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1808,9 +1712,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -1860,10 +1772,6 @@
             "in": "path",
             "description": "The Destiny Character ID of the character for whom we're getting vendor info.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1871,12 +1779,6 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.DestinyComponentType"
-              }
-            },
             "type": "array"
           },
           {
@@ -1884,10 +1786,6 @@
             "in": "path",
             "description": "Destiny membership ID of another user. You may be denied.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1896,9 +1794,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -1951,10 +1857,6 @@
             "in": "path",
             "description": "The Destiny Character ID of the character for whom we're getting vendor info.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1962,12 +1864,6 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.DestinyComponentType"
-              }
-            },
             "type": "array"
           },
           {
@@ -1975,10 +1871,6 @@
             "in": "path",
             "description": "Destiny membership ID of another user. You may be denied.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -1987,19 +1879,23 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "vendorHash",
             "in": "path",
             "description": "The Hash identifier of the Vendor to be returned.",
             "required": true,
-            "schema": {
-              "format": "uint32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint32"
           }
@@ -2343,10 +2239,6 @@
             "in": "path",
             "description": "The ID of the activity whose PGCR is requested.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           }
@@ -2440,10 +2332,6 @@
             "in": "path",
             "description": "Group ID of the clan whose leaderboards you wish to fetch.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2451,10 +2339,6 @@
             "name": "maxtop",
             "in": "query",
             "description": "Maximum number of top players to return. Use a large number to get entire leaderboard.",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -2462,18 +2346,12 @@
             "name": "modes",
             "in": "query",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
             "name": "statid",
             "in": "query",
             "description": "ID of stat to return rather than returning all Leaderboard stats.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -2530,10 +2408,6 @@
             "in": "path",
             "description": "Group ID of the clan whose leaderboards you wish to fetch.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2542,9 +2416,6 @@
             "in": "path",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -2598,10 +2469,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2609,10 +2476,6 @@
             "name": "maxtop",
             "in": "query",
             "description": "Maximum number of top players to return. Use a large number to get entire leaderboard.",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -2621,26 +2484,28 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "modes",
             "in": "query",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
             "name": "statid",
             "in": "query",
             "description": "ID of stat to return rather than returning all Leaderboard stats.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -2697,10 +2562,6 @@
             "in": "path",
             "description": "The specific character to build the leaderboard around for the provided Destiny Membership.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2709,10 +2570,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2720,10 +2577,6 @@
             "name": "maxtop",
             "in": "query",
             "description": "Maximum number of top players to return. Use a large number to get entire leaderboard.",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -2732,26 +2585,28 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "modes",
             "in": "query",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
             "name": "statid",
             "in": "query",
             "description": "ID of stat to return rather than returning all Leaderboard stats.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -2807,10 +2662,6 @@
             "name": "page",
             "in": "query",
             "description": "Page number to return, starting with 0.",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -2819,9 +2670,6 @@
             "in": "path",
             "description": "The string to use when searching for Destiny entities.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -2829,9 +2677,6 @@
             "in": "path",
             "description": "The type of entity for whom you would like results.  These correspond to the entity's definition contract name.  For instance, if you are looking for items, this property should be 'DestinyInventoryItemDefinition'.  PREVIEW: This endpoint is still in beta, and may experience rough edges.  The schema is tentatively in final form, but there may be bugs that prevent desirable operation.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -2883,10 +2728,6 @@
             "in": "path",
             "description": "The id of the character to retrieve. You can omit this character ID or set it to 0 to get aggregate stats across all characters.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2894,10 +2735,6 @@
             "name": "dayend",
             "in": "query",
             "description": "Last day to return when daily stats are requested.  Use the format YYYY-MM-DD.",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            },
             "type": "string",
             "format": "date-time"
           },
@@ -2905,10 +2742,6 @@
             "name": "daystart",
             "in": "query",
             "description": "First day to return when daily stats are requested. Use the format YYYY-MM-DD",
-            "schema": {
-              "format": "date-time",
-              "type": "string"
-            },
             "type": "string",
             "format": "date-time"
           },
@@ -2917,10 +2750,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -2928,12 +2757,6 @@
             "name": "groups",
             "in": "query",
             "description": "Group of stats to include, otherwise only general stats are returned. Comma separated list is allowed. Values: General, Weapons, Medals",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
-              }
-            },
             "type": "array"
           },
           {
@@ -2941,29 +2764,36 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "modes",
             "in": "query",
             "description": "Game modes to return. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-              }
-            },
             "type": "array"
           },
           {
             "name": "periodType",
             "in": "query",
             "description": "Indicates a specific period type to return. Optional. May be: Daily, AllTime, or Activity",
-            "schema": {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.PeriodType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
           }
         ],
         "responses": {
@@ -3016,10 +2846,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3027,12 +2853,6 @@
             "name": "groups",
             "in": "query",
             "description": "Groups of stats to include, otherwise only general stats are returned.  Comma separated list is allowed. Values: General, Weapons, Medals.",
-            "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
-              }
-            },
             "type": "array"
           },
           {
@@ -3040,9 +2860,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -3092,10 +2920,6 @@
             "in": "path",
             "description": "The id of the character to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3103,10 +2927,6 @@
             "name": "count",
             "in": "query",
             "description": "Number of rows to return",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3115,10 +2935,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3127,26 +2943,63 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "mode",
             "in": "query",
             "description": "A filter for the activity mode to be returned. None returns all activities. See the documentation for DestinyActivityModeType for valid values, and pass in string representation.",
-            "schema": {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "9",
+              "10",
+              "11",
+              "12",
+              "13",
+              "15",
+              "16",
+              "17",
+              "18",
+              "19",
+              "20",
+              "21",
+              "22",
+              "24",
+              "25",
+              "26",
+              "27",
+              "28",
+              "29",
+              "30",
+              "32",
+              "37",
+              "38",
+              "39",
+              "40"
+            ]
           },
           {
             "name": "page",
             "in": "query",
             "description": "Page number to return, starting with 0.",
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           }
@@ -3198,10 +3051,6 @@
             "in": "path",
             "description": "The id of the character to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3210,10 +3059,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3222,9 +3067,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -3274,10 +3127,6 @@
             "in": "path",
             "description": "The specific character whose activities should be returned.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3286,10 +3135,6 @@
             "in": "path",
             "description": "The Destiny membershipId of the user to retrieve.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3298,9 +3143,17 @@
             "in": "path",
             "description": "A valid non-BungieNet membership type.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           }
         ],
         "responses": {
@@ -3349,10 +3202,6 @@
             "in": "path",
             "description": "The identifier for the milestone to be returned.",
             "required": true,
-            "schema": {
-              "format": "uint32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint32"
           }
@@ -3446,19 +3295,25 @@
             "in": "path",
             "description": "The type of media to get",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.ForumTopicsCategoryFiltersEnum"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "8",
+              "16",
+              "32",
+              "64",
+              "128"
+            ]
           },
           {
             "name": "page",
             "in": "path",
             "description": "Zero based page",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3467,9 +3322,13 @@
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Forum.CommunityContentSortMode"
-            }
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ]
           }
         ],
         "responses": {
@@ -3516,10 +3375,6 @@
             "name": "modeHash",
             "in": "query",
             "description": "The hash of the Activity Mode for which streams should be retrieved.  Don't pass it in or pass 0 to not filter by mode.",
-            "schema": {
-              "format": "uint32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "uint32"
           },
@@ -3528,10 +3383,6 @@
             "in": "path",
             "description": "Zero based page.",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3540,26 +3391,31 @@
             "in": "path",
             "description": "The type of partnership for which the status should be returned.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Partnerships.PartnershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Community.CommunityStatusSort"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
           },
           {
             "name": "streamLocale",
             "in": "query",
             "description": "The locale for streams you'd like to see.  Don't pass this to fall back on your BNet locale.  Pass 'ALL' to not filter by locale.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -3608,10 +3464,6 @@
             "in": "path",
             "description": "Zero based page.",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3620,18 +3472,26 @@
             "in": "path",
             "description": "The type of partnership for which the status should be returned.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Partnerships.PartnershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Community.CommunityStatusSort"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
           }
         ],
         "responses": {
@@ -3679,10 +3539,6 @@
             "in": "path",
             "description": "Zero based page.",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3691,18 +3547,26 @@
             "in": "path",
             "description": "The type of partnership for which the status should be returned.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Partnerships.PartnershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Community.CommunityStatusSort"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
           }
         ],
         "responses": {
@@ -3750,10 +3614,6 @@
             "in": "path",
             "description": "Zero based page.",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           },
@@ -3762,26 +3622,31 @@
             "in": "path",
             "description": "The type of partnership for which the status should be returned.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Partnerships.PartnershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           },
           {
             "name": "sort",
             "in": "path",
             "description": "The sort mode.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Community.CommunityStatusSort"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
           },
           {
             "name": "streamLocale",
             "in": "query",
             "description": "The locale for streams you'd like to see.  Don't pass this to fall back on your BNet locale.  Pass 'ALL' to not filter by locale.",
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           }
         ],
@@ -3830,10 +3695,6 @@
             "in": "path",
             "description": "The membershipId related to that type.",
             "required": true,
-            "schema": {
-              "format": "int64",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int64"
           },
@@ -3842,18 +3703,29 @@
             "in": "path",
             "description": "The type of account for which info will be extracted.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "4",
+              "10",
+              "254",
+              "-1"
+            ]
           },
           {
             "name": "partnershipType",
             "in": "path",
             "description": "The type of partnership for which info will be extracted.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Partnerships.PartnershipType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1"
+            ]
           }
         ],
         "responses": {
@@ -3941,9 +3813,6 @@
             "in": "path",
             "description": "The ID of the category for whom you want additional results.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -3951,10 +3820,6 @@
             "in": "path",
             "description": "The page # of results to return.",
             "required": true,
-            "schema": {
-              "format": "int32",
-              "type": "integer"
-            },
             "type": "integer",
             "format": "int32"
           }
@@ -4004,9 +3869,6 @@
             "in": "path",
             "description": "The identifier for the entity to be returned.",
             "required": true,
-            "schema": {
-              "type": "string"
-            },
             "type": "string"
           },
           {
@@ -4014,9 +3876,20 @@
             "in": "path",
             "description": "The type of entity to be returned.",
             "required": true,
-            "schema": {
-              "$ref": "#/definitions/Trending.TrendingEntryType"
-            }
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5",
+              "6",
+              "7",
+              "8",
+              "9"
+            ]
           }
         ],
         "responses": {
