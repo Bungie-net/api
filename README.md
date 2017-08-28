@@ -10,6 +10,8 @@ This section will be added to as time goes by - we're working with it as we go!
 
 The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
 
+2017-08-27 - All known/filed bugs with the v2 and v3 Swagger Specs have been fixed.  HTML Documentation updated with a less ugly style thanks to HelloControl.  Please keep filing bugs and enhancement requests as you find need!
+
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
 
