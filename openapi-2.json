@@ -135,14 +135,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "",
-            "type": "string"
-          },
-          {
-            "name": "search",
-            "in": "path",
             "description": "The search string.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1507,7 +1500,10 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.DestinyComponentType"
+            }
           },
           {
             "name": "destinyMembershipId",
@@ -1588,7 +1584,10 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.DestinyComponentType"
+            }
           },
           {
             "name": "destinyMembershipId",
@@ -1711,7 +1710,10 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.DestinyComponentType"
+            }
           },
           {
             "name": "destinyMembershipId",
@@ -1801,7 +1803,10 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.DestinyComponentType"
+            }
           },
           {
             "name": "destinyMembershipId",
@@ -1887,7 +1892,10 @@
             "name": "components",
             "in": "query",
             "description": "A comma separated list of components to return (as strings or numeric values).  See the DestinyComponentType enum for valid components to request.  You must request at least one component to receive results.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.DestinyComponentType"
+            }
           },
           {
             "name": "destinyMembershipId",
@@ -2444,9 +2452,8 @@
           },
           {
             "name": "modes",
-            "in": "path",
+            "in": "query",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -2791,7 +2798,10 @@
             "name": "groups",
             "in": "query",
             "description": "Group of stats to include, otherwise only general stats are returned. Comma separated list is allowed. Values: General, Weapons, Medals",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
+            }
           },
           {
             "name": "membershipType",
@@ -2814,7 +2824,10 @@
             "name": "modes",
             "in": "query",
             "description": "Game modes to return. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           },
           {
             "name": "periodType",
@@ -2888,7 +2901,10 @@
             "name": "groups",
             "in": "query",
             "description": "Groups of stats to include, otherwise only general stats are returned.  Comma separated list is allowed. Values: General, Weapons, Medals.",
-            "type": "array"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
+            }
           },
           {
             "name": "membershipType",

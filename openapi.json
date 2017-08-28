@@ -91,16 +91,7 @@
           {
             "name": "q",
             "in": "query",
-            "description": "",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "search",
-            "in": "path",
             "description": "The search string.",
-            "required": true,
             "schema": {
               "type": "string"
             }
@@ -1595,9 +1586,8 @@
           },
           {
             "name": "modes",
-            "in": "path",
+            "in": "query",
             "description": "List of game modes for which to get leaderboards. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
-            "required": true,
             "schema": {
               "type": "string"
             }
