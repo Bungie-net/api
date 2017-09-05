@@ -109,3 +109,11 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   - ReadDestinyVendorsAndAdvisors is required for characterActivities, characterProgressions, kiosks and characterKiosks
   - ReadDestinyInventoryAndVault is required for profileCurrencies, profileInventory, characterInventories and vendorReceipts
   - That is all in addition to the user's privacy settings: you may still be denied the component if you're not passing their auth token and you're asking for components that they've marked private.  Your app should always assume and be able to handle the situation where an expected Component is not returned to you, even if the handling is just showing the user an error message. (if you can of course, a more elegant handling of the situation is always preferred!)
+
+# Known Issues
+
+- There is currently no way to know what reward item you will get for completing a Milestone's quest.  The DestinyMilestoneDefinition defines these rewards, but late in development we realized merely returning this information is insufficient: only a subset of these are possible to be obtained at any given time.  A future release will have the live Milestone data return the "active" rewards so that you can show the correct reward being offered at any given time.
+
+- The pgcrImage property on DestinyActivityDefinition is missing the /img/destiny_content/pgcr/ prefix to its path, causing the image to not be found.  This will be fixed in the next hotfix.
+
+- There are reports of missing PGCR data: particularly the "extended" and "teams" properties.  We have filed a bug and will investigate as time allows.
