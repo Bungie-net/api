@@ -117,3 +117,5 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 - The pgcrImage property on DestinyActivityDefinition is missing the /img/destiny_content/pgcr/ prefix to its path, causing the image to not be found.  This will be fixed in the next hotfix.
 
 - There are reports of missing PGCR data: particularly the "extended" and "teams" properties.  We have filed a bug and will investigate as time allows.
+
+- If our environment goes down entirely, to the point where we can no longer process your request, we are currently returning the same static error HTML page(s) to any API request that the website is returning.  If you get an HTML response to an API request, know that this is the undesirable side effect of our environment being down and handle it with your own messaging and error handling as needed.
