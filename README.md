@@ -109,6 +109,9 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   - ReadDestinyVendorsAndAdvisors is required for characterActivities, characterProgressions, kiosks and characterKiosks
   - ReadDestinyInventoryAndVault is required for profileCurrencies, profileInventory, characterInventories and vendorReceipts
   - That is all in addition to the user's privacy settings: you may still be denied the component if you're not passing their auth token and you're asking for components that they've marked private.  Your app should always assume and be able to handle the situation where an expected Component is not returned to you, even if the handling is just showing the user an error message. (if you can of course, a more elegant handling of the situation is always preferred!)
+  
+- Where are my consumable items?
+  - Consumables are now in an Account-level bucket called "Consumables".  They are shared across all of your characters, meaning that you don't have to transfer them back and forth anymore.  Oh, glorious day!
 
 # Known Issues
 
