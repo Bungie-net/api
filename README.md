@@ -114,6 +114,9 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   
 - Where are my consumable items?
   - Consumables are now in an Account-level bucket called "Consumables".  They are shared across all of your characters, meaning that you don't have to transfer them back and forth anymore.  Oh, glorious day!
+  
+- I have a project I'd like to recruit help for, or one that I'd like to show off!
+  - We're trying to keep the "Issues" section specific to the API itself, BUT you should definitely go to the officially unofficial Discord for the Bungie.Net API, set up by community member Xorth: https://discord.gg/WJDSUgj There are sections over there for project promotion, general discussion and so on!
 
 # Known Issues
 
