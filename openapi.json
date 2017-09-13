@@ -17,7 +17,7 @@
   },
   "servers": [
     {
-      "url": "https://bungie.net/Platform",
+      "url": "https://www.bungie.net/Platform",
       "description": "The endpoint for accessing the Bungie.net API.  You probably guessed that already."
     }
   ],
