@@ -14,7 +14,7 @@ This section will be added to as time goes by - we're working with it as we go!
 - Exposing the Groups API for public consumption
 - Added the GetDestinyEntityDefinition endpoint by popular request.  I strongly urge you not to use it outside of very trivial or educational purposes, as all of our definitions are very tightly interrelated: and to get at meaningful data for an entity, you will often have to have the definitions of several different entities.  But for the most simple/educational/investigatory use cases, this should serve your needs.
 
-Our next planned release is tomorrow, where we will un-redact Raid items and entities (as well as other items that are now able to be acquired in the game where approved to do so).
+Our next planned release is 2017-09-14, where we will un-redact Raid items and entities (as well as other items that are now able to be acquired in the game where approved to do so).
 
 # The State of the API
 
