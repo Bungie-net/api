@@ -6,7 +6,15 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-(Expected next update: 2017-09-13, to coincide with a new Bungie.net deployment)
+2017-09-13 - Documentation updated to co-incide with the 9/13 release of Bungie.Net.
+- Fixes for a variety of issues with Historical Stats APIs
+- All relevant Activity Modes are now returned with historical stats results for an Activity, so that you can better know (for a D1-compatible example) when an activity was Control and Trials of Osiris.  The old result that returned just the most specific activity mode still exists for backwards compatibility.
+- Added the requested 
+- Fixed a variety of bugs, both in the API and documentation
+- Exposing the Groups API for public consumption
+- Added the GetDestinyEntityDefinition endpoint by popular request.  I strongly urge you not to use it outside of very trivial or educational purposes, as all of our definitions are very tightly interrelated: and to get at meaningful data for an entity, you will often have to have the definitions of several different entities.  But for the most simple/educational/investigatory use cases, this should serve your needs.
+
+Our next planned release is tomorrow, where we will un-redact Raid items and entities (as well as other items that are now able to be acquired in the game where approved to do so).
 
 # The State of the API
 
