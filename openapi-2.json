@@ -2250,20 +2250,20 @@
         "operationId": "GroupV2.GetMembersOfGroup",
         "parameters": [
           {
-            "name": "currentpage",
-            "in": "path",
-            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "groupId",
             "in": "path",
             "description": "The ID of the group.",
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "memberType",
@@ -2330,20 +2330,20 @@
         "operationId": "GroupV2.GetAdminsAndFounderOfGroup",
         "parameters": [
           {
-            "name": "currentpage",
-            "in": "path",
-            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "groupId",
             "in": "path",
             "description": "The ID of the group.",
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "responses": {
@@ -2740,20 +2740,20 @@
         "operationId": "GroupV2.GetBannedMembersOfGroup",
         "parameters": [
           {
-            "name": "currentpage",
-            "in": "path",
-            "description": "Page number (starting with 1). Each page has a fixed size of 50 entries.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "groupId",
             "in": "path",
             "description": "Group ID whose banned members you are fetching",
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number (starting with 1). Each page has a fixed size of 50 entries.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "security": [
@@ -2957,20 +2957,20 @@
         "operationId": "GroupV2.GetPendingMemberships",
         "parameters": [
           {
-            "name": "currentpage",
-            "in": "path",
-            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "groupId",
             "in": "path",
             "description": "ID of the group.",
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "security": [
@@ -3023,20 +3023,20 @@
         "operationId": "GroupV2.GetInvitedIndividuals",
         "parameters": [
           {
-            "name": "currentpage",
-            "in": "path",
-            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
             "name": "groupId",
             "in": "path",
             "description": "ID of the group.",
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
           }
         ],
         "security": [
