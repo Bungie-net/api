@@ -3935,8 +3935,9 @@
             "description": "A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.DestinyComponentType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "destinyMembershipId",
@@ -4020,8 +4021,9 @@
             "description": "A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.DestinyComponentType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "destinyMembershipId",
@@ -4148,8 +4150,9 @@
             "description": "A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.DestinyComponentType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "destinyMembershipId",
@@ -4242,8 +4245,9 @@
             "description": "A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.DestinyComponentType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "destinyMembershipId",
@@ -4332,8 +4336,9 @@
             "description": "A comma separated list of components to return (as strings or numeric values). See the DestinyComponentType enum for valid components to request. You must request at least one component to receive results.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.DestinyComponentType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "destinyMembershipId",
@@ -5252,8 +5257,9 @@
             "description": "Group of stats to include, otherwise only general stats are returned. Comma separated list is allowed. Values: General, Weapons, Medals",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "membershipType",
@@ -5278,8 +5284,9 @@
             "description": "Game modes to return. See the documentation for DestinyActivityModeType for valid values, and pass in string representation, comma delimited.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "periodType",
@@ -5356,8 +5363,9 @@
             "description": "Groups of stats to include, otherwise only general stats are returned. Comma separated list is allowed. Values: General, Weapons, Medals.",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
-            }
+              "type": "integer"
+            },
+            "collectionFormat": "csv"
           },
           {
             "name": "membershipType",
