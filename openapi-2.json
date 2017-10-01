@@ -301,6 +301,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadBasicUserProfile"
             ]
@@ -1129,6 +1130,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1188,6 +1190,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1255,6 +1258,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1314,6 +1318,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1517,6 +1522,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -1591,6 +1597,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "EditUserData"
             ]
@@ -1641,6 +1648,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -1899,6 +1907,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -1957,6 +1966,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2016,6 +2026,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2075,6 +2086,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2134,6 +2146,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2201,6 +2214,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2440,6 +2454,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2524,6 +2539,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2607,6 +2623,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2691,6 +2708,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2758,6 +2776,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2909,6 +2928,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -2975,6 +2995,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3041,6 +3062,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3116,6 +3138,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -3174,6 +3197,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3235,6 +3259,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3296,6 +3321,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3357,6 +3383,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3629,6 +3656,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3712,6 +3740,7 @@
         ],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4414,6 +4443,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4464,6 +4494,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4514,6 +4545,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4563,6 +4595,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4614,6 +4647,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4666,6 +4700,7 @@
         "parameters": [],
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -24667,6 +24702,11 @@
       }
     }
   },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "tags": [
     {
       "name": "User",
