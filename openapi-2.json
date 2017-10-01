@@ -7733,12 +7733,6 @@
         }
       ]
     },
-    "BungieMembershipType[]": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/BungieMembershipType"
-      }
-    },
     "GroupsV2.HostGuidedGamesPermissionLevel": {
       "format": "int32",
       "description": "Used for setting the guided game permission level override (admins and founders can always host guided games).",
@@ -22393,18 +22387,6 @@
           "identifier": "Internal"
         }
       ]
-    },
-    "Destiny.HistoricalStats.Definitions.PeriodType[]": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.PeriodType"
-      }
-    },
-    "Destiny.HistoricalStats.Definitions.DestinyActivityModeType[]": {
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-      }
     },
     "Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType": {
       "format": "int32",
