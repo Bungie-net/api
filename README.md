@@ -6,6 +6,8 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+2017-10-11 - Yesterday we un-redacted several entities and introduced the Iron Banner milestones, which had some problems that should be resolved as of a deployment that will take place later this morning.  In other news, the delays caused by my absence will push out the Vendor API from being in a beta ready state - I'm hoping to have this ready for use sometime in November as a result.  I apologize for the delays, and will try to keep you all posted here.
+
 2017-10-04 - I apologize for the lack of contact lately.  I had an unexpected family emergency, and was not in a situation where I could communicate here.  I'm back now, and attempting to get caught up on what I have missed over the last 2 weeks - unfortunately, some efforts that I have been working on have been delayed as a result.  I also haven't had a chance to look at issues that have been created over the last couple of weeks - I will attempt to find some time to evaluate and respond to those as needed, but please bear with me as I attempt to balance working on the existing delayed features with responding to requests.  Thanks for your understanding, I look forward to continuing to improve the API and working with you all.
 
 2017-09-15 - Content-only release to un-redact various Trials of the Nine related content.  No meaningful changes to API at this time. (though the un-redaction of Trials' DestinyActivityModeDefinition will mean that queries requesting this mode should no longer fail)
