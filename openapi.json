@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.0.0"
+    "version": "2.0.1"
   },
   "servers": [
     {
@@ -991,7 +991,7 @@
         ]
       }
     },
-    "/GroupV2/Recommended/": {
+    "/GroupV2/Recommended/{groupType}/{createDateRange}/": {
       "summary": "GroupV2.GetRecommendedGroups",
       "description": "Gets groups recommended for you based on the groups to whom those you follow belong.",
       "post": {
@@ -1000,20 +1000,29 @@
         ],
         "description": "Gets groups recommended for you based on the groups to whom those you follow belong.",
         "operationId": "GroupV2.GetRecommendedGroups",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GroupsV2.GroupQuery"
-              }
+        "parameters": [
+          {
+            "name": "createDateRange",
+            "in": "path",
+            "description": "The date range of activity of groups for which we should search. Is that proper grammar I don't know",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/GroupsV2.GroupDateRange"
             }
           },
-          "required": true
-        },
+          {
+            "name": "groupType",
+            "in": "path",
+            "description": "The type of group to get.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/GroupsV2.GroupType"
+            }
+          }
+        ],
         "responses": {
           "200": {
-            "$ref": "#/components/responses/GroupsV2.GroupSearchResponse"
+            "$ref": "#/components/responses/ListOfGroupV2Card"
           }
         },
         "security": [
@@ -2144,6 +2153,70 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfEntityActionResult"
+          }
+        },
+        "security": [
+          {
+            "oauth2": [
+              "AdminGroups"
+            ]
+          }
+        ]
+      }
+    },
+    "/GroupV2/{groupId}/Members/Approve/{membershipType}/{membershipId}/": {
+      "summary": "GroupV2.ApprovePending",
+      "description": "Approve the given membershipId to join the group/clan as long as they have applied.",
+      "post": {
+        "tags": [
+          "GroupV2"
+        ],
+        "description": "Approve the given membershipId to join the group/clan as long as they have applied.",
+        "operationId": "GroupV2.ApprovePending",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "ID of the group.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id being approved.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "membershipType",
+            "in": "path",
+            "description": "Membership type of the supplied membership ID.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupsV2.GroupApplicationRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/boolean"
           }
         },
         "security": [
@@ -4449,7 +4522,8 @@
           },
           {
             "numericValue": "-1",
-            "identifier": "All"
+            "identifier": "All",
+            "description": "\"All\" is only valid for searching capabilities: you need to pass the actual matching BungieMembershipType for any query where you pass a known membershipId."
           }
         ]
       },
@@ -5904,6 +5978,15 @@
             "type": "string",
             "description": "Pulled from the Secondary Icon, this is the \"special\" background for the item. For Emblems, this is the background image used on the Details view: but it need not be limited to that for other types of items."
           },
+          "backgroundColor": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
+              }
+            ],
+            "description": "Sometimes, an item will have a background color. Most notably this occurs with Emblems, who use the Background Color for small character nameplates such as the \"friends\" view you see in-game. There are almost certainly other items that have background color as well, though I have not bothered to investigate what items have it nor what purposes they serve: use it as you will."
+          },
           "screenshot": {
             "type": "string",
             "description": "If we were able to acquire an in-game screenshot for the item, the path to that screenshot will be returned here. Note that not all items have screenshots: particularly not any non-equippable items."
@@ -6235,6 +6318,28 @@
         },
         "description": "So much of what you see in Destiny is actually an Item used in a new and creative way. This is the definition for Items in Destiny, which started off as just entities that could exist in your Inventory but ended up being the backing data for so much more: quests, reward previews, slots, and subclasses.\r\nIn practice, you will want to associate this data with \"live\" item data from a Bungie.Net Platform call: these definitions describe the item in generic, non-instanced terms: but an actual instance of an item can vary widely from these generic definitions.",
         "x-mobile-manifest-name": "Items"
+      },
+      "Destiny.Misc.DestinyColor": {
+        "type": "object",
+        "properties": {
+          "red": {
+            "type": "string",
+            "format": "byte"
+          },
+          "green": {
+            "type": "string",
+            "format": "byte"
+          },
+          "blue": {
+            "type": "string",
+            "format": "byte"
+          },
+          "alpha": {
+            "type": "string",
+            "format": "byte"
+          }
+        },
+        "description": "Represents a color whose RGBA values are all represented as values between 0 and 255."
       },
       "Destiny.Definitions.DestinyItemActionBlockDefinition": {
         "type": "object",
@@ -7405,10 +7510,15 @@
         "type": "object",
         "properties": {
           "largeIcon": {
-            "type": "string"
+            "type": "string",
+            "description": "I regret calling this a \"large icon\". It's more like a medium-sized image with a picture of the vendor's mug on it, trying their best to look cool. Not what one would call an icon."
           },
           "subtitle": {
             "type": "string"
+          },
+          "originalIcon": {
+            "type": "string",
+            "description": "If we replaced the icon with something more glitzy, this is the original icon that the vendor had according to the game's content. It may be more lame and/or have less razzle-dazzle. But who am I to tell you which icon to use."
           },
           "requirementsDisplay": {
             "type": "array",
@@ -8084,6 +8194,46 @@
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyProgressionDefinition"
             }
+          },
+          "backgroundImagePath": {
+            "type": "string",
+            "description": "The relative path to the background image, for use in a banner."
+          },
+          "tokenValues": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "The faction token item hashes, and their respective progression values.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "rewardItemHash": {
+            "type": "integer",
+            "description": "The faction reward item hash, usually an engram.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
+          },
+          "rewardVendorHash": {
+            "type": "integer",
+            "description": "The faction reward vendor hash, used for faction engram previews.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
+          },
+          "rewardVendorPreviewCategoryHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "For the faction reward vendor, the category hashes to be shown as reward previews."
           },
           "hash": {
             "type": "integer",
@@ -9652,6 +9802,7 @@
           },
           "directActivityModeHash": {
             "type": "integer",
+            "description": "If this activity had an activity mode directly defined on it, this will be the hash of that mode.",
             "format": "uint32",
             "nullable": true,
             "x-mapped-definition": {
@@ -9692,9 +9843,15 @@
               "37",
               "38",
               "39",
-              "40"
+              "40",
+              "41",
+              "42",
+              "43",
+              "44",
+              "45"
             ],
             "type": "integer",
+            "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
             "format": "int32",
             "nullable": true,
             "x-enum-values": [
@@ -9740,7 +9897,8 @@
               },
               {
                 "numericValue": "12",
-                "identifier": "Clash"
+                "identifier": "Clash",
+                "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
               },
               {
                 "numericValue": "13",
@@ -9829,6 +9987,26 @@
               {
                 "numericValue": "40",
                 "identifier": "Social"
+              },
+              {
+                "numericValue": "41",
+                "identifier": "TrialsCountdown"
+              },
+              {
+                "numericValue": "42",
+                "identifier": "TrialsSurvival"
+              },
+              {
+                "numericValue": "43",
+                "identifier": "IronBannerControl"
+              },
+              {
+                "numericValue": "44",
+                "identifier": "IronBannerClash"
+              },
+              {
+                "numericValue": "45",
+                "identifier": "IronBannerSupremacy"
               }
             ]
           },
@@ -9838,6 +10016,7 @@
               "type": "integer",
               "format": "uint32"
             },
+            "description": "The hash identifiers for Activity Modes relevant to this activity.  Note that if this is a playlist, the specific playlist entry chosen will determine the actual activity modes that end up being relevant.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
             }
@@ -9846,7 +10025,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+            },
+            "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums."
           },
           "isPvP": {
             "type": "boolean",
@@ -9962,6 +10142,7 @@
           },
           "directActivityModeHash": {
             "type": "integer",
+            "description": "If this playlist entry had an activity mode directly defined on it, this will be the hash of that mode.",
             "format": "uint32",
             "nullable": true,
             "x-mapped-definition": {
@@ -10002,9 +10183,15 @@
               "37",
               "38",
               "39",
-              "40"
+              "40",
+              "41",
+              "42",
+              "43",
+              "44",
+              "45"
             ],
             "type": "integer",
+            "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
             "format": "int32",
             "nullable": true,
             "x-enum-values": [
@@ -10050,7 +10237,8 @@
               },
               {
                 "numericValue": "12",
-                "identifier": "Clash"
+                "identifier": "Clash",
+                "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
               },
               {
                 "numericValue": "13",
@@ -10139,6 +10327,26 @@
               {
                 "numericValue": "40",
                 "identifier": "Social"
+              },
+              {
+                "numericValue": "41",
+                "identifier": "TrialsCountdown"
+              },
+              {
+                "numericValue": "42",
+                "identifier": "TrialsSurvival"
+              },
+              {
+                "numericValue": "43",
+                "identifier": "IronBannerControl"
+              },
+              {
+                "numericValue": "44",
+                "identifier": "IronBannerClash"
+              },
+              {
+                "numericValue": "45",
+                "identifier": "IronBannerSupremacy"
               }
             ]
           },
@@ -10148,6 +10356,7 @@
               "type": "integer",
               "format": "uint32"
             },
+            "description": "The hash identifiers for Activity Modes relevant to this entry.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
             }
@@ -10156,7 +10365,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+            },
+            "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums."
           }
         },
         "description": "If the activity is a playlist, this is the definition for a specific entry in the playlist: a single possible combination of Activity and Activity Mode that can be chosen."
@@ -10195,9 +10405,15 @@
           "37",
           "38",
           "39",
-          "40"
+          "40",
+          "41",
+          "42",
+          "43",
+          "44",
+          "45"
         ],
         "type": "integer",
+        "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
         "format": "int32",
         "x-enum-values": [
           {
@@ -10242,7 +10458,8 @@
           },
           {
             "numericValue": "12",
-            "identifier": "Clash"
+            "identifier": "Clash",
+            "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
           },
           {
             "numericValue": "13",
@@ -10331,6 +10548,26 @@
           {
             "numericValue": "40",
             "identifier": "Social"
+          },
+          {
+            "numericValue": "41",
+            "identifier": "TrialsCountdown"
+          },
+          {
+            "numericValue": "42",
+            "identifier": "TrialsSurvival"
+          },
+          {
+            "numericValue": "43",
+            "identifier": "IronBannerControl"
+          },
+          {
+            "numericValue": "44",
+            "identifier": "IronBannerClash"
+          },
+          {
+            "numericValue": "45",
+            "identifier": "IronBannerSupremacy"
           }
         ]
       },
@@ -10341,35 +10578,53 @@
             "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
           },
           "pgcrImage": {
-            "type": "string"
+            "type": "string",
+            "description": "If this activity mode has a related PGCR image, this will be the path to said image."
           },
           "modeType": {
-            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+              }
+            ],
+            "description": "The Enumeration value for this Activity Mode. Pass this identifier into Stats endpoints to get aggregate stats for this mode."
           },
           "activityModeCategory": {
-            "$ref": "#/components/schemas/Destiny.DestinyActivityModeCategory"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.DestinyActivityModeCategory"
+              }
+            ],
+            "description": "The type of play being performed in broad terms (PVP, PVE)"
           },
           "isTeamBased": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "If True, this mode has oppositional teams fighting against each other rather than \"Free-For-All\" or Co-operative modes of play.\r\nNote that Aggregate modes are never marked as team based, even if they happen to be team based at the moment. At any time, an aggregate whose subordinates are only team based could be changed so that one or more aren't team based, and then this boolean won't make much sense (the aggregation would become \"sometimes team based\"). Let's not deal with that right now."
           },
           "isAggregateMode": {
-            "type": "boolean"
+            "type": "boolean",
+            "description": "If true, this mode is an aggregation of other, more specific modes rather than being a mode in itself. This includes modes that group Features/Events rather than Gameplay, such as Trials of The Nine: Trials of the Nine being an Event that is interesting to see aggregate data for, but when you play the activities within Trials of the Nine they are more specific activity modes such as Clash."
           },
           "parentHashes": {
             "type": "array",
             "items": {
               "type": "integer",
               "format": "uint32"
-            }
+            },
+            "description": "The hash identifiers of the DestinyActivityModeDefinitions that represent all of the \"parent\" modes for this mode. For instance, the Nightfall Mode is also a member of AllStrikes and AllPvE."
           },
           "friendlyName": {
-            "type": "string"
+            "type": "string",
+            "description": "A Friendly identifier you can use for referring to this Activity Mode. We really only used this in our URLs, so... you know, take that for whatever it's worth."
           },
           "activityModeMappings": {
             "type": "object",
             "additionalProperties": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
             },
+            "description": "If this exists, the mode has specific Activities (referred to by the Key) that should instead map to other Activity Modes when they are played. This was useful in D1 for Private Matches, where we wanted to have Private Matches as an activity mode while still referring to the specific mode being played.",
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
@@ -10399,6 +10654,7 @@
             "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
           }
         },
+        "description": "This definition represents an \"Activity Mode\" as it exists in the Historical Stats endpoints. An individual Activity Mode represents a collection of activities that are played in a certain way. For example, Nightfall Strikes are part of a \"Nightfall\" activity mode, and any activities played as the PVP mode \"Clash\" are part of the \"Clash activity mode.\r\nActivity modes are nested under each other in a hierarchy, so that if you ask for - for example - \"AllPvP\", you will get any PVP activities that the user has played, regardless of what specific PVP mode was being played.",
         "x-mobile-manifest-name": "ActivityModes"
       },
       "Destiny.DestinyActivityModeCategory": {
@@ -12313,6 +12569,39 @@
           }
         }
       },
+      "GroupsV2.GroupDateRange": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "All"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "PastDay"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "PastWeek"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "PastMonth"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "PastYear"
+          }
+        ]
+      },
       "GroupsV2.GroupV2Card": {
         "type": "object",
         "properties": {
@@ -12479,39 +12768,6 @@
             "type": "string"
           }
         }
-      },
-      "GroupsV2.GroupDateRange": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "All"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "PastDay"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "PastWeek"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "PastMonth"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "PastYear"
-          }
-        ]
       },
       "GroupsV2.GroupSortBy": {
         "enum": [
@@ -13292,6 +13548,7 @@
           "50",
           "51",
           "52",
+          "53",
           "89",
           "90",
           "91",
@@ -14069,6 +14326,10 @@
           {
             "numericValue": "52",
             "identifier": "AuthContextCacheAssertion"
+          },
+          {
+            "numericValue": "53",
+            "identifier": "ExPlatformStringValidationError"
           },
           {
             "numericValue": "89",
@@ -16669,7 +16930,7 @@
           {
             "numericValue": "307",
             "identifier": "ItemCommonData",
-            "description": "Items that *aren't* instanced still have important information you need to know: how much of it you have, the itemHash so you can look up their DestinyInventoryItemDefinition, whether they're locked, etc... Both instanced and non-instanced items will have these properties."
+            "description": "Items that *aren't* instanced still have important information you need to know: how much of it you have, the itemHash so you can look up their DestinyInventoryItemDefinition, whether they're locked, etc... Both instanced and non-instanced items will have these properties. You will get this automatically with Inventory components - you only need to pass this when calling GetItem on a specific item."
           },
           {
             "numericValue": "308",
@@ -17371,6 +17632,15 @@
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
           },
+          "emblemColor": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
+              }
+            ],
+            "description": "A shortcut for getting the background color of the user's currently equipped emblem without having to do a DestinyInventoryItemDefinition lookup."
+          },
           "levelProgression": {
             "type": "object",
             "allOf": [
@@ -17790,10 +18060,17 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "A milestone may have one or more active vendors that are \"related\" to it (that provide rewards, or that are the initiators of the Milestone). I already regret this, even as I'm typing it. You see, sometimes a milestone may be directly correlated with a set of vendors that provide varying tiers of rewards. The player may not be able to interact with one or more of those vendors. This will return the hashes of the Vendors that the player *can* interact with, allowing you to show their current inventory as rewards or related items to the Milestone or its activities.",
+            "description": "A milestone may have one or more active vendors that are \"related\" to it (that provide rewards, or that are the initiators of the Milestone). I already regret this, even as I'm typing it. [I told you I'd regret this] You see, sometimes a milestone may be directly correlated with a set of vendors that provide varying tiers of rewards. The player may not be able to interact with one or more of those vendors. This will return the hashes of the Vendors that the player *can* interact with, allowing you to show their current inventory as rewards or related items to the Milestone or its activities.\r\nBefore we even use it, it's already deprecated! How much of a bummer is that? We need more data.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
             }
+          },
+          "vendors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneVendor"
+            },
+            "description": "Replaces vendorHashes, which I knew was going to be trouble the day it walked in the door. This will return not only what Vendors are active and relevant to the activity (in an implied order that you can choose to ignore), but also other data - for example, if the Vendor is featuring a specific item relevant to this event that you should show with them."
           },
           "rewards": {
             "type": "array",
@@ -18051,6 +18328,29 @@
         },
         "description": "Represents the status and other related information for a challenge that is - or was - available to a player. \r\nA challenge is a bonus objective, generally tacked onto Quests or Activities, that provide additional variations on play."
       },
+      "Destiny.Milestones.DestinyMilestoneVendor": {
+        "type": "object",
+        "properties": {
+          "vendorHash": {
+            "type": "integer",
+            "description": "The hash identifier of the Vendor related to this Milestone. You can show useful things from this, such as thier Faction icon or whatever you might care about.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
+          },
+          "previewItemHash": {
+            "type": "integer",
+            "description": "If this vendor is featuring a specific item for this event, this will be the hash identifier of that item. I'm taking bets now on how long we go before this needs to be a list or some other, more complex representation instead and I deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at 9:46pm PST.",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
+          }
+        },
+        "description": "If a Milestone has one or more Vendors that are relevant to it, this will contain information about that vendor that you can choose to show."
+      },
       "Destiny.Milestones.DestinyMilestoneRewardCategory": {
         "type": "object",
         "properties": {
@@ -18144,6 +18444,10 @@
               "type": "integer",
               "format": "uint32"
             }
+          },
+          "vendorsDisplayTitle": {
+            "type": "string",
+            "description": "If you're going to show Vendors for the Milestone, you can use this as a localized \"header\" for the section where you show that vendor data. It'll provide a more context-relevant clue about what the vendor's role is in the Milestone."
           },
           "vendors": {
             "type": "array",
@@ -18716,9 +19020,15 @@
               "37",
               "38",
               "39",
-              "40"
+              "40",
+              "41",
+              "42",
+              "43",
+              "44",
+              "45"
             ],
             "type": "integer",
+            "description": "And the current activity's most specific mode type, if it can be found.",
             "format": "int32",
             "nullable": true,
             "x-mapped-definition": {
@@ -18767,7 +19077,8 @@
               },
               {
                 "numericValue": "12",
-                "identifier": "Clash"
+                "identifier": "Clash",
+                "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
               },
               {
                 "numericValue": "13",
@@ -18856,6 +19167,26 @@
               {
                 "numericValue": "40",
                 "identifier": "Social"
+              },
+              {
+                "numericValue": "41",
+                "identifier": "TrialsCountdown"
+              },
+              {
+                "numericValue": "42",
+                "identifier": "TrialsSurvival"
+              },
+              {
+                "numericValue": "43",
+                "identifier": "IronBannerControl"
+              },
+              {
+                "numericValue": "44",
+                "identifier": "IronBannerClash"
+              },
+              {
+                "numericValue": "45",
+                "identifier": "IronBannerSupremacy"
               }
             ]
           },
@@ -18865,6 +19196,7 @@
               "type": "integer",
               "format": "uint32"
             },
+            "description": "If the user is in an activity, this will be the hashes of the DestinyActivityModeDefinition being played. Combine with currentActivityHash to give a person a full picture of what they're doing right now.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
             }
@@ -18873,10 +19205,12 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+            },
+            "description": "All Activity Modes that apply to the current activity being played, in enum form."
           },
           "currentPlaylistActivityHash": {
             "type": "integer",
+            "description": "If the user is in a playlist, this is the hash identifier for the playlist that they chose.",
             "format": "uint32",
             "nullable": true,
             "x-mapped-definition": {
@@ -20758,7 +21092,7 @@
         "properties": {
           "referenceId": {
             "type": "integer",
-            "description": "Hash ID that can be looked up in the DestinyActivityTable.",
+            "description": "The unique hash identifier of the DestinyActivityDefinition that was played. If I had this to do over, it'd be named activityHash. Too late now.",
             "format": "uint32",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
@@ -20766,6 +21100,7 @@
           },
           "directorActivityHash": {
             "type": "integer",
+            "description": "The unique hash identifier of the DestinyActivityDefinition that was played.",
             "format": "uint32",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
@@ -20773,7 +21108,7 @@
           },
           "instanceId": {
             "type": "integer",
-            "description": "This value can be used to get additional data about this activity such as who else was playing.",
+            "description": "The unique identifier for this *specific* match that was played.\r\nThis value can be used to get additional data about this activity such as who else was playing via the GetPostGameCarnageReport endpoint.",
             "format": "int64"
           },
           "mode": {
@@ -20783,19 +21118,21 @@
                 "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
               }
             ],
-            "description": "Indicates the game mode of the activity."
+            "description": "Indicates the most specific game mode of the activity that we could find."
           },
           "modes": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
+            },
+            "description": "The list of all Activity Modes to which this activity applies, including aggregates. This will let you see, for example, whether the activity was both Clash and part of the Trials of the Nine event."
           },
           "isPrivate": {
             "type": "boolean",
-            "description": "Whether or not the match was a private match."
+            "description": "Whether or not the match was a private match. There's no private matches in Destiny 2... yet... DUN DUN DUNNNN"
           }
-        }
+        },
+        "description": "Summary information about the activity that was played."
       },
       "Destiny.HistoricalStats.DestinyPostGameCarnageReportEntry": {
         "type": "object",
@@ -20882,6 +21219,12 @@
               }
             ],
             "description": "Weighted value of the stat if a weight greater than 1 has been assigned."
+          },
+          "activityId": {
+            "type": "integer",
+            "description": "When a stat represents the best, most, longest, fastest or some other personal best, the actual activity ID where that personal best was established is available on this property.",
+            "format": "int64",
+            "nullable": true
           }
         }
       },
@@ -21880,7 +22223,14 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "Sometimes milestones - or activities active in milestones - will have relevant vendors. These are the vendors that are currently relevant."
+            "description": "Sometimes milestones - or activities active in milestones - will have relevant vendors. These are the vendors that are currently relevant.\r\nDeprecated, already, for the sake of the new \"vendors\" property that has more data. What was I thinking."
+          },
+          "vendors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneVendor"
+            },
+            "description": "This is why we can't have nice things. This is the ordered list of vendors to be shown that relate to this milestone, potentially along with other interesting data."
           },
           "startDate": {
             "type": "string",
@@ -21991,6 +22341,28 @@
           }
         },
         "description": "A Milestone can have many Challenges. Challenges are just extra Objectives that provide a fun way to mix-up play and provide extra rewards."
+      },
+      "Destiny.Milestones.DestinyPublicMilestoneVendor": {
+        "type": "object",
+        "properties": {
+          "vendorHash": {
+            "type": "integer",
+            "description": "The hash identifier of the Vendor related to this Milestone. You can show useful things from this, such as thier Faction icon or whatever you might care about.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
+          },
+          "previewItemHash": {
+            "type": "integer",
+            "description": "If this vendor is featuring a specific item for this event, this will be the hash identifier of that item. I'm taking bets now on how long we go before this needs to be a list or some other, more complex representation instead and I deprecate this too. I'm going to go with 5 months. Calling it now, 2017-09-14 at 9:46pm PST.",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
+          }
+        }
       },
       "Forum.CommunityContentSortMode": {
         "enum": [
@@ -23214,6 +23586,46 @@
                 "Response": {
                   "type": "integer",
                   "format": "int32"
+                },
+                "ErrorCode": {
+                  "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "ListOfGroupV2Card": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/GroupsV2.GroupV2Card"
+                  }
                 },
                 "ErrorCode": {
                   "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
