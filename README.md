@@ -6,7 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2017-10-19 - A deployment has just been released that should fix a variety of bugs.  I'll take some time to regenerate the spec and documentation later today, though there shouldn't be any significant changes on that front.
+2017-10-19 - A deployment has just been released that should fix a variety of bugs.  The spec and docs have been regenerated and are now ready for consumption.  Unfortunately, pretty much all of the still-pending spec bugs have not been able to be addressed yet.  Hopefully we will find some time to address those in upcoming deployments.
 
 2017-10-11 - Yesterday we un-redacted several entities and introduced the Iron Banner milestones, which had some problems that should be resolved as of a deployment that will take place later this morning.  In other news, the delays caused by my absence will push out the Vendor API from being in a beta ready state - I'm hoping to have this ready for use sometime in November as a result.  I apologize for the delays, and will try to keep you all posted here.
 
