@@ -14307,10 +14307,6 @@
 		"alpha": {
 		  "format": "int32",
 		  "type": "integer"
-		},
-		"order": {
-			  "format": "int32",
-			  "type": "integer"
 		}
 	  }
 	},
