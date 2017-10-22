@@ -14284,6 +14284,88 @@
       },
       "x-mobile-manifest-name": "DestinyItemCategoryDefinition"
     },
+	"GroupsV2.ClanBanner.Color": {
+	  "type": "object",
+	  "properties": {
+	    "colorHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this color. Guaranteed to be unique for the type of color, but not globally.",
+          "type": "integer"
+        },
+		"red": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"green": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"blue": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"alpha": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"order": {
+			  "format": "int32",
+			  "type": "integer"
+		}
+	  }
+	},
+	"GroupsV2.ClanBanner.Decal": {
+	  "type": "object",
+	  "properties": {
+	    "imageHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this decal. Guaranteed to be unique for the type of decal, but not globally.",
+          "type": "integer"
+        },
+	    "foregroundImagePath": {
+		  "type": "string"
+	    },
+	    "backgroundImagePath": {
+		  "type": "string"
+	    }
+	  }
+	},
+	"GroupsV2.ClanBanner.Gonfalon": {
+	  "type": "object",
+	  "properties": {
+	    "imageHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this decal. Guaranteed to be unique for the type of decal, but not globally.",
+          "type": "integer"
+        },
+	    "foregroundImagePath": {
+		  "type": "string"
+	    }
+	  }
+	},
+	"GroupsV2.ClanBanner.Data": {
+	  "type": "object",
+	  "properties": {
+	    "decalPrimaryColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "decalSecondaryColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "decal": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Decal"
+	    },
+	    "gonfalonColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "gonfalonDetailColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "gonfalon": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Gonfalon"
+	    }
+	  }
+	},
     "GroupsV2.GroupUserBase": {
       "type": "object",
       "properties": {
