@@ -8139,7 +8139,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Progressions"
+      "x-mobile-manifest-name": "DestinyProgressionDefinition"
     },
     "Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition": {
       "description": "Many Destiny*Definition contracts - the \"first order\" entities of Destiny that have their own tables in the Manifest Database - also have displayable information. This is the base class for that display information.",
@@ -8669,7 +8669,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Items"
+      "x-mobile-manifest-name": "DestinyInventoryItemDefinition"
     },
     "Destiny.Misc.DestinyColor": {
       "description": "Represents a color whose RGBA values are all represented as values between 0 and 255.",
@@ -9012,7 +9012,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "InventoryBuckets"
+      "x-mobile-manifest-name": "DestinyInventoryBucketDefinition"
     },
     "Destiny.BucketScope": {
       "format": "int32",
@@ -9129,7 +9129,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ItemTierTypes"
+      "x-mobile-manifest-name": "DestinyItemTierTypeDefinition"
     },
     "Destiny.Definitions.Items.DestinyItemTierTypeInfusionBlock": {
       "type": "object",
@@ -9290,7 +9290,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Stats"
+      "x-mobile-manifest-name": "DestinyStatDefinition"
     },
     "Destiny.DestinyStatAggregationType": {
       "format": "int32",
@@ -9359,7 +9359,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "StatGroups"
+      "x-mobile-manifest-name": "DestinyStatGroupDefinition"
     },
     "Destiny.Definitions.DestinyStatDisplayDefinition": {
       "description": "Describes the way that an Item Stat (see DestinyStatDefinition) is transformed using the DestinyStatGroupDefinition related to that item. See both of the aforementioned definitions for more information about the stages of stat transformation.\r\nThis represents the transformation of a stat into a \"Display\" stat (the closest value that BNet can get to the in-game display value of the stat)",
@@ -9845,7 +9845,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Vendors"
+      "x-mobile-manifest-name": "DestinyVendorDefinition"
     },
     "Destiny.Definitions.DestinyVendorDisplayPropertiesDefinition": {
       "type": "object",
@@ -10588,7 +10588,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Factions"
+      "x-mobile-manifest-name": "DestinyFactionDefinition"
     },
     "Destiny.Definitions.DestinyItemQualityBlockDefinition": {
       "description": "An item's \"Quality\" determines its calculated stats. The Level at which the item spawns is combined with its \"qualityLevel\" along with some additional calculations to determine the value of those stats.\r\nIn Destiny 2, most items don't have default item levels and quality, making this property less useful: these apparently are almost always determined by the complex mechanisms of the Reward system rather than statically. They are still provided here in case they are still useful for people. This also contains some information about Infusion.",
@@ -10660,7 +10660,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ProgressionLevelRequirements"
+      "x-mobile-manifest-name": "DestinyProgressionLevelRequirementDefinition"
     },
     "Interpolation.InterpolationPointFloat": {
       "type": "object",
@@ -10805,7 +10805,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "RewardSources"
+      "x-mobile-manifest-name": "DestinyRewardSourceDefinition"
     },
     "Destiny.Definitions.DestinyRewardSourceCategory": {
       "format": "int32",
@@ -10981,7 +10981,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Objectives"
+      "x-mobile-manifest-name": "DestinyObjectiveDefinition"
     },
     "Destiny.DestinyUnlockValueUIStyle": {
       "format": "int32",
@@ -11152,7 +11152,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "SandboxPerks"
+      "x-mobile-manifest-name": "DestinySandboxPerkDefinition"
     },
     "Destiny.DamageType": {
       "format": "int32",
@@ -11565,7 +11565,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Locations"
+      "x-mobile-manifest-name": "DestinyLocationDefinition"
     },
     "Destiny.Definitions.DestinyLocationReleaseDefinition": {
       "description": "A specific \"spot\" referred to by a location. Only one of these can be active at a time for a given Location.",
@@ -11797,7 +11797,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Destinations"
+      "x-mobile-manifest-name": "DestinyDestinationDefinition"
     },
     "Destiny.Definitions.DestinyActivityGraphListEntryDefinition": {
       "description": "Destinations and Activities may have default Activity Graphs that should be shown when you bring up the Director and are playing in either.\r\nThis contract defines the graph referred to and the gating for when it is relevant.",
@@ -11874,7 +11874,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ActivityGraphs"
+      "x-mobile-manifest-name": "DestinyActivityGraphDefinition"
     },
     "Destiny.Definitions.Director.DestinyActivityGraphNodeDefinition": {
       "description": "This is the position and other data related to nodes in the activity graph that you can click to launch activities. An Activity Graph node will only have one active Activity at a time, which will determine the activity to be launched (and, unless overrideDisplay information is provided, will also determine the tooltip and other UI related to the node)",
@@ -12378,7 +12378,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Activities"
+      "x-mobile-manifest-name": "DestinyActivityDefinition"
     },
     "Destiny.Definitions.DestinyActivityRewardDefinition": {
       "description": "Activities can refer to one or more sets of tooltip-friendly reward data. These are the definitions for those tooltip friendly rewards.",
@@ -12433,7 +12433,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ActivityModifiers"
+      "x-mobile-manifest-name": "DestinyActivityModifierDefinition"
     },
     "Destiny.Definitions.DestinyActivityChallengeDefinition": {
       "description": "Represents a reference to a Challenge, which for now is just an Objective.",
@@ -12979,7 +12979,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ActivityModes"
+      "x-mobile-manifest-name": "DestinyActivityModeDefinition"
     },
     "Destiny.DestinyActivityModeCategory": {
       "format": "int32",
@@ -13080,7 +13080,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Places"
+      "x-mobile-manifest-name": "DestinyPlaceDefinition"
     },
     "Destiny.Definitions.DestinyActivityTypeDefinition": {
       "description": "The definition for an Activity Type.\r\nIn Destiny 2, an Activity Type represents a conceptual categorization of Activities.\r\nThese are most commonly used in the game for the subtitle under Activities, but BNet uses them extensively to identify and group activities by their common properties.\r\nUnfortunately, there has been a movement away from providing the richer data in Destiny 2 that we used to get in Destiny 1 for Activity Types. For instance, Nightfalls are grouped under the same Activity Type as regular Strikes. \r\nFor this reason, BNet will eventually migrate toward Activity Modes as a better indicator of activity category. But for the time being, it is still referred to in many places across our codebase.",
@@ -13104,7 +13104,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ActivityTypes"
+      "x-mobile-manifest-name": "DestinyActivityTypeDefinition"
     },
     "Destiny.Definitions.Director.DestinyActivityGraphArtElementDefinition": {
       "description": "These Art Elements are meant to represent one-off visual effects overlaid on the map. Currently, we do not have a pipeline to import the assets for these overlays, so this info exists as a placeholder for when such a pipeline exists (if it ever will)",
@@ -13525,7 +13525,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "SocketTypes"
+      "x-mobile-manifest-name": "DestinySocketTypeDefinition"
     },
     "Destiny.Definitions.Sockets.DestinyInsertPlugActionDefinition": {
       "description": "Data related to what happens while a plug is being inserted, mostly for UI purposes.",
@@ -13603,7 +13603,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "SocketCategories"
+      "x-mobile-manifest-name": "DestinySocketCategoryDefinition"
     },
     "Destiny.Definitions.DestinyItemSocketCategoryDefinition": {
       "description": "Sockets are grouped into categories in the UI. These define which category and which sockets are under that category.",
@@ -13746,7 +13746,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Talents"
+      "x-mobile-manifest-name": "DestinyTalentGridDefinition"
     },
     "Destiny.Definitions.DestinyTalentNodeDefinition": {
       "description": "Talent Grids on items have Nodes. These nodes have positions in the talent grid's UI, and contain \"Steps\" (DestinyTalentNodeStepDefinition), one of whom will be the \"Current\" step.\r\nThe Current Step determines the visual properties of the node, as well as what the node grants when it is activated.\r\nSee DestinyTalentGridDefinition for a more complete overview of how Talent Grids work, and how they are used in Destiny 2 (and how they were used in Destiny 1).",
@@ -14065,7 +14065,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "DamageTypes"
+      "x-mobile-manifest-name": "DestinyDamageTypeDefinition"
     },
     "Destiny.Definitions.Lore.DestinyLoreDefinition": {
       "description": "These are definitions for in-game \"Lore,\" meant to be narrative enhancements of the game experience.\r\nDestinyInventoryItemDefinitions for interesting items point to these definitions, but nothing's stopping you from scraping all of these and doing something cool with them. If they end up having cool data.",
@@ -14092,7 +14092,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Lore"
+      "x-mobile-manifest-name": "DestinyLoreDefinition"
     },
     "Destiny.Definitions.DestinyTalentNodeExclusiveSetDefinition": {
       "description": "The list of indexes into the Talent Grid's \"nodes\" property for nodes in this exclusive set. (See DestinyTalentNodeDefinition.nodeIndex)",
@@ -14580,8 +14580,86 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ItemCategories"
+      "x-mobile-manifest-name": "DestinyItemCategoryDefinition"
     },
+	"GroupsV2.ClanBanner.Color": {
+	  "type": "object",
+	  "properties": {
+	    "colorHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this color. Guaranteed to be unique for the type of color, but not globally.",
+          "type": "integer"
+        },
+		"red": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"green": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"blue": {
+		  "format": "int32",
+		  "type": "integer"
+		},
+		"alpha": {
+		  "format": "int32",
+		  "type": "integer"
+		}
+	  }
+	},
+	"GroupsV2.ClanBanner.Decal": {
+	  "type": "object",
+	  "properties": {
+	    "imageHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this decal. Guaranteed to be unique for the type of decal, but not globally.",
+          "type": "integer"
+        },
+	    "foregroundImagePath": {
+		  "type": "string"
+	    },
+	    "backgroundImagePath": {
+		  "type": "string"
+	    }
+	  }
+	},
+	"GroupsV2.ClanBanner.Gonfalon": {
+	  "type": "object",
+	  "properties": {
+	    "imageHash": {
+          "format": "uint32",
+          "description": "The unique identifier for this decal. Guaranteed to be unique for the type of decal, but not globally.",
+          "type": "integer"
+        },
+	    "foregroundImagePath": {
+		  "type": "string"
+	    }
+	  }
+	},
+	"GroupsV2.ClanBanner.Data": {
+	  "type": "object",
+	  "properties": {
+	    "decalPrimaryColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "decalSecondaryColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "decal": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Decal"
+	    },
+	    "gonfalonColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "gonfalonDetailColor": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Color"
+	    },
+	    "gonfalon": {
+	      "$ref": "#/definitions/GroupsV2.ClanBanner.Gonfalon"
+	    }
+	  }
+	},
     "GroupsV2.GroupUserBase": {
       "type": "object",
       "properties": {
@@ -20034,7 +20112,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Races"
+      "x-mobile-manifest-name": "DestinyRaceDefinition"
     },
     "Destiny.Definitions.DestinyGenderDefinition": {
       "description": "Gender is a social construct, and as such we have definitions for Genders. Right now there happens to only be two, but we'll see what the future holds.",
@@ -20067,7 +20145,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Genders"
+      "x-mobile-manifest-name": "DestinyGenderDefinition"
     },
     "Destiny.Definitions.DestinyClassDefinition": {
       "description": "Defines a Character Class in Destiny 2. These are types of characters you can play, like Titan, Warlock, and Hunter.",
@@ -20115,7 +20193,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Classes"
+      "x-mobile-manifest-name": "DestinyClassDefinition"
     },
     "DictionaryComponentResponseOfint64AndDestinyCharacterComponent": {
       "type": "object",
@@ -20715,7 +20793,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Milestones"
+      "x-mobile-manifest-name": "DestinyMilestoneDefinition"
     },
     "Destiny.Definitions.Milestones.DestinyMilestoneType": {
       "format": "int32",
@@ -21774,7 +21852,7 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "Unlocks"
+      "x-mobile-manifest-name": "DestinyUnlockDefinition"
     },
     "DictionaryComponentResponseOfint64AndDestinyItemInstanceComponent": {
       "type": "object",
@@ -23574,7 +23652,7 @@
           "type": "integer"
         }
       },
-      "x-mobile-manifest-name": "HistoricalStats"
+      "x-mobile-manifest-name": "DestinyHistoricalStatsDefinition"
     },
     "Destiny.HistoricalStats.Definitions.DestinyStatsGroupType": {
       "format": "int32",
