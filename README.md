@@ -8,21 +8,6 @@ This section will be added to as time goes by - we're working with it as we go!
 
 2017-10-19 - A deployment has just been released that should fix a variety of bugs.  The spec and docs have been regenerated and are now ready for consumption.  Unfortunately, pretty much all of the still-pending spec bugs have not been able to be addressed yet.  Hopefully we will find some time to address those in upcoming deployments.
 
-2017-10-11 - Yesterday we un-redacted several entities and introduced the Iron Banner milestones, which had some problems that should be resolved as of a deployment that will take place later this morning.  In other news, the delays caused by my absence will push out the Vendor API from being in a beta ready state - I'm hoping to have this ready for use sometime in November as a result.  I apologize for the delays, and will try to keep you all posted here.
-
-2017-10-04 - I apologize for the lack of contact lately.  I had an unexpected family emergency, and was not in a situation where I could communicate here.  I'm back now, and attempting to get caught up on what I have missed over the last 2 weeks - unfortunately, some efforts that I have been working on have been delayed as a result.  I also haven't had a chance to look at issues that have been created over the last couple of weeks - I will attempt to find some time to evaluate and respond to those as needed, but please bear with me as I attempt to balance working on the existing delayed features with responding to requests.  Thanks for your understanding, I look forward to continuing to improve the API and working with you all.
-
-2017-09-15 - Content-only release to un-redact various Trials of the Nine related content.  No meaningful changes to API at this time. (though the un-redaction of Trials' DestinyActivityModeDefinition will mean that queries requesting this mode should no longer fail)
-
-2017-09-13 - Documentation updated to co-incide with the 9/13 release of Bungie.Net.
-- Fixes for a variety of issues with Historical Stats APIs
-- All relevant Activity Modes are now returned with historical stats results for an Activity, so that you can better know (for a D1-compatible example) when an activity was Control and Trials of Osiris.  The old result that returned just the most specific activity mode still exists for backwards compatibility.
-- Added the requested 
-- Fixed a variety of bugs, both in the API and documentation
-- Exposing the Groups API for public consumption
-- Added the GetDestinyEntityDefinition endpoint by popular request.  I strongly urge you not to use it outside of very trivial or educational purposes, as all of our definitions are very tightly interrelated: and to get at meaningful data for an entity, you will often have to have the definitions of several different entities.  But for the most simple/educational/investigatory use cases, this should serve your needs.
-
-
 # The State of the API
 
 The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
@@ -141,3 +126,19 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 - There are reports of missing PGCR data: particularly the "extended" and "teams" properties.  We have filed a bug and will investigate as time allows.
 
 - If our environment goes down entirely, to the point where we can no longer process your request, we are currently returning the same static error HTML page(s) to any API request that the website is returning.  If you get an HTML response to an API request, know that this is the undesirable side effect of our environment being down and handle it with your own messaging and error handling as needed.
+
+# Release History
+
+2017-10-11 - Yesterday we un-redacted several entities and introduced the Iron Banner milestones, which had some problems that should be resolved as of a deployment that will take place later this morning.  In other news, the delays caused by my absence will push out the Vendor API from being in a beta ready state - I'm hoping to have this ready for use sometime in November as a result.  I apologize for the delays, and will try to keep you all posted here.
+
+2017-10-04 - I apologize for the lack of contact lately.  I had an unexpected family emergency, and was not in a situation where I could communicate here.  I'm back now, and attempting to get caught up on what I have missed over the last 2 weeks - unfortunately, some efforts that I have been working on have been delayed as a result.  I also haven't had a chance to look at issues that have been created over the last couple of weeks - I will attempt to find some time to evaluate and respond to those as needed, but please bear with me as I attempt to balance working on the existing delayed features with responding to requests.  Thanks for your understanding, I look forward to continuing to improve the API and working with you all.
+
+2017-09-15 - Content-only release to un-redact various Trials of the Nine related content.  No meaningful changes to API at this time. (though the un-redaction of Trials' DestinyActivityModeDefinition will mean that queries requesting this mode should no longer fail)
+
+2017-09-13 - Documentation updated to co-incide with the 9/13 release of Bungie.Net.
+- Fixes for a variety of issues with Historical Stats APIs
+- All relevant Activity Modes are now returned with historical stats results for an Activity, so that you can better know (for a D1-compatible example) when an activity was Control and Trials of Osiris.  The old result that returned just the most specific activity mode still exists for backwards compatibility.
+- Added the requested 
+- Fixed a variety of bugs, both in the API and documentation
+- Exposing the Groups API for public consumption
+- Added the GetDestinyEntityDefinition endpoint by popular request.  I strongly urge you not to use it outside of very trivial or educational purposes, as all of our definitions are very tightly interrelated: and to get at meaningful data for an entity, you will often have to have the definitions of several different entities.  But for the most simple/educational/investigatory use cases, this should serve your needs.
