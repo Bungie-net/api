@@ -6917,12 +6917,7 @@
       "properties": {
         "membershipType": {
           "description": "Type of the membership.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
+          "$ref": "#/definitions/BungieMembershipType"
         },
         "membershipId": {
           "format": "int64",
@@ -6949,12 +6944,7 @@
         },
         "membershipType": {
           "description": "Type of the membership.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
+          "$ref": "#/definitions/BungieMembershipType"
         },
         "membershipId": {
           "format": "int64",
@@ -7795,12 +7785,7 @@
         },
         "hostGuidedGamePermissionOverride": {
           "description": "Minimum Member Level allowed to host guided games\r\nAlways Allowed: Founder, Acting Founder, Admin\r\nAllowed Overrides: None, Member, Beginner\r\nDefault is Member for clans, None for groups, although this means nothing for groups.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupsV2.HostGuidedGamesPermissionLevel"
-            }
-          ]
+          "$ref": "#/definitions/GroupsV2.HostGuidedGamesPermissionLevel"
         },
         "updateBannerPermissionOverride": {
           "description": "Minimum Member Level allowed to update banner\r\nAlways Allowed: Founder, Acting Founder\r\nTrue means admins have this power, false means they don't\r\nDefault is false for clans, true for groups.",
@@ -7808,12 +7793,7 @@
         },
         "joinLevel": {
           "description": "Level to join a member at when accepting an invite, application, or joining an open clan\r\nDefault is Beginner.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupsV2.RuntimeGroupMemberType"
-            }
-          ]
+          "$ref": "#/definitions/GroupsV2.RuntimeGroupMemberType"
         }
       }
     },
@@ -8090,12 +8070,7 @@
         },
         "scope": {
           "description": "The \"Scope\" of the progression indicates the source of the progression's live data.\r\nSee the DestinyProgressionScope enum for more info: but essentially, a Progression can either be backed by a stored value, or it can be a calculated derivative of other values.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyProgressionScope"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyProgressionScope"
         },
         "repeatLastStep": {
           "description": "If this is True, then the progression doesn't have a maximum level.",
@@ -8246,12 +8221,7 @@
         },
         "displayEffectType": {
           "description": "This appears to be, when you \"level up\", whether a visual effect will display and on what entity. See DestinyProgressionStepDisplayEffect for slightly more info.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyProgressionStepDisplayEffect"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyProgressionStepDisplayEffect"
         },
         "progressTotal": {
           "format": "int32",
@@ -8336,12 +8306,7 @@
         },
         "backgroundColor": {
           "description": "Sometimes, an item will have a background color. Most notably this occurs with Emblems, who use the Background Color for small character nameplates such as the \"friends\" view you see in-game. There are almost certainly other items that have background color as well, though I have not bothered to investigate what items have it nor what purposes they serve: use it as you will.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Misc.DestinyColor"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Misc.DestinyColor"
         },
         "screenshot": {
           "description": "If we were able to acquire an in-game screenshot for the item, the path to that screenshot will be returned here. Note that not all items have screenshots: particularly not any non-equippable items.",
@@ -8365,156 +8330,71 @@
         },
         "action": {
           "description": "If the item can be \"used\", this block will be non-null, and will have data related to the action performed when using the item. (Guess what? 99% of the time, this action is \"dismantle\". Shocker)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemActionBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemActionBlockDefinition"
         },
         "inventory": {
           "description": "If this item can exist in an inventory, this block will be non-null. In practice, every item that currently exists has one of these blocks. But note that it is not necessarily guaranteed.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemInventoryBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemInventoryBlockDefinition"
         },
         "setData": {
           "description": "If this item is a quest, this block will be non-null. In practice, I wish I had called this the Quest block, but at the time it wasn't clear to me whether it would end up being used for purposes other than quests. It will contain data about the steps in the quest, and mechanics we can use for displaying and tracking the quest.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemSetBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemSetBlockDefinition"
         },
         "stats": {
           "description": "If this item can have stats (such as a weapon, armor, or vehicle), this block will be non-null and populated with the stats found on the item.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemStatBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemStatBlockDefinition"
         },
         "equippingBlock": {
           "description": "If this item can be equipped, this block will be non-null and will be populated with the conditions under which it can be equipped.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyEquippingBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyEquippingBlockDefinition"
         },
         "translationBlock": {
           "description": "If this item can be rendered, this block will be non-null and will be populated with rendering information.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemTranslationBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemTranslationBlockDefinition"
         },
         "preview": {
           "description": "If this item can be Used or Acquired to gain other items (for instance, how Eververse Boxes can be consumed to get items from the box), this block will be non-null and will give summary information for the items that can be acquired.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemPreviewBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemPreviewBlockDefinition"
         },
         "quality": {
           "description": "If this item can have a level or stats, this block will be non-null and will be populated with default quality (item level, \"quality\", and infusion) data. See the block for more details, there's often less upfront information in D2 so you'll want to be aware of how you use quality and item level on the definition level now.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemQualityBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemQualityBlockDefinition"
         },
         "value": {
           "description": "The conceptual \"Value\" of an item, if any was defined. See the DestinyItemValueBlockDefinition for more details.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemValueBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemValueBlockDefinition"
         },
         "sourceData": {
           "description": "If this item has a known source, this block will be non-null and populated with source information. Unfortunately, at this time we are not generating sources: that is some aggressively manual work which we didn't have time for, and I'm hoping to get back to at some point in the future.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemSourceBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemSourceBlockDefinition"
         },
         "objectives": {
           "description": "If this item has Objectives (extra tasks that can be accomplished related to the item... most frequently when the item is a Quest Step and the Objectives need to be completed to move on to the next Quest Step), this block will be non-null and the objectives defined herein.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemObjectiveBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemObjectiveBlockDefinition"
         },
         "plug": {
           "description": "If this item *is* a Plug, this will be non-null and the info defined herein. See DestinyItemPlugDefinition for more information.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Items.DestinyItemPlugDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Items.DestinyItemPlugDefinition"
         },
         "gearset": {
           "description": "If this item has related items in a \"Gear Set\", this will be non-null and the relationships defined herein.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemGearsetBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemGearsetBlockDefinition"
         },
         "sack": {
           "description": "If this item is a \"reward sack\" that can be opened to provide other items, this will be non-null and the properties of the sack contained herein.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemSackBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemSackBlockDefinition"
         },
         "sockets": {
           "description": "If this item has any Sockets, this will be non-null and the individual sockets on the item will be defined herein.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemSocketBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemSocketBlockDefinition"
         },
         "summary": {
           "description": "Summary data about the item.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemSummaryBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemSummaryBlockDefinition"
         },
         "talentGrid": {
           "description": "If the item has a Talent Grid, this will be non-null and the properties of the grid defined herein. Note that, while many items still have talent grids, the only ones with meaningful Nodes still on them will be Subclass/\"Build\" items.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemTalentGridBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemTalentGridBlockDefinition"
         },
         "investmentStats": {
           "description": "If the item has stats, this block will be defined. It has the \"raw\" investment stats for the item. These investment stats don't take into account the ways that the items can spawn, nor do they take into account any Stat Group transformations. I have retained them for debugging purposes, but I do not know how useful people will find them.",
@@ -8581,39 +8461,19 @@
         },
         "specialItemType": {
           "description": "In Destiny 1, we identified some items as having particular categories that we'd like to know about for various internal logic purposes. These are defined in SpecialItemType, and while these days the itemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.SpecialItemType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.SpecialItemType"
         },
         "itemType": {
           "description": "A value indicating the \"base\" the of the item. This enum is a useful but dramatic oversimplification of what it means for an item to have a \"Type\". Still, it's handy in many situations.\r\nitemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemType"
         },
         "itemSubType": {
           "description": "A value indicating the \"sub-type\" of the item. For instance, where an item might have an itemType value \"Weapon\", this will be something more specific like \"Auto Rifle\".\r\nitemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemSubType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemSubType"
         },
         "classType": {
           "description": "We run a similarly weak-sauce algorithm to try and determine whether an item is restricted to a specific class. If we find it to be restricted in such a way, we set this classType property to match the class' enumeration value so that users can easily identify class restricted items.\r\nIf you see a mis-classed item, please inform the developers in the Bungie API forum.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyClass"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyClass"
         },
         "equippable": {
           "description": "If true, then you will be allowed to equip the item if you pass its other requirements.\r\nThis being false means that you cannot equip the item under any circumstances.",
@@ -8639,12 +8499,7 @@
         },
         "defaultDamageType": {
           "description": "If the item has a damage type that could be considered to be default, it will be populated here.\r\nFor various upsetting reasons, it's surprisingly cumbersome to figure this out. I hope you're happy.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "defaultDamageTypeHash": {
           "format": "uint32",
@@ -8815,12 +8670,7 @@
       "properties": {
         "displayProperties": {
           "description": "Infrequently defined in practice. Defer to the individual progressions' display properties.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "displayUnits": {
           "description": "The localized unit of measurement for progression across the progressions defined in this mapping. Unfortunately, this is very infrequently defined. Defer to the individual progressions' display units.",
@@ -8889,12 +8739,7 @@
         },
         "tierType": {
           "description": "The enumeration matching the tier type of the item to known values, again for convenience sake.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.TierType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.TierType"
         }
       }
     },
@@ -8950,21 +8795,11 @@
         },
         "scope": {
           "description": "Where the bucket is found. 0 = Character, 1 = Account",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.BucketScope"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.BucketScope"
         },
         "category": {
           "description": "An enum value for what items can be found in the bucket. See the BucketCategory enum for more details.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.BucketCategory"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.BucketCategory"
         },
         "bucketOrder": {
           "format": "int32",
@@ -8978,12 +8813,7 @@
         },
         "location": {
           "description": "Sometimes, inventory buckets represent conceptual \"locations\" in the game that might not be expected. This value indicates the conceptual location of the bucket, regardless of where it is actually contained on the character/account. \r\nSee ItemLocation for details. \r\nNote that location includes the Vault and the Postmaster (both of whom being just inventory buckets with additional actions that can be performed on them through a Vendor)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ItemLocation"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.ItemLocation"
         },
         "hasTransferDestination": {
           "description": "If TRUE, there is at least one Vendor that can transfer items to/from this bucket. See the DestinyVendorDefinition's acceptedItems property for more information on how transferring works.",
@@ -9107,12 +8937,7 @@
         },
         "infusionProcess": {
           "description": "If this tier defines infusion properties, they will be contained here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Items.DestinyItemTierTypeInfusionBlock"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Items.DestinyItemTierTypeInfusionBlock"
         },
         "hash": {
           "format": "uint32",
@@ -9264,12 +9089,7 @@
         },
         "aggregationType": {
           "description": "Stats can exist on a character or an item, and they may potentially be aggregated in different ways. The DestinyStatAggregationType enum value indicates the way that this stat is being aggregated.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyStatAggregationType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyStatAggregationType"
         },
         "hasComputedBlock": {
           "description": "True if the stat is computed rather than being delivered as a raw value on items.\r\nFor instance, the Light stat in Destiny 1 was a computed stat.",
@@ -9418,12 +9238,7 @@
         },
         "displayProperties": {
           "description": "The display properties to show instead of the base DestinyStatDefinition display properties.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         }
       }
     },
@@ -9458,12 +9273,7 @@
         },
         "attributes": {
           "description": "These are custom attributes on the equippability of the item.\r\nFor now, this can only be \"equip on acquire\", which would mean that the item will be automatically equipped as soon as you pick it up.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.EquippingItemBlockAttributes"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.EquippingItemBlockAttributes"
         },
         "displayStrings": {
           "description": "These are strings that represent the possible Game/Account/Character state failure conditions that can occur when trying to equip the item. They match up one-to-one with requiredUnlockExpressions.",
@@ -9998,12 +9808,7 @@
         },
         "overlay": {
           "description": "If this category has an overlay prompt that should appear, this contains the details of that prompt.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyVendorCategoryOverlayDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyVendorCategoryOverlayDefinition"
         }
       }
     },
@@ -10093,12 +9898,7 @@
         },
         "headerDisplayProperties": {
           "description": "The header for the interaction dialog.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "instructions": {
           "description": "The localized text telling the player what to do when they see this dialog.",
@@ -10112,12 +9912,7 @@
       "properties": {
         "itemRewardsSelection": {
           "description": "The rewards granted upon responding to the vendor.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyVendorInteractionRewardSelection"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyVendorInteractionRewardSelection"
         },
         "reply": {
           "description": "The localized text for the reply.",
@@ -10125,12 +9920,7 @@
         },
         "replyType": {
           "description": "An enum indicating the type of reply being made.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyVendorReplyType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyVendorReplyType"
         }
       }
     },
@@ -10202,12 +9992,7 @@
         },
         "displayProperties": {
           "description": "The title and other common properties of the flyout.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "buckets": {
           "description": "A list of inventory buckets and other metadata to show on the screen.",
@@ -10245,12 +10030,7 @@
         },
         "sortItemsBy": {
           "description": "The methodology to use for sorting items from the flyout.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemSortType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemSortType"
         }
       }
     },
@@ -10317,12 +10097,7 @@
         },
         "refundPolicy": {
           "description": "If this item can be refunded, this is the policy for what will be refundd, how, and in what time period.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyVendorItemRefundPolicy"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyVendorItemRefundPolicy"
         },
         "refundTimeLimit": {
           "format": "int32",
@@ -10363,12 +10138,7 @@
         },
         "action": {
           "description": "The action to be performed when purchasing the item, if it's not just \"buy\".",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyVendorSaleItemActionBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyVendorSaleItemActionBlockDefinition"
         },
         "displayCategory": {
           "description": "The string identifier for the category selling this item.",
@@ -10381,21 +10151,11 @@
         },
         "visibilityScope": {
           "description": "The most restrictive scope that determines whether the item is available in the Vendor's inventory. See DestinyGatingScope's documentation for more information.\r\nThis can be determined by Unlock gating, or by whether or not the item has purchase level requirements (minimumLevel and maximumLevel properties).",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGatingScope"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGatingScope"
         },
         "purchasableScope": {
           "description": "Similar to visibilityScope, it represents the most restrictive scope that determines whether the item can be purchased. It will at least be as restrictive as visibilityScope, but could be more restrictive if the item has additional purchase requirements beyond whether it is merely visible or not.\r\nSee DestinyGatingScope's documentation for more information.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGatingScope"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGatingScope"
         }
       }
     },
@@ -10716,12 +10476,7 @@
         },
         "exclusive": {
           "description": "If we found that this item is exclusive to a specific platform, this will be set to the BungieMembershipType enumeration that matches that platform.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
+          "$ref": "#/definitions/BungieMembershipType"
         }
       }
     },
@@ -10783,12 +10538,7 @@
         },
         "category": {
           "description": "Sources are grouped into categories: common ways that items are provided. I hope to see this expand in Destiny 2 once we have time to generate accurate reward source data.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceCategory"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceCategory"
         },
         "hash": {
           "format": "uint32",
@@ -10903,12 +10653,7 @@
       "properties": {
         "displayProperties": {
           "description": "Ideally, this should tell you what your task is. I'm not going to lie to you though. Sometimes this doesn't have useful information at all. Which sucks, but there's nothing either of us can do about it.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "completionValue": {
           "format": "int32",
@@ -10937,12 +10682,7 @@
         },
         "valueStyle": {
           "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyUnlockValueUIStyle"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyUnlockValueUIStyle"
         },
         "progressDescription": {
           "description": "Text to describe the progress bar.",
@@ -10950,21 +10690,11 @@
         },
         "perks": {
           "description": "If this objective enables Perks intrinsically, the conditions for that enabling are defined here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyObjectivePerkEntryDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyObjectivePerkEntryDefinition"
         },
         "stats": {
           "description": "If this objective enables modifications on a player's stats intrinsically, the conditions are defined here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveStatEntryDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveStatEntryDefinition"
         },
         "hash": {
           "format": "uint32",
@@ -11060,12 +10790,7 @@
         },
         "style": {
           "description": "An enumeration indicating whether it will be applied as long as the Objective is active, when it's completed, or until it's completed.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyObjectiveGrantStyle"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyObjectiveGrantStyle"
         }
       }
     },
@@ -11099,12 +10824,7 @@
       "properties": {
         "displayProperties": {
           "description": "These display properties are by no means guaranteed to be populated. Usually when it is, it's only because we back-filled them with the displayProperties of some Talent Node or Plug item that happened to be uniquely providing that perk.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "perkIdentifier": {
           "description": "The string identifier for the perk.",
@@ -11116,12 +10836,7 @@
         },
         "damageType": {
           "description": "If this perk grants a damage type to a weapon, the damage type will be defined here.\r\nUnless you have a compelling reason to use this enum value, use the damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -11130,12 +10845,7 @@
         },
         "perkGroups": {
           "description": "An old holdover from the original Armory, this was an attempt to group perks by functionality.\r\nIt is as yet unpopulated, and there will be quite a bit of work needed to restore it to its former working order.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepGroups"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepGroups"
         },
         "hash": {
           "format": "uint32",
@@ -11494,21 +11204,11 @@
       "properties": {
         "stat": {
           "description": "The stat being modified, and the value used.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyItemInvestmentStatDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyItemInvestmentStatDefinition"
         },
         "style": {
           "description": "Whether it will be applied as long as the objective is active, when it's completed, or until it's completed.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyObjectiveGrantStyle"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyObjectiveGrantStyle"
         }
       }
     },
@@ -11573,12 +11273,7 @@
       "properties": {
         "displayProperties": {
           "description": "Sadly, these don't appear to be populated anymore (ever?)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "spawnPoint": {
           "format": "uint32",
@@ -11628,12 +11323,7 @@
         },
         "navPointType": {
           "description": "The type of Nav Point that this represents. See the enumeration for more info.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyActivityNavPointType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyActivityNavPointType"
         },
         "worldPosition": {
           "description": "Looks like it should be the position on the map, but sadly it does not look populated... yet?",
@@ -11887,21 +11577,11 @@
         },
         "overrideDisplay": {
           "description": "The node *may* have display properties that override the active Activity's display properties.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "position": {
           "description": "The position on the map for this node.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
         },
         "featuringStates": {
           "description": "The node may have various visual accents placed on it, or styles applied. These are the list of possible styles that the Node can have. The game iterates through each, looking for the first one that passes a check of the required game/character/account state in order to show that style, and then renders the node in that style.",
@@ -11942,12 +11622,7 @@
       "properties": {
         "highlightType": {
           "description": "The node can be highlighted in a variety of ways - the game iterates through these and finds the first FeaturingState that is valid at the present moment given the Game, Account, and Character state, and renders the node in that state. See the ActivityGraphNodeHighlightType enum for possible values.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ActivityGraphNodeHighlightType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.ActivityGraphNodeHighlightType"
         }
       }
     },
@@ -12010,12 +11685,7 @@
       "properties": {
         "displayProperties": {
           "description": "The title, subtitle, and icon for the activity.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "releaseIcon": {
           "description": "If the activity has an icon associated with a specific release (such as a DLC), this is the path to that release's icon.",
@@ -12117,21 +11787,11 @@
         },
         "matchmaking": {
           "description": "This block of data provides information about the Activity's matchmaking attributes: how many people can join and such.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityMatchmakingBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyActivityMatchmakingBlockDefinition"
         },
         "guidedGame": {
           "description": "This block of data, if it exists, provides information about the guided game experience and restrictions for this activity. If it doesn't exist, the game is not able to be played as a guided game.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGuidedBlockDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGuidedBlockDefinition"
         },
         "directActivityModeHash": {
           "format": "uint32",
@@ -12912,21 +12572,11 @@
         },
         "modeType": {
           "description": "The Enumeration value for this Activity Mode. Pass this identifier into Stats endpoints to get aggregate stats for this mode.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
         },
         "activityModeCategory": {
           "description": "The type of play being performed in broad terms (PVP, PVE)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyActivityModeCategory"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyActivityModeCategory"
         },
         "isTeamBased": {
           "description": "If True, this mode has oppositional teams fighting against each other rather than \"Free-For-All\" or Co-operative modes of play.\r\nNote that Aggregate modes are never marked as team based, even if they happen to be team based at the moment. At any time, an aggregate whose subordinates are only team based could be changed so that one or more aren't team based, and then this boolean won't make much sense (the aggregation would become \"sometimes team based\"). Let's not deal with that right now.",
@@ -13112,12 +12762,7 @@
       "properties": {
         "position": {
           "description": "The position on the map of the art element.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
         }
       }
     },
@@ -13202,12 +12847,7 @@
       "properties": {
         "scope": {
           "description": "A shortcut for determining the most restrictive gating that this expression performs. See the DestinyGatingScope enum's documentation for more details.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGatingScope"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGatingScope"
         }
       }
     },
@@ -13477,21 +13117,11 @@
       "properties": {
         "displayProperties": {
           "description": "There are fields for this display data, but they appear to be unpopulated as of now. I am not sure where in the UI these would show if they even were populated, but I will continue to return this data in case it becomes useful.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "insertAction": {
           "description": "Defines what happens when a plug is inserted into sockets of this type.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinyInsertPlugActionDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinyInsertPlugActionDefinition"
         },
         "plugWhitelist": {
           "description": "A list of Plug \"Categories\" that are allowed to be plugged into sockets of this type.\r\nThese should be compared against a given plug item's DestinyInventoryItemDefinition.plug.plugCategoryHash, which indicates the plug item's category.\r\nIf the plug's category matches any whitelisted plug, or if the whitelist is empty, it is allowed to be inserted.",
@@ -13660,12 +13290,7 @@
         },
         "hudDamageType": {
           "description": "If the talent grid implies a damage type, this is the enum value for that damage type.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "hudIcon": {
           "description": "If the talent grid has a special icon that's shown in the game UI (like builds, funny that), this is the identifier for that icon. Sadly, we don't actually get that icon right now. I'll be looking to replace this with a path to the actual icon itself.",
@@ -13799,12 +13424,7 @@
         },
         "randomActivationRequirement": {
           "description": "At one point, you were going to be able to repurchase talent nodes that had random steps, to \"re-roll\" the current step of the node (and thus change the properties of your item). This was to be the activation requirement for performing that re-roll.\r\nThe system still exists to do this, as far as I know, so it may yet come back around!",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyNodeActivationRequirement"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyNodeActivationRequirement"
         },
         "isRandomRepurchasable": {
           "description": "If this is true, the node can be \"re-rolled\" to acquire a different random current step. This is not used, but still exists for a theoretical future of talent grids.",
@@ -13885,12 +13505,7 @@
       "properties": {
         "displayProperties": {
           "description": "These are the display properties actually used to render the Talent Node. The currently active step's displayProperties are shown.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "stepIndex": {
           "format": "int32",
@@ -13908,12 +13523,7 @@
         },
         "damageType": {
           "description": "An enum representing a damage type granted by activating this step, if any.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -13925,12 +13535,7 @@
         },
         "activationRequirement": {
           "description": "If the step has requirements for activation (they almost always do, if nothing else than for the Talent Grid's Progression to have reached a certain level), they will be defined here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyNodeActivationRequirement"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyNodeActivationRequirement"
         },
         "canActivateNextStep": {
           "description": "There was a time when talent nodes could be activated multiple times, and the effects of subsequent Steps would be compounded on each other, essentially \"upgrading\" the node. We have moved away from this, but theoretically the capability still exists.\r\nI continue to return this in case it is used in the future: if true and this step is the current step in the node, you are allowed to activate the node a second time to receive the benefits of the next step in the node, which will then become the active step.",
@@ -13978,12 +13583,7 @@
         },
         "stepGroups": {
           "description": "In Destiny 1, the Armory's Perk Filtering was driven by a concept of TalentNodeStepGroups: categorizations of talent nodes based on their functionality. While the Armory isn't a BNet-facing thing for now, and the new Armory will need to account for Sockets rather than Talent Nodes, this categorization capability feels useful enough to still keep around.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepGroups"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepGroups"
         },
         "affectsLevel": {
           "description": "If true, this step can affect the level of the item. See DestinyInventoryItemDefintion for more information about item levels and their effect on stats.",
@@ -14026,12 +13626,7 @@
       "properties": {
         "displayProperties": {
           "description": "The description of the damage type, icon etc...",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "transparentIconPath": {
           "description": "A variant of the icon that is transparent and colorless.",
@@ -14043,12 +13638,7 @@
         },
         "enumValue": {
           "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "hash": {
           "format": "uint32",
@@ -14165,12 +13755,7 @@
         },
         "displayProperties": {
           "description": "Will contain at least the \"name\", which will be the title of the category. We will likely not have description and an icon yet, but I'm going to keep my options open.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "nodeHashes": {
           "description": "The set of all hash identifiers for Talent Nodes (DestinyTalentNodeDefinition) in this Talent Grid that are part of this Category.",
@@ -14529,30 +14114,15 @@
         },
         "grantDestinyItemType": {
           "description": "If an item belongs to this category, it will also receive this item type. This is now how DestinyItemType is populated for items: it used to be an even jankier process, but that's a story that requires more alcohol.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemType"
         },
         "grantDestinySubType": {
           "description": "If an item belongs to this category, it will also receive this subtype enum value.\r\nI know what you're thinking - what if it belongs to multiple categories that provide sub-types?\r\nThe last one processed wins, as is the case with all of these \"grant\" enums. Now you can see one reason why we moved away from these enums... but they're so convenient when they work, aren't they?",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemSubType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemSubType"
         },
         "grantDestinyClass": {
           "description": "If an item belongs to this category, it will also get this class restriction enum value.\r\nSee the other \"grant\"-prefixed properties on this definition for my color commentary.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyClass"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyClass"
         },
         "groupedCategoryHashes": {
           "description": "If this category is a \"parent\" category of other categories, those children will have their hashes listed in rendering order here, and can be looked up using these hashes against DestinyItemCategoryDefinition.\r\nIn this way, you can build up a visual hierarchy of item categories. That's what we did, and you can do it too. I believe in you. Yes, you, Carl.\r\n(I hope someone named Carl reads this someday)",
@@ -15175,12 +14745,7 @@
       "properties": {
         "groupType": {
           "description": "Type of group, either Bungie.net hosted group, or a game services hosted clan.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/GroupsV2.GroupType"
-            }
-          ]
+          "$ref": "#/definitions/GroupsV2.GroupType"
         },
         "name": {
           "type": "string"
@@ -15233,12 +14798,7 @@
         },
         "platformMembershipType": {
           "description": "When operation needs a platform specific account ID for the present user, use this property. In particular, groupType of Clan requires this value to be set.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
+          "$ref": "#/definitions/BungieMembershipType"
         }
       }
     },
@@ -19252,132 +18812,55 @@
       "properties": {
         "vendorReceipts": {
           "description": "Recent, refundable purchases you have made from vendors. When will you use it? Couldn't say...\r\nCOMPONENT TYPE: VendorReceipts",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorReceiptsComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "VendorReceipts"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorReceiptsComponent"
         },
         "profileInventory": {
           "description": "The profile-level inventory of the Destiny Profile.\r\nCOMPONENT TYPE: ProfileInventories",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ProfileInventories"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
         },
         "profileCurrencies": {
           "description": "The profile-level currencies owned by the Destiny Profile.\r\nCOMPONENT TYPE: ProfileCurrencies",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ProfileCurrencies"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
         },
         "profile": {
           "description": "The basic information about the Destiny Profile (formerly \"Account\").\r\nCOMPONENT TYPE: Profiles",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyProfileComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Profiles"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyProfileComponent"
         },
         "profileKiosks": {
           "description": "Items available from Kiosks that are available Profile-wide (i.e. across all characters)\r\nThis component returns information about what Kiosk items are available to you on a *Profile* level. It is theoretically possible for Kiosks to have items gated by specific Character as well. If you ever have those, you will find them on the characterKiosks property.\r\nCOMPONENT TYPE: Kiosks",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyKiosksComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Kiosks"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyKiosksComponent"
         },
         "characters": {
           "description": "Basic information about each character, keyed by the CharacterId.\r\nCOMPONENT TYPE: Characters",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Characters"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterComponent"
         },
         "characterInventories": {
           "description": "The character-level non-equipped inventory items, keyed by the Character's Id.\r\nCOMPONENT TYPE: CharacterInventories",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterInventories"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyInventoryComponent"
         },
         "characterProgressions": {
           "description": "Character-level progression data, keyed by the Character's Id.\r\nCOMPONENT TYPE: CharacterProgressions",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterProgressions"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterProgressionComponent"
         },
         "characterRenderData": {
           "description": "Character rendering data - a minimal set of info needed to render a character in 3D - keyed by the Character's Id.\r\nCOMPONENT TYPE: CharacterRenderData",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterRenderData"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterRenderComponent"
         },
         "characterActivities": {
           "description": "Character activity data - the activities available to this character and its status, keyed by the Character's Id.\r\nCOMPONENT TYPE: CharacterActivities",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterActivities"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent"
         },
         "characterEquipment": {
           "description": "The character's equipped items, keyed by the Character's Id.\r\nCOMPONENT TYPE: CharacterEquipment",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterEquipment"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyInventoryComponent"
         },
         "characterKiosks": {
           "description": "Items available from Kiosks that are available to a specific character as opposed to the account as a whole. It must be combined with data from the profileKiosks property to get a full picture of the character's available items to check out of a kiosk.\r\nThis component returns information about what Kiosk items are available to you on a *Character* level. Usually, kiosk items will be earned for the entire Profile (all characters) at once. To find those, look in the profileKiosks property.\r\nCOMPONENT TYPE: Kiosks",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyKiosksComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Kiosks"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyKiosksComponent"
         },
         "itemComponents": {
           "description": "Information about instanced items across all returned characters, keyed by the item's instance ID.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DestinyItemComponentSetOfint64"
-            }
-          ]
+          "$ref": "#/definitions/DestinyItemComponentSetOfint64"
         }
       }
     },
@@ -19408,12 +18891,7 @@
         },
         "itemReceived": {
           "description": "The item that was received, and its quantity.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyItemQuantity"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyItemQuantity"
         },
         "licenseUnlockHash": {
           "format": "uint32",
@@ -19427,12 +18905,7 @@
         },
         "refundPolicy": {
           "description": "Whether you can get a refund, and what happens in order for the refund to be received. See the DestinyVendorItemRefundPolicy enum for details.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyVendorItemRefundPolicy"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyVendorItemRefundPolicy"
         },
         "sequenceNumber": {
           "format": "int32",
@@ -19532,21 +19005,11 @@
         },
         "bindStatus": {
           "description": "If the item is bound to a location, it will be specified in this enum.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ItemBindStatus"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.ItemBindStatus"
         },
         "location": {
           "description": "An easy reference for where the item is located. Redundant if you got the item from an Inventory, but useful when making detail calls on specific items.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ItemLocation"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.ItemLocation"
         },
         "bucketHash": {
           "format": "uint32",
@@ -19558,12 +19021,7 @@
         },
         "transferStatus": {
           "description": "If there is a known error state that would cause this item to not be transferable, this Flags enum will indicate all of those error states. Otherwise, it will be 0 (CanTransfer).",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.TransferStatuses"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.TransferStatuses"
         },
         "lockable": {
           "description": "If the item can be locked, this will indicate that state.",
@@ -19571,12 +19029,7 @@
         },
         "state": {
           "description": "A flags enumeration indicating the states of the item: whether it's tracked or locked for example.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ItemState"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.ItemState"
         }
       }
     },
@@ -19681,12 +19134,7 @@
       "properties": {
         "userInfo": {
           "description": "If you need to render the Profile (their platform name, icon, etc...) somewhere, this property contains that information.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User.UserInfoCard"
-            }
-          ]
+          "$ref": "#/definitions/User.UserInfoCard"
         },
         "dateLastPlayed": {
           "format": "date-time",
@@ -19695,12 +19143,7 @@
         },
         "versionsOwned": {
           "description": "If you want to know what expansions they own, this will contain that data.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGameVersions"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGameVersions"
         },
         "characterIds": {
           "description": "A list of the character IDs, for further querying on your part.",
@@ -19807,12 +19250,7 @@
         },
         "membershipType": {
           "description": "membershipType tells you the platform on which the character plays. Examine the BungieMembershipType enumeration for possible values.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
+          "$ref": "#/definitions/BungieMembershipType"
         },
         "characterId": {
           "format": "int64",
@@ -19873,30 +19311,15 @@
         },
         "raceType": {
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's race.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyRace"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyRace"
         },
         "classType": {
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's class.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyClass"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyClass"
         },
         "genderType": {
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's Gender.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove. And yeah, it's an enumeration and not a boolean. Fight me.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGender"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGender"
         },
         "emblemPath": {
           "description": "A shortcut path to the user's currently equipped emblem image. If you're just showing summary info for a user, this is more convenient than examining their equipped emblem and looking up the definition.",
@@ -19916,21 +19339,11 @@
         },
         "emblemColor": {
           "description": "A shortcut for getting the background color of the user's currently equipped emblem without having to do a DestinyInventoryItemDefinition lookup.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Misc.DestinyColor"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Misc.DestinyColor"
         },
         "levelProgression": {
           "description": "The progression that indicates your character's level. Not their light level, but their character level: you know, the thing you max out a couple hours in and then ignore for the sake of light level.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyProgression"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyProgression"
         },
         "baseCharacterLevel": {
           "format": "int32",
@@ -20005,12 +19418,7 @@
         },
         "raceType": {
           "description": "An enumeration defining the existing, known Races/Species for player characters. This value will be the enum value matching this definition.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyRace"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyRace"
         },
         "genderedRaceNames": {
           "description": "A localized string referring to the singular form of the Race's name when referred to in gendered form. Keyed by the DestinyGender.",
@@ -20042,12 +19450,7 @@
       "properties": {
         "genderType": {
           "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGender"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyGender"
         },
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
@@ -20075,12 +19478,7 @@
       "properties": {
         "classType": {
           "description": "In Destiny 1, we added a convenience Enumeration for referring to classes. We've kept it, though mostly for posterity. This is the enum value for this definition's class.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyClass"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyClass"
         },
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
@@ -20353,21 +19751,11 @@
         },
         "status": {
           "description": "The current status of the quest for the character making the request.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Quests.DestinyQuestStatus"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Quests.DestinyQuestStatus"
         },
         "activity": {
           "description": "*IF* the Milestone has an active Activity that can give you greater details about what you need to do, it will be returned here. Remember to associate this with the DestinyMilestoneDefinition's activities to get details about the activity, including what specific quest it is related to if you have multiple quests to choose from.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneActivity"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneActivity"
         },
         "challenges": {
           "description": "The activities referred to by this quest can have many associated challenges. They are all contained here, with activityHashes so that you can associate them with the specific activity variants in which they can be found. In retrospect, I probably should have put these under the specific Activity Variants, but it's too late to change it now. Theoretically, a quest without Activities can still have Challenges, which is why this is on a higher level than activity/variants, but it probably should have been in both places. That may come as a later revision.",
@@ -20518,12 +19906,7 @@
         },
         "completionStatus": {
           "description": "An OPTIONAL component: if it makes sense to talk about this activity variant in terms of whether or not it has been completed or what progress you have made in it, this will be returned. Otherwise, this will be NULL.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneActivityCompletionStatus"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneActivityCompletionStatus"
         }
       }
     },
@@ -20560,12 +19943,7 @@
       "properties": {
         "objective": {
           "description": "The progress - including completion status - of the active challenge.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
         }
       }
     },
@@ -20641,12 +20019,7 @@
         },
         "milestoneType": {
           "description": "An enumeration listing one of the possible types of milestones. Check out the DestinyMilestoneType enum for more info!",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Milestones.DestinyMilestoneType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Milestones.DestinyMilestoneType"
         },
         "recruitable": {
           "description": "If True, then the Milestone has been integrated with BNet's recruiting feature.",
@@ -20775,12 +20148,7 @@
         },
         "displayProperties": {
           "description": "The individual quests may have different definitions from the overall milestone: if there's a specific active quest, use these displayProperties instead of that of the overall DestinyMilestoneDefinition.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "overrideImage": {
           "description": "If populated, this image can be shown instead of the generic milestone's image when this quest is live, or it can be used to show a background image for the quest itself that differs from that of the Activity or the Milestone.",
@@ -20788,12 +20156,7 @@
         },
         "questRewards": {
           "description": "The rewards you will get for completing this quest, as best as we could extract them from our data. Sometimes, it'll be a decent amount of data. Sometimes, it's going to be sucky. Sorry.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Milestones.DestinyMilestoneQuestRewardsDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Milestones.DestinyMilestoneQuestRewardsDefinition"
         },
         "activities": {
           "description": "The full set of all possible \"conceptual activities\" that are related to this Milestone. Tiers or alternative modes of play within these conceptual activities will be defined as sub-entities. Keyed by the Conceptual Activity Hash. Use the key to look up DestinyActivityDefinition.",
@@ -20915,12 +20278,7 @@
         },
         "displayProperties": {
           "description": "Hopefully this is obvious by now.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "rewardEntries": {
           "description": "If this milestone can provide rewards, this will define the sets of rewards that can be earned, the conditions under which they can be acquired, internal data that we'll use at runtime to determine whether you've already earned or redeemed this set of rewards, and the category that this reward should be placed under.",
@@ -20966,12 +20324,7 @@
         },
         "displayProperties": {
           "description": "For us to bother returning this info, we should be able to return some kind of information about why these rewards are grouped together. This is ideally that information. Look at how confident I am that this will always remain true.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "order": {
           "format": "int32",
@@ -21034,21 +20387,11 @@
         },
         "customization": {
           "description": "This is actually something that Spasm.js *doesn't* do right now, and that we don't return assets for yet. This is the data about what character customization options you picked. You can combine this with DestinyCharacterCustomizationOptionDefinition to show some cool info, and hopefully someday to actually render a user's face in 3D. We'll see if we ever end up with time for that.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Character.DestinyCharacterCustomization"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Character.DestinyCharacterCustomization"
         },
         "peerView": {
           "description": "A minimal view of:\r\n- Equipped items\r\n- The rendering-related custom options on those equipped items\r\nCombined, that should be enough to render all of the items on the equipped character.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Character.DestinyCharacterPeerView"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Character.DestinyCharacterPeerView"
         }
       },
       "x-destiny-component-type-dependency": "CharacterRenderData"
@@ -21476,12 +20819,7 @@
         },
         "difficultyTier": {
           "description": "A DestinyActivityDifficultyTier enum value indicating the difficulty of the activity.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyActivityDifficultyTier"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyActivityDifficultyTier"
         }
       }
     },
@@ -21607,12 +20945,7 @@
       "properties": {
         "damageType": {
           "description": "If the item has a damage type, this is the item's current damage type.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DamageType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DamageType"
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -21624,12 +20957,7 @@
         },
         "primaryStat": {
           "description": "The item stat that we consider to be \"primary\" for the item. For instance, this would be \"Attack\" for Weapons or \"Defense\" for armor.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyStat"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyStat"
         },
         "itemLevel": {
           "format": "int32",
@@ -21667,12 +20995,7 @@
         },
         "cannotEquipReason": {
           "description": "If you cannot equip the item, this is a flags enum that enumerates all of the reasons why you couldn't equip the item. You may need to refine your UI further by using unlockHashesRequiredToEquip and equipRequiredLevel.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.EquipFailureReason"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.EquipFailureReason"
         }
       },
       "x-destiny-component-type-dependency": "ItemInstances"
@@ -21752,12 +21075,7 @@
       "properties": {
         "displayProperties": {
           "description": "Sometimes, but not frequently, these unlock flags also have human readable information: usually when they are being directly tested for some requirement, in which case the string is a localized description of why the requirement check failed.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "hash": {
           "format": "uint32",
@@ -22033,11 +21351,7 @@
         "gridProgression": {
           "description": "If the item has a progression, it will be detailed here. A progression means that the item can gain experience. Thresholds of experience are what determines whether and when a talent node can be activated.",
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyProgression"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyProgression"
         }
       },
       "x-destiny-component-type-dependency": "ItemTalentGrids"
@@ -22058,12 +21372,7 @@
         },
         "state": {
           "description": "An DestinyTalentNodeState enum value indicating the node's state: whether it can be activated or swapped, and why not if neither can be performed.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyTalentNodeState"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyTalentNodeState"
         },
         "isActivated": {
           "description": "If true, the node is activated: it's current step then provides its benefits.",
@@ -22097,12 +21406,7 @@
         },
         "nodeStatsBlock": {
           "description": "This property has some history. A talent grid can provide stats on both the item it's related to and the character equipping the item. This returns data about those stat bonuses.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyTalentNodeStatBlock"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyTalentNodeStatBlock"
         }
       }
     },
@@ -22263,82 +21567,35 @@
       "properties": {
         "inventory": {
           "description": "The character-level non-equipped inventory items.\r\nCOMPONENT TYPE: CharacterInventories",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterInventories"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
         },
         "character": {
           "description": "Base information about the character in question.\r\nCOMPONENT TYPE: Characters",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Characters"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterComponent"
         },
         "progressions": {
           "description": "Character progression data, including Milestones.\r\nCOMPONENT TYPE: CharacterProgressions",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterProgressionComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterProgressions"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterProgressionComponent"
         },
         "renderData": {
           "description": "Character rendering data - a minimal set of information about equipment and dyes used for rendering.\r\nCOMPONENT TYPE: CharacterRenderData",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterRenderComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterRenderData"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterRenderComponent"
         },
         "activities": {
           "description": "Activity data - info about current activities available to the player.\r\nCOMPONENT TYPE: CharacterActivities",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterActivitiesComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterActivities"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyCharacterActivitiesComponent"
         },
         "equipment": {
           "description": "Equipped items on the character.\r\nCOMPONENT TYPE: CharacterEquipment",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "CharacterEquipment"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyInventoryComponent"
         },
         "kiosks": {
           "description": "Items available from Kiosks that are available to this specific character. \r\nCOMPONENT TYPE: Kiosks",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyKiosksComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Kiosks"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyKiosksComponent"
         },
         "itemComponents": {
           "description": "The set of components belonging to the player's instanced items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DestinyItemComponentSetOfint64"
-            }
-          ]
+          "$ref": "#/definitions/DestinyItemComponentSetOfint64"
         }
       }
     },
@@ -22397,83 +21654,35 @@
         },
         "item": {
           "description": "Common data for the item relevant to its non-instanced properties.\r\nCOMPONENT TYPE: ItemCommonData",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemCommonData"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemComponent"
         },
         "instance": {
           "description": "Basic instance data for the item.\r\nCOMPONENT TYPE: ItemInstances",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemInstanceComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemInstances"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemInstanceComponent"
         },
         "objectives": {
           "description": "Information specifically about the item's objectives.\r\nCOMPONENT TYPE: ItemObjectives",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemObjectivesComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemObjectives"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemObjectivesComponent"
         },
         "perks": {
           "description": "Information specifically about the perks currently active on the item.\r\nCOMPONENT TYPE: ItemPerks",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemPerksComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemPerks"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemPerksComponent"
         },
         "renderData": {
           "description": "Information about how to render the item in 3D.\r\nCOMPONENT TYPE: ItemRenderData",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemRenderComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemRenderData"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemRenderComponent"
         },
         "stats": {
           "description": "Information about the computed stats of the item: power, defense, etc...\r\nCOMPONENT TYPE: ItemStats",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemStatsComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemStats"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemStatsComponent"
         },
         "talentGrid": {
           "description": "Information about the talent grid attached to the item. Talent nodes can provide a variety of benefits and abilities, and in Destiny 2 are used almost exclusively for the character's \"Builds\".\r\nCOMPONENT TYPE: ItemTalentGrids",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemTalentGridComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemTalentGrids"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemTalentGridComponent"
         },
         "sockets": {
           "description": "Information about the sockets of the item: which are currently active, what potential sockets you could have and the stats/abilities/perks you can gain from them.\r\nCOMPONENT TYPE: ItemSockets",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyItemSocketsComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "ItemSockets"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyItemSocketsComponent"
         }
       }
     },
@@ -22571,42 +21780,19 @@
       "properties": {
         "vendor": {
           "description": "The base properties of the vendor.\r\nCOMPONENT TYPE: Vendors",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "Vendors"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorComponent"
         },
         "categories": {
           "description": "Categories that the vendor has available, and references to the sales therein.\r\nCOMPONENT TYPE: VendorCategories",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorCategoriesComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "VendorCategories"
+          "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorCategoriesComponent"
         },
         "sales": {
           "description": "Sales, keyed by the vendorItemIndex of the item being sold.\r\nCOMPONENT TYPE: VendorSales",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent"
-            }
-          ],
-          "x-destiny-component-type-dependency": "VendorSales"
+          "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent"
         },
         "items": {
           "description": "Item components, keyed by the vendorItemIndex of the active sale items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DestinyItemComponentSetOfint32"
-            }
-          ]
+          "$ref": "#/definitions/DestinyItemComponentSetOfint32"
         }
       }
     },
@@ -22624,12 +21810,7 @@
         },
         "ackState": {
           "description": "Long ago, we thought it would be a good idea to have special UI that showed whether or not you've seen a Vendor's inventory after cycling. \r\nFor now, we don't have that UI anymore. This property still exists for historical purposes. Don't worry about it.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User.AckState"
-            }
-          ]
+          "$ref": "#/definitions/User.AckState"
         },
         "nextRefreshDate": {
           "format": "date-time",
@@ -22646,12 +21827,7 @@
         },
         "progression": {
           "description": "If the Vendor has a related Reputation, this is the Progression data that represents the character's Reputation level with this Vendor.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyProgression"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.DestinyProgression"
         }
       },
       "x-destiny-component-type-dependency": "Vendors"
@@ -22743,12 +21919,7 @@
         },
         "saleStatus": {
           "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.VendorItemStatus"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.VendorItemStatus"
         },
         "costs": {
           "description": "A summary of the current costs of the item.",
@@ -23125,12 +22296,7 @@
         },
         "equipStatus": {
           "description": "A PlatformErrorCodes enum indicating whether it succeeded, and if it failed why.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
-            }
-          ]
+          "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
         }
       }
     },
@@ -23182,12 +22348,7 @@
         },
         "activityDetails": {
           "description": "Details about the activity.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsActivity"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsActivity"
         },
         "entries": {
           "description": "Collection of players and their data for this activity.",
@@ -23232,12 +22393,7 @@
         },
         "mode": {
           "description": "Indicates the most specific game mode of the activity that we could find.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
         },
         "modes": {
           "description": "The list of all Activity Modes to which this activity applies, including aggregates. This will let you see, for example, whether the activity was both Clash and part of the Trials of the Nine event.",
@@ -23262,21 +22418,11 @@
         },
         "score": {
           "description": "Score of the player if available",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
         },
         "player": {
           "description": "Identity details of the player",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPlayer"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPlayer"
         },
         "characterId": {
           "format": "int64",
@@ -23292,12 +22438,7 @@
         },
         "extended": {
           "description": "Extended data extracted from the activity blob.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPostGameCarnageReportExtendedData"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPostGameCarnageReportExtendedData"
         }
       }
     },
@@ -23310,30 +22451,15 @@
         },
         "basic": {
           "description": "Basic stat value.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
         },
         "pga": {
           "description": "Per game average for the statistic, if applicable",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
         },
         "weighted": {
           "description": "Weighted value of the stat if a weight greater than 1 has been assigned.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
         },
         "activityId": {
           "format": "int64",
@@ -23361,12 +22487,7 @@
       "properties": {
         "destinyUserInfo": {
           "description": "Details about the player as they are known in game (platform display name, Destiny emblem)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User.UserInfoCard"
-            }
-          ]
+          "$ref": "#/definitions/User.UserInfoCard"
         },
         "characterClass": {
           "description": "Class of the character if applicable and available.",
@@ -23384,12 +22505,7 @@
         },
         "bungieNetUserInfo": {
           "description": "Details about the player as they are known on BungieNet. This will be undefined if the player has marked their credential private, or does not have a BungieNet account.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User.UserInfoCard"
-            }
-          ]
+          "$ref": "#/definitions/User.UserInfoCard"
         },
         "clanName": {
           "description": "Current clan name for the player. This value may be null or an empty string if the user does not have a clan.",
@@ -23450,21 +22566,11 @@
         },
         "standing": {
           "description": "Team's standing relative to other teams.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
         },
         "score": {
           "description": "Score earned by the team",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
         },
         "teamName": {
           "description": "Alpha or Bravo",
@@ -23481,12 +22587,7 @@
         },
         "group": {
           "description": "Statistic group",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
         },
         "periodTypes": {
           "description": "Time periods the statistic covers",
@@ -23504,12 +22605,7 @@
         },
         "category": {
           "description": "Category for the stat.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType"
         },
         "statName": {
           "description": "Display name",
@@ -23521,12 +22617,7 @@
         },
         "unitType": {
           "description": "Unit, if any, for the statistic",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.UnitType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.UnitType"
         },
         "iconImage": {
           "description": "Optional URI to an icon for the statistic",
@@ -23864,12 +22955,7 @@
         },
         "player": {
           "description": "Identity details of the player",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPlayer"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPlayer"
         },
         "characterId": {
           "format": "int64",
@@ -23878,12 +22964,7 @@
         },
         "value": {
           "description": "Value of the stat for this player",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
         }
       }
     },
@@ -23913,12 +22994,7 @@
       "properties": {
         "mode": {
           "description": "The id of the mode of stats (allPvp, allPvE, etc)",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
         },
         "statId": {
           "description": "The id of the stat",
@@ -23926,12 +23002,7 @@
         },
         "value": {
           "description": "Value of the stat for this player",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
         }
       }
     },
@@ -23948,12 +23019,7 @@
         },
         "results": {
           "description": "The items found that are matches/near matches for the searched-for term, sorted by something vaguely resembling \"relevance\". Hopefully this will get better in the future.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/SearchResultOfDestinyEntitySearchResultItem"
-            }
-          ]
+          "$ref": "#/definitions/SearchResultOfDestinyEntitySearchResultItem"
         }
       }
     },
@@ -23972,12 +23038,7 @@
         },
         "displayProperties": {
           "description": "Basic display properties on the entity, so you don't have to look up the definition to show basic results for the item.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
         "weight": {
           "format": "double",
@@ -24093,12 +23154,7 @@
         },
         "activityDetails": {
           "description": "If the period group is for a specific activity, this property will be set.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsActivity"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsActivity"
         },
         "values": {
           "description": "Collection of stats for the period.",
@@ -24329,12 +23385,7 @@
         },
         "activity": {
           "description": "A milestone need not have an active activity, but if there is one it will be returned here, along with any variant and additional information.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestoneActivity"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestoneActivity"
         },
         "challenges": {
           "description": "For the given quest there could be 0-to-Many challenges: mini quests that you can perform in the course of doing this quest, that may grant you rewards and benefits.",
@@ -24635,12 +23686,7 @@
         },
         "entityType": {
           "description": "An enum - unfortunately - dictating all of the possible kinds of trending items that you might get in your result set, in case you want to do custom rendering or call to get the details of the item.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Trending.TrendingEntryType"
-            }
-          ]
+          "$ref": "#/definitions/Trending.TrendingEntryType"
         },
         "displayName": {
           "description": "The localized \"display name/article title/'primary localized identifier'\" of the entity.",
@@ -24985,21 +24031,11 @@
         },
         "milestoneDetails": {
           "description": "A destiny event does not necessarily have a related Milestone, but if it does the details will be returned here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestone"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestone"
         },
         "eventContent": {
           "description": "A destiny event will not necessarily have milestone \"custom content\", but if it does the details will be here.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneContent"
-            }
-          ]
+          "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneContent"
         }
       }
     },
