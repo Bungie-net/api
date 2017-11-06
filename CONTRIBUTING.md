@@ -1,6 +1,6 @@
 ** IMPORTANT NOTE **
 
-Note that the Swagger files in this project are generated on our side, which means that, if you manually edit the Swagger files, your efforts will be lost.  We have to fix our generator rather than accept pull requests to fix the spec on a more permanent basis: so please, don't worry about editing the spec manually and issuing a pull request.  (if you would still like to do so for other people to use in the interim, that's great: just know that we can't accept your pull request directly for integration)
+Note that the Swagger files in this project are generated on our side: as a result, if you manually edit the Swagger files your efforts will be lost.  We have to fix our generator rather than accept pull requests to fix the spec on a more permanent basis.  So please, don't worry about editing the spec manually and issuing a pull request.  (if you would still like to do so for other people to use in the interim, that's great: just know that we can't accept your pull request directly for integration)
 
 Instead, file an Issue and provide the following:
 
