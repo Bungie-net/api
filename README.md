@@ -10,7 +10,7 @@ This section will be added to as time goes by - we're working with it as we go!
 
 # The State of the API
 
-The API itself is currently offline in anticipation of the release of Destiny 2.  We have this site as a special sneak preview of the data that will be provided by the API when it comes online.
+The API itself is online, however several endpoints are still in a beta or unusable state.  Stay posted and keep an eye peeled on the documentation for further updates.
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
