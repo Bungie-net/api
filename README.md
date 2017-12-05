@@ -6,6 +6,20 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+2017-12-04 - Upcoming deployments will be released in waves with several improvements.  Specific dates for these releases are subject to change, but keep posted here for the improvements to be made live.  Aside from a large number of bug fixes, I wanted to point out some specific changes that will be coming along.  I'm working on ironing out a better schedule and a location where we can drop "pre-release" API documentation: but for now, this summary will at least give you a brief idea of what is coming that you'll be able to support.  These features are not all going to come in with the first wave, but as we deploy these features I will attempt to keep you informed.
+
+- We are looking into increasing item screenshot resolutions to 1920 x 1080.  Fortunately, we realized that we were not efficiently compressing the images in the previous version of the screenshots: we were actually able to increase the resolution without noticeably impacting file size and with a dramatic improvement in image quality.
+
+- A new Destiny 2 Endpoint, PullFromPostmaster, will be exposed.  It uses a very similar POST contract to the existing TransferItem endpoint, just without the "transferToVault" property.  (You can only pull items from the Postmaster, you cannot push items to him of course!)  Only a subset of items will be allowed to be transferred, because many items "turn into" something else or perform various complex and potentially irreversible actions when they are acquired from the Postmaster: we will not allow you to transfer items that perform such tasks.  There will be a new property on DestinyInventoryItemDefinition - doesPostmasterPullHaveSideEffects - that you can use to know in advance whether an item will be allowed to be pulled from the Postmaster.  If this is TRUE, then the item has side effects and will NOT be allowed to be pulled from the Postmaster.
+
+- "Flavor Objectives" will be exposed on DestinyItemObjectivesComponent and DestinyKiosksComponent, allowing you to grab information previously inaccessible such as the "flavor stat" data on Emblems.  This missed the earlier boat for shipping, but will hopefully follow up soon after.
+
+- Endpoints will be exposed and ready for use for PGCR player reporting.  Users can only report players in games that the logged-in user participated in.  There will be a webpage in a later release that you can point users to if you don't support authentication but want users to be able to report other users in PGCRs, but that will be exposed after the initial endpoint is exposed.
+
+- You will notice in upcoming releases that the Vendor contracts will be changing.  Because the Vendor endpoint is still inactive, I am taking this opportunity to modify and improve the contracts before we turn it on.  Work has been coming slowly on Vendors as other work has continued to take priority.  However I am looking forward to finally turning Vendors on at a future data.  These contract changes will likely continue to occur until the Vendor API is turned on for "beta" use.  In the meantime, feel free to add any comments or suggestions to the contracts as they exist and changes as they occur.
+
+I'll make another post once the first batch of these changes goes live, and we'll keep you posted as further features are released!
+
 2017-10-19 - A deployment has just been released that should fix a variety of bugs.  The spec and docs have been regenerated and are now ready for consumption.  Unfortunately, pretty much all of the still-pending spec bugs have not been able to be addressed yet.  Hopefully we will find some time to address those in upcoming deployments.
 
 # The State of the API
