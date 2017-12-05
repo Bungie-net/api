@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.0.1"
+    "version": "2.1.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -1642,7 +1642,7 @@
           {
             "name": "createDateRange",
             "in": "path",
-            "description": "The date range of activity of groups for which we should search. Is that proper grammar I don't know",
+            "description": "Requested range in which to pull recommended groups",
             "required": true,
             "type": "integer",
             "format": "int32",
@@ -1657,7 +1657,7 @@
           {
             "name": "groupType",
             "in": "path",
-            "description": "The type of group to get.",
+            "description": "Type of groups requested",
             "required": true,
             "type": "integer",
             "format": "int32",
@@ -4339,7 +4339,7 @@
           "Destiny2",
           "Preview"
         ],
-        "description": "Get currently available vendors. PREVIEW: This service is not yet active, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
+        "description": "Get currently available vendors from the list of vendors that can possibly have rotating inventory. Note that this does not include things like preview vendors and vendors-as-kiosks, neither of whom have rotating/dynamic inventories. Use their definitions as-is for those. PREVIEW: This service is not yet active, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
         "operationId": "Destiny2.GetVendors",
         "parameters": [
           {
@@ -4387,15 +4387,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Look at the Response property for more information about the nature of this response",
+            "description": "A response containing all of the components for all requested vendors.",
             "schema": {
               "type": "object",
               "properties": {
                 "Response": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/Destiny.Responses.DestinyVendorResponse"
-                  }
+                  "$ref": "#/definitions/Destiny.Responses.DestinyVendorsResponse"
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -4525,6 +4522,56 @@
         ],
         "description": "Transfer an item to/from your vault. You must have a valid Destiny account. You must also pass BOTH a reference AND an instance ID if it's an instanced item. itshappening.gif",
         "operationId": "Destiny2.TransferItem",
+        "parameters": [],
+        "security": [
+          {
+            "oauth2": [
+              "MoveEquipDestinyItems"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Actions/Items/PullFromPostmaster/": {
+      "post": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Extract an item from the Postmaster, with whatever implications that may entail. You must have a valid Destiny account. You must also pass BOTH a reference AND an instance ID if it's an instanced item.",
+        "operationId": "Destiny2.PullFromPostmaster",
         "parameters": [],
         "security": [
           {
@@ -4846,6 +4893,65 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/Destiny.HistoricalStats.DestinyPostGameCarnageReportData"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Stats/PostGameCarnageReport/{activityId}/Report/": {
+      "post": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Report a player that you met in an activity that was engaging in ToS-violating activities. Both you and the offending player must have played in the activityId passed in. Please use this judiciously and only when you have strong suspicions of violation, pretty please.",
+        "operationId": "Destiny2.ReportOffensivePostGameCarnageReportPlayer",
+        "parameters": [
+          {
+            "name": "activityId",
+            "in": "path",
+            "description": "The ID of the activity where you ran into the brigand that you're reporting.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "format": "int32",
+                  "type": "integer"
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -5258,8 +5364,7 @@
     "/Destiny2/Armory/Search/{type}/{searchTerm}/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
         "description": "Gets a page list of Destiny items.",
         "operationId": "Destiny2.SearchDestinyEntities",
@@ -5281,7 +5386,7 @@
           {
             "name": "type",
             "in": "path",
-            "description": "The type of entity for whom you would like results. These correspond to the entity's definition contract name. For instance, if you are looking for items, this property should be 'DestinyInventoryItemDefinition'. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is tentatively in final form, but there may be bugs that prevent desirable operation.",
+            "description": "The type of entity for whom you would like results. These correspond to the entity's definition contract name. For instance, if you are looking for items, this property should be 'DestinyInventoryItemDefinition'.",
             "required": true,
             "type": "string"
           }
@@ -5317,17 +5422,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Gets historical stats for indicated character. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is in final form, but there may be bugs that prevent desirable operation.",
+        "description": "Gets historical stats for indicated character.",
         "operationId": "Destiny2.GetHistoricalStats",
         "parameters": [
           {
@@ -5443,17 +5546,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Account/{destinyMembershipId}/Stats/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Gets aggregate historical stats organized around each character for a given account. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is in final form, but there may be bugs that prevent desirable operation.",
+        "description": "Gets aggregate historical stats organized around each character for a given account.",
         "operationId": "Destiny2.GetHistoricalStatsForAccount",
         "parameters": [
           {
@@ -5522,17 +5623,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/Activities/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Gets activity history stats for indicated character. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is in final form, but there may be bugs that prevent desirable operation.",
+        "description": "Gets activity history stats for indicated character.",
         "operationId": "Destiny2.GetActivityHistory",
         "parameters": [
           {
@@ -5661,17 +5760,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/UniqueWeapons/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Gets details about unique weapon usage, including all exotic weapons. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is in final form, but there may be bugs that prevent desirable operation.",
+        "description": "Gets details about unique weapon usage, including all exotic weapons.",
         "operationId": "Destiny2.GetUniqueWeaponHistory",
         "parameters": [
           {
@@ -5739,17 +5836,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Account/{destinyMembershipId}/Character/{characterId}/Stats/AggregateActivityStats/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Gets all activities the character has participated in together with aggregate statistics for those activities. PREVIEW: This endpoint is still in beta, and may experience rough edges. The schema is in final form, but there may be bugs that prevent desirable operation.",
+        "description": "Gets all activities the character has participated in together with aggregate statistics for those activities.",
         "operationId": "Destiny2.GetDestinyAggregateActivityStats",
         "parameters": [
           {
@@ -5817,8 +5912,7 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/Milestones/{milestoneHash}/Content/": {
@@ -6539,7 +6633,9 @@
               "6",
               "7",
               "8",
-              "9"
+              "9",
+              "10",
+              "11"
             ]
           }
         ],
@@ -6629,7 +6725,7 @@
         {
           "numericValue": "64",
           "identifier": "ReadDestinyInventoryAndVault",
-          "description": "Read Destiny Inventory and Vault contents."
+          "description": "Read Destiny 1 Inventory and Vault contents. For Destiny 2, this scope is needed to read anything regarded as private. This is the only scope a Destiny 2 app needs for read operations against Destiny 2 data such as inventory, vault, currency, vendors, milestones, progression, etc."
         },
         {
           "numericValue": "128",
@@ -6644,7 +6740,7 @@
         {
           "numericValue": "512",
           "identifier": "ReadDestinyVendorsAndAdvisors",
-          "description": "Access vendor and advisor data specific to a user."
+          "description": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API."
         },
         {
           "numericValue": "1024",
@@ -8564,6 +8660,10 @@
             "$ref": "#/definitions/Links.HyperlinkReference"
           }
         },
+        "doesPostmasterPullHaveSideEffects": {
+          "description": "The boolean will indicate to us (and you!) whether something *could* happen when you transfer this item from the Postmaster that might be considered a \"destructive\" action.\r\nIt is not feasible currently to tell you (or ourelves!) in a consistent way whether this *will* actually cause a destructive action, so we are playing it safe: if it has the potential to do so, we will not allow it to be transferred from the Postmaster by default. You will need to check for this flag before transferring an item from the Postmaster, or else you'll end up receiving an error.",
+          "type": "boolean"
+        },
         "nonTransferrable": {
           "description": "The intrinsic transferability of an item.\r\nI hate that this boolean is negative - but there's a reason.\r\nJust because an item is intrinsically transferrable doesn't mean that it can be transferred, and we don't want to imply that this is the only source of that transferability.",
           "type": "boolean"
@@ -9830,6 +9930,10 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorAcceptedItemDefinition"
           }
         },
+        "returnWithVendorRequest": {
+          "description": "As many of you know, Vendor data has historically been pretty brutal on the BNet servers. In an effort to reduce this workload, only Vendors with this flag set will be returned on Vendor requests. This allows us to filter out Vendors that don't dynamic data that's particularly useful: things like \"Preview/Sack\" vendors, for example, that you can usually suss out the details for using just the definitions themselves.",
+          "type": "boolean"
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -10004,6 +10108,14 @@
               "$ref": "#/definitions/Destiny.Definitions.DestinyVendorCategoryOverlayDefinition"
             }
           ]
+        },
+        "vendorItemIndexes": {
+          "description": "A shortcut for the vendor item indexes sold under this category. Saves us from some expensive reorganization at runtime.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -10309,7 +10421,7 @@
           }
         },
         "currencies": {
-          "description": "This is a pre-compiled aggregation of item value and priceOverrideList, so that we have one place to check for what the purchaser must pay for the item. Use this instead of trying to piece together the price separately.",
+          "description": "This is a pre-compiled aggregation of item value and priceOverrideList, so that we have one place to check for what the purchaser must pay for the item. Use this instead of trying to piece together the price separately.\r\nJUST KIDDING HA this never got populated, who's the idiot now? Hint: Me. Now they'll actually be populated [amola, 2017-11-12]",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.DestinyItemQuantity"
@@ -10396,6 +10508,23 @@
               "$ref": "#/definitions/Destiny.DestinyGatingScope"
             }
           ]
+        },
+        "exclusivity": {
+          "description": "If this item can only be purchased by a given platform, this indicates the platform to which it is restricted.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BungieMembershipType"
+            }
+          ]
+        },
+        "isOffer": {
+          "description": "If this sale can only be performed as the result of an offer check, this is true.",
+          "type": "boolean"
+        },
+        "isCrm": {
+          "description": "If this sale can only be performed as the result of receiving a CRM offer, this is true.",
+          "type": "boolean"
         }
       }
     },
@@ -10537,10 +10666,6 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
           }
         },
-        "backgroundImagePath": {
-          "description": "The relative path to the background image, for use in a banner.",
-          "type": "string"
-        },
         "tokenValues": {
           "description": "The faction token item hashes, and their respective progression values.",
           "type": "object",
@@ -10565,12 +10690,11 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
           }
         },
-        "rewardVendorPreviewCategoryHashes": {
-          "description": "For the faction reward vendor, the category hashes to be shown as reward previews.",
+        "vendors": {
+          "description": "List of vendors that are associated with this faction. The last vendor that passes the unlock flag checks is the one that should be shown.",
           "type": "array",
           "items": {
-            "format": "uint32",
-            "type": "integer"
+            "$ref": "#/definitions/Destiny.Definitions.DestinyFactionVendorDefinition"
           }
         },
         "hash": {
@@ -10590,205 +10714,76 @@
       },
       "x-mobile-manifest-name": "Factions"
     },
-    "Destiny.Definitions.DestinyItemQualityBlockDefinition": {
-      "description": "An item's \"Quality\" determines its calculated stats. The Level at which the item spawns is combined with its \"qualityLevel\" along with some additional calculations to determine the value of those stats.\r\nIn Destiny 2, most items don't have default item levels and quality, making this property less useful: these apparently are almost always determined by the complex mechanisms of the Reward system rather than statically. They are still provided here in case they are still useful for people. This also contains some information about Infusion.",
+    "Destiny.Definitions.DestinyFactionVendorDefinition": {
+      "description": "These definitions represent faction vendors at different points in the game.\r\nA single faction may contain multiple vendors, or the same vendor available at two different locations.",
       "type": "object",
       "properties": {
-        "itemLevels": {
-          "description": "The \"base\" defined level of an item. This is a list because, in theory, each Expansion could define its own base level for an item.\r\nIn practice, not only was that never done in Destiny 1, but now this isn't even populated at all. When it's not populated, the level at which it spawns has to be inferred by Reward information, of which BNet receives an imperfect view and will only be reliable on instanced data as a result.",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
+        "vendorHash": {
+          "format": "uint32",
+          "description": "The faction vendor hash.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
           }
         },
-        "qualityLevel": {
-          "format": "int32",
-          "description": "qualityLevel is used in combination with the item's level to calculate stats like Attack and Defense. It plays a role in that calculation, but not nearly as large as itemLevel does.",
-          "type": "integer"
+        "destinationHash": {
+          "format": "uint32",
+          "description": "The faction vendor destination hash.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
+          }
         },
-        "infusionCategoryName": {
-          "description": "The string identifier for this item's \"infusability\", if any. \r\nItems that match the same infusionCategoryName are allowed to infuse with each other.",
+        "backgroundImagePath": {
+          "description": "The relative path to the background image, for use in a banner.",
           "type": "string"
-        },
-        "infusionCategoryHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the infusion. It does not map to a Definition entity.",
-          "type": "integer"
-        },
-        "progressionLevelRequirementHash": {
-          "format": "uint32",
-          "description": "An item can refer to pre-set level requirements. They are defined in DestinyProgressionLevelRequirementDefinition, and you can use this hash to find the appropriate definition.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition": {
-      "description": "These are pre-constructed collections of data that can be used to determine the Level Requirement for an item given a Progression to be tested (such as the Character's level).\r\nFor instance, say a character receives a new Auto Rifle, and that Auto Rifle's DestinyInventoryItemDefinition.quality.progressionLevelRequirementHash property is pointing at one of these DestinyProgressionLevelRequirementDefinitions. Let's pretend also that the progressionHash it is pointing at is the Character Level progression. In that situation, the character's level will be used to interpolate a value in the requirementCurve property. The value picked up from that interpolation will be the required level for the item.",
-      "type": "object",
-      "properties": {
-        "requirementCurve": {
-          "description": "A curve of level requirements, weighted by the related progressions' level.\r\nInterpolate against this curve with the character's progression level to determine what the level requirement of the generated item that is using this data will be.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Interpolation.InterpolationPointFloat"
-          }
-        },
-        "progressionHash": {
-          "format": "uint32",
-          "description": "The progression whose level should be used to determine the level requirement.\r\nLook up the DestinyProgressionDefinition with this hash for more information about the progression in question.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "ProgressionLevelRequirements"
+      "x-mobile-manifest-name": "Factions"
     },
-    "Interpolation.InterpolationPointFloat": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "format": "float",
-          "type": "number"
-        },
-        "weight": {
-          "format": "float",
-          "type": "number"
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyItemValueBlockDefinition": {
-      "description": "This defines an item's \"Value\". Unfortunately, this appears to be used in different ways depending on the way that the item itself is used.\r\nFor items being sold at a Vendor, this is the default \"sale price\" of the item. These days, the vendor itself almost always sets the price, but it still possible for the price to fall back to this value. For quests, it is a preview of rewards you can gain by completing the quest. For dummy items, if the itemValue refers to an Emblem, it is the emblem that should be shown as the reward. (jeez louise)\r\nIt will likely be used in a number of other ways in the future, it appears to be a bucket where they put arbitrary items and quantities into the item.",
-      "type": "object",
-      "properties": {
-        "itemValue": {
-          "description": "References to the items that make up this item's \"value\", and the quantity.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
-          }
-        },
-        "valueDescription": {
-          "description": "If there's a localized text description of the value provided, this will be said description.",
-          "type": "string"
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyItemSourceBlockDefinition": {
-      "description": "Data about an item's \"sources\": ways that the item can be obtained.",
-      "type": "object",
-      "properties": {
-        "sourceHashes": {
-          "description": "The list of hash identifiers for Reward Sources that hint where the item can be found (DestinyRewardSourceDefinition).",
-          "type": "array",
-          "items": {
-            "format": "uint32",
-            "type": "integer"
-          },
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceDefinition"
-          }
-        },
-        "sources": {
-          "description": "A collection of details about the stats that were computed for the ways we found that the item could be spawned.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Sources.DestinyItemSourceDefinition"
-          }
-        },
-        "exclusive": {
-          "description": "If we found that this item is exclusive to a specific platform, this will be set to the BungieMembershipType enumeration that matches that platform.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/BungieMembershipType"
-            }
-          ]
-        }
-      }
-    },
-    "Destiny.Definitions.Sources.DestinyItemSourceDefinition": {
-      "description": "Properties of a DestinyInventoryItemDefinition that store all of the information we were able to discern about how the item spawns, and where you can find the item.\r\nItems will have many of these sources, one per level at which it spawns, to try and give more granular data about where items spawn for specific level ranges.",
-      "type": "object",
-      "properties": {
-        "level": {
-          "format": "int32",
-          "description": "The level at which the item spawns. Essentially the Primary Key for this source data: there will be multiple of these source entries per item that has source data, grouped by the level at which the item spawns.",
-          "type": "integer"
-        },
-        "minQuality": {
-          "format": "int32",
-          "description": "The minimum Quality at which the item spawns for this level. Examine DestinyInventoryItemDefinition for more information about what Quality means. Just don't ask Phaedrus about it, he'll never stop talking and you'll have to write a book about it.",
-          "type": "integer"
-        },
-        "maxQuality": {
-          "format": "int32",
-          "description": "The maximum quality at which the item spawns for this level.",
-          "type": "integer"
-        },
-        "minLevelRequired": {
-          "format": "int32",
-          "description": "The minimum Character Level required for equipping the item when the item spawns at the item level defined on this DestinyItemSourceDefinition, as far as we saw in our processing.",
-          "type": "integer"
-        },
-        "maxLevelRequired": {
-          "format": "int32",
-          "description": "The maximum Character Level required for equipping the item when the item spawns at the item level defined on this DestinyItemSourceDefinition, as far as we saw in our processing.",
-          "type": "integer"
-        },
-        "computedStats": {
-          "description": "The stats computed for this level/quality range.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemStatDefinition"
-          }
-        },
-        "sourceHashes": {
-          "description": "The DestinyRewardSourceDefinitions found that can spawn the item at this level.",
-          "type": "array",
-          "items": {
-            "format": "uint32",
-            "type": "integer"
-          },
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyRewardSourceDefinition": {
-      "description": "Represents a heuristically-determined \"item source\" according to Bungie.net. These item sources are non-canonical: we apply a combination of special configuration and often-fragile heuristics to attempt to discern whether an item should be part of a given \"source,\" but we have known cases of false positives and negatives due to our imperfect heuristics.\r\nStill, they provide a decent approximation for people trying to figure out how an item can be obtained. DestinyInventoryItemDefinition refers to sources in the sourceDatas.sourceHashes property for all sources we determined the item could spawn from.\r\nAn example in Destiny 1 of a Source would be \"Nightfall\". If an item has the \"Nightfall\" source associated with it, it's extremely likely that you can earn that item while playing Nightfall, either during play or as an after-completion reward.",
+    "Destiny.Definitions.DestinyDestinationDefinition": {
+      "description": "On to one of the more confusing subjects of the API. What is a Destination, and what is the relationship between it, Activities, Locations, and Places?\r\nA \"Destination\" is a specific region/city/area of a larger \"Place\". For instance, a Place might be Earth where a Destination might be Bellevue, Washington. (Please, pick a more interesting destination if you come to visit Earth).",
       "type": "object",
       "properties": {
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
         },
-        "category": {
-          "description": "Sources are grouped into categories: common ways that items are provided. I hope to see this expand in Destiny 2 once we have time to generate accurate reward source data.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceCategory"
-            }
-          ]
+        "placeHash": {
+          "format": "uint32",
+          "description": "The place that \"owns\" this Destination. Use this hash to look up the DestinyPlaceDefinition.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyPlaceDefinition"
+          }
+        },
+        "defaultFreeroamActivityHash": {
+          "format": "uint32",
+          "description": "If this Destination has a default Free-Roam activity, this is the hash for that Activity. Use it to look up the DestinyActivityDefintion.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
+          }
+        },
+        "activityGraphEntries": {
+          "description": "If the Destination has default Activity Graphs (i.e. \"Map\") that should be shown in the director, this is the list of those Graphs. At most, only one should be active at any given time for a Destination: these would represent, for example, different variants on a Map if the Destination is changing on a macro level based on game state.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGraphListEntryDefinition"
+          }
+        },
+        "bubbleSettings": {
+          "description": "A Destination may have many \"Bubbles\" zones with human readable properties.\r\nWe don't get as much info as I'd like about them - I'd love to return info like where on the map they are located - but at least this gives you the name of those bubbles. bubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationBubbleSettingDefinition"
+          }
+        },
+        "bubbles": {
+          "description": "This provides the unique identifiers for every bubble in the destination (only guaranteed unique within the destination), and any intrinsic properties of the bubble.\r\nbubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyBubbleDefinition"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -10805,95 +10800,655 @@
           "type": "boolean"
         }
       },
-      "x-mobile-manifest-name": "RewardSources"
+      "x-mobile-manifest-name": "Destinations"
     },
-    "Destiny.Definitions.DestinyRewardSourceCategory": {
+    "Destiny.Definitions.DestinyActivityGraphListEntryDefinition": {
+      "description": "Destinations and Activities may have default Activity Graphs that should be shown when you bring up the Director and are playing in either.\r\nThis contract defines the graph referred to and the gating for when it is relevant.",
+      "type": "object",
+      "properties": {
+        "activityGraphHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the DestinyActivityGraphDefinition that should be shown when opening the director.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Director.DestinyActivityGraphDefinition": {
+      "description": "Represents a Map View in the director: be them overview views, destination views, or other.\r\nThey have nodes which map to activities, and other various visual elements that we (or others) may or may not be able to use.\r\nActivity graphs, most importantly, have nodes which can have activities in various states of playability.\r\nUnfortunately, activity graphs are combined at runtime with Game UI-only assets such as fragments of map images, various in-game special effects, decals etc... that we don't get in these definitions.\r\nIf we end up having time, we may end up trying to manually populate those here: but the last time we tried that, before the lead-up to D1, it proved to be unmaintainable as the game's content changed. So don't bet the farm on us providing that content in this definition.",
+      "type": "object",
+      "properties": {
+        "nodes": {
+          "description": "These represent the visual \"nodes\" on the map's view. These are the activities you can click on in the map.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeDefinition"
+          }
+        },
+        "artElements": {
+          "description": "Represents one-off/special UI elements that appear on the map.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphArtElementDefinition"
+          }
+        },
+        "connections": {
+          "description": "Represents connections between graph nodes. However, it lacks context that we'd need to make good use of it.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphConnectionDefinition"
+          }
+        },
+        "displayObjectives": {
+          "description": "Objectives can display on maps, and this is supposedly metadata for that. I have not had the time to analyze the details of what is useful within however: we could be missing important data to make this work. Expect this property to be expanded on later if possible.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDisplayObjectiveDefinition"
+          }
+        },
+        "displayProgressions": {
+          "description": "Progressions can also display on maps, but similarly to displayObjectives we appear to lack some required information and context right now. We will have to look into it later and add more data if possible.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDisplayProgressionDefinition"
+          }
+        },
+        "linkedGraphs": {
+          "description": "Represents links between this Activity Graph and other ones.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyLinkedGraphDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivityGraphs"
+    },
+    "Destiny.Definitions.Director.DestinyActivityGraphNodeDefinition": {
+      "description": "This is the position and other data related to nodes in the activity graph that you can click to launch activities. An Activity Graph node will only have one active Activity at a time, which will determine the activity to be launched (and, unless overrideDisplay information is provided, will also determine the tooltip and other UI related to the node)",
+      "type": "object",
+      "properties": {
+        "nodeId": {
+          "format": "uint32",
+          "description": "An identifier for the Activity Graph Node, only guaranteed to be unique within its parent Activity Graph.",
+          "type": "integer"
+        },
+        "overrideDisplay": {
+          "description": "The node *may* have display properties that override the active Activity's display properties.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
+        "position": {
+          "description": "The position on the map for this node.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
+            }
+          ]
+        },
+        "featuringStates": {
+          "description": "The node may have various visual accents placed on it, or styles applied. These are the list of possible styles that the Node can have. The game iterates through each, looking for the first one that passes a check of the required game/character/account state in order to show that style, and then renders the node in that style.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeFeaturingStateDefinition"
+          }
+        },
+        "activities": {
+          "description": "The node may have various possible activities that could be active for it, however only one may be active at a time. See the DestinyActivityGraphNodeActivityDefinition for details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeActivityDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Common.DestinyPositionDefinition": {
+      "type": "object",
+      "properties": {
+        "x": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "y": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "z": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.Director.DestinyActivityGraphNodeFeaturingStateDefinition": {
+      "description": "Nodes can have different visual states. This object represents a single visual state (\"highlight type\") that a node can be in, and the unlock expression condition to determine whether it should be set.",
+      "type": "object",
+      "properties": {
+        "highlightType": {
+          "description": "The node can be highlighted in a variety of ways - the game iterates through these and finds the first FeaturingState that is valid at the present moment given the Game, Account, and Character state, and renders the node in that state. See the ActivityGraphNodeHighlightType enum for possible values.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.ActivityGraphNodeHighlightType"
+            }
+          ]
+        }
+      }
+    },
+    "Destiny.ActivityGraphNodeHighlightType": {
       "format": "int32",
-      "description": "BNet's custom categorization of reward sources. We took a look at the existing ways that items could be spawned, and tried to make high-level categorizations of them. This needs to be re-evaluated for Destiny 2.",
+      "description": "The various known UI styles in which an item can be highlighted. It'll be up to you to determine what you want to show based on this highlighting, BNet doesn't have any assets that correspond to these states. And yeah, RiseOfIron and Comet have their own special highlight states. Don't ask me, I can't imagine they're still used.",
       "enum": [
         "0",
         "1",
         "2",
-        "3"
+        "3",
+        "4"
       ],
       "type": "integer",
       "x-enum-values": [
         {
           "numericValue": "0",
-          "identifier": "None",
-          "description": "The source doesn't fit well into any of the other types."
+          "identifier": "None"
         },
         {
           "numericValue": "1",
-          "identifier": "Activity",
-          "description": "The source is directly related to the rewards gained by playing an activity or set of activities. This currently includes Quests and other action in-game."
+          "identifier": "Normal"
         },
         {
           "numericValue": "2",
-          "identifier": "Vendor",
-          "description": "This source is directly related to items that Vendors sell."
+          "identifier": "Hyper"
         },
         {
           "numericValue": "3",
-          "identifier": "Aggregate",
-          "description": "This source is a custom aggregation of items that can be earned in many ways, but that share some other property in common that is useful to share. For instance, in Destiny 1 we would make \"Reward Sources\" for every game expansion: that way, you could search reward sources to see what items became available with any given Expansion."
+          "identifier": "Comet"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "RiseOfIron"
         }
       ]
     },
-    "Destiny.Definitions.DestinyItemObjectiveBlockDefinition": {
-      "description": "An item can have objectives on it. In practice, these are the exclusive purview of \"Quest Step\" items: DestinyInventoryItemDefinitions that represent a specific step in a Quest.\r\nQuest steps have 1:M objectives that we end up processing and returning in live data as DestinyQuestStatus data, and other useful information.",
+    "Destiny.Definitions.Director.DestinyActivityGraphNodeActivityDefinition": {
+      "description": "The actual activity to be redirected to when you click on the node. Note that a node can have many Activities attached to it: but only one will be active at any given time. The list of Node Activities will be traversed, and the first one found to be active will be displayed. This way, a node can layer multiple variants of an activity on top of each other. For instance, one node can control the weekly Crucible Playlist. There are multiple possible playlists, but only one is active for the week.",
       "type": "object",
       "properties": {
-        "objectiveHashes": {
-          "description": "The hashes to Objectives (DestinyObjectiveDefinition) that are part of this Quest Step, in the order that they should be rendered.",
-          "type": "array",
-          "items": {
-            "format": "uint32",
-            "type": "integer"
-          },
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
-          }
+        "nodeActivityId": {
+          "format": "uint32",
+          "description": "An identifier for this node activity. It is only guaranteed to be unique within the Activity Graph.",
+          "type": "integer"
         },
-        "displayActivityHashes": {
-          "description": "For every entry in objectiveHashes, there is a corresponding entry in this array at the same index. If the objective is meant to be associated with a specific DestinyActivityDefinition, there will be a valid hash at that index. Otherwise, it will be invalid (0).",
-          "type": "array",
-          "items": {
-            "format": "uint32",
-            "type": "integer"
-          },
+        "activityHash": {
+          "format": "uint32",
+          "description": "The activity that will be activated if the user clicks on this node. Controls all activity-related information displayed on the node if it is active (the text shown in the tooltip etc)",
+          "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
           }
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyActivityDefinition": {
+      "description": "The static data about Activities in Destiny 2.\r\nNote that an Activity must be combined with an ActivityMode to know - from a Gameplay perspective - what the user is \"Playing\".\r\nIn most PvE activities, this is fairly straightforward. A Story Activity can only be played in the Story Activity Mode.\r\nHowever, in PvP activities, the Activity alone only tells you the map being played, or the Playlist that the user chose to enter. You'll need to know the Activity Mode they're playing to know that they're playing Mode X on Map Y.\r\nActivity Definitions tell a great deal of information about what *could* be relevant to a user: what rewards they can earn, what challenges could be performed, what modifiers could be applied. To figure out which of these properties is actually live, you'll need to combine the definition with \"Live\" data from one of the Destiny endpoints.\r\nActivities also have Activity Types, but unfortunately in Destiny 2 these are even less reliable of a source of information than they were in Destiny 1. I will be looking into ways to provide more reliable sources for type information as time goes on, but for now we're going to have to deal with the limitations. See DestinyActivityTypeDefinition for more information.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "description": "The title, subtitle, and icon for the activity.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
         },
-        "requireFullObjectiveCompletion": {
-          "description": "If True, all objectives must be completed for the step to be completed. If False, any one objective can be completed for the step to be completed.",
-          "type": "boolean"
+        "releaseIcon": {
+          "description": "If the activity has an icon associated with a specific release (such as a DLC), this is the path to that release's icon.",
+          "type": "string"
         },
-        "questlineItemHash": {
+        "releaseTime": {
+          "format": "int32",
+          "description": "If the activity will not be visible until a specific and known time, this will be the seconds since the Epoch when it will become visible.",
+          "type": "integer"
+        },
+        "activityLevel": {
+          "format": "int32",
+          "description": "The difficulty level of the activity.",
+          "type": "integer"
+        },
+        "activityLightLevel": {
+          "format": "int32",
+          "description": "The recommended light level for this activity.",
+          "type": "integer"
+        },
+        "destinationHash": {
           "format": "uint32",
-          "description": "The hash for the DestinyInventoryItemDefinition representing the Quest to which this Quest Step belongs.",
+          "description": "The hash identifier for the Destination on which this Activity is played. Use it to look up the DestinyDestinationDefinition for human readable info about the destination. A Destination can be thought of as a more specific location than a \"Place\". For instance, if the \"Place\" is Earth, the \"Destination\" would be a specific city or region on Earth.",
           "type": "integer",
           "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
           }
         },
-        "narrative": {
-          "description": "The localized string for narrative text related to this quest step, if any.",
-          "type": "string"
-        },
-        "objectiveVerbName": {
-          "description": "The localized string describing an action to be performed associated with the objectives, if any.",
-          "type": "string"
-        },
-        "questTypeIdentifier": {
-          "description": "The identifier for the type of quest being performed, if any. Not associated with any fixed definition, yet.",
-          "type": "string"
-        },
-        "questTypeHash": {
+        "placeHash": {
           "format": "uint32",
-          "description": "A hashed value for the questTypeIdentifier, because apparently I like to be redundant.",
+          "description": "The hash identifier for the \"Place\" on which this Activity is played. Use it to look up the DestinyPlaceDefinition for human readable info about the Place. A Place is the largest-scoped concept for location information. For instance, if the \"Place\" is Earth, the \"Destination\" would be a specific city or region on Earth.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyPlaceDefinition"
+          }
+        },
+        "activityTypeHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the Activity Type of this Activity. You may use it to look up the DestinyActivityTypeDefinition for human readable info, but be forewarned: Playlists and many PVP Map Activities will map to generic Activity Types. You'll have to use your knowledge of the Activity Mode being played to get more specific information about what the user is playing.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityTypeDefinition"
+          }
+        },
+        "tier": {
+          "format": "int32",
+          "description": "The difficulty tier of the activity.",
           "type": "integer"
+        },
+        "pgcrImage": {
+          "description": "When Activities are completed, we generate a \"Post-Game Carnage Report\", or PGCR, with details about what happened in that activity (how many kills someone got, which team won, etc...) We use this image as the background when displaying PGCR information, and often use it when we refer to the Activity in general.",
+          "type": "string"
+        },
+        "rewards": {
+          "description": "The expected possible rewards for the activity. These rewards may or may not be accessible for an individual player based on their character state, the account state, and even the game's state overall. But it is a useful reference for possible rewards you can earn in the activity. These match up to rewards displayed when you hover over the Activity in the in-game Director, and often refer to Placeholder or \"Dummy\" items: items that tell you what you can earn in vague terms rather than what you'll specifically be earning (partly because the game doesn't even know what you'll earn specifically until you roll for it at the end)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityRewardDefinition"
+          }
+        },
+        "modifiers": {
+          "description": "Activities can have Modifiers, as defined in DestinyActivityModifierDefinition. These are references to the modifiers that *can* be applied to that activity, along with data that we use to determine if that modifier is actually active at any given point in time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModifierReferenceDefinition"
+          }
+        },
+        "isPlaylist": {
+          "description": "If True, this Activity is actually a Playlist that refers to multiple possible specific Activities and Activity Modes. For instance, a Crucible Playlist may have references to multiple Activities (Maps) with multiple Activity Modes (specific PvP gameplay modes). If this is true, refer to the playlistItems property for the specific entries in the playlist.",
+          "type": "boolean"
+        },
+        "challenges": {
+          "description": "An activity can have many Challenges, of which any subset of them may be active for play at any given period of time. This gives the information about the challenges and data that we use to understand when they're active and what rewards they provide. Sadly, at the moment there's no central definition for challenges: much like \"Skulls\" were in Destiny 1, these are defined on individual activities and there can be many duplicates/near duplicates across the Destiny 2 ecosystem. I have it in mind to centralize these in a future revision of the API, but we are out of time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityChallengeDefinition"
+          }
+        },
+        "optionalUnlockStrings": {
+          "description": "If there are status strings related to the activity and based on internal state of the game, account, or character, then this will be the definition of those strings and the states needed in order for the strings to be shown.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityUnlockStringDefinition"
+          }
+        },
+        "playlistItems": {
+          "description": "Represents all of the possible activities that could be played in the Playlist, along with information that we can use to determine if they are active at the present time.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityPlaylistItemDefinition"
+          }
+        },
+        "activityGraphList": {
+          "description": "Unfortunately, in practice this is almost never populated. In theory, this is supposed to tell which Activity Graph to show if you bring up the director while in this activity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGraphListEntryDefinition"
+          }
+        },
+        "matchmaking": {
+          "description": "This block of data provides information about the Activity's matchmaking attributes: how many people can join and such.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityMatchmakingBlockDefinition"
+            }
+          ]
+        },
+        "guidedGame": {
+          "description": "This block of data, if it exists, provides information about the guided game experience and restrictions for this activity. If it doesn't exist, the game is not able to be played as a guided game.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGuidedBlockDefinition"
+            }
+          ]
+        },
+        "directActivityModeHash": {
+          "format": "uint32",
+          "description": "If this activity had an activity mode directly defined on it, this will be the hash of that mode.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "directActivityModeType": {
+          "format": "int32",
+          "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
+          "enum": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "Story"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "Strike"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "Raid"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "AllPvP"
+            },
+            {
+              "numericValue": "6",
+              "identifier": "Patrol"
+            },
+            {
+              "numericValue": "7",
+              "identifier": "AllPvE"
+            },
+            {
+              "numericValue": "9",
+              "identifier": "Reserved9"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "Control"
+            },
+            {
+              "numericValue": "11",
+              "identifier": "Reserved11"
+            },
+            {
+              "numericValue": "12",
+              "identifier": "Clash",
+              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
+            },
+            {
+              "numericValue": "13",
+              "identifier": "Reserved13"
+            },
+            {
+              "numericValue": "15",
+              "identifier": "Reserved15"
+            },
+            {
+              "numericValue": "16",
+              "identifier": "Nightfall"
+            },
+            {
+              "numericValue": "17",
+              "identifier": "HeroicNightfall"
+            },
+            {
+              "numericValue": "18",
+              "identifier": "AllStrikes"
+            },
+            {
+              "numericValue": "19",
+              "identifier": "IronBanner"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "Reserved20"
+            },
+            {
+              "numericValue": "21",
+              "identifier": "Reserved21"
+            },
+            {
+              "numericValue": "22",
+              "identifier": "Reserved22"
+            },
+            {
+              "numericValue": "24",
+              "identifier": "Reserved24"
+            },
+            {
+              "numericValue": "25",
+              "identifier": "Reserved25"
+            },
+            {
+              "numericValue": "26",
+              "identifier": "Reserved26"
+            },
+            {
+              "numericValue": "27",
+              "identifier": "Reserved27"
+            },
+            {
+              "numericValue": "28",
+              "identifier": "Reserved28"
+            },
+            {
+              "numericValue": "29",
+              "identifier": "Reserved29"
+            },
+            {
+              "numericValue": "30",
+              "identifier": "Reserved30"
+            },
+            {
+              "numericValue": "31",
+              "identifier": "Supremacy"
+            },
+            {
+              "numericValue": "32",
+              "identifier": "Reserved32"
+            },
+            {
+              "numericValue": "37",
+              "identifier": "Survival"
+            },
+            {
+              "numericValue": "38",
+              "identifier": "Countdown"
+            },
+            {
+              "numericValue": "39",
+              "identifier": "TrialsOfTheNine"
+            },
+            {
+              "numericValue": "40",
+              "identifier": "Social"
+            },
+            {
+              "numericValue": "41",
+              "identifier": "TrialsCountdown"
+            },
+            {
+              "numericValue": "42",
+              "identifier": "TrialsSurvival"
+            },
+            {
+              "numericValue": "43",
+              "identifier": "IronBannerControl"
+            },
+            {
+              "numericValue": "44",
+              "identifier": "IronBannerClash"
+            },
+            {
+              "numericValue": "45",
+              "identifier": "IronBannerSupremacy"
+            }
+          ]
+        },
+        "activityModeHashes": {
+          "description": "The hash identifiers for Activity Modes relevant to this activity.  Note that if this is a playlist, the specific playlist entry chosen will determine the actual activity modes that end up being relevant.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "activityModeTypes": {
+          "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+          }
+        },
+        "isPvP": {
+          "description": "If true, this activity is a PVP activity or playlist.",
+          "type": "boolean"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Activities"
+    },
+    "Destiny.Definitions.DestinyActivityRewardDefinition": {
+      "description": "Activities can refer to one or more sets of tooltip-friendly reward data. These are the definitions for those tooltip friendly rewards.",
+      "type": "object",
+      "properties": {
+        "rewardText": {
+          "description": "The header for the reward set, if any.",
+          "type": "string"
+        },
+        "rewardItems": {
+          "description": "The \"Items provided\" in the reward. This is almost always a pointer to a DestinyInventoryItemDefintion for an item that you can't actually earn in-game, but that has name/description/icon information for the vague concept of the rewards you will receive. This is because the actual reward generation is non-deterministic and extremely complicated, so the best the game can do is tell you what you'll get in vague terms. And so too shall we.\r\nInteresting trivia: you actually *do* earn these items when you complete the activity. They go into a single-slot bucket on your profile, which is how you see the pop-ups of these rewards when you complete an activity that match these \"dummy\" items. You can even see them if you look at the last one you earned in your profile-level inventory through the BNet API! Who said reading documentation is a waste of time?",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyActivityModifierReferenceDefinition": {
+      "description": "A reference to an Activity Modifier from another entity, such as an Activity (for now, just Activities).\r\nThis defines some",
+      "type": "object",
+      "properties": {
+        "activityModifierHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the DestinyActivityModifierDefinition referenced by this activity.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition": {
+      "description": "Modifiers - in Destiny 1, these were referred to as \"Skulls\" - are changes that can be applied to an Activity.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivityModifiers"
+    },
+    "Destiny.Definitions.DestinyActivityChallengeDefinition": {
+      "description": "Represents a reference to a Challenge, which for now is just an Objective.",
+      "type": "object",
+      "properties": {
+        "objectiveHash": {
+          "format": "uint32",
+          "description": "The hash for the Objective that matches this challenge. Use it to look up the DestinyObjectiveDefinition.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
+          }
         }
       }
     },
@@ -11738,717 +12293,6 @@
         }
       ]
     },
-    "Destiny.Definitions.DestinyDestinationDefinition": {
-      "description": "On to one of the more confusing subjects of the API. What is a Destination, and what is the relationship between it, Activities, Locations, and Places?\r\nA \"Destination\" is a specific region/city/area of a larger \"Place\". For instance, a Place might be Earth where a Destination might be Bellevue, Washington. (Please, pick a more interesting destination if you come to visit Earth).",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "placeHash": {
-          "format": "uint32",
-          "description": "The place that \"owns\" this Destination. Use this hash to look up the DestinyPlaceDefinition.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyPlaceDefinition"
-          }
-        },
-        "defaultFreeroamActivityHash": {
-          "format": "uint32",
-          "description": "If this Destination has a default Free-Roam activity, this is the hash for that Activity. Use it to look up the DestinyActivityDefintion.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
-          }
-        },
-        "activityGraphEntries": {
-          "description": "If the Destination has default Activity Graphs (i.e. \"Map\") that should be shown in the director, this is the list of those Graphs. At most, only one should be active at any given time for a Destination: these would represent, for example, different variants on a Map if the Destination is changing on a macro level based on game state.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGraphListEntryDefinition"
-          }
-        },
-        "bubbleSettings": {
-          "description": "A Destination may have many \"Bubbles\" zones with human readable properties.\r\nWe don't get as much info as I'd like about them - I'd love to return info like where on the map they are located - but at least this gives you the name of those bubbles. bubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationBubbleSettingDefinition"
-          }
-        },
-        "bubbles": {
-          "description": "This provides the unique identifiers for every bubble in the destination (only guaranteed unique within the destination), and any intrinsic properties of the bubble.\r\nbubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyBubbleDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "Destinations"
-    },
-    "Destiny.Definitions.DestinyActivityGraphListEntryDefinition": {
-      "description": "Destinations and Activities may have default Activity Graphs that should be shown when you bring up the Director and are playing in either.\r\nThis contract defines the graph referred to and the gating for when it is relevant.",
-      "type": "object",
-      "properties": {
-        "activityGraphHash": {
-          "format": "uint32",
-          "description": "The hash identifier of the DestinyActivityGraphDefinition that should be shown when opening the director.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.Director.DestinyActivityGraphDefinition": {
-      "description": "Represents a Map View in the director: be them overview views, destination views, or other.\r\nThey have nodes which map to activities, and other various visual elements that we (or others) may or may not be able to use.\r\nActivity graphs, most importantly, have nodes which can have activities in various states of playability.\r\nUnfortunately, activity graphs are combined at runtime with Game UI-only assets such as fragments of map images, various in-game special effects, decals etc... that we don't get in these definitions.\r\nIf we end up having time, we may end up trying to manually populate those here: but the last time we tried that, before the lead-up to D1, it proved to be unmaintainable as the game's content changed. So don't bet the farm on us providing that content in this definition.",
-      "type": "object",
-      "properties": {
-        "nodes": {
-          "description": "These represent the visual \"nodes\" on the map's view. These are the activities you can click on in the map.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeDefinition"
-          }
-        },
-        "artElements": {
-          "description": "Represents one-off/special UI elements that appear on the map.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphArtElementDefinition"
-          }
-        },
-        "connections": {
-          "description": "Represents connections between graph nodes. However, it lacks context that we'd need to make good use of it.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphConnectionDefinition"
-          }
-        },
-        "displayObjectives": {
-          "description": "Objectives can display on maps, and this is supposedly metadata for that. I have not had the time to analyze the details of what is useful within however: we could be missing important data to make this work. Expect this property to be expanded on later if possible.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDisplayObjectiveDefinition"
-          }
-        },
-        "displayProgressions": {
-          "description": "Progressions can also display on maps, but similarly to displayObjectives we appear to lack some required information and context right now. We will have to look into it later and add more data if possible.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphDisplayProgressionDefinition"
-          }
-        },
-        "linkedGraphs": {
-          "description": "Represents links between this Activity Graph and other ones.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyLinkedGraphDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "ActivityGraphs"
-    },
-    "Destiny.Definitions.Director.DestinyActivityGraphNodeDefinition": {
-      "description": "This is the position and other data related to nodes in the activity graph that you can click to launch activities. An Activity Graph node will only have one active Activity at a time, which will determine the activity to be launched (and, unless overrideDisplay information is provided, will also determine the tooltip and other UI related to the node)",
-      "type": "object",
-      "properties": {
-        "nodeId": {
-          "format": "uint32",
-          "description": "An identifier for the Activity Graph Node, only guaranteed to be unique within its parent Activity Graph.",
-          "type": "integer"
-        },
-        "overrideDisplay": {
-          "description": "The node *may* have display properties that override the active Activity's display properties.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
-        },
-        "position": {
-          "description": "The position on the map for this node.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyPositionDefinition"
-            }
-          ]
-        },
-        "featuringStates": {
-          "description": "The node may have various visual accents placed on it, or styles applied. These are the list of possible styles that the Node can have. The game iterates through each, looking for the first one that passes a check of the required game/character/account state in order to show that style, and then renders the node in that style.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeFeaturingStateDefinition"
-          }
-        },
-        "activities": {
-          "description": "The node may have various possible activities that could be active for it, however only one may be active at a time. See the DestinyActivityGraphNodeActivityDefinition for details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Director.DestinyActivityGraphNodeActivityDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.Common.DestinyPositionDefinition": {
-      "type": "object",
-      "properties": {
-        "x": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "y": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "z": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "Destiny.Definitions.Director.DestinyActivityGraphNodeFeaturingStateDefinition": {
-      "description": "Nodes can have different visual states. This object represents a single visual state (\"highlight type\") that a node can be in, and the unlock expression condition to determine whether it should be set.",
-      "type": "object",
-      "properties": {
-        "highlightType": {
-          "description": "The node can be highlighted in a variety of ways - the game iterates through these and finds the first FeaturingState that is valid at the present moment given the Game, Account, and Character state, and renders the node in that state. See the ActivityGraphNodeHighlightType enum for possible values.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.ActivityGraphNodeHighlightType"
-            }
-          ]
-        }
-      }
-    },
-    "Destiny.ActivityGraphNodeHighlightType": {
-      "format": "int32",
-      "description": "The various known UI styles in which an item can be highlighted. It'll be up to you to determine what you want to show based on this highlighting, BNet doesn't have any assets that correspond to these states. And yeah, RiseOfIron and Comet have their own special highlight states. Don't ask me, I can't imagine they're still used.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Normal"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Hyper"
-        },
-        {
-          "numericValue": "3",
-          "identifier": "Comet"
-        },
-        {
-          "numericValue": "4",
-          "identifier": "RiseOfIron"
-        }
-      ]
-    },
-    "Destiny.Definitions.Director.DestinyActivityGraphNodeActivityDefinition": {
-      "description": "The actual activity to be redirected to when you click on the node. Note that a node can have many Activities attached to it: but only one will be active at any given time. The list of Node Activities will be traversed, and the first one found to be active will be displayed. This way, a node can layer multiple variants of an activity on top of each other. For instance, one node can control the weekly Crucible Playlist. There are multiple possible playlists, but only one is active for the week.",
-      "type": "object",
-      "properties": {
-        "nodeActivityId": {
-          "format": "uint32",
-          "description": "An identifier for this node activity. It is only guaranteed to be unique within the Activity Graph.",
-          "type": "integer"
-        },
-        "activityHash": {
-          "format": "uint32",
-          "description": "The activity that will be activated if the user clicks on this node. Controls all activity-related information displayed on the node if it is active (the text shown in the tooltip etc)",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyActivityDefinition": {
-      "description": "The static data about Activities in Destiny 2.\r\nNote that an Activity must be combined with an ActivityMode to know - from a Gameplay perspective - what the user is \"Playing\".\r\nIn most PvE activities, this is fairly straightforward. A Story Activity can only be played in the Story Activity Mode.\r\nHowever, in PvP activities, the Activity alone only tells you the map being played, or the Playlist that the user chose to enter. You'll need to know the Activity Mode they're playing to know that they're playing Mode X on Map Y.\r\nActivity Definitions tell a great deal of information about what *could* be relevant to a user: what rewards they can earn, what challenges could be performed, what modifiers could be applied. To figure out which of these properties is actually live, you'll need to combine the definition with \"Live\" data from one of the Destiny endpoints.\r\nActivities also have Activity Types, but unfortunately in Destiny 2 these are even less reliable of a source of information than they were in Destiny 1. I will be looking into ways to provide more reliable sources for type information as time goes on, but for now we're going to have to deal with the limitations. See DestinyActivityTypeDefinition for more information.",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "description": "The title, subtitle, and icon for the activity.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
-        },
-        "releaseIcon": {
-          "description": "If the activity has an icon associated with a specific release (such as a DLC), this is the path to that release's icon.",
-          "type": "string"
-        },
-        "releaseTime": {
-          "format": "int32",
-          "description": "If the activity will not be visible until a specific and known time, this will be the seconds since the Epoch when it will become visible.",
-          "type": "integer"
-        },
-        "activityLevel": {
-          "format": "int32",
-          "description": "The difficulty level of the activity.",
-          "type": "integer"
-        },
-        "activityLightLevel": {
-          "format": "int32",
-          "description": "The recommended light level for this activity.",
-          "type": "integer"
-        },
-        "destinationHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the Destination on which this Activity is played. Use it to look up the DestinyDestinationDefinition for human readable info about the destination. A Destination can be thought of as a more specific location than a \"Place\". For instance, if the \"Place\" is Earth, the \"Destination\" would be a specific city or region on Earth.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
-          }
-        },
-        "placeHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the \"Place\" on which this Activity is played. Use it to look up the DestinyPlaceDefinition for human readable info about the Place. A Place is the largest-scoped concept for location information. For instance, if the \"Place\" is Earth, the \"Destination\" would be a specific city or region on Earth.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyPlaceDefinition"
-          }
-        },
-        "activityTypeHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the Activity Type of this Activity. You may use it to look up the DestinyActivityTypeDefinition for human readable info, but be forewarned: Playlists and many PVP Map Activities will map to generic Activity Types. You'll have to use your knowledge of the Activity Mode being played to get more specific information about what the user is playing.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityTypeDefinition"
-          }
-        },
-        "tier": {
-          "format": "int32",
-          "description": "The difficulty tier of the activity.",
-          "type": "integer"
-        },
-        "pgcrImage": {
-          "description": "When Activities are completed, we generate a \"Post-Game Carnage Report\", or PGCR, with details about what happened in that activity (how many kills someone got, which team won, etc...) We use this image as the background when displaying PGCR information, and often use it when we refer to the Activity in general.",
-          "type": "string"
-        },
-        "rewards": {
-          "description": "The expected possible rewards for the activity. These rewards may or may not be accessible for an individual player based on their character state, the account state, and even the game's state overall. But it is a useful reference for possible rewards you can earn in the activity. These match up to rewards displayed when you hover over the Activity in the in-game Director, and often refer to Placeholder or \"Dummy\" items: items that tell you what you can earn in vague terms rather than what you'll specifically be earning (partly because the game doesn't even know what you'll earn specifically until you roll for it at the end)",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityRewardDefinition"
-          }
-        },
-        "modifiers": {
-          "description": "Activities can have Modifiers, as defined in DestinyActivityModifierDefinition. These are references to the modifiers that *can* be applied to that activity, along with data that we use to determine if that modifier is actually active at any given point in time.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModifierReferenceDefinition"
-          }
-        },
-        "isPlaylist": {
-          "description": "If True, this Activity is actually a Playlist that refers to multiple possible specific Activities and Activity Modes. For instance, a Crucible Playlist may have references to multiple Activities (Maps) with multiple Activity Modes (specific PvP gameplay modes). If this is true, refer to the playlistItems property for the specific entries in the playlist.",
-          "type": "boolean"
-        },
-        "challenges": {
-          "description": "An activity can have many Challenges, of which any subset of them may be active for play at any given period of time. This gives the information about the challenges and data that we use to understand when they're active and what rewards they provide. Sadly, at the moment there's no central definition for challenges: much like \"Skulls\" were in Destiny 1, these are defined on individual activities and there can be many duplicates/near duplicates across the Destiny 2 ecosystem. I have it in mind to centralize these in a future revision of the API, but we are out of time.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityChallengeDefinition"
-          }
-        },
-        "optionalUnlockStrings": {
-          "description": "If there are status strings related to the activity and based on internal state of the game, account, or character, then this will be the definition of those strings and the states needed in order for the strings to be shown.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityUnlockStringDefinition"
-          }
-        },
-        "playlistItems": {
-          "description": "Represents all of the possible activities that could be played in the Playlist, along with information that we can use to determine if they are active at the present time.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityPlaylistItemDefinition"
-          }
-        },
-        "activityGraphList": {
-          "description": "Unfortunately, in practice this is almost never populated. In theory, this is supposed to tell which Activity Graph to show if you bring up the director while in this activity.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGraphListEntryDefinition"
-          }
-        },
-        "matchmaking": {
-          "description": "This block of data provides information about the Activity's matchmaking attributes: how many people can join and such.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityMatchmakingBlockDefinition"
-            }
-          ]
-        },
-        "guidedGame": {
-          "description": "This block of data, if it exists, provides information about the guided game experience and restrictions for this activity. If it doesn't exist, the game is not able to be played as a guided game.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.DestinyActivityGuidedBlockDefinition"
-            }
-          ]
-        },
-        "directActivityModeHash": {
-          "format": "uint32",
-          "description": "If this activity had an activity mode directly defined on it, this will be the hash of that mode.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
-          }
-        },
-        "directActivityModeType": {
-          "format": "int32",
-          "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
-          "enum": [
-            "0",
-            "2",
-            "3",
-            "4",
-            "5",
-            "6",
-            "7",
-            "9",
-            "10",
-            "11",
-            "12",
-            "13",
-            "15",
-            "16",
-            "17",
-            "18",
-            "19",
-            "20",
-            "21",
-            "22",
-            "24",
-            "25",
-            "26",
-            "27",
-            "28",
-            "29",
-            "30",
-            "31",
-            "32",
-            "37",
-            "38",
-            "39",
-            "40",
-            "41",
-            "42",
-            "43",
-            "44",
-            "45"
-          ],
-          "type": "integer",
-          "x-enum-values": [
-            {
-              "numericValue": "0",
-              "identifier": "None"
-            },
-            {
-              "numericValue": "2",
-              "identifier": "Story"
-            },
-            {
-              "numericValue": "3",
-              "identifier": "Strike"
-            },
-            {
-              "numericValue": "4",
-              "identifier": "Raid"
-            },
-            {
-              "numericValue": "5",
-              "identifier": "AllPvP"
-            },
-            {
-              "numericValue": "6",
-              "identifier": "Patrol"
-            },
-            {
-              "numericValue": "7",
-              "identifier": "AllPvE"
-            },
-            {
-              "numericValue": "9",
-              "identifier": "Reserved9"
-            },
-            {
-              "numericValue": "10",
-              "identifier": "Control"
-            },
-            {
-              "numericValue": "11",
-              "identifier": "Reserved11"
-            },
-            {
-              "numericValue": "12",
-              "identifier": "Clash",
-              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
-            },
-            {
-              "numericValue": "13",
-              "identifier": "Reserved13"
-            },
-            {
-              "numericValue": "15",
-              "identifier": "Reserved15"
-            },
-            {
-              "numericValue": "16",
-              "identifier": "Nightfall"
-            },
-            {
-              "numericValue": "17",
-              "identifier": "HeroicNightfall"
-            },
-            {
-              "numericValue": "18",
-              "identifier": "AllStrikes"
-            },
-            {
-              "numericValue": "19",
-              "identifier": "IronBanner"
-            },
-            {
-              "numericValue": "20",
-              "identifier": "Reserved20"
-            },
-            {
-              "numericValue": "21",
-              "identifier": "Reserved21"
-            },
-            {
-              "numericValue": "22",
-              "identifier": "Reserved22"
-            },
-            {
-              "numericValue": "24",
-              "identifier": "Reserved24"
-            },
-            {
-              "numericValue": "25",
-              "identifier": "Reserved25"
-            },
-            {
-              "numericValue": "26",
-              "identifier": "Reserved26"
-            },
-            {
-              "numericValue": "27",
-              "identifier": "Reserved27"
-            },
-            {
-              "numericValue": "28",
-              "identifier": "Reserved28"
-            },
-            {
-              "numericValue": "29",
-              "identifier": "Reserved29"
-            },
-            {
-              "numericValue": "30",
-              "identifier": "Reserved30"
-            },
-            {
-              "numericValue": "31",
-              "identifier": "Supremacy"
-            },
-            {
-              "numericValue": "32",
-              "identifier": "Reserved32"
-            },
-            {
-              "numericValue": "37",
-              "identifier": "Survival"
-            },
-            {
-              "numericValue": "38",
-              "identifier": "Countdown"
-            },
-            {
-              "numericValue": "39",
-              "identifier": "TrialsOfTheNine"
-            },
-            {
-              "numericValue": "40",
-              "identifier": "Social"
-            },
-            {
-              "numericValue": "41",
-              "identifier": "TrialsCountdown"
-            },
-            {
-              "numericValue": "42",
-              "identifier": "TrialsSurvival"
-            },
-            {
-              "numericValue": "43",
-              "identifier": "IronBannerControl"
-            },
-            {
-              "numericValue": "44",
-              "identifier": "IronBannerClash"
-            },
-            {
-              "numericValue": "45",
-              "identifier": "IronBannerSupremacy"
-            }
-          ]
-        },
-        "activityModeHashes": {
-          "description": "The hash identifiers for Activity Modes relevant to this activity.  Note that if this is a playlist, the specific playlist entry chosen will determine the actual activity modes that end up being relevant.",
-          "type": "array",
-          "items": {
-            "format": "uint32",
-            "type": "integer"
-          },
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
-          }
-        },
-        "activityModeTypes": {
-          "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
-          }
-        },
-        "isPvP": {
-          "description": "If true, this activity is a PVP activity or playlist.",
-          "type": "boolean"
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "Activities"
-    },
-    "Destiny.Definitions.DestinyActivityRewardDefinition": {
-      "description": "Activities can refer to one or more sets of tooltip-friendly reward data. These are the definitions for those tooltip friendly rewards.",
-      "type": "object",
-      "properties": {
-        "rewardText": {
-          "description": "The header for the reward set, if any.",
-          "type": "string"
-        },
-        "rewardItems": {
-          "description": "The \"Items provided\" in the reward. This is almost always a pointer to a DestinyInventoryItemDefintion for an item that you can't actually earn in-game, but that has name/description/icon information for the vague concept of the rewards you will receive. This is because the actual reward generation is non-deterministic and extremely complicated, so the best the game can do is tell you what you'll get in vague terms. And so too shall we.\r\nInteresting trivia: you actually *do* earn these items when you complete the activity. They go into a single-slot bucket on your profile, which is how you see the pop-ups of these rewards when you complete an activity that match these \"dummy\" items. You can even see them if you look at the last one you earned in your profile-level inventory through the BNet API! Who said reading documentation is a waste of time?",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyActivityModifierReferenceDefinition": {
-      "description": "A reference to an Activity Modifier from another entity, such as an Activity (for now, just Activities).\r\nThis defines some",
-      "type": "object",
-      "properties": {
-        "activityModifierHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the DestinyActivityModifierDefinition referenced by this activity.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-          }
-        }
-      }
-    },
-    "Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition": {
-      "description": "Modifiers - in Destiny 1, these were referred to as \"Skulls\" - are changes that can be applied to an Activity.",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "ActivityModifiers"
-    },
-    "Destiny.Definitions.DestinyActivityChallengeDefinition": {
-      "description": "Represents a reference to a Challenge, which for now is just an Objective.",
-      "type": "object",
-      "properties": {
-        "objectiveHash": {
-          "format": "uint32",
-          "description": "The hash for the Objective that matches this challenge. Use it to look up the DestinyObjectiveDefinition.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
-          }
-        }
-      }
-    },
     "Destiny.Definitions.DestinyActivityUnlockStringDefinition": {
       "description": "Represents a status string that could be conditionally displayed about an activity. Note that externally, you can only see the strings themselves. Internally we combine this information with server state to determine which strings should be shown.",
       "type": "object",
@@ -13240,6 +13084,313 @@
         }
       }
     },
+    "Destiny.Definitions.DestinyItemQualityBlockDefinition": {
+      "description": "An item's \"Quality\" determines its calculated stats. The Level at which the item spawns is combined with its \"qualityLevel\" along with some additional calculations to determine the value of those stats.\r\nIn Destiny 2, most items don't have default item levels and quality, making this property less useful: these apparently are almost always determined by the complex mechanisms of the Reward system rather than statically. They are still provided here in case they are still useful for people. This also contains some information about Infusion.",
+      "type": "object",
+      "properties": {
+        "itemLevels": {
+          "description": "The \"base\" defined level of an item. This is a list because, in theory, each Expansion could define its own base level for an item.\r\nIn practice, not only was that never done in Destiny 1, but now this isn't even populated at all. When it's not populated, the level at which it spawns has to be inferred by Reward information, of which BNet receives an imperfect view and will only be reliable on instanced data as a result.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "qualityLevel": {
+          "format": "int32",
+          "description": "qualityLevel is used in combination with the item's level to calculate stats like Attack and Defense. It plays a role in that calculation, but not nearly as large as itemLevel does.",
+          "type": "integer"
+        },
+        "infusionCategoryName": {
+          "description": "The string identifier for this item's \"infusability\", if any. \r\nItems that match the same infusionCategoryName are allowed to infuse with each other.",
+          "type": "string"
+        },
+        "infusionCategoryHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the infusion. It does not map to a Definition entity.",
+          "type": "integer"
+        },
+        "progressionLevelRequirementHash": {
+          "format": "uint32",
+          "description": "An item can refer to pre-set level requirements. They are defined in DestinyProgressionLevelRequirementDefinition, and you can use this hash to find the appropriate definition.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition": {
+      "description": "These are pre-constructed collections of data that can be used to determine the Level Requirement for an item given a Progression to be tested (such as the Character's level).\r\nFor instance, say a character receives a new Auto Rifle, and that Auto Rifle's DestinyInventoryItemDefinition.quality.progressionLevelRequirementHash property is pointing at one of these DestinyProgressionLevelRequirementDefinitions. Let's pretend also that the progressionHash it is pointing at is the Character Level progression. In that situation, the character's level will be used to interpolate a value in the requirementCurve property. The value picked up from that interpolation will be the required level for the item.",
+      "type": "object",
+      "properties": {
+        "requirementCurve": {
+          "description": "A curve of level requirements, weighted by the related progressions' level.\r\nInterpolate against this curve with the character's progression level to determine what the level requirement of the generated item that is using this data will be.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Interpolation.InterpolationPointFloat"
+          }
+        },
+        "progressionHash": {
+          "format": "uint32",
+          "description": "The progression whose level should be used to determine the level requirement.\r\nLook up the DestinyProgressionDefinition with this hash for more information about the progression in question.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ProgressionLevelRequirements"
+    },
+    "Interpolation.InterpolationPointFloat": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "float",
+          "type": "number"
+        },
+        "weight": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyItemValueBlockDefinition": {
+      "description": "This defines an item's \"Value\". Unfortunately, this appears to be used in different ways depending on the way that the item itself is used.\r\nFor items being sold at a Vendor, this is the default \"sale price\" of the item. These days, the vendor itself almost always sets the price, but it still possible for the price to fall back to this value. For quests, it is a preview of rewards you can gain by completing the quest. For dummy items, if the itemValue refers to an Emblem, it is the emblem that should be shown as the reward. (jeez louise)\r\nIt will likely be used in a number of other ways in the future, it appears to be a bucket where they put arbitrary items and quantities into the item.",
+      "type": "object",
+      "properties": {
+        "itemValue": {
+          "description": "References to the items that make up this item's \"value\", and the quantity.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
+          }
+        },
+        "valueDescription": {
+          "description": "If there's a localized text description of the value provided, this will be said description.",
+          "type": "string"
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyItemSourceBlockDefinition": {
+      "description": "Data about an item's \"sources\": ways that the item can be obtained.",
+      "type": "object",
+      "properties": {
+        "sourceHashes": {
+          "description": "The list of hash identifiers for Reward Sources that hint where the item can be found (DestinyRewardSourceDefinition).",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceDefinition"
+          }
+        },
+        "sources": {
+          "description": "A collection of details about the stats that were computed for the ways we found that the item could be spawned.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Sources.DestinyItemSourceDefinition"
+          }
+        },
+        "exclusive": {
+          "description": "If we found that this item is exclusive to a specific platform, this will be set to the BungieMembershipType enumeration that matches that platform.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BungieMembershipType"
+            }
+          ]
+        }
+      }
+    },
+    "Destiny.Definitions.Sources.DestinyItemSourceDefinition": {
+      "description": "Properties of a DestinyInventoryItemDefinition that store all of the information we were able to discern about how the item spawns, and where you can find the item.\r\nItems will have many of these sources, one per level at which it spawns, to try and give more granular data about where items spawn for specific level ranges.",
+      "type": "object",
+      "properties": {
+        "level": {
+          "format": "int32",
+          "description": "The level at which the item spawns. Essentially the Primary Key for this source data: there will be multiple of these source entries per item that has source data, grouped by the level at which the item spawns.",
+          "type": "integer"
+        },
+        "minQuality": {
+          "format": "int32",
+          "description": "The minimum Quality at which the item spawns for this level. Examine DestinyInventoryItemDefinition for more information about what Quality means. Just don't ask Phaedrus about it, he'll never stop talking and you'll have to write a book about it.",
+          "type": "integer"
+        },
+        "maxQuality": {
+          "format": "int32",
+          "description": "The maximum quality at which the item spawns for this level.",
+          "type": "integer"
+        },
+        "minLevelRequired": {
+          "format": "int32",
+          "description": "The minimum Character Level required for equipping the item when the item spawns at the item level defined on this DestinyItemSourceDefinition, as far as we saw in our processing.",
+          "type": "integer"
+        },
+        "maxLevelRequired": {
+          "format": "int32",
+          "description": "The maximum Character Level required for equipping the item when the item spawns at the item level defined on this DestinyItemSourceDefinition, as far as we saw in our processing.",
+          "type": "integer"
+        },
+        "computedStats": {
+          "description": "The stats computed for this level/quality range.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemStatDefinition"
+          }
+        },
+        "sourceHashes": {
+          "description": "The DestinyRewardSourceDefinitions found that can spawn the item at this level.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyRewardSourceDefinition": {
+      "description": "Represents a heuristically-determined \"item source\" according to Bungie.net. These item sources are non-canonical: we apply a combination of special configuration and often-fragile heuristics to attempt to discern whether an item should be part of a given \"source,\" but we have known cases of false positives and negatives due to our imperfect heuristics.\r\nStill, they provide a decent approximation for people trying to figure out how an item can be obtained. DestinyInventoryItemDefinition refers to sources in the sourceDatas.sourceHashes property for all sources we determined the item could spawn from.\r\nAn example in Destiny 1 of a Source would be \"Nightfall\". If an item has the \"Nightfall\" source associated with it, it's extremely likely that you can earn that item while playing Nightfall, either during play or as an after-completion reward.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "category": {
+          "description": "Sources are grouped into categories: common ways that items are provided. I hope to see this expand in Destiny 2 once we have time to generate accurate reward source data.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.DestinyRewardSourceCategory"
+            }
+          ]
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "RewardSources"
+    },
+    "Destiny.Definitions.DestinyRewardSourceCategory": {
+      "format": "int32",
+      "description": "BNet's custom categorization of reward sources. We took a look at the existing ways that items could be spawned, and tried to make high-level categorizations of them. This needs to be re-evaluated for Destiny 2.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None",
+          "description": "The source doesn't fit well into any of the other types."
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Activity",
+          "description": "The source is directly related to the rewards gained by playing an activity or set of activities. This currently includes Quests and other action in-game."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Vendor",
+          "description": "This source is directly related to items that Vendors sell."
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Aggregate",
+          "description": "This source is a custom aggregation of items that can be earned in many ways, but that share some other property in common that is useful to share. For instance, in Destiny 1 we would make \"Reward Sources\" for every game expansion: that way, you could search reward sources to see what items became available with any given Expansion."
+        }
+      ]
+    },
+    "Destiny.Definitions.DestinyItemObjectiveBlockDefinition": {
+      "description": "An item can have objectives on it. In practice, these are the exclusive purview of \"Quest Step\" items: DestinyInventoryItemDefinitions that represent a specific step in a Quest.\r\nQuest steps have 1:M objectives that we end up processing and returning in live data as DestinyQuestStatus data, and other useful information.",
+      "type": "object",
+      "properties": {
+        "objectiveHashes": {
+          "description": "The hashes to Objectives (DestinyObjectiveDefinition) that are part of this Quest Step, in the order that they should be rendered.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
+          }
+        },
+        "displayActivityHashes": {
+          "description": "For every entry in objectiveHashes, there is a corresponding entry in this array at the same index. If the objective is meant to be associated with a specific DestinyActivityDefinition, there will be a valid hash at that index. Otherwise, it will be invalid (0).",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
+          }
+        },
+        "requireFullObjectiveCompletion": {
+          "description": "If True, all objectives must be completed for the step to be completed. If False, any one objective can be completed for the step to be completed.",
+          "type": "boolean"
+        },
+        "questlineItemHash": {
+          "format": "uint32",
+          "description": "The hash for the DestinyInventoryItemDefinition representing the Quest to which this Quest Step belongs.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "narrative": {
+          "description": "The localized string for narrative text related to this quest step, if any.",
+          "type": "string"
+        },
+        "objectiveVerbName": {
+          "description": "The localized string describing an action to be performed associated with the objectives, if any.",
+          "type": "string"
+        },
+        "questTypeIdentifier": {
+          "description": "The identifier for the type of quest being performed, if any. Not associated with any fixed definition, yet.",
+          "type": "string"
+        },
+        "questTypeHash": {
+          "format": "uint32",
+          "description": "A hashed value for the questTypeIdentifier, because apparently I like to be redundant.",
+          "type": "integer"
+        }
+      }
+    },
     "Destiny.Definitions.Items.DestinyItemPlugDefinition": {
       "description": "If an item is a Plug, its DestinyInventoryItemDefinition.plug property will be populated with an instance of one of these bad boys.\r\nThis gives information about when it can be inserted, what the plug's category is (and thus whether it is compatible with a socket... see DestinySocketTypeDefinition for information about Plug Categories and socket compatibility), whether it is enabled and other Plug info.",
       "type": "object",
@@ -13401,6 +13552,9 @@
         },
         "vendorSackType": {
           "type": "string"
+        },
+        "openOnAcquire": {
+          "type": "boolean"
         }
       }
     },
@@ -16309,6 +16463,7 @@
         "1670",
         "1671",
         "1672",
+        "1673",
         "1800",
         "1801",
         "1802",
@@ -16406,7 +16561,10 @@
         "2501",
         "2502",
         "2600",
-        "2601"
+        "2601",
+        "2700",
+        "2701",
+        "2702"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -18481,6 +18639,10 @@
           "identifier": "DestinyThrottledByGameServer"
         },
         {
+          "numericValue": "1673",
+          "identifier": "DestinyItemNotTransferrableHasSideEffects"
+        },
+        {
           "numericValue": "1800",
           "identifier": "FbInvalidRequest"
         },
@@ -18871,6 +19033,18 @@
         {
           "numericValue": "2601",
           "identifier": "TrendingEntryTypeNotSupported"
+        },
+        {
+          "numericValue": "2700",
+          "identifier": "ReportOffenderNotInPgcr"
+        },
+        {
+          "numericValue": "2701",
+          "identifier": "ReportRequestorNotInPgcr"
+        },
+        {
+          "numericValue": "2702",
+          "identifier": "ReportSubmissionFailed"
         }
       ]
     },
@@ -19229,15 +19403,18 @@
         },
         {
           "numericValue": "400",
-          "identifier": "Vendors"
+          "identifier": "Vendors",
+          "description": "When obtaining vendor information, this will return summary information about the Vendor or Vendors being returned."
         },
         {
           "numericValue": "401",
-          "identifier": "VendorCategories"
+          "identifier": "VendorCategories",
+          "description": "When obtaining vendor information, this will return information about the categories of items provided by the Vendor."
         },
         {
           "numericValue": "402",
-          "identifier": "VendorSales"
+          "identifier": "VendorSales",
+          "description": "When obtaining vendor information, this will return the information about items being sold by the Vendor."
         },
         {
           "numericValue": "500",
@@ -19718,7 +19895,8 @@
       "description": "A flags enumeration indicating the versions of the game that a given user has purchased.",
       "enum": [
         "0",
-        "1"
+        "1",
+        "2"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19729,6 +19907,10 @@
         {
           "numericValue": "1",
           "identifier": "Destiny2"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "DLC1"
         }
       ]
     },
@@ -20215,6 +20397,11 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyFactionDefinition"
           }
         },
+        "factionVendorIndex": {
+          "format": "int32",
+          "description": "The index of the Faction vendor that is currently available. Will be set to -1 if no vendors are available.",
+          "type": "integer"
+        },
         "progressionHash": {
           "format": "uint32",
           "description": "The hash identifier of the Progression in question. Use it to look up the DestinyProgressionDefinition in static data.",
@@ -20484,6 +20671,214 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
           }
         },
+        "activityModeHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the most specific Activity Mode under which this activity is played. This is useful for situations where the activity in question is - for instance - a PVP map, but it's not clear what mode the PVP map is being played under. If it's a playlist, this will be less specific: but hopefully useful in some way.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "activityModeType": {
+          "format": "int32",
+          "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
+          "enum": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "Story"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "Strike"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "Raid"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "AllPvP"
+            },
+            {
+              "numericValue": "6",
+              "identifier": "Patrol"
+            },
+            {
+              "numericValue": "7",
+              "identifier": "AllPvE"
+            },
+            {
+              "numericValue": "9",
+              "identifier": "Reserved9"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "Control"
+            },
+            {
+              "numericValue": "11",
+              "identifier": "Reserved11"
+            },
+            {
+              "numericValue": "12",
+              "identifier": "Clash",
+              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
+            },
+            {
+              "numericValue": "13",
+              "identifier": "Reserved13"
+            },
+            {
+              "numericValue": "15",
+              "identifier": "Reserved15"
+            },
+            {
+              "numericValue": "16",
+              "identifier": "Nightfall"
+            },
+            {
+              "numericValue": "17",
+              "identifier": "HeroicNightfall"
+            },
+            {
+              "numericValue": "18",
+              "identifier": "AllStrikes"
+            },
+            {
+              "numericValue": "19",
+              "identifier": "IronBanner"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "Reserved20"
+            },
+            {
+              "numericValue": "21",
+              "identifier": "Reserved21"
+            },
+            {
+              "numericValue": "22",
+              "identifier": "Reserved22"
+            },
+            {
+              "numericValue": "24",
+              "identifier": "Reserved24"
+            },
+            {
+              "numericValue": "25",
+              "identifier": "Reserved25"
+            },
+            {
+              "numericValue": "26",
+              "identifier": "Reserved26"
+            },
+            {
+              "numericValue": "27",
+              "identifier": "Reserved27"
+            },
+            {
+              "numericValue": "28",
+              "identifier": "Reserved28"
+            },
+            {
+              "numericValue": "29",
+              "identifier": "Reserved29"
+            },
+            {
+              "numericValue": "30",
+              "identifier": "Reserved30"
+            },
+            {
+              "numericValue": "31",
+              "identifier": "Supremacy"
+            },
+            {
+              "numericValue": "32",
+              "identifier": "Reserved32"
+            },
+            {
+              "numericValue": "37",
+              "identifier": "Survival"
+            },
+            {
+              "numericValue": "38",
+              "identifier": "Countdown"
+            },
+            {
+              "numericValue": "39",
+              "identifier": "TrialsOfTheNine"
+            },
+            {
+              "numericValue": "40",
+              "identifier": "Social"
+            },
+            {
+              "numericValue": "41",
+              "identifier": "TrialsCountdown"
+            },
+            {
+              "numericValue": "42",
+              "identifier": "TrialsSurvival"
+            },
+            {
+              "numericValue": "43",
+              "identifier": "IronBannerControl"
+            },
+            {
+              "numericValue": "44",
+              "identifier": "IronBannerClash"
+            },
+            {
+              "numericValue": "45",
+              "identifier": "IronBannerSupremacy"
+            }
+          ]
+        },
         "modifierHashes": {
           "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data. Note that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
           "type": "array",
@@ -20522,6 +20917,214 @@
           "allOf": [
             {
               "$ref": "#/definitions/Destiny.Milestones.DestinyMilestoneActivityCompletionStatus"
+            }
+          ]
+        },
+        "activityModeHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the most specific Activity Mode under which this activity is played. This is useful for situations where the activity in question is - for instance - a PVP map, but it's not clear what mode the PVP map is being played under. If it's a playlist, this will be less specific: but hopefully useful in some way.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "activityModeType": {
+          "format": "int32",
+          "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
+          "enum": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "Story"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "Strike"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "Raid"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "AllPvP"
+            },
+            {
+              "numericValue": "6",
+              "identifier": "Patrol"
+            },
+            {
+              "numericValue": "7",
+              "identifier": "AllPvE"
+            },
+            {
+              "numericValue": "9",
+              "identifier": "Reserved9"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "Control"
+            },
+            {
+              "numericValue": "11",
+              "identifier": "Reserved11"
+            },
+            {
+              "numericValue": "12",
+              "identifier": "Clash",
+              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
+            },
+            {
+              "numericValue": "13",
+              "identifier": "Reserved13"
+            },
+            {
+              "numericValue": "15",
+              "identifier": "Reserved15"
+            },
+            {
+              "numericValue": "16",
+              "identifier": "Nightfall"
+            },
+            {
+              "numericValue": "17",
+              "identifier": "HeroicNightfall"
+            },
+            {
+              "numericValue": "18",
+              "identifier": "AllStrikes"
+            },
+            {
+              "numericValue": "19",
+              "identifier": "IronBanner"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "Reserved20"
+            },
+            {
+              "numericValue": "21",
+              "identifier": "Reserved21"
+            },
+            {
+              "numericValue": "22",
+              "identifier": "Reserved22"
+            },
+            {
+              "numericValue": "24",
+              "identifier": "Reserved24"
+            },
+            {
+              "numericValue": "25",
+              "identifier": "Reserved25"
+            },
+            {
+              "numericValue": "26",
+              "identifier": "Reserved26"
+            },
+            {
+              "numericValue": "27",
+              "identifier": "Reserved27"
+            },
+            {
+              "numericValue": "28",
+              "identifier": "Reserved28"
+            },
+            {
+              "numericValue": "29",
+              "identifier": "Reserved29"
+            },
+            {
+              "numericValue": "30",
+              "identifier": "Reserved30"
+            },
+            {
+              "numericValue": "31",
+              "identifier": "Supremacy"
+            },
+            {
+              "numericValue": "32",
+              "identifier": "Reserved32"
+            },
+            {
+              "numericValue": "37",
+              "identifier": "Survival"
+            },
+            {
+              "numericValue": "38",
+              "identifier": "Countdown"
+            },
+            {
+              "numericValue": "39",
+              "identifier": "TrialsOfTheNine"
+            },
+            {
+              "numericValue": "40",
+              "identifier": "Social"
+            },
+            {
+              "numericValue": "41",
+              "identifier": "TrialsCountdown"
+            },
+            {
+              "numericValue": "42",
+              "identifier": "TrialsSurvival"
+            },
+            {
+              "numericValue": "43",
+              "identifier": "IronBannerControl"
+            },
+            {
+              "numericValue": "44",
+              "identifier": "IronBannerClash"
+            },
+            {
+              "numericValue": "45",
+              "identifier": "IronBannerSupremacy"
             }
           ]
         }
@@ -20629,7 +21232,7 @@
       }
     },
     "Destiny.Definitions.Milestones.DestinyMilestoneDefinition": {
-      "description": "Milestones are an in-game concept where they're attempting to tell you what you can do next in-game.\r\nIf that sounds a lot like Advisors in Destiny 1, it is! So we threw out Advisors in the Destiny 2 API and tacked all of the data we would have put on Advisors onto Milestones instead.\r\nEach Milestone represents something going on in the game right now:\r\n- A \"ritual activity\" you can perform, like nightfall\r\n- A \"special event\" that may have activities related to it, like Taco Tuesday (there's no Taco Tuesday in Destiny 2)\r\n- A checklist you can fulfill, like helping your Clan complete all of its weekly objectives\r\n- A tutorial quest you can play through, like the introduction to the Crucible.\r\nMost of these milestones appear in game as well. Some of them are BNet only, because we're so extra. You're welcome.",
+      "description": "Milestones are an in-game concept where they're attempting to tell you what you can do next in-game.\r\nIf that sounds a lot like Advisors in Destiny 1, it is! So we threw out Advisors in the Destiny 2 API and tacked all of the data we would have put on Advisors onto Milestones instead.\r\nEach Milestone represents something going on in the game right now:\r\n- A \"ritual activity\" you can perform, like nightfall\r\n- A \"special event\" that may have activities related to it, like Taco Tuesday (there's no Taco Tuesday in Destiny 2)\r\n- A checklist you can fulfill, like helping your Clan complete all of its weekly objectives\r\n- A tutorial quest you can play through, like the introduction to the Crucible.\r\nMost of these milestones appear in game as well. Some of them are BNet only, because we're so extra. You're welcome.\r\nThere are some important caveats to understand about how we currently render Milestones and their deficiencies. The game currently doesn't have any content that actually tells you oughtright *what* the Milestone is: that is to say, what you'll be doing. The best we get is either a description of the overall Milestone, or of the Quest that the Milestone is having you partake in: which is usually something that assumes you already know what it's talking about, like \"Complete 5 Challenges\". 5 Challenges for what? What's a challenge? These are not questions that the Milestone data will answer for you unfortunately.\r\nThis isn't great, and in the future I'd like to add some custom text to give you more contextual information to pass on to your users. But for now, you can do what we do to render what little display info we do have:\r\nStart by looking at the currently active quest (ideally, you've fetched DestinyMilestone or DestinyPublicMilestone data from the API, so you know the currently active quest for the Milestone in question). Look up the Quests property in the Milestone Definition, and check if it has display properties. If it does, show that as the description of the Milestone. If it doesn't, fall back on the Milestone's description.\r\nThis approach will let you avoid, whenever possible, the even less useful (and sometimes nonexistant) milestone-level names and descriptions.",
       "type": "object",
       "properties": {
         "displayProperties": {
@@ -20657,7 +21260,11 @@
           "type": "string"
         },
         "showInExplorer": {
-          "description": "If TRUE, this entry should be returned in the list of milestones for the \"Explore Destiny\" (i.e. new BNet homepage) features of Bungie.net (as long as the underlying event is active)",
+          "description": "If TRUE, this entry should be returned in the list of milestones for the \"Explore Destiny\" (i.e. new BNet homepage) features of Bungie.net (as long as the underlying event is active) Note that this is a property specifically used by BNet and the companion app for the \"Live Events\" feature of the front page/welcome view: it's not a reflection of what you see in-game.",
+          "type": "boolean"
+        },
+        "explorePrioritizesActivityImage": {
+          "description": "If TRUE, \"Explore Destiny\" (the front page of BNet and the companion app) prioritize using the activity image over any overriding Quest or Milestone image provided. This unfortunate hack is brought to you by Trials of The Nine.",
           "type": "boolean"
         },
         "hasPredictableDates": {
@@ -22565,16 +23172,16 @@
         }
       }
     },
-    "Destiny.Responses.DestinyVendorResponse": {
-      "description": "A response containing all of the components for a vendor.",
+    "Destiny.Responses.DestinyVendorsResponse": {
+      "description": "A response containing all of the components for all requested vendors.",
       "type": "object",
       "properties": {
-        "vendor": {
+        "vendors": {
           "description": "The base properties of the vendor.\r\nCOMPONENT TYPE: Vendors",
           "type": "object",
           "allOf": [
             {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorComponent"
+              "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyVendorComponent"
             }
           ],
           "x-destiny-component-type-dependency": "Vendors"
@@ -22584,7 +23191,7 @@
           "type": "object",
           "allOf": [
             {
-              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorCategoriesComponent"
+              "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent"
             }
           ],
           "x-destiny-component-type-dependency": "VendorCategories"
@@ -22594,19 +23201,16 @@
           "type": "object",
           "allOf": [
             {
-              "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent"
+              "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent"
             }
           ],
           "x-destiny-component-type-dependency": "VendorSales"
         },
-        "items": {
-          "description": "Item components, keyed by the vendorItemIndex of the active sale items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
+        "itemComponents": {
           "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DestinyItemComponentSetOfint32"
-            }
-          ]
+          "additionalProperties": {
+            "$ref": "#/definitions/DestinyItemComponentSetOfint32"
+          }
         }
       }
     },
@@ -22621,15 +23225,6 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
           }
-        },
-        "ackState": {
-          "description": "Long ago, we thought it would be a good idea to have special UI that showed whether or not you've seen a Vendor's inventory after cycling. \r\nFor now, we don't have that UI anymore. This property still exists for historical purposes. Don't worry about it.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/User.AckState"
-            }
-          ]
         },
         "nextRefreshDate": {
           "format": "date-time",
@@ -22656,24 +23251,15 @@
       },
       "x-destiny-component-type-dependency": "Vendors"
     },
-    "User.AckState": {
-      "type": "object",
-      "properties": {
-        "needsAck": {
-          "description": "Indicates the related item has not been acknowledged.",
-          "type": "boolean"
-        },
-        "ackId": {
-          "description": "Identifier to use when acknowledging the related item. [category]:[entityId]:[targetId]",
-          "type": "string"
-        }
-      }
-    },
-    "SingleComponentResponseOfDestinyVendorComponent": {
+    "DictionaryComponentResponseOfuint32AndDestinyVendorComponent": {
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorComponent"
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "Vendors",
+            "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorComponent"
+          }
         },
         "privacy": {
           "$ref": "#/definitions/Components.ComponentPrivacySetting"
@@ -22713,16 +23299,35 @@
         }
       }
     },
-    "SingleComponentResponseOfDestinyVendorCategoriesComponent": {
+    "DictionaryComponentResponseOfuint32AndDestinyVendorCategoriesComponent": {
       "type": "object",
       "properties": {
         "data": {
-          "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorCategoriesComponent"
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "VendorCategories",
+            "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorCategoriesComponent"
+          }
         },
         "privacy": {
           "$ref": "#/definitions/Components.ComponentPrivacySetting"
         }
       }
+    },
+    "Destiny.Components.Vendors.DestinyVendorSaleItemSetComponent": {
+      "description": "The collection of all items currently being sold by a specific Vendor and visible to the given character for which the request was made.",
+      "type": "object",
+      "properties": {
+        "saleItems": {
+          "description": "The items being sold by this vendor, keyed by the vendorItemIndex of the item being sold. (because showing sale items depends on the ordering dictated by the categories being shown - see DestinyVendorCategoryComponent - this is a dictionary for quick lookup capability.)",
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "VendorSales",
+            "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorSaleItemComponent"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "VendorSales"
     },
     "Destiny.Entities.Vendors.DestinyVendorSaleItemComponent": {
       "description": "Request this component if you want the details about an item being sold in relation to the character making the request: whether the character can buy it, whether they can afford it, and other data related to purchasing the item.\r\nNote that if you want instance, stats, etc... data for the item, you'll have to request additional components such as ItemInstances, ItemPerks etc... and acquire them from the DestinyVendorResponse's \"items\" property.",
@@ -22740,6 +23345,11 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "How much of the item you'll be getting.",
+          "type": "integer"
         },
         "saleStatus": {
           "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it.",
@@ -22882,14 +23492,14 @@
         }
       }
     },
-    "DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent": {
+    "DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent": {
       "type": "object",
       "properties": {
         "data": {
           "type": "object",
           "additionalProperties": {
             "x-destiny-component-type-dependency": "VendorSales",
-            "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorSaleItemComponent"
+            "$ref": "#/definitions/Destiny.Components.Vendors.DestinyVendorSaleItemSetComponent"
           }
         },
         "privacy": {
@@ -23039,6 +23649,88 @@
         }
       }
     },
+    "Destiny.Responses.DestinyVendorResponse": {
+      "description": "A response containing all of the components for a vendor.",
+      "type": "object",
+      "properties": {
+        "vendor": {
+          "description": "The base properties of the vendor.\r\nCOMPONENT TYPE: Vendors",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "Vendors"
+        },
+        "categories": {
+          "description": "Categories that the vendor has available, and references to the sales therein.\r\nCOMPONENT TYPE: VendorCategories",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyVendorCategoriesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "VendorCategories"
+        },
+        "sales": {
+          "description": "Sales, keyed by the vendorItemIndex of the item being sold.\r\nCOMPONENT TYPE: VendorSales",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "VendorSales"
+        },
+        "itemComponents": {
+          "description": "Item components, keyed by the vendorItemIndex of the active sale items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DestinyItemComponentSetOfint32"
+            }
+          ]
+        }
+      }
+    },
+    "SingleComponentResponseOfDestinyVendorComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorComponent"
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "SingleComponentResponseOfDestinyVendorCategoriesComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorCategoriesComponent"
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "DictionaryComponentResponseOfint32AndDestinyVendorSaleItemComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "VendorSales",
+            "$ref": "#/definitions/Destiny.Entities.Vendors.DestinyVendorSaleItemComponent"
+          }
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
     "Destiny.Requests.Actions.DestinyActionRequest": {
       "type": "object",
       "properties": {
@@ -23088,6 +23780,30 @@
         },
         "transferToVault": {
           "type": "boolean"
+        },
+        "itemId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "characterId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "membershipType": {
+          "$ref": "#/definitions/BungieMembershipType"
+        }
+      }
+    },
+    "Destiny.Requests.Actions.DestinyPostmasterTransferRequest": {
+      "type": "object",
+      "properties": {
+        "itemReferenceHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "stackSize": {
+          "format": "int32",
+          "type": "integer"
         },
         "itemId": {
           "format": "int64",
@@ -23398,6 +24114,11 @@
         "clanTag": {
           "description": "Current clan tag for the player. This value may be null or an empty string if the user does not have a clan.",
           "type": "string"
+        },
+        "emblemHash": {
+          "format": "uint32",
+          "description": "If we know the emblem's hash, this can be used to look up the player's emblem at the time of a match when receiving PGCR data, or otherwise their currently equipped emblem (if we are able to obtain it).",
+          "type": "integer"
         }
       }
     },
@@ -23472,6 +24193,81 @@
         }
       }
     },
+    "Destiny.Reporting.Requests.DestinyReportOffensePgcrRequest": {
+      "description": "If you want to report a player causing trouble in a game, this request will let you report that player and the specific PGCR in which the trouble was caused, along with why.\r\nPlease don't do this just because you dislike the person! I mean, I know people will do it anyways, but can you like take a good walk, or put a curse on them or something? Do me a solid and reconsider.\r\nNote that this request object doesn't have the actual PGCR ID nor your Account/Character ID in it. We will infer that information from your authentication information and the PGCR ID that you pass into the URL of the reporting endpoint itself.",
+      "type": "object",
+      "properties": {
+        "reasonCategoryHashes": {
+          "description": "So you've decided to report someone instead of cursing them and their descendants. Well, okay then. This is the category or categorie(s) of infractions for which you are reporting the user. These are hash identifiers that map to DestinyReportReasonCategoryDefinition entries.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Reporting.DestinyReportReasonCategoryDefinition"
+          }
+        },
+        "reasonHashes": {
+          "description": "If applicable, provide a more specific reason(s) within the general category of problems provided by the reasonHash. This is also an identifier for a reason. All reasonHashes provided must be children of at least one the reasonCategoryHashes provided.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "offendingCharacterId": {
+          "format": "int64",
+          "description": "Within the PGCR provided when calling the Reporting endpoint, this should be the character ID of the user that you thought was violating terms of use. They must exist in the PGCR provided.",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.Reporting.DestinyReportReasonCategoryDefinition": {
+      "description": "If you're going to report someone for a Terms of Service violation, you need to choose a category and reason for the report. This definition holds both the categories and the reasons within those categories, for simplicity and my own laziness' sake.\r\nNote tha this means that, to refer to a Reason by reasonHash, you need a combination of the reasonHash *and* the associated ReasonCategory's hash: there are some reasons defined under multiple categories.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "reasons": {
+          "description": "The specific reasons for the report under this category.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.Definitions.Reporting.DestinyReportReasonDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ReportReasonCategories"
+    },
+    "Destiny.Definitions.Reporting.DestinyReportReasonDefinition": {
+      "description": "A specific reason for being banned. Only accessible under the related category (DestinyReportReasonCategoryDefinition) under which it is shown. Note that this means that report reasons' reasonHash are not globally unique: and indeed, entries like \"Other\" are defined under most categories for example.",
+      "type": "object",
+      "properties": {
+        "reasonHash": {
+          "format": "uint32",
+          "description": "The identifier for the reason: they are only guaranteed unique under the Category in which they are found.",
+          "type": "integer"
+        },
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        }
+      }
+    },
     "Destiny.HistoricalStats.Definitions.DestinyHistoricalStatsDefinition": {
       "type": "object",
       "properties": {
@@ -23513,6 +24309,10 @@
         },
         "statName": {
           "description": "Display name",
+          "type": "string"
+        },
+        "statNameAbbr": {
+          "description": "Display name abbreviated",
           "type": "string"
         },
         "statDescription": {
@@ -23744,7 +24544,8 @@
         "9",
         "10",
         "11",
-        "12"
+        "12",
+        "13"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -23811,6 +24612,11 @@
           "numericValue": "12",
           "identifier": "Milliseconds",
           "description": "Number of milliseconds some event spanned. For example, race time, or lap time."
+        },
+        {
+          "numericValue": "13",
+          "identifier": "CompletionReason",
+          "description": "The value is a enumeration of the Completion Reason type."
         }
       ]
     },
@@ -24374,6 +25180,214 @@
           "items": {
             "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestoneActivityVariant"
           }
+        },
+        "activityModeHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the most specific Activity Mode under which this activity is played. This is useful for situations where the activity in question is - for instance - a PVP map, but it's not clear what mode the PVP map is being played under. If it's a playlist, this will be less specific: but hopefully useful in some way.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "activityModeType": {
+          "format": "int32",
+          "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
+          "enum": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "Story"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "Strike"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "Raid"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "AllPvP"
+            },
+            {
+              "numericValue": "6",
+              "identifier": "Patrol"
+            },
+            {
+              "numericValue": "7",
+              "identifier": "AllPvE"
+            },
+            {
+              "numericValue": "9",
+              "identifier": "Reserved9"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "Control"
+            },
+            {
+              "numericValue": "11",
+              "identifier": "Reserved11"
+            },
+            {
+              "numericValue": "12",
+              "identifier": "Clash",
+              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
+            },
+            {
+              "numericValue": "13",
+              "identifier": "Reserved13"
+            },
+            {
+              "numericValue": "15",
+              "identifier": "Reserved15"
+            },
+            {
+              "numericValue": "16",
+              "identifier": "Nightfall"
+            },
+            {
+              "numericValue": "17",
+              "identifier": "HeroicNightfall"
+            },
+            {
+              "numericValue": "18",
+              "identifier": "AllStrikes"
+            },
+            {
+              "numericValue": "19",
+              "identifier": "IronBanner"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "Reserved20"
+            },
+            {
+              "numericValue": "21",
+              "identifier": "Reserved21"
+            },
+            {
+              "numericValue": "22",
+              "identifier": "Reserved22"
+            },
+            {
+              "numericValue": "24",
+              "identifier": "Reserved24"
+            },
+            {
+              "numericValue": "25",
+              "identifier": "Reserved25"
+            },
+            {
+              "numericValue": "26",
+              "identifier": "Reserved26"
+            },
+            {
+              "numericValue": "27",
+              "identifier": "Reserved27"
+            },
+            {
+              "numericValue": "28",
+              "identifier": "Reserved28"
+            },
+            {
+              "numericValue": "29",
+              "identifier": "Reserved29"
+            },
+            {
+              "numericValue": "30",
+              "identifier": "Reserved30"
+            },
+            {
+              "numericValue": "31",
+              "identifier": "Supremacy"
+            },
+            {
+              "numericValue": "32",
+              "identifier": "Reserved32"
+            },
+            {
+              "numericValue": "37",
+              "identifier": "Survival"
+            },
+            {
+              "numericValue": "38",
+              "identifier": "Countdown"
+            },
+            {
+              "numericValue": "39",
+              "identifier": "TrialsOfTheNine"
+            },
+            {
+              "numericValue": "40",
+              "identifier": "Social"
+            },
+            {
+              "numericValue": "41",
+              "identifier": "TrialsCountdown"
+            },
+            {
+              "numericValue": "42",
+              "identifier": "TrialsSurvival"
+            },
+            {
+              "numericValue": "43",
+              "identifier": "IronBannerControl"
+            },
+            {
+              "numericValue": "44",
+              "identifier": "IronBannerClash"
+            },
+            {
+              "numericValue": "45",
+              "identifier": "IronBannerSupremacy"
+            }
+          ]
         }
       }
     },
@@ -24385,6 +25399,214 @@
           "format": "uint32",
           "description": "The hash identifier of this activity variant. Examine the activity's definition in the Manifest database to determine what makes it a distinct variant. Usually it will be difficulty level or whether or not it is a guided game variant of the activity, but theoretically it could be distinguished in any arbitrary way.",
           "type": "integer"
+        },
+        "activityModeHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the most specific Activity Mode under which this activity is played. This is useful for situations where the activity in question is - for instance - a PVP map, but it's not clear what mode the PVP map is being played under. If it's a playlist, this will be less specific: but hopefully useful in some way.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityModeDefinition"
+          }
+        },
+        "activityModeType": {
+          "format": "int32",
+          "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
+          "enum": [
+            "0",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "24",
+            "25",
+            "26",
+            "27",
+            "28",
+            "29",
+            "30",
+            "31",
+            "32",
+            "37",
+            "38",
+            "39",
+            "40",
+            "41",
+            "42",
+            "43",
+            "44",
+            "45"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "Story"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "Strike"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "Raid"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "AllPvP"
+            },
+            {
+              "numericValue": "6",
+              "identifier": "Patrol"
+            },
+            {
+              "numericValue": "7",
+              "identifier": "AllPvE"
+            },
+            {
+              "numericValue": "9",
+              "identifier": "Reserved9"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "Control"
+            },
+            {
+              "numericValue": "11",
+              "identifier": "Reserved11"
+            },
+            {
+              "numericValue": "12",
+              "identifier": "Clash",
+              "description": "Clash -> Destiny's name for Team Deathmatch. 4v4 combat, the team with the highest kills at the end of time wins."
+            },
+            {
+              "numericValue": "13",
+              "identifier": "Reserved13"
+            },
+            {
+              "numericValue": "15",
+              "identifier": "Reserved15"
+            },
+            {
+              "numericValue": "16",
+              "identifier": "Nightfall"
+            },
+            {
+              "numericValue": "17",
+              "identifier": "HeroicNightfall"
+            },
+            {
+              "numericValue": "18",
+              "identifier": "AllStrikes"
+            },
+            {
+              "numericValue": "19",
+              "identifier": "IronBanner"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "Reserved20"
+            },
+            {
+              "numericValue": "21",
+              "identifier": "Reserved21"
+            },
+            {
+              "numericValue": "22",
+              "identifier": "Reserved22"
+            },
+            {
+              "numericValue": "24",
+              "identifier": "Reserved24"
+            },
+            {
+              "numericValue": "25",
+              "identifier": "Reserved25"
+            },
+            {
+              "numericValue": "26",
+              "identifier": "Reserved26"
+            },
+            {
+              "numericValue": "27",
+              "identifier": "Reserved27"
+            },
+            {
+              "numericValue": "28",
+              "identifier": "Reserved28"
+            },
+            {
+              "numericValue": "29",
+              "identifier": "Reserved29"
+            },
+            {
+              "numericValue": "30",
+              "identifier": "Reserved30"
+            },
+            {
+              "numericValue": "31",
+              "identifier": "Supremacy"
+            },
+            {
+              "numericValue": "32",
+              "identifier": "Reserved32"
+            },
+            {
+              "numericValue": "37",
+              "identifier": "Survival"
+            },
+            {
+              "numericValue": "38",
+              "identifier": "Countdown"
+            },
+            {
+              "numericValue": "39",
+              "identifier": "TrialsOfTheNine"
+            },
+            {
+              "numericValue": "40",
+              "identifier": "Social"
+            },
+            {
+              "numericValue": "41",
+              "identifier": "TrialsCountdown"
+            },
+            {
+              "numericValue": "42",
+              "identifier": "TrialsSurvival"
+            },
+            {
+              "numericValue": "43",
+              "identifier": "IronBannerControl"
+            },
+            {
+              "numericValue": "44",
+              "identifier": "IronBannerClash"
+            },
+            {
+              "numericValue": "45",
+              "identifier": "IronBannerSupremacy"
+            }
+          ]
         }
       }
     },
@@ -24675,6 +25897,13 @@
         "featureImage": {
           "description": "If isFeatured, this image will be populated with whatever the featured image is. Note that this will likely be a very large image, so don't use it all the time.",
           "type": "string"
+        },
+        "items": {
+          "description": "If the item is of entityType TrendingEntryType.Container, it may have items - also Trending Entries - contained within it. This is the ordered list of those to display under the Container's header.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Trending.TrendingEntry"
+          }
         }
       }
     },
@@ -24691,7 +25920,9 @@
         "6",
         "7",
         "8",
-        "9"
+        "9",
+        "10",
+        "11"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -24734,6 +25965,14 @@
         {
           "numericValue": "9",
           "identifier": "ForumTag"
+        },
+        {
+          "numericValue": "10",
+          "identifier": "Container"
+        },
+        {
+          "numericValue": "11",
+          "identifier": "Release"
         }
       ]
     },
@@ -25070,10 +26309,10 @@
         "AdminGroups": "Administer Group/Clan Forums, Wall, and Members for groups and clans that the \r\nuser is a founder or an administrator.",
         "BnetWrite": "Create new groups, clans, and forum posts.",
         "MoveEquipDestinyItems": "Move or equip Destiny items",
-        "ReadDestinyInventoryAndVault": "Read Destiny Inventory and Vault contents.",
+        "ReadDestinyInventoryAndVault": "Read Destiny 1 Inventory and Vault contents.\r\nFor Destiny 2, this scope is needed to read anything regarded as private. This is the only scope a\r\nDestiny 2 app needs for read operations against Destiny 2 data such as inventory, vault, currency,\r\nvendors, milestones, progression, etc.",
         "ReadUserData": "Read user data such as who they are web notifications, \r\nclan/group memberships, recent activity, muted users.",
         "EditUserData": "Edit user data such as preferred language, status, motto, avatar selection and theme.",
-        "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user.",
+        "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
         "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user."
       }
     }
