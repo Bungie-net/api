@@ -63,9 +63,6 @@ The API itself is online, however several endpoints are still in a beta or unusa
 
 - ### Vendors
   - We discovered breaking changes with how Vendors work under the surface pretty late in our development cycle, and were unable to recover in time to stabilize both it and our other features in time to ship.  Those of you who used Vendors in Destiny 1 remember the great Vendor meltdown of 2016.  The implementation that I built to work around said performance meltdown will no longer work in Destiny 2, which puts me back at the drawing board for finding a way to expose Vendor data in an efficient enough manner to melt neither our servers nor the game's servers.  I regret this deeply - particularly discovering it so late and thus not having time to pivot - but I am using this opportunity to pre-release the proposal for the format in which the Vendor calls will return data for review while I continue to work on making Vendors function again.  It is one of the highest priorities on my plate for post-ship.
-
-- ### Stats (working, but may have bugs)
-  - Stats are pretty much in working order, and as you will see their endpoints have not really changed at all.  These *should* be functioning as desired, but I mark them as Pending because they have not been given as thorough of a review for edge cases as the other Destiny features, because BNet itself isn't currently exposing any stats related features.  This is another high-priority task for future improvements of the site, which will also bring about improvements to the API as a result when our attention can be turned back to it as a team.
   
 # Swagger/OpenAPI Specs (or, how to generate your own clients for the BNet API)
 
