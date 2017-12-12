@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.0"
+    "version": "2.1.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -8447,6 +8447,10 @@
           "description": "The localized title/name of the item's type. This can be whatever the designers want, and has no guarantee of consistency between items.",
           "type": "string"
         },
+        "uiItemDisplayStyle": {
+          "description": "A string identifier that the game's UI uses to determine how the item should be rendered in inventory screens and the like. This could really be anything - at the moment, we don't have the time to really breakdown and maintain all the possible strings this could be, partly because new ones could be added ad hoc. But if you want to use it to dictate your own UI, or look for items with a certain display style, go for it!",
+          "type": "string"
+        },
         "itemTypeAndTierDisplayName": {
           "description": "It became a common enough pattern in our UI to show Item Type and Tier combined into a single localized string that I'm just going to go ahead and start pre-creating these for items.",
           "type": "string"
@@ -8494,6 +8498,11 @@
               "$ref": "#/definitions/Destiny.Definitions.DestinyItemStatBlockDefinition"
             }
           ]
+        },
+        "emblemObjectiveHash": {
+          "format": "uint32",
+          "description": "If the item is an emblem that has a special Objective attached to it - for instance, if the emblem tracks PVP Kills, or what-have-you. This is a bit different from, for example, the Vanguard Kill Tracker mod, which pipes data into the \"art channel\". When I get some time, I would like to standardize these so you can get at the values they expose without having to care about what they're being used for and how they are wired up, but for now here's the raw data.",
+          "type": "integer"
         },
         "equippingBlock": {
           "description": "If this item can be equipped, this block will be non-null and will be populated with the conditions under which it can be equipped.",
@@ -9630,7 +9639,8 @@
           "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
           "type": "boolean"
         }
-      }
+      },
+      "x-mobile-manifest-name": "EquipmentSlots"
     },
     "Destiny.Definitions.DestinyItemTranslationBlockDefinition": {
       "description": "This Block defines the rendering data associated with the item, if any.",
@@ -13102,13 +13112,21 @@
           "type": "integer"
         },
         "infusionCategoryName": {
-          "description": "The string identifier for this item's \"infusability\", if any. \r\nItems that match the same infusionCategoryName are allowed to infuse with each other.",
+          "description": "The string identifier for this item's \"infusability\", if any. \r\nItems that match the same infusionCategoryName are allowed to infuse with each other.\r\nDEPRECATED: Items can now have multiple infusion categories. Please use infusionCategoryHashes instead.",
           "type": "string"
         },
         "infusionCategoryHash": {
           "format": "uint32",
-          "description": "The hash identifier for the infusion. It does not map to a Definition entity.",
+          "description": "The hash identifier for the infusion. It does not map to a Definition entity.\r\nDEPRECATED: Items can now have multiple infusion categories. Please use infusionCategoryHashes instead.",
           "type": "integer"
+        },
+        "infusionCategoryHashes": {
+          "description": "If any one of these hashes matches any value in another item's infusionCategoryHashes, the two can infuse with each other.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
         },
         "progressionLevelRequirementHash": {
           "format": "uint32",
@@ -13445,6 +13463,26 @@
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.Items.DestinyPlugRuleDefinition"
           }
+        },
+        "uiPlugLabel": {
+          "description": "Plugs can have arbitrary, UI-defined identifiers that the UI designers use to determine the style applied to plugs. Unfortunately, we have neither a definitive list of these labels nor advance warning of when new labels might be applied or how that relates to how they get rendered. If you want to, you can refer to known labels to change your own styles: but know that new ones can be created arbitrarily, and we have no way of associating the labels with any specific UI style guidance... you'll have to piece that together on your end. Or do what we do, and just show plugs more generically, without specialized styles.",
+          "type": "string"
+        },
+        "plugStyle": {
+          "$ref": "#/definitions/Destiny.PlugUiStyles"
+        },
+        "isPseudoPlug": {
+          "description": "If TRUE, the plug doesn't actually convey any benefit: it only exists to show information in the UI.",
+          "type": "boolean"
+        },
+        "plugAvailability": {
+          "description": "Indicates the rules about when this plug can be used. See the PlugAvailabilityMode enumeration for more information!",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.PlugAvailabilityMode"
+            }
+          ]
         }
       }
     },
@@ -13457,6 +13495,49 @@
           "type": "string"
         }
       }
+    },
+    "Destiny.PlugUiStyles": {
+      "format": "int32",
+      "description": "If the plug has a specific custom style, this enumeration will represent that style/those styles.",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Masterwork"
+        }
+      ]
+    },
+    "Destiny.PlugAvailabilityMode": {
+      "format": "int32",
+      "description": "This enum determines whether the plug is available to be inserted.\r\n- Normal means that all existing rules for plug insertion apply.\r\n- UnavailableIfSocketContainsMatchingPlugCategory means that the plug is only available if the socket does NOT match the plug category.\r\n- AvailableIfSocketContainsMatchingPlugCategory means that the plug is only available if the socket DOES match the plug category.\r\nFor category matching, use the plug's \"plugCategoryIdentifier\" property, comparing it to",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Normal"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "UnavailableIfSocketContainsMatchingPlugCategory"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "AvailableIfSocketContainsMatchingPlugCategory"
+        }
+      ]
     },
     "Destiny.Definitions.DestinyMaterialRequirementSetDefinition": {
       "description": "Represent a set of material requirements: Items that either need to be owned or need to be consumed in order to perform an action.\r\nA variety of other entities refer to these as gatekeepers and payments for actions that can be performed in game.",
@@ -13567,10 +13648,17 @@
           "type": "string"
         },
         "socketEntries": {
-          "description": "Each socket on an item is defined here. Check inside for more info.",
+          "description": "Each non-intrinsic (or mutable) socket on an item is defined here. Check inside for more info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyItemSocketEntryDefinition"
+          }
+        },
+        "intrinsicSockets": {
+          "description": "Each intrinsic (or immutable/permanent) socket on an item is defined here, along with the plug that is permanently affixed to the socket.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyItemIntrinsicSocketEntryDefinition"
           }
         },
         "socketCategories": {
@@ -13608,6 +13696,14 @@
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyItemSocketEntryPlugItemDefinition"
           }
+        },
+        "preventInitializationOnVendorPurchase": {
+          "description": "If this is true, then the socket will not be initialized with a plug if the item is purchased from a Vendor.\r\nRemember that Vendors are much more than conceptual vendors: they include \"Collection Kiosks\" and other entities. See DestinyVendorDefinition for more information.",
+          "type": "boolean"
+        },
+        "hidePerksInItemTooltip": {
+          "description": "If this is true, the perks provided by this socket shouldn't be shown in the item's tooltip. This might be useful if it's providing a hidden bonus, or if the bonus is less important than other benefits on the item.",
+          "type": "boolean"
         }
       }
     },
@@ -13689,8 +13785,41 @@
           "format": "int32",
           "description": "How long it takes for the Plugging of the item to be completed once it is initiated, if you care.",
           "type": "integer"
+        },
+        "actionType": {
+          "description": "The type of action being performed when you act on this Socket Type. The most common value is \"insert plug\", but there are others as well (for instance, a \"Masterwork\" socket may allow for Re-initialization, and an Infusion socket allows for items to be consumed to upgrade the item)",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.SocketTypeActionType"
+            }
+          ]
         }
       }
+    },
+    "Destiny.SocketTypeActionType": {
+      "format": "int32",
+      "description": "Indicates the type of actions that can be performed",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "InsertPlug"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "InfuseItem"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "ReinitializeSocket"
+        }
+      ]
     },
     "Destiny.Definitions.Sockets.DestinyPlugWhitelistEntryDefinition": {
       "description": "Defines a plug \"Category\" that is allowed to be plugged into a socket of this type.\r\nThis should be compared against a given plug item's DestinyInventoryItemDefinition.plug.plugCategoryHash, which indicates the plug item's category.",
@@ -13704,6 +13833,14 @@
         "categoryIdentifier": {
           "description": "The string identifier for the category, which is here mostly for debug purposes.",
           "type": "string"
+        },
+        "reinitializationPossiblePlugHashes": {
+          "description": "The list of all plug items (DestinyInventoryItemDefinition) that the socket may randomly be populated with when reinitialized.\r\nWhich ones you should actually show are determined by the plug being inserted into the socket, and the socket’s type.\r\nWhen you inspect the plug that could go into a Masterwork Socket, look up the socket type of the socket being inspected and find the DestinySocketTypeDefinition.\r\nThen, look at the Plugs that can fit in that socket. Find the Whitelist in the DestinySocketTypeDefinition that matches the plug item’s categoryhash.\r\nThat whitelist entry will potentially have a new “reinitializationPossiblePlugHashes” property.If it does, that means we know what it will roll if you try to insert this plug into this socket.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -13712,7 +13849,8 @@
       "enum": [
         "0",
         "1",
-        "2"
+        "2",
+        "3"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13727,6 +13865,10 @@
         {
           "numericValue": "2",
           "identifier": "HiddenWhenEmpty"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "HiddenIfNoPlugsAvailable"
         }
       ]
     },
@@ -13758,6 +13900,28 @@
         }
       },
       "x-mobile-manifest-name": "SocketCategories"
+    },
+    "Destiny.Definitions.DestinyItemIntrinsicSocketEntryDefinition": {
+      "description": "Represents a socket that has a plug associated with it intrinsically. This is useful for situations where the weapon needs to have a visual plug/Mod on it, but that plug/Mod should never change.",
+      "type": "object",
+      "properties": {
+        "plugItemHash": {
+          "format": "uint32",
+          "description": "Indicates the plug that is intrinsically inserted into this socket.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "socketTypeHash": {
+          "format": "uint32",
+          "description": "Indicates the type of this intrinsic socket.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinySocketTypeDefinition"
+          }
+        }
+      }
     },
     "Destiny.Definitions.DestinyItemSocketCategoryDefinition": {
       "description": "Sockets are grouped into categories in the UI. These define which category and which sockets are under that category.",
@@ -14435,7 +14599,7 @@
     },
     "Destiny.DestinyItemType": {
       "format": "int32",
-      "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various wepaon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.",
+      "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various wepaon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.\r\n I keep updating these because they're so damn convenient. I guess I shouldn't fight it.",
       "enum": [
         "0",
         "1",
@@ -14453,7 +14617,13 @@
         "16",
         "17",
         "18",
-        "19"
+        "19",
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -14524,6 +14694,30 @@
         {
           "numericValue": "19",
           "identifier": "Mod"
+        },
+        {
+          "numericValue": "20",
+          "identifier": "Dummy"
+        },
+        {
+          "numericValue": "21",
+          "identifier": "Ship"
+        },
+        {
+          "numericValue": "22",
+          "identifier": "Vehicle"
+        },
+        {
+          "numericValue": "23",
+          "identifier": "Emote"
+        },
+        {
+          "numericValue": "24",
+          "identifier": "Ghost"
+        },
+        {
+          "numericValue": "25",
+          "identifier": "Package"
         }
       ]
     },
@@ -14548,7 +14742,17 @@
         "17",
         "18",
         "19",
-        "20"
+        "20",
+        "21",
+        "22",
+        "23",
+        "24",
+        "25",
+        "26",
+        "27",
+        "28",
+        "29",
+        "30"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -14623,6 +14827,46 @@
         {
           "numericValue": "20",
           "identifier": "Shader"
+        },
+        {
+          "numericValue": "21",
+          "identifier": "Ornament"
+        },
+        {
+          "numericValue": "22",
+          "identifier": "FusionRifleLine"
+        },
+        {
+          "numericValue": "23",
+          "identifier": "GrenadeLauncher"
+        },
+        {
+          "numericValue": "24",
+          "identifier": "SubmachineGun"
+        },
+        {
+          "numericValue": "25",
+          "identifier": "TraceRifle"
+        },
+        {
+          "numericValue": "26",
+          "identifier": "HelmetArmor"
+        },
+        {
+          "numericValue": "27",
+          "identifier": "GauntletsArmor"
+        },
+        {
+          "numericValue": "28",
+          "identifier": "ChestArmor"
+        },
+        {
+          "numericValue": "29",
+          "identifier": "LegArmor"
+        },
+        {
+          "numericValue": "30",
+          "identifier": "ClassArmor"
         }
       ]
     },
@@ -14718,6 +14962,16 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyItemCategoryDefinition"
           }
+        },
+        "parentCategoryHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "groupCategoryOnly": {
+          "type": "boolean"
         },
         "hash": {
           "format": "uint32",
@@ -16564,7 +16818,8 @@
         "2601",
         "2700",
         "2701",
-        "2702"
+        "2702",
+        "2703"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19045,6 +19300,10 @@
         {
           "numericValue": "2702",
           "identifier": "ReportSubmissionFailed"
+        },
+        {
+          "numericValue": "2703",
+          "identifier": "ReportCannotReportSelf"
         }
       ]
     },
@@ -19747,7 +20006,7 @@
           "type": "boolean"
         },
         "state": {
-          "description": "A flags enumeration indicating the states of the item: whether it's tracked or locked for example.",
+          "description": "A flags enumeration indicating the transient/custom states of the item that affect how it is rendered: whether it's tracked or locked for example, or whether it has a masterwork plug inserted.",
           "type": "object",
           "allOf": [
             {
@@ -19820,10 +20079,12 @@
     },
     "Destiny.ItemState": {
       "format": "int32",
+      "description": "A flags enumeration where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.",
       "enum": [
         "0",
         "1",
-        "2"
+        "2",
+        "4"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19833,11 +20094,18 @@
         },
         {
           "numericValue": "1",
-          "identifier": "Locked"
+          "identifier": "Locked",
+          "description": "If this bit is set, the item has been \"locked\" by the user and cannot be deleted. You may want to represent this visually with a \"lock\" icon."
         },
         {
           "numericValue": "2",
-          "identifier": "Tracked"
+          "identifier": "Tracked",
+          "description": "If this bit is set, the item is a quest that's being tracked by the user. You may want a visual indicator to show that this is a tracked quest."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Masterwork",
+          "description": "If this bit is set, the item has a Masterwork plug inserted. This usually coincides with having a special \"glowing\" effect applied to the item's icon."
         }
       ]
     },
@@ -19964,6 +20232,54 @@
             "format": "int32",
             "type": "integer"
           }
+        },
+        "flavorObjective": {
+          "description": "I may regret naming it this way - but this represents when an item has an objective that doesn't serve a beneficial purpose, but rather is used for \"flavor\" or additional information. For instance, when Emblems track specific stats, those stats are represented as Objectives on the item.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+            }
+          ]
+        }
+      }
+    },
+    "Destiny.Quests.DestinyObjectiveProgress": {
+      "description": "Returns data about a character's status with a given Objective. Combine with DestinyObjectiveDefinition static data for display purposes.",
+      "type": "object",
+      "properties": {
+        "objectiveHash": {
+          "format": "uint32",
+          "description": "The unique identifier of the Objective being referred to. Use to look up the DestinyObjectiveDefinition in static data.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
+          }
+        },
+        "destinationHash": {
+          "format": "uint32",
+          "description": "If the Objective has a Destination associated with it, this is the unique identifier of the Destination being referred to. Use to look up the DestinyDestinationDefinition in static data. This will give localized data about *where* in the universe the objective should be achieved.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
+          }
+        },
+        "activityHash": {
+          "format": "uint32",
+          "description": "If the Objective has an Activity associated with it, this is the unique identifier of the Activity being referred to. Use to look up the DestinyActivityDefinition in static data. This will give localized data about *what* you should be playing for the objective to be achieved.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
+          }
+        },
+        "progress": {
+          "format": "int32",
+          "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
+          "type": "integer"
+        },
+        "complete": {
+          "description": "Whether or not the Objective is completed.",
+          "type": "boolean"
         }
       }
     },
@@ -20617,45 +20933,6 @@
           "format": "uint32",
           "description": "If the quest has a related Vendor that you should talk to in order to initiate the quest/earn rewards/continue the quest, this will be the hash identifier of that Vendor. Look it up its DestinyVendorDefinition.",
           "type": "integer"
-        }
-      }
-    },
-    "Destiny.Quests.DestinyObjectiveProgress": {
-      "description": "Returns data about a character's status with a given Objective. Combine with DestinyObjectiveDefinition static data for display purposes.",
-      "type": "object",
-      "properties": {
-        "objectiveHash": {
-          "format": "uint32",
-          "description": "The unique identifier of the Objective being referred to. Use to look up the DestinyObjectiveDefinition in static data.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveDefinition"
-          }
-        },
-        "destinationHash": {
-          "format": "uint32",
-          "description": "If the Objective has a Destination associated with it, this is the unique identifier of the Destination being referred to. Use to look up the DestinyDestinationDefinition in static data. This will give localized data about *where* in the universe the objective should be achieved.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
-          }
-        },
-        "activityHash": {
-          "format": "uint32",
-          "description": "If the Objective has an Activity associated with it, this is the unique identifier of the Activity being referred to. Use to look up the DestinyActivityDefinition in static data. This will give localized data about *what* you should be playing for the objective to be achieved.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
-          }
-        },
-        "progress": {
-          "format": "int32",
-          "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
-          "type": "integer"
-        },
-        "complete": {
-          "description": "Whether or not the Objective is completed.",
-          "type": "boolean"
         }
       }
     },
@@ -22408,6 +22685,15 @@
           "items": {
             "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
           }
+        },
+        "flavorObjective": {
+          "description": "I may regret naming it this way - but this represents when an item has an objective that doesn't serve a beneficial purpose, but rather is used for \"flavor\" or additional information. For instance, when Emblems track specific stats, those stats are represented as Objectives on the item.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+            }
+          ]
         }
       },
       "x-destiny-component-type-dependency": "ItemObjectives"
@@ -22595,6 +22881,57 @@
           },
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "plugObjectives": {
+          "description": "Sometimes, Plugs may have objectives: generally, these are used for flavor and display purposes. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+          }
+        },
+        "reusablePlugs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Sockets.DestinyItemPlug"
+          }
+        }
+      }
+    },
+    "Destiny.Sockets.DestinyItemPlug": {
+      "type": "object",
+      "properties": {
+        "plugItemHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "plugObjectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+          }
+        },
+        "canInsert": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "insertFailIndexes": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "enableFailIndexes": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
           }
         }
       }
@@ -22830,8 +23167,26 @@
       "description": "Plugs are non-instanced items that can provide Stat and Perk benefits when socketed into an instanced item. Items have Sockets, and Plugs are inserted into Sockets.\r\nThis component finds all items that are considered \"Plugs\" in your inventory, and return information about the plug aside from any specific Socket into which it could be inserted.",
       "type": "object",
       "properties": {
+        "plugItemHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "plugObjectives": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+          }
+        },
+        "canInsert": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
         "insertFailIndexes": {
-          "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -22839,7 +23194,6 @@
           }
         },
         "enableFailIndexes": {
-          "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -24088,6 +24442,18 @@
           "description": "Class of the character if applicable and available.",
           "type": "string"
         },
+        "classHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "raceHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "genderHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
         "characterLevel": {
           "format": "int32",
           "description": "Level of the character if available. Zero if it is not available.",
@@ -24378,6 +24744,7 @@
     },
     "Destiny.HistoricalStats.Definitions.DestinyStatsGroupType": {
       "format": "int32",
+      "description": "If the enum value is > 100, it is a \"special\" group that cannot be queried for directly (special cases apply to when they are returned, and are not relevant in general cases)",
       "enum": [
         "0",
         "1",
@@ -24409,19 +24776,23 @@
         },
         {
           "numericValue": "100",
-          "identifier": "ReservedGroups"
+          "identifier": "ReservedGroups",
+          "description": "This is purely to serve as the dividing line between filterable and un-filterable groups. Below this number is a group you can pass as a filter. Above it are groups used in very specific circumstances and not relevant for filtering."
         },
         {
           "numericValue": "101",
-          "identifier": "Leaderboard"
+          "identifier": "Leaderboard",
+          "description": "Only applicable while generating leaderboards."
         },
         {
           "numericValue": "102",
-          "identifier": "Activity"
+          "identifier": "Activity",
+          "description": "These will *only* be consumed by GetAggregateStatsByActivity"
         },
         {
           "numericValue": "103",
-          "identifier": "UniqueWeapon"
+          "identifier": "UniqueWeapon",
+          "description": "These are only consumed and returned by GetUniqueWeaponHistory"
         },
         {
           "numericValue": "104",
