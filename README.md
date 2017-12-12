@@ -6,16 +6,19 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2017-12-05 - The Destiny API is being updated to v2.1.0 as we speak.  Screenshots will be updated shortly thereafter, check back around noon and they will be there.
+12-12-2017 - The API will be updated to v2.1.1 shortly, with documentation following later today.  
 
-Main API Highlights:
-
-- New "PullFromPostmaster" endpoint, and accompanying changes to contracts
-- Historical Stats APIs no longer in pre-release
-- New "ReportOffensivePostGameCarnageReportPlayer" endpoint, allowing players to report players that violated terms of service in games in which they participated.
-- New Milestones for DLC1 and Season 2.
-- Vendor endpoint is still not quite ready for use, but the contracts are changing to better reflect the desired output of the API once it is ready for use.  Comments and suggestions are welcome!
-- Screenshots will now be at 1920 x 1080 resolution.
+Changes of significance:
+- #317 Fixed the issue where certain types of daily milestones were not being returned in all situations
+- #324 Infusion Category changes mentioned in the bug have been implemented.
+- #154 Equipment Slot definitions are now finally making it out to the manifest database.
+- Fixed a bug where challenges weren't being returned for Mercury's landing zone.
+- Various items that should not have been redacted are now not redacted.
+- Added support for returning Objective/Progress information for Reusable Plugs.  When you see plugs that you can insert into sockets, but require you to complete an Objective to do so, that objective information is now being returned.  See the changes to DestinyItemSocketsComponent, as this has been modified to store additional data about reusable plugs.
+- DestinyItemObjectivesComponent now has an optional "flavorObjective" property.  When items such as Emblems have stats that they show about the user, those are represented by flavorObjectives.
+- Various data is added for Masterworks sockets:
+  - The ItemState enum has a new value, "Masterwork", that indicates whether the item has a Masterwork plug inserted (since this ItemState property is on the basic DestinyItemComponent, this makes knowing whether the item is a Masterwork easier than having to iterate through the plugs inserted into the item)
+  - Extra state information was added to DestinyItemPlugDefinition and DestinySocketTypeDefinition (and its children) that should be useful (see definition for new properties and their documentation).  Notably, Socket Type actions now convey the rules under which a plug can be inserted into a socket of that type. (These rules keep piling on each other!  Sockets are getting pretty complicated)  Socket Type whitelists also have reinitializationPossiblePlugHashes, which is the list of possible masterwork plugs that could be inserted when you "reinitialize" a masterwork socket.
 
 # The State of the API
 
@@ -135,6 +138,16 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 
 # Release History
 
+2017-12-05 - The Destiny API is being updated to v2.1.0 as we speak.  Screenshots will be updated shortly thereafter, check back around noon and they will be there.
+
+Main API Highlights:
+
+- New "PullFromPostmaster" endpoint, and accompanying changes to contracts
+- Historical Stats APIs no longer in pre-release
+- New "ReportOffensivePostGameCarnageReportPlayer" endpoint, allowing players to report players that violated terms of service in games in which they participated.
+- New Milestones for DLC1 and Season 2.
+- Vendor endpoint is still not quite ready for use, but the contracts are changing to better reflect the desired output of the API once it is ready for use.  Comments and suggestions are welcome!
+- Screenshots will now be at 1920 x 1080 resolution.
 
 2017-12-04 - Upcoming deployments will be released in waves with several improvements.  Specific dates for these releases are subject to change, but keep posted here for the improvements to be made live.  Aside from a large number of bug fixes, I wanted to point out some specific changes that will be coming along.  I'm working on ironing out a better schedule and a location where we can drop "pre-release" API documentation: but for now, this summary will at least give you a brief idea of what is coming that you'll be able to support.  These features are not all going to come in with the first wave, but as we deploy these features I will attempt to keep you informed.
 
