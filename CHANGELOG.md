@@ -7,7 +7,7 @@ DestinyItemObjectivesComponent now has an optional "flavorObjective" property. W
 Various data is added for Masterworks sockets:
 - #154 Equipment Slot definitions are now finally making it out to the manifest database.
 - The ItemState enum has a new value, "Masterwork", that indicates whether the item has a Masterwork plug inserted (since this ItemState property is on the basic DestinyItemComponent, this makes knowing whether the item is a Masterwork easier than having to iterate through the plugs inserted into the item)
-Extra state information was added to DestinyItemPlugDefinition and DestinySocketTypeDefinition (and its children) that should be useful (see definition for new properties and their documentation). Notably, Socket Type actions now convey the rules under which a plug can be inserted into a socket of that type. (These rules keep piling on each other! Sockets are getting pretty complicated) Socket Type whitelists also have reinitializationPossiblePlugHashes, which is the list of possible masterwork plugs that could be inserted when you "reinitialize" a masterwork socket.
+- Extra state information was added to DestinyItemPlugDefinition and DestinySocketTypeDefinition (and its children) that should be useful (see definition for new properties and their documentation). Notably, Socket Type actions now convey the rules under which a plug can be inserted into a socket of that type. (These rules keep piling on each other! Sockets are getting pretty complicated) Socket Type whitelists also have reinitializationPossiblePlugHashes, which is the list of possible masterwork plugs that could be inserted when you "reinitialize" a masterwork socket.
   - The template for player reporting URLs to redirect to us for player reports is:
     - https://www.bungie.net/en/PGCR/Report/[PGCR ID]/?characterId=[Offending Character ID]
     - It's kind of ugly right now, something I need to fix up when I get the time.
@@ -28,6 +28,11 @@ Extra state information was added to DestinyItemPlugDefinition and DestinySocket
 - Historical Stats APIs no longer in pre-release
 - Vendor endpoint is still not quite ready for use, but the contracts are changing to better reflect the desired output of the API once it is ready for use. Comments and suggestions are welcome!
 - Screenshots will now be at 1920 x 1080 resolution.
+
+## [2.0.1 - 2.1.0] - 2017-09-05 through 2017-12-05
+
+### Added
+- Many changes were made over these months that I did not document well previously.  I doubt anyone will care at this point, so I'm not going to bother fishing them all out now.  But if anyone really cares enough that they want this historical information, file a Github issue and I'll get to it when we get to other documentation and spec improvements!  Better documentation for what was specifically going out with releases started with 2.1.0, see above for that history.
 
 ## [2.0.0] - 2017-09-03
 
