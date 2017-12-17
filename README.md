@@ -6,22 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-12-12-2017 - The API will be updated to v2.1.1 shortly, with documentation following later today.  
-
-Changes of significance:
-- #317 Fixed the issue where certain types of daily milestones were not being returned in all situations
-- #324 Infusion Category changes mentioned in the bug have been implemented.
-- #154 Equipment Slot definitions are now finally making it out to the manifest database.
-- Fixed a bug where challenges weren't being returned for Mercury's landing zone.
-- Various items that should not have been redacted are now not redacted.
-- Added support for returning Objective/Progress information for Reusable Plugs.  When you see plugs that you can insert into sockets, but require you to complete an Objective to do so, that objective information is now being returned.  See the changes to DestinyItemSocketsComponent, as this has been modified to store additional data about reusable plugs.
-- DestinyItemObjectivesComponent now has an optional "flavorObjective" property.  When items such as Emblems have stats that they show about the user, those are represented by flavorObjectives.
-- Various data is added for Masterworks sockets:
-  - The ItemState enum has a new value, "Masterwork", that indicates whether the item has a Masterwork plug inserted (since this ItemState property is on the basic DestinyItemComponent, this makes knowing whether the item is a Masterwork easier than having to iterate through the plugs inserted into the item)
-  - Extra state information was added to DestinyItemPlugDefinition and DestinySocketTypeDefinition (and its children) that should be useful (see definition for new properties and their documentation).  Notably, Socket Type actions now convey the rules under which a plug can be inserted into a socket of that type. (These rules keep piling on each other!  Sockets are getting pretty complicated)  Socket Type whitelists also have reinitializationPossiblePlugHashes, which is the list of possible masterwork plugs that could be inserted when you "reinitialize" a masterwork socket.
-- The template for player reporting URLs to redirect to us for player reports is:
-  - https://www.bungie.net/en/PGCR/Report/[PGCR ID]/?characterId=[Offending Character ID]
-  - It's kind of ugly right now, something I need to fix up when I get the time.
+12-12-2017 - The API has been updated again!  See the new CHANGELOG.md (thanks for the suggestion hskrasek!) where I'll put the details of subsequent releases from now on instead of cramming them all in the readme.
 
 # The State of the API
 
@@ -133,51 +118,6 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 
 - There is currently no way to know what reward item you will get for completing a Milestone's quest.  The DestinyMilestoneDefinition defines these rewards, but late in development we realized merely returning this information is insufficient: only a subset of these are possible to be obtained at any given time.  A future release will have the live Milestone data return the "active" rewards so that you can show the correct reward being offered at any given time.
 
-- The pgcrImage property on DestinyActivityDefinition is missing the /img/destiny_content/pgcr/ prefix to its path, causing the image to not be found.  This will be fixed in the next hotfix.
-
-- There are reports of missing PGCR data: particularly the "extended" and "teams" properties.  We have filed a bug and will investigate as time allows.
-
 - If our environment goes down entirely, to the point where we can no longer process your request, we are currently returning the same static error HTML page(s) to any API request that the website is returning.  If you get an HTML response to an API request, know that this is the undesirable side effect of our environment being down and handle it with your own messaging and error handling as needed.
 
-# Release History
-
-2017-12-05 - The Destiny API is being updated to v2.1.0 as we speak.  Screenshots will be updated shortly thereafter, check back around noon and they will be there.
-
-Main API Highlights:
-
-- New "PullFromPostmaster" endpoint, and accompanying changes to contracts
-- Historical Stats APIs no longer in pre-release
-- New "ReportOffensivePostGameCarnageReportPlayer" endpoint, allowing players to report players that violated terms of service in games in which they participated.
-- New Milestones for DLC1 and Season 2.
-- Vendor endpoint is still not quite ready for use, but the contracts are changing to better reflect the desired output of the API once it is ready for use.  Comments and suggestions are welcome!
-- Screenshots will now be at 1920 x 1080 resolution.
-
-2017-12-04 - Upcoming deployments will be released in waves with several improvements.  Specific dates for these releases are subject to change, but keep posted here for the improvements to be made live.  Aside from a large number of bug fixes, I wanted to point out some specific changes that will be coming along.  I'm working on ironing out a better schedule and a location where we can drop "pre-release" API documentation: but for now, this summary will at least give you a brief idea of what is coming that you'll be able to support.  These features are not all going to come in with the first wave, but as we deploy these features I will attempt to keep you informed.
-
-- We are looking into increasing item screenshot resolutions to 1920 x 1080.  Fortunately, we realized that we were not efficiently compressing the images in the previous version of the screenshots: we were actually able to increase the resolution without noticeably impacting file size and with a dramatic improvement in image quality.
-
-- A new Destiny 2 Endpoint, PullFromPostmaster, will be exposed.  It uses a very similar POST contract to the existing TransferItem endpoint, just without the "transferToVault" property.  (You can only pull items from the Postmaster, you cannot push items to him of course!)  Only a subset of items will be allowed to be transferred, because many items "turn into" something else or perform various complex and potentially irreversible actions when they are acquired from the Postmaster: we will not allow you to transfer items that perform such tasks.  There will be a new property on DestinyInventoryItemDefinition - doesPostmasterPullHaveSideEffects - that you can use to know in advance whether an item will be allowed to be pulled from the Postmaster.  If this is TRUE, then the item has side effects and will NOT be allowed to be pulled from the Postmaster.
-
-- "Flavor Objectives" will be exposed on DestinyItemObjectivesComponent and DestinyKiosksComponent, allowing you to grab information previously inaccessible such as the "flavor stat" data on Emblems.  This missed the earlier boat for shipping, but will hopefully follow up soon after.
-
-- Endpoints will be exposed and ready for use for PGCR player reporting.  Users can only report players in games that the logged-in user participated in.  There will be a webpage in a later release that you can point users to if you don't support authentication but want users to be able to report other users in PGCRs, but that will be exposed after the initial endpoint is exposed.
-
-- You will notice in upcoming releases that the Vendor contracts will be changing.  Because the Vendor endpoint is still inactive, I am taking this opportunity to modify and improve the contracts before we turn it on.  Work has been coming slowly on Vendors as other work has continued to take priority.  However I am looking forward to finally turning Vendors on at a future date.  These contract changes will likely continue to occur until the Vendor API is turned on for "beta" use.  In the meantime, feel free to add any comments or suggestions to the contracts as they exist and changes as they occur.
-
-I'll make another post once the first batch of these changes goes live, and we'll keep you posted as further features are released!
-
-2017-10-19 - A deployment has just been released that should fix a variety of bugs.  The spec and docs have been regenerated and are now ready for consumption.  Unfortunately, pretty much all of the still-pending spec bugs have not been able to be addressed yet.  Hopefully we will find some time to address those in upcoming deployments.
-
-2017-10-11 - Yesterday we un-redacted several entities and introduced the Iron Banner milestones, which had some problems that should be resolved as of a deployment that will take place later this morning.  In other news, the delays caused by my absence will push out the Vendor API from being in a beta ready state - I'm hoping to have this ready for use sometime in November as a result.  I apologize for the delays, and will try to keep you all posted here.
-
-2017-10-04 - I apologize for the lack of contact lately.  I had an unexpected family emergency, and was not in a situation where I could communicate here.  I'm back now, and attempting to get caught up on what I have missed over the last 2 weeks - unfortunately, some efforts that I have been working on have been delayed as a result.  I also haven't had a chance to look at issues that have been created over the last couple of weeks - I will attempt to find some time to evaluate and respond to those as needed, but please bear with me as I attempt to balance working on the existing delayed features with responding to requests.  Thanks for your understanding, I look forward to continuing to improve the API and working with you all.
-
-2017-09-15 - Content-only release to un-redact various Trials of the Nine related content.  No meaningful changes to API at this time. (though the un-redaction of Trials' DestinyActivityModeDefinition will mean that queries requesting this mode should no longer fail)
-
-2017-09-13 - Documentation updated to co-incide with the 9/13 release of Bungie.Net.
-- Fixes for a variety of issues with Historical Stats APIs
-- All relevant Activity Modes are now returned with historical stats results for an Activity, so that you can better know (for a D1-compatible example) when an activity was Control and Trials of Osiris.  The old result that returned just the most specific activity mode still exists for backwards compatibility.
-- Added the requested 
-- Fixed a variety of bugs, both in the API and documentation
-- Exposing the Groups API for public consumption
-- Added the GetDestinyEntityDefinition endpoint by popular request.  I strongly urge you not to use it outside of very trivial or educational purposes, as all of our definitions are very tightly interrelated: and to get at meaningful data for an entity, you will often have to have the definitions of several different entities.  But for the most simple/educational/investigatory use cases, this should serve your needs.
+- Vendors are still not terribly useful.  They exist in an extremely early pre-release form.  The items returned should be accurate for a given character, but their stats and any other attributes will almost certainly be incorrect.  The contract itself is still also subject to change.
