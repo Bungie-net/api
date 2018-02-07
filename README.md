@@ -6,7 +6,24 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-12-12-2017 - The API has been updated again!  See the new CHANGELOG.md (thanks for the suggestion hskrasek!) where I'll put the details of subsequent releases from now on instead of cramming them all in the readme.
+02-07-2018 - Stay posted, the site will be updated within the next hour with the following update.  The documentation will be updated later this afternoon to coincide!
+
+Bungie.NET API, v2.1.2: 2018-02-07
+
+* Vendor API responses should now have correct item component data.  We're still adding more tests and implementing features against this data ourselves, so I'm not going to pull it out of beta until I feel a high level of confidence in it.  But we're nearing the final threshold for having a fully functional vendor endpoint again.
+* The "Trending" endpoint has been altered to make the front page of the site and app more news-oriented.
+* New milestones added for the upcoming Crimson Days event
+* Crimson re-added as a historical stats Activity Mode
+* Still in-progress work for "Explore 2.0", which will be a new aggregation endpoint that provides a more personalized experience for the homepage and Companion.  Completion date TBD, still in early prototyping phase.  You'll see some new endpoints and contracts related to "Explore": pay no attention to the man behind the curtain!
+* Ongoing work on Advanced Write Actions.  We will make an announcement later about how these can be used in conjunction with the API.  Rest assured that you will have to explicitly ask for permissions to use these new actions, that it will require 2 factor auth through Bungie's companion app itself, and that it will come with logging that users can inspect about actions taken through your app to safeguard your app from false accusations of undesired actions.
+* #349, #88 - Challenges should be greatly improved, with proper challenges on Milestones that need them and not on ones that are unrelated.
+* #348 - Mayhem mode should be working again in historical stats.
+* #329, #322, #319, #206, #168 - A vast number of new Item Categories and ItemTypes/ItemSubTypes have been added.  Check the documentation for further details.
+* #288 - Grenade kills should come through correctly once more.
+* #181 - "Globally" applied stat bonuses from mods on equipped items now no longer get applied to any item other than the item on which it is equipped (if relevant to that item).
+* #78 - Classified items now have a default blank icon applied to them.
+* #166, #69 - Fixes to character stats that should not have been appearing, and forcing other stats to appear even if they are 0.
+
 
 # The State of the API
 
