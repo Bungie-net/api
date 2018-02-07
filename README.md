@@ -8,6 +8,8 @@ This section will be added to as time goes by - we're working with it as we go!
 
 02-07-2018 - Stay posted, the site will be updated within the next hour with the following update.  The documentation will be updated later this afternoon to coincide!
 
+UPDATE: We are experiencing temporary technical difficulties.  Please stand by. https://www.youtube.com/watch?v=BMkC_lKxrVo
+
 Bungie.NET API, v2.1.2: 2018-02-07
 
 * Vendor API responses should now have correct item component data.  We're still adding more tests and implementing features against this data ourselves, so I'm not going to pull it out of beta until I feel a high level of confidence in it.  But we're nearing the final threshold for having a fully functional vendor endpoint again.
