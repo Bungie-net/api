@@ -1,5 +1,22 @@
 # Changelog
 
+## [2.1.2] - 2018-02-07
+### Added
+* New milestones added for the upcoming Crimson Days event
+* Crimson re-added as a historical stats Activity Mode
+* Still in-progress work for "Explore 2.0", which will be a new aggregation endpoint that provides a more personalized experience for the homepage and Companion.  Completion date TBD, still in early prototyping phase.  You'll see some new endpoints and contracts related to "Explore": pay no attention to the man behind the curtain!
+* Ongoing work on Advanced Write Actions.  We will make an announcement later about how these can be used in conjunction with the API.  Rest assured that you will have to explicitly ask for permissions to use these new actions, that it will require 2 factor auth through Bungie's companion app itself, and that it will come with logging that users can inspect about actions taken through your app to safeguard your app from false accusations of undesired actions.
+* #329, #322, #319, #206, #168 - A vast number of new Item Categories and ItemTypes/ItemSubTypes have been added.  Check the documentation for further details.
+### Changed
+* Vendor API responses should now have correct item component data.  We're still adding more tests and implementing features against this data ourselves, so I'm not going to pull it out of beta until I feel a high level of confidence in it.  But we're nearing the final threshold for having a fully functional vendor endpoint again.
+* The "Trending" endpoint has been altered to make the front page of the site and app more news-oriented.
+* #349, #88 - Challenges should be greatly improved, with proper challenges on Milestones that need them and not on ones that are unrelated.
+* #348 - Mayhem mode should be working again in historical stats.
+* #288 - Grenade kills should come through correctly once more.
+* #181 - "Globally" applied stat bonuses from mods on equipped items now no longer get applied to any item other than the item on which it is equipped (if relevant to that item).
+* #78 - Classified items now have a default blank icon applied to them.
+* #166, #69 - Fixes to character stats that should not have been appearing, and forcing other stats to appear even if they are 0.
+
 ## [2.1.1] - 2017-12-15
 ### Added
 - Added support for returning Objective/Progress information for Reusable Plugs. When you see plugs that you can insert into sockets, but require you to complete an Objective to do so, that objective information is now being returned. See the changes to DestinyItemSocketsComponent, as this has been modified to store additional data about reusable plugs.
