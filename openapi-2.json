@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.1"
+    "version": "2.1.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -38,6 +38,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -46,60 +47,6 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/User.GeneralUser"
-                },
-                "ErrorCode": {
-                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
-                },
-                "ThrottleSeconds": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/User/GetUserAliases/{id}/": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Loads aliases of a bungienet membership id.",
-        "operationId": "User.GetUserAliases",
-        "parameters": [
-          {
-            "name": "id",
-            "in": "path",
-            "description": "The requested Bungie.net membership id.",
-            "required": true,
-            "type": "integer",
-            "format": "int64"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Look at the Response property for more information about the nature of this response",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/User.Models.UserAlias"
-                  }
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -141,6 +88,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -186,6 +134,7 @@
         "description": "Returns a list of all available user themes.",
         "operationId": "User.GetAvailableThemes",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -257,6 +206,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -299,6 +249,7 @@
         "description": "Returns a list of accounts associated with signed in user. This is useful for OAuth implementations that do not give you access to the token response.",
         "operationId": "User.GetMembershipDataForCurrentUser",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -357,6 +308,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -491,6 +443,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -600,6 +553,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -671,7 +625,7 @@
             "description": "",
             "required": true,
             "type": "integer",
-            "format": "uint64"
+            "format": "int64"
           },
           {
             "name": "replySize",
@@ -707,6 +661,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -755,7 +710,7 @@
             "description": "",
             "required": true,
             "type": "integer",
-            "format": "uint64"
+            "format": "int64"
           },
           {
             "name": "page",
@@ -807,6 +762,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -855,7 +811,7 @@
             "description": "",
             "required": true,
             "type": "integer",
-            "format": "uint64"
+            "format": "int64"
           },
           {
             "name": "showbanned",
@@ -864,6 +820,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -912,7 +869,7 @@
             "description": "",
             "required": true,
             "type": "integer",
-            "format": "uint64"
+            "format": "int64"
           },
           {
             "name": "showbanned",
@@ -921,6 +878,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -972,6 +930,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1022,6 +981,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1076,6 +1036,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1127,6 +1088,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1186,6 +1148,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1253,6 +1216,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1312,6 +1276,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1362,6 +1327,7 @@
         "description": "Allows the caller to get a list of to 25 recruitment thread summary information objects.",
         "operationId": "Forum.GetRecruitmentThreadSummaries",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1407,6 +1373,7 @@
         "description": "Returns a list of all available group avatars for the signed-in user.",
         "operationId": "GroupV2.GetAvailableAvatars",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1452,6 +1419,7 @@
         "description": "Returns a list of all available group themes.",
         "operationId": "GroupV2.GetAvailableThemes",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1515,6 +1483,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1589,6 +1558,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1667,6 +1637,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1719,6 +1690,7 @@
         "description": "Search for Groups.",
         "operationId": "GroupV2.GroupSearch",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1770,6 +1742,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1832,6 +1805,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1883,6 +1857,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -1928,6 +1903,7 @@
         "description": "Create a new group.",
         "operationId": "GroupV2.CreateGroup",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -1986,6 +1962,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2045,6 +2022,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2104,6 +2082,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2163,6 +2142,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2230,6 +2210,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2318,6 +2299,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -2377,6 +2359,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -2469,6 +2452,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2553,6 +2537,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2636,6 +2621,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2720,6 +2706,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2787,6 +2774,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -2870,6 +2858,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -2938,6 +2927,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3004,6 +2994,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3070,6 +3061,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3145,6 +3137,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3203,6 +3196,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3264,6 +3258,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3325,6 +3320,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3411,6 +3407,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3469,6 +3466,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3572,6 +3570,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -3665,6 +3664,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -3741,6 +3741,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3824,6 +3825,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -3873,6 +3875,7 @@
         "description": "Returns the current version of the manifest as a json object.",
         "operationId": "Destiny2.GetDestinyManifest",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "DestinyManifest is the external-facing contract for just the properties needed by those calling the Destiny Platform.",
@@ -3931,6 +3934,7 @@
             "format": "uint32"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Provides common properties for destiny definitions.",
@@ -3998,6 +4002,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -4078,6 +4083,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "The response for GetDestinyProfile, with components for character and item-level data.",
@@ -4163,6 +4169,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "The response contract for GetDestinyCharacter, with components that can be returned for character and item-level data.",
@@ -4214,6 +4221,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Represents a runtime instance of a user's milestone status. Live Milestone data should be combined with DestinyMilestoneDefinition data to show the user a picture of what is available for them to do in the game, and their status in regards to said \"things to do.\" Consider it a big, wonky to-do list, or Advisors 3.0 for those who remember the Destiny 1 API.",
@@ -4299,6 +4307,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "The response object for retrieving an individual instanced item. None of these components are relevant for an item that doesn't have an \"itemInstanceId\": for those, get your information from the DestinyInventoryDefinition.",
@@ -4385,6 +4394,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "A response containing all of the components for all requested vendors.",
@@ -4480,6 +4490,7 @@
             "format": "uint32"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "A response containing all of the components for a vendor.",
@@ -4523,6 +4534,7 @@
         "description": "Transfer an item to/from your vault. You must have a valid Destiny account. You must also pass BOTH a reference AND an instance ID if it's an instanced item. itshappening.gif",
         "operationId": "Destiny2.TransferItem",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4573,6 +4585,7 @@
         "description": "Extract an item from the Postmaster, with whatever implications that may entail. You must have a valid Destiny account. You must also pass BOTH a reference AND an instance ID if it's an instanced item.",
         "operationId": "Destiny2.PullFromPostmaster",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4623,6 +4636,7 @@
         "description": "Equip an item. You must have a valid Destiny Account, and either be in a social space, in orbit, or offline.",
         "operationId": "Destiny2.EquipItem",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4673,6 +4687,7 @@
         "description": "Equip a list of items by itemInstanceIds. You must have a valid Destiny Account, and either be in a social space, in orbit, or offline. Any items not found on your character will be ignored.",
         "operationId": "Destiny2.EquipItems",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4722,6 +4737,7 @@
         "description": "Set the Lock State for an instanced item. You must have a valid Destiny Account.",
         "operationId": "Destiny2.SetItemLockState",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4770,13 +4786,14 @@
           "Destiny2",
           "Preview"
         ],
-        "description": "Insert a plug into a socketed item. I know how it sounds, but I assure you it's much more G-rated than you might be guessing. We haven't decided yet whether this will be able to insert plugs that have side effects, but if we do it will require special scope permission for an application attempting to do so. You must have a valid Destiny Account, and either be in a social space, in orbit, or offline. PREVIEW: This service is not yet active, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
+        "description": "Insert a plug into a socketed item. I know how it sounds, but I assure you it's much more G-rated than you might be guessing. We haven't decided yet whether this will be able to insert plugs that have side effects, but if we do it will require special scope permission for an application attempting to do so. You must have a valid Destiny Account, and either be in a social space, in orbit, or offline. Request must include proof of permission for 'InsertPlugs' from the account owner.",
         "operationId": "Destiny2.InsertSocketPlug",
         "parameters": [],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
-              "MoveEquipDestinyItems"
+              "AdvancedWriteActions"
             ]
           }
         ],
@@ -4787,60 +4804,7 @@
               "type": "object",
               "properties": {
                 "Response": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "ErrorCode": {
-                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
-                },
-                "ThrottleSeconds": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        },
-        "x-preview": true
-      }
-    },
-    "/Destiny2/Actions/Items/ActivateTalentNode/": {
-      "post": {
-        "tags": [
-          "Destiny2",
-          "Preview"
-        ],
-        "description": "Activate a Talent Node. Chill out, everyone: we haven't decided yet whether this will be able to activate nodes with costs, but if we do it will require special scope permission for an application attempting to do so. You must have a valid Destiny Account, and either be in a social space, in orbit, or offline. PREVIEW: This service is not actually implemented yet, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
-        "operationId": "Destiny2.ActivateTalentNode",
-        "parameters": [],
-        "security": [
-          {
-            "oauth2": [
-              "MoveEquipDestinyItems"
-            ]
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Look at the Response property for more information about the nature of this response",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "format": "int32",
-                  "type": "integer"
+                  "$ref": "#/definitions/Destiny.Responses.DestinySocketResponseCodes"
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -4885,6 +4849,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -4936,6 +4901,7 @@
             "format": "int64"
           }
         ],
+        "deprecated": false,
         "security": [
           {
             "oauth2": [
@@ -4986,6 +4952,7 @@
         "description": "Gets historical stats definitions.",
         "operationId": "Destiny2.GetHistoricalStatsDefinition",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5060,6 +5027,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5125,6 +5093,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5217,6 +5186,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5320,6 +5290,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5391,6 +5362,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "The results of a search for Destiny content. This will be improved on over time, I've been doing some experimenting to see what might be useful.",
@@ -5512,6 +5484,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5592,6 +5565,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5729,6 +5703,7 @@
             "format": "int32"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5805,6 +5780,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5881,6 +5857,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5932,6 +5909,7 @@
             "format": "uint32"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Represents localized, extended content related to Milestones. This is intentionally returned by a separate endpoint and not with Character-level Milestone data because we do not put localized data into standard Destiny responses, both for brevity of response and for caching purposes. If you really need this data, hit the Milestone Content endpoint.",
@@ -5974,6 +5952,7 @@
         "description": "Gets public information about currently available Milestones.",
         "operationId": "Destiny2.GetPublicMilestones",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -5985,6 +5964,158 @@
                   "additionalProperties": {
                     "$ref": "#/definitions/Destiny.Milestones.DestinyPublicMilestone"
                   }
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Awa/Initialize/": {
+      "post": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Initialize a request to perform an advanced write action.",
+        "operationId": "Destiny2.AwaInitializeRequest",
+        "parameters": [],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "AdvancedWriteActions"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Destiny.Advanced.AwaInitializeResponse"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Awa/AwaProvideAuthorizationResult/": {
+      "post": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Provide the result of the user interaction. Called by the Bungie Destiny App to approve or reject a request.",
+        "operationId": "Destiny2.AwaProvideAuthorizationResult",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Awa/GetActionToken/{correlationId}/": {
+      "get": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Returns the action token if user approves the request.",
+        "operationId": "Destiny2.AwaGetActionToken",
+        "parameters": [
+          {
+            "name": "correlationId",
+            "in": "path",
+            "description": "The identifier for the advanced write action request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "AdvancedWriteActions"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Destiny.Advanced.AwaAuthorizationResult"
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -6060,6 +6191,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6150,6 +6282,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6227,6 +6360,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6304,6 +6438,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6387,6 +6522,7 @@
             "type": "string"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6467,6 +6603,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6509,6 +6646,7 @@
         "description": "Returns trending items for Bungie.net, collapsed into the first page of items per category. For pagination within a category, call GetTrendingCategory.",
         "operationId": "Trending.GetTrendingCategories",
         "parameters": [],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6567,6 +6705,7 @@
             "format": "int32"
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6639,6 +6778,7 @@
             ]
           }
         ],
+        "deprecated": false,
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -6688,7 +6828,8 @@
         "128",
         "256",
         "512",
-        "1024"
+        "1024",
+        "2048"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -6746,6 +6887,11 @@
           "numericValue": "1024",
           "identifier": "ReadAndApplyTokens",
           "description": "Read offer history and claim and apply tokens for the user."
+        },
+        {
+          "numericValue": "2048",
+          "identifier": "AdvancedWriteActions",
+          "description": "Can perform actions that will result in a prompt to the user via the Destiny app."
         }
       ]
     },
@@ -6923,14 +7069,6 @@
           "identifier": "IgnoredGlobal"
         }
       ]
-    },
-    "User.Models.UserAlias": {
-      "type": "object",
-      "properties": {
-        "cachePrefix": {
-          "type": "string"
-        }
-      }
     },
     "Config.UserTheme": {
       "type": "object",
@@ -10193,8 +10331,17 @@
         },
         "uiInteractionType": {
           "format": "uint32",
-          "description": "A UI hint for the behavior of the interaction screen. BNet doesn't use this, but you can choose to.",
+          "description": "A UI hint for the behavior of the interaction screen. This is useful to determine what type of interaction is occurring, such as a prompt to receive a rank up reward or a prompt to choose a reward for completing a quest. The hash isn't as useful as the Enum in retrospect, well what can you do. Try using interactionType instead.",
           "type": "integer"
+        },
+        "interactionType": {
+          "description": "The enumerated version of the possible UI hints for vendor interactions, which is a little easier to grok than the hash found in uiInteractionType.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.VendorInteractionType"
+            }
+          ]
         },
         "rewardBlockLabel": {
           "description": "If this interaction is displaying rewards, this is the text to use for the header of the reward-displaying section of the interaction.",
@@ -10313,6 +10460,74 @@
           "type": "integer"
         }
       }
+    },
+    "Destiny.VendorInteractionType": {
+      "format": "int32",
+      "description": "An enumeration of the known UI interactions for Vendors.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "QuestComplete",
+          "description": "An interaction shown when you complete a quest and receive a reward."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "QuestContinue",
+          "description": "An interaction shown when you talk to a Vendor as an intermediary step of a quest."
+        },
+        {
+          "numericValue": "3",
+          "identifier": "ReputationPreview",
+          "description": "An interaction shown when you are previewing the vendor's reputation rewards."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "RankUpReward",
+          "description": "An interaction shown when you rank up with the vendor."
+        },
+        {
+          "numericValue": "5",
+          "identifier": "TokenTurnIn",
+          "description": "An interaction shown when you have tokens to turn in for the vendor."
+        },
+        {
+          "numericValue": "6",
+          "identifier": "QuestAccept",
+          "description": "An interaction shown when you're accepting a new quest."
+        },
+        {
+          "numericValue": "7",
+          "identifier": "ProgressTab",
+          "description": "Honestly, this doesn't seem consistent to me. It is used to give you choices in the Cryptarch as well as some reward prompts by the Eververse vendor. I'll have to look into that further at some point."
+        },
+        {
+          "numericValue": "8",
+          "identifier": "End",
+          "description": "These seem even less consistent. I don't know what these are."
+        },
+        {
+          "numericValue": "9",
+          "identifier": "Start",
+          "description": "Also seem inconsistent. I also don't know what these are offhand."
+        }
+      ]
     },
     "Destiny.Definitions.DestinyVendorInventoryFlyoutDefinition": {
       "description": "The definition for an \"inventory flyout\": a UI screen where we show you part of an otherwise hidden vendor inventory: like the Vault inventory buckets.",
@@ -11250,7 +11465,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -12429,7 +12644,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -12649,7 +12864,7 @@
         },
         {
           "numericValue": "15",
-          "identifier": "Reserved15"
+          "identifier": "CrimsonDoubles"
         },
         {
           "numericValue": "16",
@@ -13760,6 +13975,24 @@
         "visibility": {
           "$ref": "#/definitions/Destiny.DestinySocketVisibility"
         },
+        "alwaysRandomizeSockets": {
+          "type": "boolean"
+        },
+        "isPreviewEnabled": {
+          "type": "boolean"
+        },
+        "hideDuplicateReusablePlugs": {
+          "type": "boolean"
+        },
+        "avoidDuplicatesOnInitialization": {
+          "type": "boolean"
+        },
+        "currencyScalars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinySocketTypeScalarMaterialRequirementEntry"
+          }
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -13871,6 +14104,19 @@
           "identifier": "HiddenIfNoPlugsAvailable"
         }
       ]
+    },
+    "Destiny.Definitions.Sockets.DestinySocketTypeScalarMaterialRequirementEntry": {
+      "type": "object",
+      "properties": {
+        "currencyItemHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "scalarValue": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
     },
     "Destiny.Definitions.Sockets.DestinySocketCategoryDefinition": {
       "description": "Sockets on an item are organized into Categories visually.\r\nYou can find references to the socket category defined on an item's DestinyInventoryItemDefinition.sockets.socketCategories property.\r\nThis has the display information for rendering the categories' header, and a hint for how the UI should handle showing this category.",
@@ -14545,7 +14791,7 @@
     },
     "Destiny.SpecialItemType": {
       "format": "int32",
-      "description": "As you run into items that need to be classified for Milestone purposes in ways that we cannot infer via Babel or Bonbobo-sourced data, add a new classification here and use a string constant to represent it in the local item config file.\r\nNOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.",
+      "description": "As you run into items that need to be classified for Milestone purposes in ways that we cannot infer via direct data, add a new classification here and use a string constant to represent it in the local item config file.\r\nNOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.",
       "enum": [
         "0",
         "1",
@@ -14599,7 +14845,7 @@
     },
     "Destiny.DestinyItemType": {
       "format": "int32",
-      "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various wepaon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.\r\n I keep updating these because they're so damn convenient. I guess I shouldn't fight it.",
+      "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various weapon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.\r\n I keep updating these because they're so damn convenient. I guess I shouldn't fight it.",
       "enum": [
         "0",
         "1",
@@ -14762,15 +15008,18 @@
         },
         {
           "numericValue": "1",
-          "identifier": "Crucible"
+          "identifier": "Crucible",
+          "description": "DEPRECATED. Items can be both \"Crucible\" and something else interesting."
         },
         {
           "numericValue": "2",
-          "identifier": "Vanguard"
+          "identifier": "Vanguard",
+          "description": "DEPRECATED. An item can both be \"Vanguard\" and something else."
         },
         {
           "numericValue": "5",
-          "identifier": "Exotic"
+          "identifier": "Exotic",
+          "description": "DEPRECATED. An item can both be Exotic and something else."
         },
         {
           "numericValue": "6",
@@ -14810,7 +15059,8 @@
         },
         {
           "numericValue": "16",
-          "identifier": "Crm"
+          "identifier": "Crm",
+          "description": "DEPRECATED. An item can both be CRM and something else."
         },
         {
           "numericValue": "17",
@@ -14964,6 +15214,7 @@
           }
         },
         "parentCategoryHashes": {
+          "description": "All item category hashes of \"parent\" categories: categories that contain this as a child through the hierarchy of groupedCategoryHashes. It's a bit redundant, but having this child-centric list speeds up some calculations.",
           "type": "array",
           "items": {
             "format": "uint32",
@@ -14971,6 +15222,7 @@
           }
         },
         "groupCategoryOnly": {
+          "description": "If true, this category is only used for grouping, and should not be evaluated with its own checks. Rather, the item only has this category if it has one of its child categories.",
           "type": "boolean"
         },
         "hash": {
@@ -16467,6 +16719,7 @@
         "592",
         "593",
         "594",
+        "595",
         "601",
         "602",
         "603",
@@ -16718,6 +16971,7 @@
         "1671",
         "1672",
         "1673",
+        "1674",
         "1800",
         "1801",
         "1802",
@@ -16819,7 +17073,14 @@
         "2700",
         "2701",
         "2702",
-        "2703"
+        "2703",
+        "2800",
+        "2801",
+        "2802",
+        "2803",
+        "2804",
+        "2805",
+        "2806"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -17893,6 +18154,10 @@
           "identifier": "ForumRecruitmentFireteamMembersOnly"
         },
         {
+          "numericValue": "595",
+          "identifier": "ForumRequiresDestiny2Progress"
+        },
+        {
           "numericValue": "601",
           "identifier": "GroupMembershipApplicationAlreadyResolved"
         },
@@ -18898,6 +19163,10 @@
           "identifier": "DestinyItemNotTransferrableHasSideEffects"
         },
         {
+          "numericValue": "1674",
+          "identifier": "DestinyItemLocked"
+        },
+        {
           "numericValue": "1800",
           "identifier": "FbInvalidRequest"
         },
@@ -19304,6 +19573,34 @@
         {
           "numericValue": "2703",
           "identifier": "ReportCannotReportSelf"
+        },
+        {
+          "numericValue": "2800",
+          "identifier": "AwaTypeDisabled"
+        },
+        {
+          "numericValue": "2801",
+          "identifier": "AwaTooManyPendingRequests"
+        },
+        {
+          "numericValue": "2802",
+          "identifier": "AwaTheFeatureRequiresARegisteredDevice"
+        },
+        {
+          "numericValue": "2803",
+          "identifier": "AwaRequestWasUnansweredForTooLong"
+        },
+        {
+          "numericValue": "2804",
+          "identifier": "AwaWriteRequestMissingOrInvalidToken"
+        },
+        {
+          "numericValue": "2805",
+          "identifier": "AwaWriteRequestTokenExpired"
+        },
+        {
+          "numericValue": "2806",
+          "identifier": "AwaWriteRequestTokenUsageLimitReached"
         }
       ]
     },
@@ -20011,6 +20308,15 @@
           "allOf": [
             {
               "$ref": "#/definitions/Destiny.ItemState"
+            }
+          ]
+        },
+        "dismantlePermission": {
+          "description": "Indicates what type of permission is required from the player before an app can dismantle this item.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.DismantlePermissionGroup"
             }
           ]
         }
@@ -21052,7 +21358,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -21301,7 +21607,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -22175,7 +22481,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -22849,7 +23155,7 @@
       "x-destiny-component-type-dependency": "ItemSockets"
     },
     "Destiny.Entities.Items.DestinyItemSocketState": {
-      "description": "The status of a given item's socket. (which plug is inserted, if any: whether it is enabled, what \"reusable\" plugs can be inserted, etc...)",
+      "description": "The status of a given item's socket. (which plug is inserted, if any: whether it is enabled, what \"reusable\" plugs can be inserted, etc...)\r\nIf I had it to do over, this would probably have a DestinyItemPlug representing the inserted item instead of most of these properties. :shrug:",
       "type": "object",
       "properties": {
         "plugHash": {
@@ -22873,7 +23179,7 @@
           }
         },
         "reusablePlugHashes": {
-          "description": "If the item supports reusable plugs, this is the list of plug item hashes that are currently allowed to be used for this socket. (sometimes restrictions may cause reusable plugs defined on the item definition to not be valid, so you should trust the instanced reusablePlugHashes list rather than the definition's list)\r\nA Reusable Plug is a plug that you can *always* insert into this socket, regardless of whether or not you have the plug in your inventory. In practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info.",
+          "description": "If the item supports reusable plugs, this is the list of plug item hashes that are currently allowed to be used for this socket. See the \"reusablePlugs\" property, which has rendered this obsolete, for more information.",
           "type": "array",
           "items": {
             "format": "uint32",
@@ -22891,6 +23197,7 @@
           }
         },
         "reusablePlugs": {
+          "description": "If the item supports reusabe plugs, this is the list of plugs that are allowed to be used for the socket, and any relevant information about whether they are \"enabled\", whether they are allowed to be inserted, and any other information such as objectives.\r\nA Reusable Plug is a plug that you can always insert into this socket as long as its insertion rules are passed, regardless of whether or not you have the plug in your inventory. An example of it failing an insertion rule would be if it has an Objective that needs to be completed before it can be inserted, and that objective hasn't been completed yet.\r\nIn practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Sockets.DestinyItemPlug"
@@ -22903,24 +23210,29 @@
       "properties": {
         "plugItemHash": {
           "format": "uint32",
+          "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
         },
         "plugObjectives": {
+          "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
           }
         },
         "canInsert": {
+          "description": "If true, this plug has met all of its insertion requirements. Big if true.",
           "type": "boolean"
         },
         "enabled": {
+          "description": "If true, this plug will provide its benefits while inserted.",
           "type": "boolean"
         },
         "insertFailIndexes": {
+          "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -22928,6 +23240,7 @@
           }
         },
         "enableFailIndexes": {
+          "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -23169,24 +23482,29 @@
       "properties": {
         "plugItemHash": {
           "format": "uint32",
+          "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
         },
         "plugObjectives": {
+          "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
           }
         },
         "canInsert": {
+          "description": "If true, this plug has met all of its insertion requirements. Big if true.",
           "type": "boolean"
         },
         "enabled": {
+          "description": "If true, this plug will provide its benefits while inserted.",
           "type": "boolean"
         },
         "insertFailIndexes": {
+          "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -23194,6 +23512,7 @@
           }
         },
         "enableFailIndexes": {
+          "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
           "type": "array",
           "items": {
             "format": "int32",
@@ -23582,7 +23901,7 @@
         },
         "nextRefreshDate": {
           "format": "date-time",
-          "description": "The date when this vendor's inventory will next rotate/refresh.",
+          "description": "The date when this vendor's inventory will next rotate/refresh.\r\nNote that this is distinct from the date ranges that the vendor is visible/available in-game: this field indicates the specific time when the vendor's available items refresh and rotate, regardless of whether the vendor is actually available at that time. Unfortunately, these two values may be (and are, for the case of important vendors like Xur) different.\r\nIssue https://github.com/Bungie-net/api/issues/353 is tracking a fix to start providing visibility date ranges where possible in addition to this refresh date, so that all important dates for vendors are available for use.",
           "type": "string"
         },
         "enabled": {
@@ -24239,6 +24558,111 @@
         },
         "membershipType": {
           "$ref": "#/definitions/BungieMembershipType"
+        }
+      }
+    },
+    "Destiny.Responses.DestinySocketResponseCodes": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32",
+        "64",
+        "128",
+        "256",
+        "512",
+        "2048"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "CannotAffordMaterialRequirements"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "FailedPlugInsertionRules"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "CategoryNotWhitelisted"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "PlugItemInvalid"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "PlugItemAlreadySocketed"
+        },
+        {
+          "numericValue": "32",
+          "identifier": "SocketDefinitionBlank"
+        },
+        {
+          "numericValue": "64",
+          "identifier": "SocketIndexInvalid"
+        },
+        {
+          "numericValue": "128",
+          "identifier": "SocketInstanceUnoccupied"
+        },
+        {
+          "numericValue": "256",
+          "identifier": "SocketItemInvalid"
+        },
+        {
+          "numericValue": "512",
+          "identifier": "SocketItemNotFound"
+        },
+        {
+          "numericValue": "2048",
+          "identifier": "RequestInvalid"
+        }
+      ]
+    },
+    "Destiny.Requests.Actions.DestinyInsertPlugsActionRequest": {
+      "type": "object",
+      "properties": {
+        "actionToken": {
+          "description": "Action token provided by the AwaGetActionToken API call.",
+          "type": "string"
+        },
+        "itemInstanceId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "plug": {
+          "$ref": "#/definitions/Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry"
+        },
+        "characterId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "membershipType": {
+          "$ref": "#/definitions/BungieMembershipType"
+        }
+      }
+    },
+    "Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry": {
+      "type": "object",
+      "properties": {
+        "socketIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "plugItemHash": {
+          "format": "uint32",
+          "description": "Plugs are never instanced. So with the hash alone, we should be able to: 1) Infer whether the player actually needs to have the item, or if it's a reusable plug 2) Perform any operation needed to use the Plug, including removing the plug item and running reward sheets.",
+          "type": "integer"
         }
       }
     },
@@ -25656,7 +26080,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -25875,7 +26299,7 @@
             },
             {
               "numericValue": "15",
-              "identifier": "Reserved15"
+              "identifier": "CrimsonDoubles"
             },
             {
               "numericValue": "16",
@@ -26023,6 +26447,211 @@
           }
         }
       }
+    },
+    "Destiny.Advanced.AwaInitializeResponse": {
+      "type": "object",
+      "properties": {
+        "correlationId": {
+          "type": "string"
+        }
+      }
+    },
+    "Destiny.Advanced.AwaPermissionRequested": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of advanced write action.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Advanced.AwaType"
+            }
+          ]
+        },
+        "affectedItemId": {
+          "format": "int64",
+          "description": "Item instance ID the action shall be applied to. This is optional for all but a new AwaType values. Rule of thumb is to provide the item instance ID if one is available.",
+          "type": "integer"
+        },
+        "membershipType": {
+          "description": "Destiny membership type of the account to modify.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BungieMembershipType"
+            }
+          ]
+        },
+        "characterId": {
+          "format": "int64",
+          "description": "Destiny character ID, if applicable, that will be affected by the action.",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Advanced.AwaType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "InsertPlugs",
+          "description": "Insert plugs into sockets."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "BuyItemFromVendor",
+          "description": "Exchange currency to purchase something from a vendor."
+        },
+        {
+          "numericValue": "3",
+          "identifier": "RefundItem",
+          "description": "Return an item to a vendor that accepts returns."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "DismantleGroupA",
+          "description": "Dismantle highest value weapons and armor. This group requires permission for a specific item and the resulting token can be used once on that specific item."
+        },
+        {
+          "numericValue": "5",
+          "identifier": "DismantleGroupB",
+          "description": "Dismantle high value weapons and armor."
+        },
+        {
+          "numericValue": "6",
+          "identifier": "DismantleGroupC",
+          "description": "Dismantle mid value weapons and armor."
+        }
+      ]
+    },
+    "Destiny.Advanced.AwaUserResponse": {
+      "type": "object",
+      "properties": {
+        "selection": {
+          "description": "Indication of the selection the user has made (Approving or rejecting the action)",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Advanced.AwaUserSelection"
+            }
+          ]
+        },
+        "correlationId": {
+          "description": "Correlation ID of the request",
+          "type": "string"
+        },
+        "nonce": {
+          "description": "Secret nonce received via the PUSH notification.",
+          "type": "array",
+          "items": {
+            "format": "byte",
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Destiny.Advanced.AwaUserSelection": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Rejected"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Approved"
+        }
+      ]
+    },
+    "Destiny.Advanced.AwaAuthorizationResult": {
+      "type": "object",
+      "properties": {
+        "userSelection": {
+          "description": "Indication of how the user responded to the request. If the value is \"Approved\" the actionToken will contain the token that can be presented when performing the advanced write action.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Advanced.AwaUserSelection"
+            }
+          ]
+        },
+        "responseReason": {
+          "$ref": "#/definitions/Destiny.Advanced.AwaResponseReason"
+        },
+        "developerNote": {
+          "description": "Message to the app developer to help understand the response.",
+          "type": "string"
+        },
+        "actionToken": {
+          "description": "Credential used to prove the user authorized an advanced write action.",
+          "type": "string"
+        },
+        "maximumNumberOfUses": {
+          "format": "int32",
+          "description": "This token may be used to perform the requested action this number of times, at a maximum. If this value is 0, then there is no limit.",
+          "type": "integer"
+        },
+        "validUntil": {
+          "format": "date-time",
+          "description": "Time, UTC, when token expires.",
+          "type": "string"
+        }
+      }
+    },
+    "Destiny.Advanced.AwaResponseReason": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Answered",
+          "description": "User provided an answer"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "TimedOut",
+          "description": "The HTTP request timed out, a new request may be made and an answer may still be provided."
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Replaced",
+          "description": "This request was replaced by another request."
+        }
+      ]
     },
     "Forum.CommunityContentSortMode": {
       "format": "byte",
@@ -26275,6 +26904,11 @@
           "items": {
             "$ref": "#/definitions/Trending.TrendingEntry"
           }
+        },
+        "creationDate": {
+          "format": "date-time",
+          "description": "If the entry has a date at which it was created, this is that date.",
+          "type": "string"
         }
       }
     },
@@ -26630,7 +27264,7 @@
           "type": "integer"
         },
         "postId": {
-          "format": "uint64",
+          "format": "int64",
           "type": "integer"
         },
         "body": {
@@ -26684,7 +27318,8 @@
         "ReadUserData": "Read user data such as who they are web notifications, \r\nclan/group memberships, recent activity, muted users.",
         "EditUserData": "Edit user data such as preferred language, status, motto, avatar selection and theme.",
         "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
-        "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user."
+        "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
+        "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app."
       }
     }
   },
