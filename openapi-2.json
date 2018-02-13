@@ -20310,15 +20310,6 @@
               "$ref": "#/definitions/Destiny.ItemState"
             }
           ]
-        },
-        "dismantlePermission": {
-          "description": "Indicates what type of permission is required from the player before an app can dismantle this item.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DismantlePermissionGroup"
-            }
-          ]
         }
       }
     },

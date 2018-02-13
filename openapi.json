@@ -17983,15 +17983,6 @@
               }
             ],
             "description": "A flags enumeration indicating the transient/custom states of the item that affect how it is rendered: whether it's tracked or locked for example, or whether it has a masterwork plug inserted."
-          },
-          "dismantlePermission": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.DismantlePermissionGroup"
-              }
-            ],
-            "description": "Indicates what type of permission is required from the player before an app can dismantle this item."
           }
         },
         "description": "The base item component, filled with properties that are generally useful to know in any item request or that don't feel worthwhile to put in their own component."
