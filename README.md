@@ -6,7 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-02-07-2018 - v2.1.2 of the API released.  Documentation deployed, have at it!  Check the Changelog for details about this latest release.
+02-16-2018 - A new deployment will be coming next week (target date 2/21) to Bungie.Net, and with it several changes to the API.  Search with the "ready for release" tag on currently active Issues for a summary of externally known changes that are upcoming.  It's not an exhaustive list, but should help you prepare.  I'll have more information as we get closer to the release date.
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
