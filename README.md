@@ -6,7 +6,23 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-02-16-2018 - A new deployment will be coming next week (target date 2/21) to Bungie.Net, and with it several changes to the API.  Search with the "ready for release" tag on currently active Issues for a summary of externally known changes that are upcoming.  It's not an exhaustive list, but should help you prepare.  I'll have more information as we get closer to the release date.
+02-21-2018 - A new deployment will be coming later today, with the following changes:
+- Vendor components should be getting returned now from requests.  Some data, such as time sensitive items, may still be incorrect and will have fixes in the next release.
+- Further improvements to the new Advanced Write Actions
+- Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property.  If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info.  (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
+- The following Github Issues were addressed:
+#412 NOTICE: DestinyVendorCategoryDefinition is going to be removed rfc
+#411 NOTICE: The Aura activity bucket will be left unused starting 2/27
+#402 RFC: emblemHash on DestinyCharacterComponent may no longer necessarily point to an emblem item
+#399 Weapon Mods with empty itemCategoryHashes
+#397 Include Mayhem in AllPvP mode
+#395 The daily strike milestone claims to have 48 challenges! instead of 3
+#394 Transfer between char x vault returning error for some item types
+#393 Armour Ornaments missing itemCategoryHashes
+#392 New Item Categories lack localized text for name/description
+#379 Clarification around instanced reusablePlugHashes data
+#348 Mayhem Mode in API
+#334 Heroic Strike DestinyActivityModeType
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
