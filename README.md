@@ -6,23 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-02-21-2018 - (update: the release has been deployed, but there's going to be a short delay before I can update the new documentation and swagger specs.  I will attempt to do so first thing in the morning tomorrow!) A new deployment will be coming later today, with the following changes:
-* Vendor components should be getting returned now from requests.  Some data, such as time sensitive items, may still be incorrect and will have fixes in the next release.
-* Further improvements to the new Advanced Write Actions
-* Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property.  If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info.  (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
-* The following Github Issues were addressed:
-  * #412 NOTICE: DestinyVendorCategoryDefinition is going to be removed rfc
-  * #411 NOTICE: The Aura activity bucket will be left unused starting 2/27
-  * #402 RFC: emblemHash on DestinyCharacterComponent may no longer necessarily point to an emblem item
-  * #399 Weapon Mods with empty itemCategoryHashes
-  * #397 Include Mayhem in AllPvP mode
-  * #395 The daily strike milestone claims to have 48 challenges! instead of 3
-  * #394 Transfer between char x vault returning error for some item types
-  * #393 Armour Ornaments missing itemCategoryHashes
-  * #392 New Item Categories lack localized text for name/description
-  * #379 Clarification around instanced reusablePlugHashes data
-  * #348 Mayhem Mode in API
-  * #334 Heroic Strike DestinyActivityModeType
+02-22-2018 - The API and documentation has been updated!  Please see the changelog for more information!
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
@@ -128,8 +112,4 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 
 # Known Issues
 
-- There is currently no way to know what reward item you will get for completing a Milestone's quest.  The DestinyMilestoneDefinition defines these rewards, but late in development we realized merely returning this information is insufficient: only a subset of these are possible to be obtained at any given time.  A future release will have the live Milestone data return the "active" rewards so that you can show the correct reward being offered at any given time.
-
 - If our environment goes down entirely, to the point where we can no longer process your request, we are currently returning the same static error HTML page(s) to any API request that the website is returning.  If you get an HTML response to an API request, know that this is the undesirable side effect of our environment being down and handle it with your own messaging and error handling as needed.
-
-- Vendors are still not terribly useful.  They exist in an extremely early pre-release form.  The items returned should be accurate for a given character, but their stats and any other attributes will almost certainly be incorrect.  The contract itself is still also subject to change.
