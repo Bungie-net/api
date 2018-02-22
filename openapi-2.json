@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.2"
+    "version": "2.1.3"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -4799,12 +4799,12 @@
         ],
         "responses": {
           "200": {
-            "description": "Look at the Response property for more information about the nature of this response",
+            "description": "A response containing all of the components for all requested vendors.",
             "schema": {
               "type": "object",
               "properties": {
                 "Response": {
-                  "$ref": "#/definitions/Destiny.Responses.DestinySocketResponseCodes"
+                  "$ref": "#/definitions/Destiny.Responses.InventoryChangedResponse"
                 },
                 "ErrorCode": {
                   "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
@@ -10082,6 +10082,12 @@
           "description": "As many of you know, Vendor data has historically been pretty brutal on the BNet servers. In an effort to reduce this workload, only Vendors with this flag set will be returned on Vendor requests. This allows us to filter out Vendors that don't dynamic data that's particularly useful: things like \"Preview/Sack\" vendors, for example, that you can usually suss out the details for using just the definitions themselves.",
           "type": "boolean"
         },
+        "locations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Vendors.DestinyVendorLocationDefinition"
+          }
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -10119,6 +10125,18 @@
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorRequirementDisplayEntryDefinition"
           }
+        },
+        "smallTransparentIcon": {
+          "description": "This is the icon used in parts of the game UI such as the vendor's waypoint.",
+          "type": "string"
+        },
+        "mapIcon": {
+          "description": "This is the icon used in the map overview, when the vendor is located on the map.",
+          "type": "string"
+        },
+        "largeTransparentIcon": {
+          "description": "This is apparently the \"Watermark\". I am not certain offhand where this is actually used in the Game UI, but some people may find it useful.",
+          "type": "string"
         },
         "description": {
           "type": "string"
@@ -10264,6 +10282,10 @@
             "format": "int32",
             "type": "integer"
           }
+        },
+        "isPreview": {
+          "description": "Sometimes a category isn't actually used to sell items, but rather to preview them. This implies different UI (and manual placement of the category in the UI) in the game, and special treatment.",
+          "type": "boolean"
         }
       }
     },
@@ -10876,95 +10898,23 @@
         }
       }
     },
-    "Destiny.Definitions.DestinyFactionDefinition": {
-      "description": "These definitions represent Factions in the game. Factions have ended up unilaterally being related to Vendors that represent them, but that need not necessarily be the case.\r\nA Faction is really just an entity that has a related progression for which a character can gain experience. In Destiny 1, Dead Orbit was an example of a Faction: there happens to be a Vendor that represents Dead Orbit (and indeed, DestinyVendorDefinition.factionHash defines to this relationship), but Dead Orbit could theoretically exist without the Vendor that provides rewards.",
+    "Destiny.Definitions.Vendors.DestinyVendorLocationDefinition": {
+      "description": "These definitions represent vendors' locations and relevant display information at different times in the game.",
       "type": "object",
       "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "progressionHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the DestinyProgressionDefinition that indicates the character's relationship with this faction in terms of experience and levels.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
-          }
-        },
-        "tokenValues": {
-          "description": "The faction token item hashes, and their respective progression values.",
-          "type": "object",
-          "additionalProperties": {
-            "format": "uint32",
-            "type": "integer"
-          }
-        },
-        "rewardItemHash": {
-          "format": "uint32",
-          "description": "The faction reward item hash, usually an engram.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
-          }
-        },
-        "rewardVendorHash": {
-          "format": "uint32",
-          "description": "The faction reward vendor hash, used for faction engram previews.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
-          }
-        },
-        "vendors": {
-          "description": "List of vendors that are associated with this faction. The last vendor that passes the unlock flag checks is the one that should be shown.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyFactionVendorDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "Factions"
-    },
-    "Destiny.Definitions.DestinyFactionVendorDefinition": {
-      "description": "These definitions represent faction vendors at different points in the game.\r\nA single faction may contain multiple vendors, or the same vendor available at two different locations.",
-      "type": "object",
-      "properties": {
-        "vendorHash": {
-          "format": "uint32",
-          "description": "The faction vendor hash.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
-          }
-        },
         "destinationHash": {
           "format": "uint32",
-          "description": "The faction vendor destination hash.",
+          "description": "The hash identifier for a Destination at which this vendor may be located. Each destination where a Vendor may exist will only ever have a single entry.",
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
           }
         },
         "backgroundImagePath": {
-          "description": "The relative path to the background image, for use in a banner.",
+          "description": "The relative path to the background image representing this Vendor at this location, for use in a banner.",
           "type": "string"
         }
-      },
-      "x-mobile-manifest-name": "Factions"
+      }
     },
     "Destiny.Definitions.DestinyDestinationDefinition": {
       "description": "On to one of the more confusing subjects of the API. What is a Destination, and what is the relationship between it, Activities, Locations, and Places?\r\nA \"Destination\" is a specific region/city/area of a larger \"Place\". For instance, a Place might be Earth where a Destination might be Bellevue, Washington. (Please, pick a more interesting destination if you come to visit Earth).",
@@ -11501,7 +11451,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -11775,7 +11725,8 @@
         "5",
         "6",
         "7",
-        "8"
+        "8",
+        "9"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -11823,6 +11774,10 @@
           "numericValue": "8",
           "identifier": "Hidden",
           "description": "Don't bother showing the value at all, it's not easily human-interpretable, and used for some internal purpose."
+        },
+        {
+          "numericValue": "9",
+          "identifier": "Multiplier"
         }
       ]
     },
@@ -12360,6 +12315,15 @@
             }
           ]
         },
+        "smallTransparentIcon": {
+          "type": "string"
+        },
+        "mapIcon": {
+          "type": "string"
+        },
+        "largeTransparentIcon": {
+          "type": "string"
+        },
         "spawnPoint": {
           "format": "uint32",
           "description": "If we had map information, this spawnPoint would be interesting. But sadly, we don't have that info.",
@@ -12680,7 +12644,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -12900,7 +12864,7 @@
         },
         {
           "numericValue": "25",
-          "identifier": "Reserved25"
+          "identifier": "AllMayhem"
         },
         {
           "numericValue": "26",
@@ -13306,6 +13270,95 @@
           "format": "uint32",
           "description": "The identifier for the bubble: only guaranteed to be unique within the Destination.",
           "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyFactionDefinition": {
+      "description": "These definitions represent Factions in the game. Factions have ended up unilaterally being related to Vendors that represent them, but that need not necessarily be the case.\r\nA Faction is really just an entity that has a related progression for which a character can gain experience. In Destiny 1, Dead Orbit was an example of a Faction: there happens to be a Vendor that represents Dead Orbit (and indeed, DestinyVendorDefinition.factionHash defines to this relationship), but Dead Orbit could theoretically exist without the Vendor that provides rewards.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "progressionHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the DestinyProgressionDefinition that indicates the character's relationship with this faction in terms of experience and levels.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
+          }
+        },
+        "tokenValues": {
+          "description": "The faction token item hashes, and their respective progression values.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "rewardItemHash": {
+          "format": "uint32",
+          "description": "The faction reward item hash, usually an engram.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "rewardVendorHash": {
+          "format": "uint32",
+          "description": "The faction reward vendor hash, used for faction engram previews.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
+          }
+        },
+        "vendors": {
+          "description": "List of vendors that are associated with this faction. The last vendor that passes the unlock flag checks is the one that should be shown.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyFactionVendorDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Factions"
+    },
+    "Destiny.Definitions.DestinyFactionVendorDefinition": {
+      "description": "These definitions represent faction vendors at different points in the game.\r\nA single faction may contain multiple vendors, or the same vendor available at two different locations.",
+      "type": "object",
+      "properties": {
+        "vendorHash": {
+          "format": "uint32",
+          "description": "The faction vendor hash.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
+          }
+        },
+        "destinationHash": {
+          "format": "uint32",
+          "description": "The hash identifier for a Destination at which this vendor may be located. Each destination where a Vendor may exist will only ever have a single entry.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
+          }
+        },
+        "backgroundImagePath": {
+          "description": "The relative path to the background image representing this Vendor at this location, for use in a banner.",
+          "type": "string"
         }
       }
     },
@@ -13779,7 +13832,8 @@
           "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
           "type": "boolean"
         }
-      }
+      },
+      "x-mobile-manifest-name": "MaterialRequirementSets"
     },
     "Destiny.Definitions.DestinyMaterialRequirement": {
       "description": "Many actions relating to items require you to expend materials: - Activating a talent node - Inserting a plug into a socket The items will refer to material requirements by a materialRequirementsHash in these cases, and this is the definition for those requirements in terms of the item required, how much of it is required and other interesting info. This is one of the rare/strange times where a single contract class is used both in definitions *and* in live data response contracts. I'm not sure yet whether I regret that.",
@@ -13982,6 +14036,10 @@
           "type": "boolean"
         },
         "hideDuplicateReusablePlugs": {
+          "type": "boolean"
+        },
+        "overridesUiAppearance": {
+          "description": "This property indicates if the socket type determines whether Emblem icons and nameplates should be overridden by the inserted plug item's icon and nameplate.",
           "type": "boolean"
         },
         "avoidDuplicatesOnInitialization": {
@@ -16972,6 +17030,10 @@
         "1672",
         "1673",
         "1674",
+        "1675",
+        "1676",
+        "1677",
+        "1678",
         "1800",
         "1801",
         "1802",
@@ -19165,6 +19227,22 @@
         {
           "numericValue": "1674",
           "identifier": "DestinyItemLocked"
+        },
+        {
+          "numericValue": "1675",
+          "identifier": "DestinyCannotAffordMaterialRequirements"
+        },
+        {
+          "numericValue": "1676",
+          "identifier": "DestinyFailedPlugInsertionRules"
+        },
+        {
+          "numericValue": "1677",
+          "identifier": "DestinySocketNotFound"
+        },
+        {
+          "numericValue": "1678",
+          "identifier": "DestinySocketActionNotAllowed"
         },
         {
           "numericValue": "1800",
@@ -21385,7 +21463,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -21634,7 +21712,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -22508,7 +22586,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -23841,7 +23919,7 @@
       "type": "object",
       "properties": {
         "vendors": {
-          "description": "The base properties of the vendor.\r\nCOMPONENT TYPE: Vendors",
+          "description": "The base properties of the vendor. These are keyed by the Vendor Hash, so you will get one Vendor Component per vendor returned.\r\nCOMPONENT TYPE: Vendors",
           "type": "object",
           "allOf": [
             {
@@ -23851,7 +23929,7 @@
           "x-destiny-component-type-dependency": "Vendors"
         },
         "categories": {
-          "description": "Categories that the vendor has available, and references to the sales therein.\r\nCOMPONENT TYPE: VendorCategories",
+          "description": "Categories that the vendor has available, and references to the sales therein. These are keyed by the Vendor Hash, so you will get one Categories Component per vendor returned.\r\nCOMPONENT TYPE: VendorCategories",
           "type": "object",
           "allOf": [
             {
@@ -23861,7 +23939,7 @@
           "x-destiny-component-type-dependency": "VendorCategories"
         },
         "sales": {
-          "description": "Sales, keyed by the vendorItemIndex of the item being sold.\r\nCOMPONENT TYPE: VendorSales",
+          "description": "Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.\r\nNote that within the Sale Item Set component, the sales are themselves keyed by the vendorSaleIndex, so you can relate it to the corrent sale item definition within the Vendor's definition.\r\nCOMPONENT TYPE: VendorSales",
           "type": "object",
           "allOf": [
             {
@@ -23871,6 +23949,7 @@
           "x-destiny-component-type-dependency": "VendorSales"
         },
         "itemComponents": {
+          "description": "The set of item detail components, one set of item components per Vendor. These are keyed by the Vendor Hash, so you will get one Item Component Set per vendor returned.\r\nThe components contained inside are themselves keyed by the vendorSaleIndex, and will have whatever item-level components you requested (Sockets, Stats, Instance data etc...) per item being sold by the vendor.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/DestinyItemComponentSetOfint32"
@@ -23911,6 +23990,11 @@
               "$ref": "#/definitions/Destiny.DestinyProgression"
             }
           ]
+        },
+        "vendorLocationIndex": {
+          "format": "int32",
+          "description": "An index into the vendor definition's \"locations\" property array, indicating which location they are at currently. If -1, then the vendor has no known location (and you may choose not to show them in your UI as a result. I mean, it's your bag honey)",
+          "type": "integer"
         }
       },
       "x-destiny-component-type-dependency": "Vendors"
@@ -24552,73 +24636,25 @@
         }
       }
     },
-    "Destiny.Responses.DestinySocketResponseCodes": {
-      "format": "int32",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "4",
-        "8",
-        "16",
-        "32",
-        "64",
-        "128",
-        "256",
-        "512",
-        "2048"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
+    "Destiny.Responses.InventoryChangedResponse": {
+      "description": "A response containing all of the components for all requested vendors.",
+      "type": "object",
+      "properties": {
+        "addedInventoryItems": {
+          "description": "Items that appeared in the inventory possibly as a result of an action.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemComponent"
+          }
         },
-        {
-          "numericValue": "1",
-          "identifier": "CannotAffordMaterialRequirements"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "FailedPlugInsertionRules"
-        },
-        {
-          "numericValue": "4",
-          "identifier": "CategoryNotWhitelisted"
-        },
-        {
-          "numericValue": "8",
-          "identifier": "PlugItemInvalid"
-        },
-        {
-          "numericValue": "16",
-          "identifier": "PlugItemAlreadySocketed"
-        },
-        {
-          "numericValue": "32",
-          "identifier": "SocketDefinitionBlank"
-        },
-        {
-          "numericValue": "64",
-          "identifier": "SocketIndexInvalid"
-        },
-        {
-          "numericValue": "128",
-          "identifier": "SocketInstanceUnoccupied"
-        },
-        {
-          "numericValue": "256",
-          "identifier": "SocketItemInvalid"
-        },
-        {
-          "numericValue": "512",
-          "identifier": "SocketItemNotFound"
-        },
-        {
-          "numericValue": "2048",
-          "identifier": "RequestInvalid"
+        "removedInventoryItems": {
+          "description": "Items that disappeared from the inventory possibly as a result of an action.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemComponent"
+          }
         }
-      ]
+      }
     },
     "Destiny.Requests.Actions.DestinyInsertPlugsActionRequest": {
       "type": "object",
@@ -24629,10 +24665,17 @@
         },
         "itemInstanceId": {
           "format": "int64",
+          "description": "The instance ID of the item having a plug inserted. Only instanced items can have sockets.",
           "type": "integer"
         },
         "plug": {
-          "$ref": "#/definitions/Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry"
+          "description": "The plugs being inserted.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry"
+            }
+          ]
         },
         "characterId": {
           "format": "int64",
@@ -24644,18 +24687,48 @@
       }
     },
     "Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry": {
+      "description": "Represents all of the data related to a single plug to be inserted.\r\nNote that, while you *can* point to a socket that represents infusion, you will receive an error if you attempt to do so. Come on guys, let's play nice.",
       "type": "object",
       "properties": {
         "socketIndex": {
           "format": "int32",
+          "description": "The index into the socket array, which identifies the specific socket being operated on. We also need to know the socketArrayType in order to uniquely identify the socket.\r\nDon't point to or try to insert a plug into an infusion socket. It won't work.",
           "type": "integer"
+        },
+        "socketArrayType": {
+          "description": "This property, combined with the socketIndex, tells us which socket we are referring to (since operations can be performed on both Intrinsic and \"default\" sockets, and they occupy different arrays in the Inventory Item Definition). I know, I know. Don't give me that look.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Requests.Actions.DestinySocketArrayType"
+            }
+          ]
         },
         "plugItemHash": {
           "format": "uint32",
-          "description": "Plugs are never instanced. So with the hash alone, we should be able to: 1) Infer whether the player actually needs to have the item, or if it's a reusable plug 2) Perform any operation needed to use the Plug, including removing the plug item and running reward sheets.",
+          "description": "Plugs are never instanced (except in infusion). So with the hash alone, we should be able to: 1) Infer whether the player actually needs to have the item, or if it's a reusable plug 2) Perform any operation needed to use the Plug, including removing the plug item and running reward sheets.",
           "type": "integer"
         }
       }
+    },
+    "Destiny.Requests.Actions.DestinySocketArrayType": {
+      "format": "int32",
+      "description": "If you look in the DestinyInventoryItemDefinition's \"sockets\" property, you'll see that there are two types of sockets: intrinsic, and \"socketEntry.\"\r\nUnfortunately, because Intrinsic sockets are a whole separate array, it is no longer sufficient to know the index into that array to know which socket we're talking about. You have to know whether it's in the default \"socketEntries\" or if it's in the \"intrinsic\" list.",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Default"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Intrinsic"
+        }
+      ]
     },
     "Destiny.HistoricalStats.DestinyPostGameCarnageReportData": {
       "type": "object",
@@ -26107,7 +26180,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -26326,7 +26399,7 @@
             },
             {
               "numericValue": "25",
-              "identifier": "Reserved25"
+              "identifier": "AllMayhem"
             },
             {
               "numericValue": "26",
@@ -26610,6 +26683,24 @@
           "format": "date-time",
           "description": "Time, UTC, when token expires.",
           "type": "string"
+        },
+        "type": {
+          "description": "Advanced Write Action Type from the permission request.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Advanced.AwaType"
+            }
+          ]
+        },
+        "membershipType": {
+          "description": "MembershipType from the permission request.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BungieMembershipType"
+            }
+          ]
         }
       }
     },
