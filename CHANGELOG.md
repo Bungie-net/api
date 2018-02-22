@@ -5,6 +5,7 @@
 * Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property. If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info. (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
 ### Changed
 * Vendor components should be getting returned now from requests. Some data, such as time sensitive items, may still be incorrect and will have fixes in the next release.
+* Vendors will no longer be returned if they can't be accessed in the game by the character in question (for instance, Xur will only appear once he appears on the map on Friday: but also, if the character hasn't reached the point where they are at the Tower, they won't see Tower-related Vendors in the results) (spoiler alert for those who haven't beaten the D2 campaign yet, sorry not sorry)
 * Further improvements to the new Advanced Write Actions
 * The following Github Issues were addressed:
  * #412 NOTICE: DestinyVendorCategoryDefinition is going to be removed rfc
