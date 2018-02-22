@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.1.3] - 2018-02-22
+### Added
+* Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property. If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info. (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
+### Changed
+* Vendor components should be getting returned now from requests. Some data, such as time sensitive items, may still be incorrect and will have fixes in the next release.
+* Further improvements to the new Advanced Write Actions
+* The following Github Issues were addressed:
+ * #412 NOTICE: DestinyVendorCategoryDefinition is going to be removed rfc
+ * #411 NOTICE: The Aura activity bucket will be left unused starting 2/27
+ * #402 RFC: emblemHash on DestinyCharacterComponent may no longer necessarily point to an emblem item
+ * #399 Weapon Mods with empty itemCategoryHashes
+ * #397 Include Mayhem in AllPvP mode
+ * #395 The daily strike milestone claims to have 48 challenges! instead of 3
+ * #394 Transfer between char x vault returning error for some item types
+ * #393 Armour Ornaments missing itemCategoryHashes
+ * #392 New Item Categories lack localized text for name/description
+ * #379 Clarification around instanced reusablePlugHashes data
+ * #348 Mayhem Mode in API
+ * #334 Heroic Strike DestinyActivityModeType
+
 ## [2.1.2] - 2018-02-07
 ### Added
 * New milestones added for the upcoming Crimson Days event
