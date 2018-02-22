@@ -6,7 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-02-21-2018 - A new deployment will be coming later today, with the following changes:
+02-21-2018 - (update: the release has been deployed, but there's going to be a short delay before I can update the new documentation and swagger specs.  I will attempt to do so first thing in the morning tomorrow!) A new deployment will be coming later today, with the following changes:
 * Vendor components should be getting returned now from requests.  Some data, such as time sensitive items, may still be incorrect and will have fixes in the next release.
 * Further improvements to the new Advanced Write Actions
 * Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property.  If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info.  (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
