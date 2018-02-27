@@ -12,7 +12,9 @@ This section will be added to as time goes by - we're working with it as we go!
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
 
 # How do I register to use the API?
-- (TODO: Move registration documentation to wiki)
+- You're in luck!  Check out our wiki article... in fact, check out the wiki in general, we'll be adding to it as time allows:
+
+https://github.com/Bungie-net/api/wiki/Bungie.net-Application-Portal
 
 # Are there any restrictions on the API?
 - (TODO: Pay more attention to the man behind the curtain.  Also write about the throttles etc...)
@@ -109,6 +111,9 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   
 - I am unable to get results from endpoints that require authentication.  I always get WebAuthRequired back, even though I am passing both my X-API-Key header and the Authorization header.
   - It turns out, if you hit the API with bungie.net rather than www.bungie.net, we currently redirect you and lose the authorization header in the process.  I'd like to fix this along with resolving other redirection issues covered in https://github.com/Bungie-net/api/issues/55, but for now be careful that you're using exactly https://www.bungie.net for your URLs, and make sure that your URLs are terminating with a trailing slash (/).  Otherwise, you'll encounter our undesirable redirections.
+  
+- Were you sent here by the devil?
+  - No, good sir, I'm on the level!
 
 # Known Issues
 
