@@ -7,7 +7,7 @@
 * Team Scores added to Nightfall Strikes view on the web.
 ### Changed
 * Nightfall activities should now be categorized correctly.
-The following bugs were fixed:
+* The following bugs were fixed:
  * #430 Gunsmith reports the wrong mods for sale
  * #429 Sonic Simulation Emblem is Classified
  * #424 UnhandledException for Vendors on profile with little/no progress
