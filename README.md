@@ -6,7 +6,19 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-02-22-2018 - The API and documentation has been updated!  Please see the changelog for more information!
+2018-03-07 - Our newest deployment is in progress.  Highlights:
+
+* Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow.  These features are not yet available to 3rd parties, but we will keep you posted.
+* A new Application History page shows a user the in-game actions performed through both 1st and 3rd party applications, so that users can more reliably monitor what apps are doing with their characters, items etc.
+* Team Scores added to Nightfall Strikes view on the web.
+* Nightfall activities should now be categorized correctly.
+* The following bugs were fixed:
+  * #430 Gunsmith reports the wrong mods for sale
+  * #429 Sonic Simulation Emblem is Classified
+  * #424 UnhandledException for Vendors on profile with little/no progress
+  * #423 All masterwork plugs are returned even if they can't actually be used
+  * #415 GetVendor: Kind of messy data
+  * #413 Some items are classified
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
