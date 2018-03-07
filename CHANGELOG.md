@@ -1,5 +1,20 @@
 # Changelog
 
+## [2.1.4] -2018-03-07
+### Added
+* Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow. These features are not yet available to 3rd parties, but we will keep you posted.
+* A new Application History page shows a user the in-game actions performed through both 1st and 3rd party applications, so that users can more reliably monitor what apps are doing with their characters, items etc.
+* Team Scores added to Nightfall Strikes view on the web.
+### Changed
+* Nightfall activities should now be categorized correctly.
+The following bugs were fixed:
+ * #430 Gunsmith reports the wrong mods for sale
+ * #429 Sonic Simulation Emblem is Classified
+ * #424 UnhandledException for Vendors on profile with little/no progress
+ * #423 All masterwork plugs are returned even if they can't actually be used
+ * #415 GetVendor: Kind of messy data
+ * #413 Some items are classified
+
 ## [2.1.3] - 2018-02-22
 ### Added
 * Vendor definitions will now have "location" data, and DestinyVendorComponent will now have a "vendorLocationIndex" property. If a valid (>= 0) index, it will point to the index of DestinyVendorDefinition.locations data that you can use to show a vendor's destination and other human readable info. (actual population of that info is TBD, didn't quite make it out for release yet: but you can begin implementing against it in anticipation)
