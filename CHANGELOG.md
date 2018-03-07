@@ -8,12 +8,12 @@
 ### Changed
 * Nightfall activities should now be categorized correctly.
 * The following bugs were fixed:
- * #430 Gunsmith reports the wrong mods for sale
- * #429 Sonic Simulation Emblem is Classified
- * #424 UnhandledException for Vendors on profile with little/no progress
- * #423 All masterwork plugs are returned even if they can't actually be used
- * #415 GetVendor: Kind of messy data
- * #413 Some items are classified
+  * #430 Gunsmith reports the wrong mods for sale
+  * #429 Sonic Simulation Emblem is Classified
+  * #424 UnhandledException for Vendors on profile with little/no progress
+  * #423 All masterwork plugs are returned even if they can't actually be used
+  * #415 GetVendor: Kind of messy data
+  * #413 Some items are classified
 
 ## [2.1.3] - 2018-02-22
 ### Added
