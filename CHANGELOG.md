@@ -5,6 +5,7 @@
 * Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow. These features are not yet available to 3rd parties, but we will keep you posted.
 * A new Application History page shows a user the in-game actions performed through both 1st and 3rd party applications, so that users can more reliably monitor what apps are doing with their characters, items etc.
 * Team Scores added to Nightfall Strikes view on the web.
+* There is a new component for Vendor requests, "VendorGroups".  This grabs dynamic categorizations of groups for vendors, and comes with its own new set of Destiny Definitions in the manifest.  This is a replacement for the confusing and obsolete "VendorCategories" concept from the Destiny 1.0 API, which not only wasn't as dynamic as we want but also was very confusing to talk about (given that vendor sale items are also grouped by "Categories").
 ### Changed
 * Vendor location data should now be accurate.
 * Nightfall activities should now be categorized correctly.
@@ -15,6 +16,8 @@
   * #423 All masterwork plugs are returned even if they can't actually be used
   * #415 GetVendor: Kind of messy data
   * #413 Some items are classified
+### Removed
+* Vendor Categories was removed as a concept.  There was already no data populating for this type of entity in Destiny 2, so it shouldn't cause anyone harm.
 
 ## [2.1.3] - 2018-02-22
 ### Added
