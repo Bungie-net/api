@@ -19,6 +19,7 @@ This section will be added to as time goes by - we're working with it as we go!
   * #423 All masterwork plugs are returned even if they can't actually be used
   * #415 GetVendor: Kind of messy data
   * #413 Some items are classified
+  * #400 Trying to (un)lock items on vault returns not found
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
