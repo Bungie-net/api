@@ -6,6 +6,7 @@
 * A new Application History page shows a user the in-game actions performed through both 1st and 3rd party applications, so that users can more reliably monitor what apps are doing with their characters, items etc.
 * Team Scores added to Nightfall Strikes view on the web.
 ### Changed
+* Vendor location data should now be accurate.
 * Nightfall activities should now be categorized correctly.
 * The following bugs were fixed:
   * #430 Gunsmith reports the wrong mods for sale
