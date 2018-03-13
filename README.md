@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+2018-03-13 - An important note about the latest deployment
+
+The 2.1.4 deployment introduced two new activity modes, which I neglected to mention in my changelog!  I will update that momentarily, however please note that there are two new Activity Modes that cover Nightfall: ScoredNightfall (46) and ScoredHeroicNightfall (47).  Due to some internal issues, you will see that the first few days of scored nightfalls still logged as the original Nightfall activity type.  We are unable to fix that issue at this time, but all Nightfalls since then should be getting logged under the ScoredNightfall and ScoredHeroicNightfall activity modes.
+
 2018-03-07 - Our newest deployment is in progress.  Highlights:
 
 * Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow.  These features are not yet available to 3rd parties, but we will keep you posted.
