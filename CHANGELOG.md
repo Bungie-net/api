@@ -1,5 +1,12 @@
 # Changelog
 
+## [2.1.5] -2018-03-27
+### Added
+* Rumble as an activity mode
+* A new component, CurrencyLookups, that you can ask for alongside Vendor data for a quick reference of the requesting character's items and quantities of those items.
+### Changed
+* The Vendor APIs are officially out of beta.  Have at them, and as usual file any bugs you see!
+
 ## [2.1.4] -2018-03-07
 ### Added
 * Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow. These features are not yet available to 3rd parties, but we will keep you posted.
