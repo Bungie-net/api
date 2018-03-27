@@ -6,24 +6,7 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-03-13 - An important note about the latest deployment
-
-The 2.1.4 deployment introduced two new activity modes, which I neglected to mention in my changelog!  I will update that momentarily, however please note that there are two new Activity Modes that cover Nightfall: ScoredNightfall (46) and ScoredHeroicNightfall (47).  Due to some internal issues, you will see that the first few days of scored nightfalls still logged as the original Nightfall activity type.  We are unable to fix that issue at this time, but all Nightfalls since then should be getting logged under the ScoredNightfall and ScoredHeroicNightfall activity modes.
-
-2018-03-07 - Our newest deployment is in progress.  Highlights:
-
-* Insert Plugs action now ready for Bungie use, alongside the Advanced Write Action authorization flow.  These features are not yet available to 3rd parties, but we will keep you posted.
-* A new Application History page shows a user the in-game actions performed through both 1st and 3rd party applications, so that users can more reliably monitor what apps are doing with their characters, items etc.
-* Team Scores added to Nightfall Strikes view on the web.
-* Nightfall activities should now be categorized correctly.
-* The following bugs were fixed:
-  * #430 Gunsmith reports the wrong mods for sale
-  * #429 Sonic Simulation Emblem is Classified
-  * #424 UnhandledException for Vendors on profile with little/no progress
-  * #423 All masterwork plugs are returned even if they can't actually be used
-  * #415 GetVendor: Kind of messy data
-  * #413 Some items are classified
-  * #400 Trying to (un)lock items on vault returns not found
+2018-03-27 - A new Bungie.Net deployment is in progress.  A new version of the API documentation and a changelist will be out later today!
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
