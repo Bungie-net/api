@@ -6,7 +6,13 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-03-27 - A new Bungie.Net deployment is in progress.  A new version of the API documentation and a changelist will be out later today!
+2018-03-27 - A new Bungie.Net deployment is in progress.  A new version of the API documentation and a changelist will be out later today!  Not much new from an API endpoint perspective.
+
+- Added:
+  - Rumble as an activity mode
+  - A new component, CurrencyLookups, that you can ask for alongside Vendor data for a quick reference of the requesting character's items and quantities of those items.
+
+
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
