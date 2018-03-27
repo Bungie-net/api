@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.4"
+    "version": "2.1.5"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -4391,10 +4391,9 @@
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Vendors/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Get currently available vendors from the list of vendors that can possibly have rotating inventory. Note that this does not include things like preview vendors and vendors-as-kiosks, neither of whom have rotating/dynamic inventories. Use their definitions as-is for those. PREVIEW: This service is not yet active, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
+        "description": "Get currently available vendors from the list of vendors that can possibly have rotating inventory. Note that this does not include things like preview vendors and vendors-as-kiosks, neither of whom have rotating/dynamic inventories. Use their definitions as-is for those.",
         "operationId": "Destiny2.GetVendors",
         "parameters": [
           {
@@ -4472,17 +4471,15 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Vendors/{vendorHash}/": {
       "get": {
         "tags": [
-          "Destiny2",
-          "Preview"
+          "Destiny2"
         ],
-        "description": "Get the details of a specific Vendor. PREVIEW: This service is not yet active, but we are returning the planned schema of the endpoint for review, comment, and preparation for its eventual implementation.",
+        "description": "Get the details of a specific Vendor.",
         "operationId": "Destiny2.GetVendor",
         "parameters": [
           {
@@ -4568,8 +4565,7 @@
               }
             }
           }
-        },
-        "x-preview": true
+        }
       }
     },
     "/Destiny2/Actions/Items/TransferItem/": {
@@ -5740,7 +5736,8 @@
               "44",
               "45",
               "46",
-              "47"
+              "47",
+              "48"
             ]
           },
           {
@@ -11589,7 +11586,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -11753,6 +11751,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         },
@@ -12792,7 +12794,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -12956,6 +12959,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         },
@@ -13022,7 +13029,8 @@
         "44",
         "45",
         "46",
-        "47"
+        "47",
+        "48"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13186,6 +13194,10 @@
         {
           "numericValue": "47",
           "identifier": "ScoredHeroicNightfall"
+        },
+        {
+          "numericValue": "48",
+          "identifier": "Rumble"
         }
       ]
     },
@@ -17225,6 +17237,7 @@
         "705",
         "706",
         "707",
+        "750",
         "801",
         "802",
         "803",
@@ -18981,6 +18994,10 @@
           "identifier": "ActivityLoggingDisabled"
         },
         {
+          "numericValue": "750",
+          "identifier": "ClanRequiresExistingDestinyAccount"
+        },
+        {
           "numericValue": "801",
           "identifier": "ItemAlreadyFollowed"
         },
@@ -20285,7 +20302,8 @@
         "400",
         "401",
         "402",
-        "500"
+        "500",
+        "600"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -20407,6 +20425,11 @@
           "numericValue": "500",
           "identifier": "Kiosks",
           "description": "Asking for this component will return you the account's Kiosk statuses: that is, what items have been filled out/acquired. But only if you are the currently authenticated user or the user has elected to allow anonymous viewing of its progression info."
+        },
+        {
+          "numericValue": "600",
+          "identifier": "CurrencyLookups",
+          "description": "A \"shortcut\" component that will give you all of the item hashes/quantities of items that the requested character can use to determine if an action (purchasing, socket insertion) has the required currency. (recall that all currencies are just items, and that some vendor purchases require items that you might not traditionally consider to be a \"currency\", like plugs/mods!)"
         }
       ]
     },
@@ -20542,6 +20565,16 @@
               "$ref": "#/definitions/DestinyItemComponentSetOfint64"
             }
           ]
+        },
+        "characterCurrencyLookups": {
+          "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyCurrenciesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "CurrencyLookups"
         }
       }
     },
@@ -21727,7 +21760,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -21891,6 +21925,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         },
@@ -21986,7 +22024,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -22150,6 +22189,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         }
@@ -22867,7 +22910,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -23034,6 +23078,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         },
@@ -23989,6 +24037,39 @@
         }
       }
     },
+    "Destiny.Components.Inventory.DestinyCurrenciesComponent": {
+      "description": "This component provides a quick lookup of every item the requested character has and how much of that item they have.\r\nRequesting this component will allow you to circumvent manually putting together the list of which currencies you have for the purpose of testing currency requirements on an item being purchased, or operations that have costs.\r\nYou *could* figure this out yourself by doing a GetCharacter or GetProfile request and forming your own lookup table, but that is inconvenient enough that this feels like a worthwhile (and optional) redundency. Don't bother requesting it if you have already created your own lookup from prior GetCharacter/GetProfile calls.",
+      "type": "object",
+      "properties": {
+        "itemQuantities": {
+          "description": "A dictionary - keyed by the item's hash identifier (DestinyInventoryItemDefinition), and whose value is the amount of that item you have across all available inventory buckets for purchasing.\r\nThis allows you to see whether the requesting character can afford any given purchase/action without having to re-create this list itself.",
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "CurrencyLookups"
+    },
+    "DictionaryComponentResponseOfint64AndDestinyCurrenciesComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "CurrencyLookups",
+            "$ref": "#/definitions/Destiny.Components.Inventory.DestinyCurrenciesComponent"
+          }
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
     "Destiny.Responses.DestinyCharacterResponse": {
       "description": "The response contract for GetDestinyCharacter, with components that can be returned for character and item-level data.",
       "type": "object",
@@ -24071,6 +24152,16 @@
               "$ref": "#/definitions/DestinyItemComponentSetOfint64"
             }
           ]
+        },
+        "currencyLookups": {
+          "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyCurrenciesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "CurrencyLookups"
         }
       }
     },
@@ -24112,6 +24203,17 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/Destiny.Entities.Characters.DestinyCharacterActivitiesComponent"
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "SingleComponentResponseOfDestinyCurrenciesComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Components.Inventory.DestinyCurrenciesComponent"
         },
         "privacy": {
           "$ref": "#/definitions/Components.ComponentPrivacySetting"
@@ -24347,6 +24449,16 @@
           "additionalProperties": {
             "$ref": "#/definitions/DestinyItemComponentSetOfint32"
           }
+        },
+        "currencyLookups": {
+          "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyCurrenciesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "CurrencyLookups"
         }
       }
     },
@@ -24881,6 +24993,16 @@
               "$ref": "#/definitions/DestinyItemComponentSetOfint32"
             }
           ]
+        },
+        "currencyLookups": {
+          "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyCurrenciesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "CurrencyLookups"
         }
       }
     },
@@ -26555,7 +26677,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26719,6 +26842,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         }
@@ -26784,7 +26911,8 @@
             "44",
             "45",
             "46",
-            "47"
+            "47",
+            "48"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26948,6 +27076,10 @@
             {
               "numericValue": "47",
               "identifier": "ScoredHeroicNightfall"
+            },
+            {
+              "numericValue": "48",
+              "identifier": "Rumble"
             }
           ]
         }
@@ -27046,12 +27178,7 @@
       "format": "int32",
       "enum": [
         "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6"
+        "1"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -27063,31 +27190,6 @@
           "numericValue": "1",
           "identifier": "InsertPlugs",
           "description": "Insert plugs into sockets."
-        },
-        {
-          "numericValue": "2",
-          "identifier": "BuyItemFromVendor",
-          "description": "Exchange currency to purchase something from a vendor."
-        },
-        {
-          "numericValue": "3",
-          "identifier": "RefundItem",
-          "description": "Return an item to a vendor that accepts returns."
-        },
-        {
-          "numericValue": "4",
-          "identifier": "DismantleGroupA",
-          "description": "Dismantle highest value weapons and armor. This group requires permission for a specific item and the resulting token can be used once on that specific item."
-        },
-        {
-          "numericValue": "5",
-          "identifier": "DismantleGroupB",
-          "description": "Dismantle high value weapons and armor."
-        },
-        {
-          "numericValue": "6",
-          "identifier": "DismantleGroupC",
-          "description": "Dismantle mid value weapons and armor."
         }
       ]
     },
