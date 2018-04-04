@@ -5,6 +5,7 @@
 * GetApplicationApiUsage - A new endpoint for viewing your application's API usage.
 * Fireteam Services - Many new endpoints for creating Fireteams through Clans that result in on-console Fireteam creation.  Currently not available for 3rd party developers, but the documentation exists here for your reference in case we release this for more general use in the future.
 * non-Crimson "Doubles" added as an Activity Mode, for potential future use.  Added an "All Doubles" mode as a parent mode to both Crimson Doubles and non-Crimson doubles.
+* Added a field to mark some Item Categories as "deprecated": categories that neither have any items currently in that category, nor will likely have items in that category in the future, but that I won't remove from the API in case doing so would break anyone with hard references to them.
 
 ## [2.1.5] -2018-03-27
 ### Added
