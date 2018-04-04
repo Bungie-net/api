@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.1.6] -2018-04-04
+### Added
+* GetApplicationApiUsage - A new endpoint for viewing your application's API usage.
+* Fireteam Services - Many new endpoints for creating Fireteams through Clans that result in on-console Fireteam creation.  Currently not available for 3rd party developers, but the documentation exists here for your reference in case we release this for more general use in the future.
+* non-Crimson "Doubles" added as an Activity Mode, for potential future use.  Added an "All Doubles" mode as a parent mode to both Crimson Doubles and non-Crimson doubles.
+
 ## [2.1.5] -2018-03-27
 ### Added
 * Rumble as an activity mode
