@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.5"
+    "version": "2.1.6"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -21,12 +21,85 @@
     "https"
   ],
   "paths": {
+    "/App/ApiUsage/{applicationId}/": {
+      "get": {
+        "tags": [
+          "App"
+        ],
+        "description": "Get API usage by application for time frame specified.",
+        "operationId": "App.GetApplicationApiUsage",
+        "parameters": [
+          {
+            "name": "applicationId",
+            "in": "path",
+            "description": "ID of the application to get usage statistics.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "End time for query. Goes to now if not specified.",
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "Start time for query. Goes to 24 hours ago if not specified.",
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadUserData"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Applications.ApiUsage"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/App/FirstParty/": {
       "get": {
         "tags": [
           "App"
         ],
-        "description": "Get of applications created by Bungie.",
+        "description": "Get list of applications created by Bungie.",
         "operationId": "App.GetBungieApplications",
         "parameters": [],
         "deprecated": false,
@@ -5737,7 +5810,9 @@
               "45",
               "46",
               "47",
-              "48"
+              "48",
+              "49",
+              "50"
             ]
           },
           {
@@ -6857,6 +6932,476 @@
           }
         }
       }
+    },
+    "/Fireteam/Clan/{groupId}/ActiveCount/": {
+      "get": {
+        "tags": [
+          "Fireteam"
+        ],
+        "description": "Gets a count of all active non-public fireteams for the specified clan. Maximum value returned is 25.",
+        "operationId": "Fireteam.GetActivePrivateClanFireteamCount",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The group id of the clan.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadGroups"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Fireteam/Clan/{groupId}/Available/{platform}/{activityType}/{dateRange}/{slotFilter}/{publicOnly}/{page}/": {
+      "get": {
+        "tags": [
+          "Fireteam"
+        ],
+        "description": "Gets a listing of all of this clan's fireteams that are have available slots. Caller is not checked for join criteria so caching is maximized.",
+        "operationId": "Fireteam.GetAvailableClanFireteams",
+        "parameters": [
+          {
+            "name": "activityType",
+            "in": "path",
+            "description": "The activity type to filter by.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          {
+            "name": "dateRange",
+            "in": "path",
+            "description": "The date range to grab available fireteams.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The group id of the clan.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Zero based page",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "platform",
+            "in": "path",
+            "description": "The platform filter.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "publicOnly",
+            "in": "path",
+            "description": "Determines public/private filtering.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ]
+          },
+          {
+            "name": "slotFilter",
+            "in": "path",
+            "description": "Filters based on available slots",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ]
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadGroups"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/SearchResultOfFireteamSummary"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Fireteam/Search/Available/{platform}/{activityType}/{dateRange}/{slotFilter}/{page}/": {
+      "get": {
+        "tags": [
+          "Fireteam"
+        ],
+        "description": "Gets a listing of all public fireteams starting now with open slots. Caller is not checked for join criteria so caching is maximized.",
+        "operationId": "Fireteam.SearchPublicAvailableClanFireteams",
+        "parameters": [
+          {
+            "name": "activityType",
+            "in": "path",
+            "description": "The activity type to filter by.",
+            "required": true,
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4",
+              "5"
+            ]
+          },
+          {
+            "name": "dateRange",
+            "in": "path",
+            "description": "The date range to grab available fireteams.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3",
+              "4"
+            ]
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Zero based page",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "platform",
+            "in": "path",
+            "description": "The platform filter.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
+          },
+          {
+            "name": "slotFilter",
+            "in": "path",
+            "description": "Filters based on available slots",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ]
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadGroups"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/SearchResultOfFireteamSummary"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Fireteam/Clan/{groupId}/My/{platform}/{includeClosed}/{page}/": {
+      "get": {
+        "tags": [
+          "Fireteam"
+        ],
+        "description": "Gets a listing of all clan fireteams that caller is an applicant, a member, or an alternate of.",
+        "operationId": "Fireteam.GetMyClanFireteams",
+        "parameters": [
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The group id of the clan.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "includeClosed",
+            "in": "path",
+            "description": "If true, return fireteams that have been closed.",
+            "required": true,
+            "type": "boolean"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "Zero based page",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "platform",
+            "in": "path",
+            "description": "The platform filter.",
+            "required": true,
+            "type": "integer",
+            "format": "byte",
+            "enum": [
+              "0",
+              "1",
+              "2",
+              "3"
+            ]
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadGroups"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/SearchResultOfFireteamResponse"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Fireteam/Clan/{groupId}/Summary/{fireteamId}/": {
+      "get": {
+        "tags": [
+          "Fireteam"
+        ],
+        "description": "Gets a specific clan fireteam.",
+        "operationId": "Fireteam.GetClanFireteam",
+        "parameters": [
+          {
+            "name": "fireteamId",
+            "in": "path",
+            "description": "The unique id of the fireteam.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "groupId",
+            "in": "path",
+            "description": "The group id of the clan.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadGroups"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Fireteam.FireteamResponse"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -6939,6 +7484,78 @@
           "description": "Can perform actions that will result in a prompt to the user via the Destiny app."
         }
       ]
+    },
+    "Applications.ApiUsage": {
+      "type": "object",
+      "properties": {
+        "range": {
+          "description": "The date range for the data being reported.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Dates.DateRange"
+            }
+          ]
+        },
+        "apiCalls": {
+          "description": "Counts for on API calls made for the time range.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Applications.Series"
+          }
+        },
+        "throttledRequests": {
+          "description": "Instances of blocked requests or requests that crossed the warn threshold during the time range.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Applications.Series"
+          }
+        }
+      }
+    },
+    "Dates.DateRange": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "end": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Applications.Series": {
+      "type": "object",
+      "properties": {
+        "datapoints": {
+          "description": "Collection of samples with time and value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Applications.Datapoint"
+          }
+        },
+        "target": {
+          "description": "Target to which to datapoints apply.",
+          "type": "string"
+        }
+      }
+    },
+    "Applications.Datapoint": {
+      "type": "object",
+      "properties": {
+        "time": {
+          "format": "date-time",
+          "description": "Timestamp for the related count.",
+          "type": "string"
+        },
+        "count": {
+          "format": "double",
+          "description": "Count associated with timestamp",
+          "type": "number"
+        }
+      }
     },
     "Applications.Application": {
       "type": "object",
@@ -8041,10 +8658,6 @@
         "isPublicTopicAdminOnly": {
           "type": "boolean"
         },
-        "primaryAlliedGroupId": {
-          "format": "int64",
-          "type": "integer"
-        },
         "motto": {
           "type": "string"
         },
@@ -8081,9 +8694,6 @@
         },
         "avatarPath": {
           "type": "string"
-        },
-        "isAllianceOwner": {
-          "type": "boolean"
         },
         "conversationId": {
           "format": "int64",
@@ -9708,7 +10318,7 @@
         },
         "maximum": {
           "format": "int32",
-          "description": "The maximum possible value for this stat that we think the item can roll.",
+          "description": "The maximum possible value for this stat that we think the item can roll.\r\nWARNING: In Destiny 1, this field was calculated using the potential stat rolls on the item's talent grid. In Destiny 2, items no longer have meaningful talent grids and instead have sockets: but the calculation of this field was never altered to adapt to this change. As such, this field should be considered deprecated until we can address this oversight.",
           "type": "integer"
         }
       }
@@ -10382,19 +10992,6 @@
           "type": "string"
         },
         "type": {
-          "type": "string"
-        }
-      }
-    },
-    "Dates.DateRange": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "end": {
-          "format": "date-time",
           "type": "string"
         }
       }
@@ -11587,7 +12184,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -11755,6 +12354,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         },
@@ -12795,7 +13402,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -12963,6 +13572,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         },
@@ -13030,7 +13647,9 @@
         "45",
         "46",
         "47",
-        "48"
+        "48",
+        "49",
+        "50"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13198,6 +13817,14 @@
         {
           "numericValue": "48",
           "identifier": "Rumble"
+        },
+        {
+          "numericValue": "49",
+          "identifier": "AllDoubles"
+        },
+        {
+          "numericValue": "50",
+          "identifier": "Doubles"
         }
       ]
     },
@@ -15572,6 +16199,10 @@
           "description": "If True, this category should be visible in UI. Sometimes we make categories that we don't think are interesting externally. It's up to you if you want to skip on showing them.",
           "type": "boolean"
         },
+        "deprecated": {
+          "description": "If True, this category has been deprecated: it may have no items left, or there may be only legacy items that remain in it which are no longer relevant to the game.",
+          "type": "boolean"
+        },
         "shortTitle": {
           "description": "A shortened version of the title. The reason why we have this is because the Armory in German had titles that were too long to display in our UI, so these were localized abbreviated versions of those categories. The property still exists today, even though the Armory doesn't exist for D2... yet.",
           "type": "string"
@@ -17283,6 +17914,8 @@
         "1235",
         "1236",
         "1237",
+        "1238",
+        "1239",
         "1300",
         "1301",
         "1302",
@@ -17500,7 +18133,28 @@
         "2803",
         "2804",
         "2805",
-        "2806"
+        "2806",
+        "3000",
+        "3001",
+        "3002",
+        "3003",
+        "3004",
+        "3005",
+        "3006",
+        "3007",
+        "3008",
+        "3009",
+        "3010",
+        "3011",
+        "3012",
+        "3013",
+        "3014",
+        "3015",
+        "3016",
+        "3017",
+        "3018",
+        "3019",
+        "3020"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19178,6 +19832,14 @@
           "identifier": "PsnApiAccountAttributeMissing"
         },
         {
+          "numericValue": "1238",
+          "identifier": "PsnApiNoPermission"
+        },
+        {
+          "numericValue": "1239",
+          "identifier": "PsnApiTargetUserBlocked"
+        },
+        {
           "numericValue": "1300",
           "identifier": "XblExSystemDisabled"
         },
@@ -20049,6 +20711,90 @@
         {
           "numericValue": "2806",
           "identifier": "AwaWriteRequestTokenUsageLimitReached"
+        },
+        {
+          "numericValue": "3000",
+          "identifier": "ClanFireteamNotFound"
+        },
+        {
+          "numericValue": "3001",
+          "identifier": "ClanFireteamAddNoAlternatesForImmediate"
+        },
+        {
+          "numericValue": "3002",
+          "identifier": "ClanFireteamFull"
+        },
+        {
+          "numericValue": "3003",
+          "identifier": "ClanFireteamAltFull"
+        },
+        {
+          "numericValue": "3004",
+          "identifier": "ClanFireteamBlocked"
+        },
+        {
+          "numericValue": "3005",
+          "identifier": "ClanFireteamPlayerEntryNotFound"
+        },
+        {
+          "numericValue": "3006",
+          "identifier": "ClanFireteamPermissions"
+        },
+        {
+          "numericValue": "3007",
+          "identifier": "ClanFireteamInvalidPlatform"
+        },
+        {
+          "numericValue": "3008",
+          "identifier": "ClanFireteamCannotAdjustSlotCount"
+        },
+        {
+          "numericValue": "3009",
+          "identifier": "ClanFireteamInvalidPlayerPlatform"
+        },
+        {
+          "numericValue": "3010",
+          "identifier": "ClanFireteamNotReadyForInvitesNotEnoughPlayers"
+        },
+        {
+          "numericValue": "3011",
+          "identifier": "ClanFireteamGameInvitesNotSupportForPlatform"
+        },
+        {
+          "numericValue": "3012",
+          "identifier": "ClanFireteamPlatformInvitePreqFailure"
+        },
+        {
+          "numericValue": "3013",
+          "identifier": "ClanFireteamInvalidAuthContext"
+        },
+        {
+          "numericValue": "3014",
+          "identifier": "ClanFireteamInvalidAuthProviderPsn"
+        },
+        {
+          "numericValue": "3015",
+          "identifier": "ClanFireteamPs4SessionFull"
+        },
+        {
+          "numericValue": "3016",
+          "identifier": "ClanFireteamInvalidAuthToken"
+        },
+        {
+          "numericValue": "3017",
+          "identifier": "ClanFireteamScheduledFireteamsDisabled"
+        },
+        {
+          "numericValue": "3018",
+          "identifier": "ClanFireteamNotReadyForInvitesNotScheduledYet"
+        },
+        {
+          "numericValue": "3019",
+          "identifier": "ClanFireteamNotReadyForInvitesClosed"
+        },
+        {
+          "numericValue": "3020",
+          "identifier": "ClanFireteamScheduledFireteamsRequireAdminPermissions"
         }
       ]
     },
@@ -21761,7 +22507,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -21929,6 +22677,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         },
@@ -22025,7 +22781,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -22193,6 +22951,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         }
@@ -22911,7 +23677,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -23082,6 +23850,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         },
@@ -26678,7 +27454,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26846,6 +27624,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         }
@@ -26912,7 +27698,9 @@
             "45",
             "46",
             "47",
-            "48"
+            "48",
+            "49",
+            "50"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27080,6 +27868,14 @@
             {
               "numericValue": "48",
               "identifier": "Rumble"
+            },
+            {
+              "numericValue": "49",
+              "identifier": "AllDoubles"
+            },
+            {
+              "numericValue": "50",
+              "identifier": "Doubles"
             }
           ]
         }
@@ -27965,6 +28761,355 @@
           "$ref": "#/definitions/Partnerships.PartnershipType"
         }
       }
+    },
+    "Fireteam.FireteamActivityType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "All"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Raid"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Crucible"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Trials"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Nightfall"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Anything"
+        }
+      ]
+    },
+    "Fireteam.FireteamDateRange": {
+      "format": "byte",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "All"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Now"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "TwentyFourHours"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "FortyEightHours"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "ThisWeek"
+        }
+      ]
+    },
+    "Fireteam.FireteamPlatform": {
+      "format": "byte",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Playstation4"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "XboxOne"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Blizzard"
+        }
+      ]
+    },
+    "Fireteam.FireteamPublicSearchOption": {
+      "format": "byte",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "PublicAndPrivate"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "PublicOnly"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "PrivateOnly"
+        }
+      ]
+    },
+    "Fireteam.FireteamSlotSearch": {
+      "format": "byte",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "NoSlotRestriction"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "HasOpenPlayerSlots"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "HasOpenPlayerOrAltSlots"
+        }
+      ]
+    },
+    "Fireteam.FireteamSummary": {
+      "type": "object",
+      "properties": {
+        "fireteamId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "groupId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "platform": {
+          "$ref": "#/definitions/Fireteam.FireteamPlatform"
+        },
+        "activityType": {
+          "$ref": "#/definitions/Fireteam.FireteamActivityType"
+        },
+        "isImmediate": {
+          "type": "boolean"
+        },
+        "scheduledTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "ownerMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "playerSlotCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "alternateSlotCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "availablePlayerSlotCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "availableAlternateSlotCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "title": {
+          "type": "string"
+        },
+        "dateCreated": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "dateModified": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "locale": {
+          "type": "string"
+        },
+        "isValid": {
+          "type": "boolean"
+        }
+      }
+    },
+    "SearchResultOfFireteamSummary": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fireteam.FireteamSummary"
+          }
+        },
+        "totalResults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        },
+        "query": {
+          "$ref": "#/definitions/Queries.PagedQuery"
+        },
+        "replacementContinuationToken": {
+          "type": "string"
+        },
+        "useTotalResults": {
+          "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Fireteam.FireteamResponse": {
+      "type": "object",
+      "properties": {
+        "Summary": {
+          "$ref": "#/definitions/Fireteam.FireteamSummary"
+        },
+        "Members": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fireteam.FireteamMember"
+          }
+        },
+        "Alternates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fireteam.FireteamMember"
+          }
+        }
+      }
+    },
+    "Fireteam.FireteamMember": {
+      "type": "object",
+      "properties": {
+        "destinyUserInfo": {
+          "$ref": "#/definitions/User.UserInfoCard"
+        },
+        "bungieNetUserInfo": {
+          "$ref": "#/definitions/User.UserInfoCard"
+        },
+        "characterId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "dateJoined": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "hasMicrophone": {
+          "type": "boolean"
+        },
+        "lastPlatformInviteAttemptDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "lastPlatformInviteAttemptResult": {
+          "$ref": "#/definitions/Fireteam.FireteamPlatformInviteResult"
+        }
+      }
+    },
+    "Fireteam.FireteamPlatformInviteResult": {
+      "format": "byte",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Success"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "AlreadyInFireteam"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Throttled"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "ServiceError"
+        }
+      ]
+    },
+    "SearchResultOfFireteamResponse": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Fireteam.FireteamResponse"
+          }
+        },
+        "totalResults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        },
+        "query": {
+          "$ref": "#/definitions/Queries.PagedQuery"
+        },
+        "replacementContinuationToken": {
+          "type": "string"
+        },
+        "useTotalResults": {
+          "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
+          "type": "boolean"
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -28024,6 +29169,10 @@
     {
       "name": "Trending",
       "description": "trending"
+    },
+    {
+      "name": "Fireteam",
+      "description": "fireteam"
     }
   ],
   "externalDocs": {
