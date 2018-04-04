@@ -6,12 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-03-27 - A new Bungie.Net deployment is in progress.  A new version of the API documentation and a changelist will be out later today!  Not much new from an API endpoint perspective.
+2018-04-04 - The Bungie.net API has been updated to 2.1.6!
 
-- Added:
-  - Rumble as an activity mode
-  - A new component, CurrencyLookups, that you can ask for alongside Vendor data for a quick reference of the requesting character's items and quantities of those items.
-
+* Added
+  * GetApplicationApiUsage - A new endpoint for viewing your application's API usage.
+  * Fireteam Services - Many new endpoints for creating Fireteams through Clans that result in on-console Fireteam creation.  Currently not available for 3rd party developers, but the documentation exists here for your reference in case we release this for more general use in the future.
+  * non-Crimson "Doubles" added as an Activity Mode, for potential future use.  Added an "All Doubles" mode as a parent mode to both Crimson Doubles and non-Crimson doubles.
 
 
 # I'm New to the API.  What can I do with it?
