@@ -6,13 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-04-04 - The Bungie.net API has been updated to 2.1.6!
+2018-05-03 - Preparation for 3.2.0 game update
 
-* Added
-  * GetApplicationApiUsage - A new endpoint for viewing your application's API usage.
-  * Fireteam Services - Many new endpoints for creating Fireteams through Clans that result in on-console Fireteam creation.  Currently not available for 3rd party developers, but the documentation exists here for your reference in case we release this for more general use in the future.
-  * non-Crimson "Doubles" added as an Activity Mode, for potential future use.  Added an "All Doubles" mode as a parent mode to both Crimson Doubles and non-Crimson doubles.
-  * Added a field to mark some Item Categories as "deprecated": categories that neither have any items currently in that category, nor will likely have items in that category in the future, but that I won't remove from the API in case doing so would break anyone with hard references to them.
+Please read and keep tabs on the following wiki page, I will be adding to it as time allows but this covers essential features that you will want to implement against.  This will be particularly important to those of you who want to properly support Emote Wheels (or socketed items in general in the future), as we are changing the way we return socket data:
+
+https://github.com/Bungie-net/api/wiki/3.2.0-API-Changes
 
 
 # I'm New to the API.  What can I do with it?
