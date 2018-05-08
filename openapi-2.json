@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.1.6"
+    "version": "2.2.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -26,7 +26,7 @@
         "tags": [
           "App"
         ],
-        "description": "Get API usage by application for time frame specified.",
+        "description": "Get API usage by application for time frame specified. You can go as far back as 30 days ago, and can ask for up to a 48 hour window of time in a single request. You must be authenticated with at least the ReadUserData permission to access this endpoint.",
         "operationId": "App.GetApplicationApiUsage",
         "parameters": [
           {
@@ -5812,7 +5812,15 @@
               "47",
               "48",
               "49",
-              "50"
+              "50",
+              "51",
+              "52",
+              "53",
+              "54",
+              "55",
+              "56",
+              "57",
+              "58"
             ]
           },
           {
@@ -7257,9 +7265,15 @@
         "operationId": "Fireteam.GetMyClanFireteams",
         "parameters": [
           {
+            "name": "groupFilter",
+            "in": "query",
+            "description": "If true, filter by clan. Otherwise, ignore the clan and show all of the user's fireteams.",
+            "type": "boolean"
+          },
+          {
             "name": "groupId",
             "in": "path",
-            "description": "The group id of the clan.",
+            "description": "The group id of the clan. (This parameter is ignored unless the optional query parameter groupFilter is true).",
             "required": true,
             "type": "integer",
             "format": "int64"
@@ -9319,6 +9333,10 @@
           "items": {
             "$ref": "#/definitions/Destiny.DestinyItemQuantity"
           }
+        },
+        "icon": {
+          "description": "If this progression step has a specific icon related to it, this is the icon to show.",
+          "type": "string"
         }
       }
     },
@@ -10262,6 +10280,10 @@
       "description": "Information about the item's calculated stats, with as much data as we can find for the stats without having an actual instance of the item.\r\nNote that this means the entire concept of providing these stats is fundamentally insufficient: we cannot predict with 100% accuracy the conditions under which an item can spawn, so we use various heuristics to attempt to simulate the conditions as accurately as possible. Actual stats for items in-game can and will vary, but these should at least be useful base points for comparison and display.\r\nIt is also worth noting that some stats, like Magazine size, have further calculations performed on them by scripts in-game and on the game servers that BNet does not have access to. We cannot know how those stats are further transformed, and thus some stats will be inaccurate even on instances of items in BNet vs. how they appear in-game. This is a known limitation of our item statistics, without any planned fix.",
       "type": "object",
       "properties": {
+        "disablePrimaryStatDisplay": {
+          "description": "If true, the game won't show the \"primary\" stat on this item when you inspect it.\r\nNOTE: This is being manually mapped, because I happen to want it in a block that isn't going to directly create this derivative block.",
+          "type": "boolean"
+        },
         "statGroupHash": {
           "format": "uint32",
           "description": "If the item's stats are meant to be modified by a DestinyStatGroupDefinition, this will be the identifier for that definition.\r\nIf you are using live data or precomputed stats data on the DestinyInventoryItemDefinition.stats.stats property, you don't have to worry about statGroupHash and how it alters stats: the already altered stats are provided to you. But if you want to see how the sausage gets made, or perform computations yourself, this is valuable information.",
@@ -10343,6 +10365,15 @@
           "description": "True if the stat is computed rather than being delivered as a raw value on items.\r\nFor instance, the Light stat in Destiny 1 was a computed stat.",
           "type": "boolean"
         },
+        "statCategory": {
+          "description": "The category of the stat, according to the game.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.DestinyStatCategory"
+            }
+          ]
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -10381,6 +10412,35 @@
         {
           "numericValue": "2",
           "identifier": "Item"
+        }
+      ]
+    },
+    "Destiny.DestinyStatCategory": {
+      "format": "int32",
+      "description": "At last, stats have categories. Use this for whatever purpose you might wish.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Gameplay"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Weapon"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Defense"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Primary"
         }
       ]
     },
@@ -10584,6 +10644,13 @@
           "description": "If True, equipped items should have their custom art dyes applied when rendering the item. Otherwise, custom art dyes on an item should be ignored if the item is equipped in this slot.",
           "type": "boolean"
         },
+        "artDyeChannels": {
+          "description": "The Art Dye Channels that apply to this equipment slot.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyArtDyeReference"
+          }
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -10600,6 +10667,15 @@
         }
       },
       "x-mobile-manifest-name": "EquipmentSlots"
+    },
+    "Destiny.Definitions.DestinyArtDyeReference": {
+      "type": "object",
+      "properties": {
+        "artDyeChannelHash": {
+          "format": "uint32",
+          "type": "integer"
+        }
+      }
     },
     "Destiny.Definitions.DestinyItemTranslationBlockDefinition": {
       "description": "This Block defines the rendering data associated with the item, if any.",
@@ -10671,6 +10747,10 @@
       "description": "Items like Sacks or Boxes can have items that it shows in-game when you view details that represent the items you can obtain if you use or acquire the item.\r\nThis defines those categories, and gives some insights into that data's source.",
       "type": "object",
       "properties": {
+        "screenStyle": {
+          "description": "A string that the game UI uses as a hint for which detail screen to show for the item. You, too, can leverage this for your own custom screen detail views. Note, however, that these are arbitrarily defined by designers: there's no guarantees of a fixed, known number of these - so fall back to something reasonable if you don't recognize it.",
+          "type": "string"
+        },
         "previewVendorHash": {
           "format": "uint32",
           "description": "If the preview data is derived from a fake \"Preview\" Vendor, this will be the hash identifier for the DestinyVendorDefinition of that fake vendor.",
@@ -11103,6 +11183,10 @@
         "isPreview": {
           "description": "Sometimes a category isn't actually used to sell items, but rather to preview them. This implies different UI (and manual placement of the category in the UI) in the game, and special treatment.",
           "type": "boolean"
+        },
+        "isDisplayOnly": {
+          "description": "If true, this category only displays items: you can't purchase anything in them.",
+          "type": "boolean"
         }
       }
     },
@@ -11121,6 +11205,11 @@
         },
         "title": {
           "type": "string"
+        },
+        "currencyItemHash": {
+          "format": "uint32",
+          "description": "If this overlay has a currency item that it features, this is said featured item.",
+          "type": "integer"
         }
       }
     },
@@ -11138,8 +11227,57 @@
         },
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "displayInBanner": {
+          "description": "If true, this category should be displayed in the \"Banner\" section of the vendor's UI.",
+          "type": "boolean"
+        },
+        "progressionHash": {
+          "format": "uint32",
+          "description": "If it exists, this is the hash identifier of a DestinyProgressionDefinition that represents the progression to show on this display category.\r\nSpecific categories can now have thier own distinct progression, apparently. So that's cool.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
+          }
+        },
+        "sortOrder": {
+          "description": "If this category sorts items in a nonstandard way, this will be the way we sort.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.VendorDisplayCategorySortOrder"
+            }
+          ]
+        },
+        "displayStyleHash": {
+          "format": "uint32",
+          "description": "An indicator of how the category will be displayed in the UI. It's up to you to do something cool or interesting in response to this, or just to treat it as a normal category.",
+          "type": "integer"
+        },
+        "displayStyleIdentifier": {
+          "description": "An indicator of how the category will be displayed in the UI. It's up to you to do something cool or interesting in response to this, or just to treat it as a normal category.",
+          "type": "string"
         }
       }
+    },
+    "Destiny.VendorDisplayCategorySortOrder": {
+      "format": "int32",
+      "description": "Display categories can have custom sort orders. These are the possible options.",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Default"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "SortByTier"
+        }
+      ]
     },
     "Destiny.Definitions.DestinyVendorInteractionDefinition": {
       "description": "A Vendor Interaction is a dialog shown by the vendor other than sale items or transfer screens. The vendor is showing you something, and asking you to reply to it by choosing an option or reward.",
@@ -11489,10 +11627,10 @@
           }
         },
         "currencies": {
-          "description": "This is a pre-compiled aggregation of item value and priceOverrideList, so that we have one place to check for what the purchaser must pay for the item. Use this instead of trying to piece together the price separately.\r\nJUST KIDDING HA this never got populated, who's the idiot now? Hint: Me. Now they'll actually be populated [amola, 2017-11-12]",
+          "description": "This is a pre-compiled aggregation of item value and priceOverrideList, so that we have one place to check for what the purchaser must pay for the item. Use this instead of trying to piece together the price separately.\r\nThe somewhat crappy part about this is that, now that item quantity overrides have dynamic modifiers, this will not necessarily be statically true. If you were using this instead of live data, switch to using live data.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
+            "$ref": "#/definitions/Destiny.Definitions.DestinyVendorItemQuantity"
           }
         },
         "refundPolicy": {
@@ -11593,6 +11731,35 @@
         "isCrm": {
           "description": "If this sale can only be performed as the result of receiving a CRM offer, this is true.",
           "type": "boolean"
+        },
+        "sortValue": {
+          "format": "int32",
+          "description": "*if* the category this item is in supports non-default sorting, this value should represent the sorting value to use, pre-processed and ready to go.",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyVendorItemQuantity": {
+      "description": "In addition to item quantity information for vendor prices, this also has any optional information that may exist about how the item's quantity can be modified. (unfortunately not information that is able to be read outside of the BNet servers, but it's there)",
+      "type": "object",
+      "properties": {
+        "itemHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the item in question. Use it to look up the item's DestinyInventoryItemDefinition.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "itemInstanceId": {
+          "format": "int64",
+          "description": "If this quantity is referring to a specific instance of an item, this will have the item's instance ID. Normally, this will be null.",
+          "type": "integer"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
+          "type": "integer"
         }
       }
     },
@@ -12186,7 +12353,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -12305,7 +12480,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -12362,6 +12537,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         },
@@ -12541,6 +12748,19 @@
               "$ref": "#/definitions/Destiny.Definitions.DestinyObjectiveStatEntryDefinition"
             }
           ]
+        },
+        "minimumVisibilityThreshold": {
+          "format": "int32",
+          "description": "If nonzero, this is the minimum value at which the objective's progression should be shown. Otherwise, don't show it yet.",
+          "type": "integer"
+        },
+        "allowOvercompletion": {
+          "description": "If True, the progress will continue even beyond the point where the objective met its minimum completion requirements. Your UI will have to accommodate it.",
+          "type": "boolean"
+        },
+        "showValueOnComplete": {
+          "description": "If True, you should continue showing the progression value in the UI after it's complete. I mean, we already do that in BNet anyways, but if you want to be better behaved than us you could honor this flag.",
+          "type": "boolean"
         },
         "hash": {
           "format": "uint32",
@@ -13109,6 +13329,10 @@
           "format": "int32",
           "description": "The raw \"Investment\" value for the stat, before transformations are performed to turn this raw stat into stats that are displayed in the game UI.",
           "type": "integer"
+        },
+        "isConditionallyActive": {
+          "description": "If this is true, the stat will only be applied on the item in certain game state conditions, and we can't know statically whether or not this stat will be applied. Check the \"live\" API data instead for whether this value is being applied on a specific instance of the item in question, and you can use this to decide whether you want to show the stat on the generic view of the item, or whether you want to show some kind of caveat or warning about the stat value being conditional on game state.",
+          "type": "boolean"
         }
       }
     },
@@ -13404,7 +13628,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -13523,7 +13755,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -13580,6 +13812,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         },
@@ -13649,7 +13913,15 @@
         "47",
         "48",
         "49",
-        "50"
+        "50",
+        "51",
+        "52",
+        "53",
+        "54",
+        "55",
+        "56",
+        "57",
+        "58"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13768,7 +14040,7 @@
         },
         {
           "numericValue": "32",
-          "identifier": "Reserved32"
+          "identifier": "PrivateMatchesAll"
         },
         {
           "numericValue": "37",
@@ -13825,6 +14097,38 @@
         {
           "numericValue": "50",
           "identifier": "Doubles"
+        },
+        {
+          "numericValue": "51",
+          "identifier": "PrivateMatchesClash"
+        },
+        {
+          "numericValue": "52",
+          "identifier": "PrivateMatchesControl"
+        },
+        {
+          "numericValue": "53",
+          "identifier": "PrivateMatchesSupremacy"
+        },
+        {
+          "numericValue": "54",
+          "identifier": "PrivateMatchesCountdown"
+        },
+        {
+          "numericValue": "55",
+          "identifier": "PrivateMatchesSurvival"
+        },
+        {
+          "numericValue": "56",
+          "identifier": "PrivateMatchesMayhem"
+        },
+        {
+          "numericValue": "57",
+          "identifier": "PrivateMatchesRumble"
+        },
+        {
+          "numericValue": "58",
+          "identifier": "HeroicAdventure"
         }
       ]
     },
@@ -14690,6 +14994,23 @@
               "$ref": "#/definitions/Destiny.PlugAvailabilityMode"
             }
           ]
+        },
+        "alternateUiPlugLabel": {
+          "description": "If the plug meets certain state requirements, it may have an alternative label applied to it. This is the alternative label that will be applied in such a situation.",
+          "type": "string"
+        },
+        "alternatePlugStyle": {
+          "description": "The alternate plug of the plug: only applies when the item is in states that only the server can know about and control, unfortunately. See AlternateUiPlugLabel for the related label info.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.PlugUiStyles"
+            }
+          ]
+        },
+        "isDummyPlug": {
+          "description": "If TRUE, this plug is used for UI display purposes only, and doesn't have any interesting effects of its own.",
+          "type": "boolean"
         }
       }
     },
@@ -14912,6 +15233,20 @@
         "hidePerksInItemTooltip": {
           "description": "If this is true, the perks provided by this socket shouldn't be shown in the item's tooltip. This might be useful if it's providing a hidden bonus, or if the bonus is less important than other benefits on the item.",
           "type": "boolean"
+        },
+        "plugSources": {
+          "description": "Indicates where you should go to get plugs for this socket. This will affect how you populate your UI, as well as what plugs are valid for this socket. It's an alternative to having to check for the existence of certain properties (reusablePlugItems for example) to infer where plugs should come from.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.SocketPlugSources"
+            }
+          ]
+        },
+        "reusablePlugSetHash": {
+          "format": "uint32",
+          "description": "If this socket's plugs come from a reusable DestinyPlugSetDefinition, this is the identifier for that set. We added this concept to reduce some major duplication that's going to come from sockets as replacements for what was once implemented as large sets of items and kiosks (like Emotes).",
+          "type": "integer"
         }
       }
     },
@@ -14928,6 +15263,45 @@
           }
         }
       }
+    },
+    "Destiny.SocketPlugSources": {
+      "format": "int32",
+      "description": "Indicates how a socket is populated, and where you should look for valid plug data. This is a flags enumeration field, as you may have to look in multiple sources across multiple components for valid plugs.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "8"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None",
+          "description": "If there's no way we can detect to insert new plugs."
+        },
+        {
+          "numericValue": "1",
+          "identifier": "InventorySourced",
+          "description": "Use plugs found in the player's inventory, based on the socket type rules (see DestinySocketTypeDefinition for more info)"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "ReusablePlugItems",
+          "description": "Use the DestinyItemSocketsComponent.sockets.reusablePlugs property to determine which plugs are valid for this socket."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "ProfilePlugSet",
+          "description": "Use the ProfilePlugSets component data to determine which plugs are valid for this socket."
+        },
+        {
+          "numericValue": "8",
+          "identifier": "CharacterPlugSet",
+          "description": "Use the CharacterPlugSets component data to determine which plugs are valid for this socket."
+        }
+      ]
     },
     "Destiny.Definitions.Sockets.DestinySocketTypeDefinition": {
       "description": "All Sockets have a \"Type\": a set of common properties that determine when the socket allows Plugs to be inserted, what Categories of Plugs can be inserted, and whether the socket is even visible at all given the current game/character/account state.\r\nSee DestinyInventoryItemDefinition for more information about Socketed items and Plugs.",
@@ -15801,8 +16175,41 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinySandboxPerkDefinition"
           }
+        },
+        "perkVisibility": {
+          "description": "Indicates whether this perk should be shown, or if it should be shown disabled.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.ItemPerkVisibility"
+            }
+          ]
         }
       }
+    },
+    "Destiny.ItemPerkVisibility": {
+      "format": "int32",
+      "description": "Indicates how a perk should be shown, or if it should be, in the game UI. Maybe useful for those of you trying to filter out internal-use-only perks (or for those of you trying to figure out what they do!)",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Visible"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Disabled"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Hidden"
+        }
+      ]
     },
     "Destiny.Definitions.Animations.DestinyAnimationReference": {
       "type": "object",
@@ -17677,6 +18084,7 @@
         "310",
         "311",
         "312",
+        "313",
         "400",
         "500",
         "501",
@@ -18882,6 +19290,10 @@
         {
           "numericValue": "312",
           "identifier": "MessagingGroupOptionalChatExceededMaximum"
+        },
+        {
+          "numericValue": "313",
+          "identifier": "PrivateMessagingRequiresDestinyMembership"
         },
         {
           "numericValue": "400",
@@ -21233,6 +21645,16 @@
           ],
           "x-destiny-component-type-dependency": "Kiosks"
         },
+        "profilePlugSets": {
+          "description": "When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more info), this is the set of plugs and their states that are profile-scoped.\r\nThis comes back with ItemSockets, as it is needed for a complete picture of the sockets on requested items.\r\nCOMPONENT TYPE: ItemSockets",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyPlugSetsComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "ItemSockets"
+        },
         "characters": {
           "description": "Basic information about each character, keyed by the CharacterId.\r\nCOMPONENT TYPE: Characters",
           "type": "object",
@@ -21302,6 +21724,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "Kiosks"
+        },
+        "characterPlugSets": {
+          "description": "When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more info), this is the set of plugs and their states, per character, that are character-scoped.\r\nThis comes back with ItemSockets, as it is needed for a complete picture of the sockets on requested items.\r\nCOMPONENT TYPE: ItemSockets",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyPlugSetsComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "ItemSockets"
         },
         "itemComponents": {
           "description": "Information about instanced items across all returned characters, keyed by the item's instance ID.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
@@ -21787,6 +22219,10 @@
         "complete": {
           "description": "Whether or not the Objective is completed.",
           "type": "boolean"
+        },
+        "visible": {
+          "description": "If this is true, the objective is visible in-game. Otherwise, it's not yet visible to the player. Up to you if you want to honor this property.",
+          "type": "boolean"
         }
       }
     },
@@ -21795,6 +22231,109 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/Destiny.Components.Kiosks.DestinyKiosksComponent"
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "Destiny.Components.PlugSets.DestinyPlugSetsComponent": {
+      "description": "Sockets may refer to a \"Plug Set\": a set of reusable plugs that may be shared across multiple sockets (or even, in theory, multiple sockets over multiple items).\r\nThis is the set of those plugs that we came across in the users' inventory, along with the values for plugs in the set. Any given set in this component may be represented in Character and Profile-level, as some plugs may be Profile-level restricted, and some character-level restricted. (note that the ones that are even more specific will remain on the actual socket component itself, as they cannot be reused)",
+      "type": "object",
+      "properties": {
+        "plugs": {
+          "description": "The shared list of plugs for each relevant PlugSet, keyed by the hash identifier of the PlugSet (DestinyPlugSetDefinition).",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/Destiny.Sockets.DestinyItemPlug"
+            }
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinyPlugSetDefinition"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "ItemSockets"
+    },
+    "Destiny.Sockets.DestinyItemPlug": {
+      "type": "object",
+      "properties": {
+        "plugItemHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "plugObjectives": {
+          "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
+          }
+        },
+        "canInsert": {
+          "description": "If true, this plug has met all of its insertion requirements. Big if true.",
+          "type": "boolean"
+        },
+        "enabled": {
+          "description": "If true, this plug will provide its benefits while inserted.",
+          "type": "boolean"
+        },
+        "insertFailIndexes": {
+          "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        },
+        "enableFailIndexes": {
+          "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Sockets.DestinyPlugSetDefinition": {
+      "description": "Sometimes, we have large sets of reusable plugs that are defined identically and thus can (and in some cases, are so large that they *must*) be shared across the places where they are used. These are the definitions for those reusable sets of plugs. \r\nSee DestinyItemSocketEntryDefinition.plugSource and reusablePlugSetHash for the relationship between these reusable plug sets and the sockets that leverage them (for starters, Emotes).",
+      "type": "object",
+      "properties": {
+        "reusablePlugItems": {
+          "description": "This is a list of pre-determined plugs that can be plugged into this socket, without the character having the plug in their inventory.\r\nIf this list is populated, you will not be allowed to plug an arbitrary item in the socket: you will only be able to choose from one of these reusable plugs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyItemSocketEntryPlugItemDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "PlugSets"
+    },
+    "SingleComponentResponseOfDestinyPlugSetsComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Components.PlugSets.DestinyPlugSetsComponent"
         },
         "privacy": {
           "$ref": "#/definitions/Components.ComponentPrivacySetting"
@@ -22509,7 +23048,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -22628,7 +23175,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -22685,6 +23232,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         },
@@ -22783,7 +23362,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -22902,7 +23489,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -22959,6 +23546,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         }
@@ -23679,7 +24298,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -23801,7 +24428,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -23858,6 +24485,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         },
@@ -24023,6 +24682,21 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "Kiosks",
             "$ref": "#/definitions/Destiny.Components.Kiosks.DestinyKiosksComponent"
+          }
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "DictionaryComponentResponseOfint64AndDestinyPlugSetsComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "ItemSockets",
+            "$ref": "#/definitions/Destiny.Components.PlugSets.DestinyPlugSetsComponent"
           }
         },
         "privacy": {
@@ -24276,6 +24950,11 @@
               "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
             }
           ]
+        },
+        "dateCompleted": {
+          "format": "date-time",
+          "description": "If we have any information on when these objectives were completed, this will be the date of that completion. This won't be on many items, but could be interesting for some items that do store this information.",
+          "type": "string"
         }
       },
       "x-destiny-component-type-dependency": "ItemObjectives"
@@ -24473,54 +25152,10 @@
           }
         },
         "reusablePlugs": {
-          "description": "If the item supports reusabe plugs, this is the list of plugs that are allowed to be used for the socket, and any relevant information about whether they are \"enabled\", whether they are allowed to be inserted, and any other information such as objectives.\r\nA Reusable Plug is a plug that you can always insert into this socket as long as its insertion rules are passed, regardless of whether or not you have the plug in your inventory. An example of it failing an insertion rule would be if it has an Objective that needs to be completed before it can be inserted, and that objective hasn't been completed yet.\r\nIn practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info.",
+          "description": "If the item supports reusable plugs, this is the list of plugs that are allowed to be used for the socket, and any relevant information about whether they are \"enabled\", whether they are allowed to be inserted, and any other information such as objectives.\r\nA Reusable Plug is a plug that you can always insert into this socket as long as its insertion rules are passed, regardless of whether or not you have the plug in your inventory. An example of it failing an insertion rule would be if it has an Objective that needs to be completed before it can be inserted, and that objective hasn't been completed yet.\r\nIn practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Sockets.DestinyItemPlug"
-          }
-        }
-      }
-    },
-    "Destiny.Sockets.DestinyItemPlug": {
-      "type": "object",
-      "properties": {
-        "plugItemHash": {
-          "format": "uint32",
-          "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
-          }
-        },
-        "plugObjectives": {
-          "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
-          }
-        },
-        "canInsert": {
-          "description": "If true, this plug has met all of its insertion requirements. Big if true.",
-          "type": "boolean"
-        },
-        "enabled": {
-          "description": "If true, this plug will provide its benefits while inserted.",
-          "type": "boolean"
-        },
-        "insertFailIndexes": {
-          "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        },
-        "enableFailIndexes": {
-          "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
           }
         }
       }
@@ -24919,6 +25554,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "Kiosks"
+        },
+        "plugSets": {
+          "description": "When sockets refer to reusable Plug Sets (see DestinyPlugSetDefinition for more info), this is the set of plugs and their states that are scoped to this character.\r\nThis comes back with ItemSockets, as it is needed for a complete picture of the sockets on requested items.\r\nCOMPONENT TYPE: ItemSockets",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyPlugSetsComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "ItemSockets"
         },
         "itemComponents": {
           "description": "The set of components belonging to the player's instanced items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
@@ -25325,6 +25970,11 @@
           "format": "int32",
           "description": "An index into the vendor definition's \"locations\" property array, indicating which location they are at currently. If -1, then the vendor has no known location (and you may choose not to show them in your UI as a result. I mean, it's your bag honey)",
           "type": "integer"
+        },
+        "seasonalRank": {
+          "format": "int32",
+          "description": "If this vendor has a seasonal rank, this will be the calculated value of that rank. How nice is that? I mean, that's pretty sweeet. It's a whole 32 bit integer.",
+          "type": "integer"
         }
       },
       "x-destiny-component-type-dependency": "Vendors"
@@ -25470,6 +26120,15 @@
             "format": "int32",
             "type": "integer"
           }
+        },
+        "augments": {
+          "description": "A flags enumeration value representing the current state of any \"state modifiers\" on the item being sold. These are meant to correspond with some sort of visual indicator as to the augmentation: for instance, if an item is on sale or if you already own the item in question.\r\nDetermining how you want to represent these in your own app (or if you even want to) is an exercise left for the reader.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.DestinyVendorItemState"
+            }
+          ]
         }
       },
       "x-destiny-component-type-dependency": "VendorSales"
@@ -25490,7 +26149,8 @@
         "512",
         "1024",
         "2048",
-        "4096"
+        "4096",
+        "8192"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -25549,6 +26209,10 @@
         {
           "numericValue": "4096",
           "identifier": "AlreadyOwned"
+        },
+        {
+          "numericValue": "8192",
+          "identifier": "DisplayOnly"
         }
       ]
     },
@@ -25569,6 +26233,69 @@
           "type": "boolean"
         }
       }
+    },
+    "Destiny.DestinyVendorItemState": {
+      "format": "int32",
+      "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration for v3.2.0.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32",
+        "64",
+        "128"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None",
+          "description": "There are no augments on the item."
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Incomplete",
+          "description": "DEPRECATED, for now..."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "RewardAvailable",
+          "description": "DEPRECATED, for now..."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Complete",
+          "description": "DEPRECATED, for now..."
+        },
+        {
+          "numericValue": "8",
+          "identifier": "New",
+          "description": "This item is considered to be \"newly available\", and should have some UI showing how shiny it is."
+        },
+        {
+          "numericValue": "16",
+          "identifier": "Featured",
+          "description": "This item is being \"featured\", and should be shiny in a different way from items that are merely new."
+        },
+        {
+          "numericValue": "32",
+          "identifier": "Ending",
+          "description": "This item is only available for a limited time, and that time is approaching."
+        },
+        {
+          "numericValue": "64",
+          "identifier": "OnSale",
+          "description": "This item is \"on sale\". Get it while it's hot."
+        },
+        {
+          "numericValue": "128",
+          "identifier": "Owned",
+          "description": "This item is already owned."
+        }
+      ]
     },
     "DictionaryComponentResponseOfuint32AndDestinyVendorSaleItemSetComponent": {
       "type": "object",
@@ -27456,7 +28183,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27575,7 +28310,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -27632,6 +28367,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         }
@@ -27700,7 +28467,15 @@
             "47",
             "48",
             "49",
-            "50"
+            "50",
+            "51",
+            "52",
+            "53",
+            "54",
+            "55",
+            "56",
+            "57",
+            "58"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27819,7 +28594,7 @@
             },
             {
               "numericValue": "32",
-              "identifier": "Reserved32"
+              "identifier": "PrivateMatchesAll"
             },
             {
               "numericValue": "37",
@@ -27876,6 +28651,38 @@
             {
               "numericValue": "50",
               "identifier": "Doubles"
+            },
+            {
+              "numericValue": "51",
+              "identifier": "PrivateMatchesClash"
+            },
+            {
+              "numericValue": "52",
+              "identifier": "PrivateMatchesControl"
+            },
+            {
+              "numericValue": "53",
+              "identifier": "PrivateMatchesSupremacy"
+            },
+            {
+              "numericValue": "54",
+              "identifier": "PrivateMatchesCountdown"
+            },
+            {
+              "numericValue": "55",
+              "identifier": "PrivateMatchesSurvival"
+            },
+            {
+              "numericValue": "56",
+              "identifier": "PrivateMatchesMayhem"
+            },
+            {
+              "numericValue": "57",
+              "identifier": "PrivateMatchesRumble"
+            },
+            {
+              "numericValue": "58",
+              "identifier": "HeroicAdventure"
             }
           ]
         }
@@ -28970,6 +29777,10 @@
         },
         "isValid": {
           "type": "boolean"
+        },
+        "datePlayerModified": {
+          "format": "date-time",
+          "type": "string"
         }
       }
     },
