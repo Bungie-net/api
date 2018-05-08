@@ -10,7 +10,7 @@ This section will be added to as time goes by - we're working with it as we go!
 
 DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following are high level notes on the changes to the API that took place.  Documentation and Swagger Spec updates will be coming later this afternoon.
 
-## Added
+### Added
 * Item Stats now have "categories" enum, in case you want to sort stats
 * Equipment Slot Definitions now have Art Dye Channels, so you don't have to hard code what channels to apply to items in a given equipment slot if you're doing 3D rendering.
 * Item Preview Blocks now expose a "screenStyle" property: a string that the game UI (and you!) can use as a hint for how the item should be rendered if shown in a preview window/view.
@@ -27,7 +27,7 @@ DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following
 * Vendor sale items now have "augments": a flags enumeration value that indicates modifiers you can apply visually to the items being sold.
 * New Milestones for DLC2!
 * Emote wheel support (through "Plug Sets", see above), though changing your equipped emotes must take place with an "insert plugs" operation now, which is not currently available to 3rd parties.  We hope to rectify that situation in the near future.
-## Changed
+### Changed
 * All PVP activities have had their identifiers altered in game content, and thus the hash identifiers for them have been altered as well.  PGCR data should compensate for this automatically, but if you had hard coded references to PVP activity names you will need to update those accordingly.
 
 Please read and keep tabs on the following wiki page, I will be adding to it as time allows but this covers essential features that you will want to implement against.  This will be particularly important to those of you who want to properly support Emote Wheels (or socketed items in general in the future), as we are changing the way we return socket data:
