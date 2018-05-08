@@ -8,7 +8,7 @@ This section will be added to as time goes by - we're working with it as we go!
 
 2018-05-08
 
-DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following are high level notes on the changes to the API that took place.  Documentation and Swagger Spec updates will be coming later this afternoon.
+DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following are high level notes on the changes to the API that took place.
 
 ### Added
 * Item Stats now have "categories" enum, in case you want to sort stats
