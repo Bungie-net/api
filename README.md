@@ -6,7 +6,29 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-05-03 - Preparation for 3.2.0 game update
+2018-05-08
+
+DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following are high level notes on the changes to the API that took place.  Documentation and Swagger Spec updates will be coming later this afternoon.
+
+## Added
+* Item Stats now have "categories" enum, in case you want to sort stats
+* Equipment Slot Definitions now have Art Dye Channels, so you don't have to hard code what channels to apply to items in a given equipment slot if you're doing 3D rendering.
+* Item Preview Blocks now expose a "screenStyle" property: a string that the game UI (and you!) can use as a hint for how the item should be rendered if shown in a preview window/view.
+* Vendor Categories now have information indicating if they are for display only (i.e. you can't actually buy the items shown), whether there is a currency item shown as a "featured" currency for that section, and various new fields about progressions that can be shown along with the category and other display information and hints.
+* Various Activity Modes have been added for Private Match subcategories and Heroic Adventures
+	- The bug with private matches not categorizing correctly still exists, and will hopefully be resolved in time for the 5/16 BNet hotfix release.
+* Objective Definitions now have new properties that can help you determine when you should show the objective's progress information (minimumVisibilityThreshold, allowOvercompletion, showValueOnComplete)
+* Item's Plug definitions now expose style information that could be useful for you (styles, whether it's a "dummy" plug or a legitimate one etc...)
+* Item's socket definitions now have "plug source" information, which tells you what components in live data need to be inspected to assemble all of the socket's possible reusable plug states.
+* "Plug Sets" now exist as a concept: they indicate a set of reusable plugs that share common state across character or Account boundaries, and may be referred to by multiple sockets across multiple characters.
+	* Paired with this is the new "profilePlugSets" and "characterPlugSets" components on GetProfile/GetCharacter which will give you this reusable plug information that was previously only found on the item's "itemSockets" component itself.
+* Item Objectives can now optionally have a "dateCompleted", which will tell you when the objective successfully was completed if it has been.
+* Vendor components now have an optional "seasonalRank" property, that will tell you the value of their rank for this season if the vendor has one.
+* Vendor sale items now have "augments": a flags enumeration value that indicates modifiers you can apply visually to the items being sold.
+* New Milestones for DLC2!
+* Emote wheel support (through "Plug Sets", see above), though changing your equipped emotes must take place with an "insert plugs" operation now, which is not currently available to 3rd parties.  We hope to rectify that situation in the near future.
+## Changed
+* All PVP activities have had their identifiers altered in game content, and thus the hash identifiers for them have been altered as well.  PGCR data should compensate for this automatically, but if you had hard coded references to PVP activity names you will need to update those accordingly.
 
 Please read and keep tabs on the following wiki page, I will be adding to it as time allows but this covers essential features that you will want to implement against.  This will be particularly important to those of you who want to properly support Emote Wheels (or socketed items in general in the future), as we are changing the way we return socket data:
 
