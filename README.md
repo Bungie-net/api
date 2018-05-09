@@ -44,7 +44,13 @@ https://github.com/Bungie-net/api/wiki/3.2.0-API-Changes
 https://github.com/Bungie-net/api/wiki/Bungie.net-Application-Portal
 
 # Are there any restrictions on the API?
-- (TODO: Pay more attention to the man behind the curtain.  Also write about the throttles etc...)
+
+Right now the API doesn’t require a User-Agent header for requests and we haven’t set a standard for one. We will continue the policy of not requiring one for the foreseeable future. Starting now we do ask you send a User-Agent header as a best practice. Your agent string should include the app name and ap-id with an optional web url and/or email address. A suggested format is “AppName/Version AppId/appIdNum (+webUrl;contactEmail)” 
+
+For example: 
+User-Agent: Really Cool App/1.0 AppId/#####  (+www.example.com;contact@example.com)
+
+It would be helpful to us and may also allow us to provide more detailed metrics in the future to app owners who provide one. On the off chance we need to contact you about your app this will help us reach out to you and may prevent us from having to disable an app (though only as a last resort!).
 
 # What about the Destiny 1 API?
 - It is alive and well, under the /d1/Platform/Destiny/ root URL.  We unfortunately don't have the time to write documentation for the D1 API, but community member Lowlines made [this fantastic documentation](http://destinydevs.github.io/BungieNetPlatform/docs/Getting-Started).  Buy him a beer sometime, or name your first kid after him or something.  Or donate to him if he accepts donations, which he should because the work he did in D1 was totally boss.
