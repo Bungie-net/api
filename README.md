@@ -6,9 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-05-08
+2018-05-23
 
-DLC2 is now live, and with it comes Bungie.Net API version 2.2.0!  The following are high level notes on the changes to the API that took place.
+Just a heads up folks - after a lot of discussion internally about when we'd be able to fully test and ship the fix, it looks like we're going to miss the boat for next week's game deployment.  This means that we're going to go ahead with the plan to give you a workaround where you'll still be able to equip as long as the character attempting the equip is *offline*.
+
+I apologize for the inconvenience caused by the inaccessibility of the Equip Items API.  Hopefully this workaround will suffice until we can ride the next game deployment into production.
 
 ### Added
 * Item Stats now have "categories" enum, in case you want to sort stats
