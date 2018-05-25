@@ -371,6 +371,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadBasicUserProfile"
             ]
@@ -1210,6 +1211,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1270,6 +1272,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1338,6 +1341,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1398,6 +1402,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "WriteGroups",
               "BnetWrite"
@@ -1605,6 +1610,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -1680,6 +1686,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "EditUserData"
             ]
@@ -1759,6 +1766,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -2025,6 +2033,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -2084,6 +2093,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2144,6 +2154,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2204,6 +2215,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2264,6 +2276,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2332,6 +2345,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2574,6 +2588,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2659,6 +2674,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2743,6 +2759,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2828,6 +2845,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2896,6 +2914,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3049,6 +3068,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -3116,6 +3136,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3183,6 +3204,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3259,6 +3281,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -3318,6 +3341,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3380,6 +3404,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3442,6 +3467,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3588,6 +3614,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3863,6 +3890,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3947,6 +3975,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4652,6 +4681,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4703,6 +4733,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4754,6 +4785,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4805,6 +4837,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4855,6 +4888,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4907,6 +4941,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -29952,6 +29987,11 @@
       }
     }
   },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "tags": [
     {
       "name": "App",
