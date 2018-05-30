@@ -13,14 +13,14 @@ The previously mentioned workaround for the Equip Items restriction is now live.
 ## v2.2.1 Minor Update
 
 ### Fixed
-#504 : Known issue: "Crucible Labs" Activity Mode won't be in data until May 30th, Crucible Labs PGCRs will return as "All" until then. bug ready for release
-#501 : Equip Items (added a workaround where logged off characters can still equip)
-#485 : New Warmind items are not appearing in screenshots bug ready for release
-#476 : Official companion app doesn’t display the counter on Sentinel’s Shove bug ready for release
-#470 : The new Warmind vendor's (Ana Bray) faction definition is lacking tokenValues property bug investigation ready for release
-#469 : Since Warmind itemState property is not showing if an item is a masterwork bug ready for release
-#468 : Known bug: Nightfall Score Multiplier and Handicap not being returned bug ready for release
-#466 : Content Warning for DLC2: Several Activities removed from database, replaced with variants that have only changed identifiers definitions ready for release rfc
+* #504 : Known issue: "Crucible Labs" Activity Mode won't be in data until May 30th, Crucible Labs PGCRs will return as "All" until then. bug ready for release
+* #501 : Equip Items (added a workaround where logged off characters can still equip)
+* #485 : New Warmind items are not appearing in screenshots bug ready for release
+* #476 : Official companion app doesn’t display the counter on Sentinel’s Shove bug ready for release
+* #470 : The new Warmind vendor's (Ana Bray) faction definition is lacking tokenValues property bug investigation ready for release
+* #469 : Since Warmind itemState property is not showing if an item is a masterwork bug ready for release
+* #468 : Known bug: Nightfall Score Multiplier and Handicap not being returned bug ready for release
+* #466 : Content Warning for DLC2: Several Activities removed from database, replaced with variants that have only changed identifiers definitions ready for release rfc
 
 ### Added
 
