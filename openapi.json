@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.2.0"
+    "version": "2.2.1"
   },
   "servers": [
     {
@@ -2689,6 +2689,43 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/IEnumerableOfUserInfoCard"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Destiny2/{membershipType}/Profile/{membershipId}/LinkedProfiles/": {
+      "summary": "Destiny2.GetLinkedProfiles",
+      "description": "Returns a summary information about all profiles linked to the requesting membership type/membership ID that have valid Destiny information. The passed-in Membership Type/Membership ID may be a Bungie.Net membership or a Destiny membership. It only returns the minimal amount of data to begin making more substantive requests, but will hopefully serve as a useful alternative to UserServices for people who just care about Destiny data. Note that it will only return linked accounts whose linkages you are allowed to view.",
+      "get": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Returns a summary information about all profiles linked to the requesting membership type/membership ID that have valid Destiny information. The passed-in Membership Type/Membership ID may be a Bungie.Net membership or a Destiny membership. It only returns the minimal amount of data to begin making more substantive requests, but will hopefully serve as a useful alternative to UserServices for people who just care about Destiny data. Note that it will only return linked accounts whose linkages you are allowed to view.",
+        "operationId": "Destiny2.GetLinkedProfiles",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The ID of the membership whose linked Destiny accounts you want returned. Make sure your membership ID matches its Membership Type: don't pass us a PSN membership ID and the XBox membership type, it's not going to work!",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "membershipType",
+            "in": "path",
+            "description": "The type for the membership whose linked Destiny accounts you want returned.",
+            "required": true,
+            "schema": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Destiny.Responses.DestinyLinkedProfilesResponse"
           }
         },
         "deprecated": false
@@ -8394,6 +8431,14 @@
             },
             "description": "A vendor can be a part of 0 or 1 \"groups\" at a time: a group being a collection of Vendors related by either location or function/purpose. It's used for our our Companion Vendor UI. Only one of these can be active for a Vendor at a time."
           },
+          "ignoreSaleItemHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "Some items don't make sense to return in the API, for example because they represent an action to be performed rather than an item being sold. I'd rather we not do this, but at least in the short term this is a workable workaround."
+          },
           "hash": {
             "type": "integer",
             "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -9767,7 +9812,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -9978,6 +10024,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           },
@@ -11045,7 +11095,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -11256,6 +11307,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           },
@@ -11332,7 +11387,8 @@
           "55",
           "56",
           "57",
-          "58"
+          "58",
+          "59"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -11542,6 +11598,10 @@
           {
             "numericValue": "58",
             "identifier": "HeroicAdventure"
+          },
+          {
+            "numericValue": "59",
+            "identifier": "Showdown"
           }
         ]
       },
@@ -15886,6 +15946,7 @@
           "1678",
           "1679",
           "1680",
+          "1681",
           "1800",
           "1801",
           "1802",
@@ -16015,7 +16076,10 @@
           "3017",
           "3018",
           "3019",
-          "3020"
+          "3020",
+          "3021",
+          "3022",
+          "3023"
         ],
         "type": "integer",
         "format": "int32",
@@ -18143,6 +18207,10 @@
             "identifier": "DestinyPlugItemNotAvailable"
           },
           {
+            "numericValue": "1681",
+            "identifier": "DestinyCharacterLoggedInNotAllowed"
+          },
+          {
             "numericValue": "1800",
             "identifier": "FbInvalidRequest"
           },
@@ -18661,6 +18729,18 @@
           {
             "numericValue": "3020",
             "identifier": "ClanFireteamScheduledFireteamsRequireAdminPermissions"
+          },
+          {
+            "numericValue": "3021",
+            "identifier": "ClanFireteamNonPublicMustHaveClan"
+          },
+          {
+            "numericValue": "3022",
+            "identifier": "ClanFireteamPublicCreationRestriction"
+          },
+          {
+            "numericValue": "3023",
+            "identifier": "ClanFireteamAlreadyJoined"
           }
         ]
       },
@@ -18893,6 +18973,59 @@
             "type": "string"
           }
         }
+      },
+      "Destiny.Responses.DestinyLinkedProfilesResponse": {
+        "type": "object",
+        "properties": {
+          "profiles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User.UserInfoCard"
+            },
+            "description": "Any Destiny account for whom we could successfully pull characters will be returned here, as the Platform-level summary of user data. (no character data, no Destiny account data other than the Membership ID and Type so you can make further queries)"
+          },
+          "bnetMembership": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User.UserInfoCard"
+              }
+            ],
+            "description": "If the requested membership had a linked Bungie.Net membership ID, this is the basic information about that BNet account.\r\nI know, Tetron; I know this is mixing UserServices concerns with DestinyServices concerns. But it's so damn convenient! https://www.youtube.com/watch?v=X5R-bB-gKVI"
+          },
+          "profilesWithErrors": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Responses.DestinyErrorProfile"
+            },
+            "description": "This is brief summary info for profiles that we believe have valid Destiny info, but who failed to return data for some other reason and thus we know that subsequent calls for their info will also fail."
+          }
+        },
+        "description": "I know what you seek. You seek linked accounts. Found them, you have.\r\nThis contract returns a minimal amount of data about Destiny Accounts that are linked through your Bungie.Net account. We will not return accounts in this response whose"
+      },
+      "Destiny.Responses.DestinyErrorProfile": {
+        "type": "object",
+        "properties": {
+          "errorCode": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+              }
+            ],
+            "description": "The error that we encountered. You should be able to look up localized text to show to the user for these failures."
+          },
+          "infoCard": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/User.UserInfoCard"
+              }
+            ],
+            "description": "Basic info about the account that failed. Don't expect anything other than membership ID, Membership Type, and displayName to be populated."
+          }
+        },
+        "description": "If a Destiny Profile can't be returned, but we're pretty certain it's a valid Destiny account, this will contain as much info as we can get about the profile for your use.\r\nAssume that the most you'll get is the Error Code, the Membership Type and the Membership ID."
       },
       "Destiny.DestinyComponentType": {
         "enum": [
@@ -20567,7 +20700,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -20778,6 +20912,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           },
@@ -20883,7 +21021,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -21094,6 +21233,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           }
@@ -21856,7 +21999,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -22070,6 +22214,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           },
@@ -23882,7 +24030,9 @@
           "16",
           "32",
           "64",
-          "128"
+          "128",
+          "256",
+          "512"
         ],
         "type": "integer",
         "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration for v3.2.0.",
@@ -23932,6 +24082,16 @@
             "numericValue": "128",
             "identifier": "Owned",
             "description": "This item is already owned."
+          },
+          {
+            "numericValue": "256",
+            "identifier": "WideView",
+            "description": "This item should be shown with a \"wide view\" instead of normal icon view."
+          },
+          {
+            "numericValue": "512",
+            "identifier": "NexusAttention",
+            "description": "This indicates that you should show some kind of attention-requesting indicator on the item, in a similar manner to items in the nexus that have such notifications."
           }
         ]
       },
@@ -25916,7 +26076,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -26127,6 +26288,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           }
@@ -26202,7 +26367,8 @@
               "55",
               "56",
               "57",
-              "58"
+              "58",
+              "59"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -26413,6 +26579,10 @@
               {
                 "numericValue": "58",
                 "identifier": "HeroicAdventure"
+              },
+              {
+                "numericValue": "59",
+                "identifier": "Showdown"
               }
             ]
           }
@@ -28907,6 +29077,43 @@
                   "items": {
                     "$ref": "#/components/schemas/User.UserInfoCard"
                   }
+                },
+                "ErrorCode": {
+                  "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      },
+      "Destiny.Responses.DestinyLinkedProfilesResponse": {
+        "description": "I know what you seek. You seek linked accounts. Found them, you have.\r\nThis contract returns a minimal amount of data about Destiny Accounts that are linked through your Bungie.Net account. We will not return accounts in this response whose",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/Destiny.Responses.DestinyLinkedProfilesResponse"
                 },
                 "ErrorCode": {
                   "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
