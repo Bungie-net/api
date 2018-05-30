@@ -4,6 +4,7 @@
 
 ### Added
 * A new endpoint, "GetLinkedProfiles", has been added to the Destiny 2 endpoints.  The hope is that this will simplify some of your workflows if you find you've had to do a lot of manual workarounds and querying to find out if linked Platform accounts actually have Destiny information.
+* A new activity mode, "Showdown", has been added.
 
 ### Fixed
 * #504 : Known issue: "Crucible Labs" Activity Mode won't be in data until May 30th, Crucible Labs PGCRs will return as "All" until then. bug ready for release
