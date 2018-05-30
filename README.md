@@ -24,7 +24,7 @@ The previously mentioned workaround for the Equip Items restriction is now live.
 
 ### Added
 
-* A new endpoint, "GetLinkedProfiles", has been added to the Destiny 2 endpoints.  The hope is that this will simplify some of your workflows if you find you've had to do a lot of manual workarounds and querying to find out if linked Platform accounts actually have Destiny information.
+* A new endpoint, ["GetLinkedProfiles"](https://bungie-net.github.io/multi/operation_get_Destiny2-GetLinkedProfiles.html#operation_get_Destiny2-GetLinkedProfiles), has been added to the Destiny 2 endpoints.  The hope is that this will simplify some of your workflows if you find you've had to do a lot of manual workarounds and querying to find out if linked Platform accounts actually have Destiny information.
 * A new activity mode, "Showdown", has been added.
 
 
