@@ -1,5 +1,25 @@
 # Changelog
 
+## [2.2.2] - 2018-06-27
+
+### Fixed
+* #539 Curse of Osiris milestones
+* #532 [question] where to get flashpoint location ?
+* #523 Known Issue: Clans may be inaccessible, increase in timeouts
+* #522 plugSources does not seem correct for shaders
+* #514 Wrong kills/deaths/assists numbers for Rumble
+* #513 "You're Welcome" ghost perk incorrectly classified as a Weapon Mod
+* #511 Glass modifier missing in DestinySandboxPerkDefinition
+* #506 /Platform/GlobalAlerts/ 
+* #493 Display properties for PlugSets
+
+### Added
+* Added a new component for Profile-level Progression data:  ProfileProgressions.
+  - For now, this will only have checklists.  More will likely be added to it as time goes by.
+* Added the concept of [DestinyChecklistDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition.html#schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition), and checklist data to Progression components returned from the API.
+* Added some throwaway APIs for an upcoming update to the game.
+  - If you happen to dig through our Platform Client Javascript libraries to find our unpublished APIs, you'll likely see some APIs about "Triumphs."  Yes, Triumphs are coming.  Please don't build anything that relies on these endpoints: as the name of them implies, they're going to be thrown away once Triumphs is over.  Such is the ethereal and ever-changing nature of Triumphs.  It's very Zen-like, I assure you.  The data that will both be truly interesting and that will actually persist once Triumphs is over is in the new Checklists data.
+
 ## [2.2.1] - 2018-05-30
 
 ### Added
