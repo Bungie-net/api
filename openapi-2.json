@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.2.1"
+    "version": "2.2.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -87,6 +87,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -133,6 +136,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -185,6 +191,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -238,6 +247,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -284,6 +296,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -353,6 +368,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -403,6 +421,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -458,6 +479,384 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/GetContentType/{type}/": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Gets an object describing a particular variant of content.",
+        "operationId": "Content.GetContentType",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Content.Models.ContentTypeDescription"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/GetContentById/{id}/{locale}/": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Returns a content item referenced by id",
+        "operationId": "Content.GetContentById",
+        "parameters": [
+          {
+            "name": "head",
+            "in": "query",
+            "description": "false",
+            "type": "boolean"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Content.ContentItemPublicContract"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/GetContentByTagAndType/{tag}/{type}/{locale}/": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Returns the newest item that matches a given tag and Content Type.",
+        "operationId": "Content.GetContentByTagAndType",
+        "parameters": [
+          {
+            "name": "head",
+            "in": "query",
+            "description": "Not used.",
+            "type": "boolean"
+          },
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Content.ContentItemPublicContract"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/Search/{locale}/": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Gets content based on querystring information passed in. Provides basic search and text search capabilities.",
+        "operationId": "Content.SearchContentWithText",
+        "parameters": [
+          {
+            "name": "ctype",
+            "in": "query",
+            "description": "Content type tag: Help, News, etc. Supply multiple ctypes separated by space.",
+            "type": "string"
+          },
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number for the search results, starting with page 1.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "head",
+            "in": "query",
+            "description": "Not used.",
+            "type": "boolean"
+          },
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "searchtext",
+            "in": "query",
+            "description": "Word or phrase for the search.",
+            "type": "string"
+          },
+          {
+            "name": "source",
+            "in": "query",
+            "description": "For analytics, hint at the part of the app that triggered the search. Optional.",
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "query",
+            "description": "Tag used on the content to be searched.",
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/SearchResultOfContentItemPublicContract"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/SearchContentByTagAndType/{tag}/{type}/{locale}/": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Searches for Content Items that match the given Tag and Content Type.",
+        "operationId": "Content.SearchContentByTagAndType",
+        "parameters": [
+          {
+            "name": "currentpage",
+            "in": "query",
+            "description": "Page number for the search results starting with page 1.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "head",
+            "in": "query",
+            "description": "Not used.",
+            "type": "boolean"
+          },
+          {
+            "name": "itemsperpage",
+            "in": "query",
+            "description": "Not used.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "locale",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tag",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/SearchResultOfContentItemPublicContract"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -590,6 +989,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -700,6 +1102,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -808,6 +1213,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -909,6 +1317,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -967,6 +1378,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1025,6 +1439,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1078,6 +1495,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1131,6 +1551,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1183,6 +1606,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1243,6 +1669,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1303,6 +1732,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1371,6 +1803,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1431,6 +1866,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1477,6 +1915,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1523,6 +1964,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1569,6 +2013,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1637,6 +2084,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1713,6 +2163,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1794,6 +2247,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1837,6 +2293,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1889,6 +2348,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -1952,6 +2414,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2007,6 +2472,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2057,6 +2525,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2117,6 +2588,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2177,6 +2651,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2237,6 +2714,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2297,6 +2777,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2365,6 +2848,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2446,6 +2932,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2506,6 +2995,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2607,6 +3099,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2691,6 +3186,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2776,6 +3274,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2861,6 +3362,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -2928,6 +3432,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3005,6 +3512,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3081,6 +3591,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3148,6 +3661,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3215,6 +3731,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3291,6 +3810,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3353,6 +3875,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3415,6 +3940,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3477,6 +4005,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3561,6 +4092,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3623,6 +4157,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3717,6 +4254,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3811,6 +4351,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3895,6 +4438,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -3979,6 +4525,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4022,6 +4571,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4081,6 +4633,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4152,6 +4707,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4172,7 +4730,8 @@
             "in": "path",
             "description": "The ID of the membership whose linked Destiny accounts you want returned. Make sure your membership ID matches its Membership Type: don't pass us a PSN membership ID and the XBox membership type, it's not going to work!",
             "required": true,
-            "type": "string"
+            "type": "integer",
+            "format": "int64"
           },
           {
             "name": "membershipType",
@@ -4220,6 +4779,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4298,6 +4860,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4384,6 +4949,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4436,6 +5004,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4522,6 +5093,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4608,6 +5182,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4702,6 +5279,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4753,6 +5333,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4804,6 +5387,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4855,6 +5441,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4905,6 +5494,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -4956,6 +5548,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5007,6 +5602,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5060,6 +5658,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5120,6 +5721,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5166,6 +5770,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5244,6 +5851,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5307,6 +5917,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5403,6 +6016,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5507,6 +6123,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5573,6 +6192,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5698,6 +6320,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5776,6 +6401,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -5928,6 +6556,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6005,6 +6636,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6082,6 +6716,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6134,6 +6771,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6180,6 +6820,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6230,6 +6873,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6274,6 +6920,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6332,6 +6981,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6416,6 +7068,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6507,6 +7162,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6585,6 +7243,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6663,6 +7324,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6747,6 +7411,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6828,6 +7495,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6871,6 +7541,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -6930,6 +7603,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7003,6 +7679,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7063,6 +7742,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7201,6 +7883,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7318,6 +8003,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7412,6 +8100,9 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -7479,6 +8170,160 @@
                   "additionalProperties": {
                     "type": "string"
                   }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "//GetAvailableLocales/": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "description": "List of available localization cultures",
+        "operationId": ".GetAvailableLocales",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "//Settings/": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "description": "Get the common settings used by the Bungie.Net environment.",
+        "operationId": ".GetCommonSettings",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Common.Models.CoreSettingsConfiguration"
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "//GlobalAlerts/": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "description": "Gets any active global alert for display in the forum banners, help pages, etc. Usually used for DOC alerts.",
+        "operationId": ".GetGlobalAlerts",
+        "parameters": [
+          {
+            "name": "includestreaming",
+            "in": "query",
+            "description": "Determines whether Streaming Alerts are included in results",
+            "type": "boolean"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/GlobalAlert"
+                  }
+                },
+                "ErrorCode": {
+                  "$ref": "#/definitions/Exceptions.PlatformErrorCodes"
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
                 }
               }
             }
@@ -8149,6 +8994,588 @@
         }
       ]
     },
+    "Content.Models.ContentTypeDescription": {
+      "type": "object",
+      "properties": {
+        "cType": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "contentDescription": {
+          "type": "string"
+        },
+        "previewImage": {
+          "type": "string"
+        },
+        "priority": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "reminder": {
+          "type": "string"
+        },
+        "properties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.ContentTypeProperty"
+          }
+        },
+        "tagMetadata": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.TagMetadataDefinition"
+          }
+        },
+        "tagMetadataItems": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Content.Models.TagMetadataItem"
+          }
+        },
+        "usageExamples": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "showInContentEditor": {
+          "type": "boolean"
+        },
+        "typeOf": {
+          "type": "string"
+        },
+        "bindIdentifierToProperty": {
+          "type": "string"
+        },
+        "boundRegex": {
+          "type": "string"
+        },
+        "forceIdentifierBinding": {
+          "type": "boolean"
+        },
+        "allowComments": {
+          "type": "boolean"
+        },
+        "autoEnglishPropertyFallback": {
+          "type": "boolean"
+        },
+        "bulkUploadable": {
+          "type": "boolean"
+        },
+        "previews": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.ContentPreview"
+          }
+        },
+        "suppressCmsPath": {
+          "type": "boolean"
+        },
+        "propertySections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.ContentTypePropertySection"
+          }
+        }
+      }
+    },
+    "Content.Models.ContentTypeProperty": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "readableName": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "propertyDescription": {
+          "type": "string"
+        },
+        "localizable": {
+          "type": "boolean"
+        },
+        "fallback": {
+          "type": "boolean"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "visible": {
+          "type": "boolean"
+        },
+        "isTitle": {
+          "type": "boolean"
+        },
+        "required": {
+          "type": "boolean"
+        },
+        "maxLength": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxByteLength": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxFileSize": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "regexp": {
+          "type": "string"
+        },
+        "validateAs": {
+          "type": "string"
+        },
+        "rssAttribute": {
+          "type": "string"
+        },
+        "visibleDependency": {
+          "type": "string"
+        },
+        "visibleOn": {
+          "type": "string"
+        },
+        "datatype": {
+          "$ref": "#/definitions/Content.Models.ContentPropertyDataTypeEnum"
+        },
+        "attributes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "childProperties": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.ContentTypeProperty"
+          }
+        },
+        "contentTypeAllowed": {
+          "type": "string"
+        },
+        "bindToProperty": {
+          "type": "string"
+        },
+        "boundRegex": {
+          "type": "string"
+        },
+        "representationSelection": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "defaultValues": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.ContentTypeDefaultValue"
+          }
+        },
+        "isExternalAllowed": {
+          "type": "boolean"
+        },
+        "propertySection": {
+          "type": "string"
+        },
+        "weight": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "entitytype": {
+          "type": "string"
+        },
+        "isCombo": {
+          "type": "boolean"
+        },
+        "suppressProperty": {
+          "type": "boolean"
+        },
+        "legalContentTypes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "representationValidationString": {
+          "type": "string"
+        },
+        "minWidth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxWidth": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minHeight": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maxHeight": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isVideo": {
+          "type": "boolean"
+        },
+        "isImage": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Content.Models.ContentPropertyDataTypeEnum": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12",
+        "13",
+        "14"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Plaintext"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Html"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Dropdown"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "List"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Json"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Content"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Representation"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Set"
+        },
+        {
+          "numericValue": "9",
+          "identifier": "File"
+        },
+        {
+          "numericValue": "10",
+          "identifier": "FolderSet"
+        },
+        {
+          "numericValue": "11",
+          "identifier": "Date"
+        },
+        {
+          "numericValue": "12",
+          "identifier": "MultilinePlaintext"
+        },
+        {
+          "numericValue": "13",
+          "identifier": "DestinyContent"
+        },
+        {
+          "numericValue": "14",
+          "identifier": "Color"
+        }
+      ]
+    },
+    "Content.Models.ContentTypeDefaultValue": {
+      "type": "object",
+      "properties": {
+        "whenClause": {
+          "type": "string"
+        },
+        "whenValue": {
+          "type": "string"
+        },
+        "defaultValue": {
+          "type": "string"
+        }
+      }
+    },
+    "Content.Models.TagMetadataDefinition": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "order": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "items": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.Models.TagMetadataItem"
+          }
+        },
+        "datatype": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "isRequired": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Content.Models.TagMetadataItem": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "tagText": {
+          "type": "string"
+        },
+        "groups": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "Content.Models.ContentPreview": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "itemInSet": {
+          "type": "boolean"
+        },
+        "setTag": {
+          "type": "string"
+        },
+        "setNesting": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "useSetId": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Content.Models.ContentTypePropertySection": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "readableName": {
+          "type": "string"
+        },
+        "collapsed": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Content.ContentItemPublicContract": {
+      "type": "object",
+      "properties": {
+        "contentId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "cType": {
+          "type": "string"
+        },
+        "cmsPath": {
+          "type": "string"
+        },
+        "creationDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "modifyDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "allowComments": {
+          "type": "boolean"
+        },
+        "hasAgeGate": {
+          "type": "boolean"
+        },
+        "minimumAge": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ratingImagePath": {
+          "type": "string"
+        },
+        "author": {
+          "$ref": "#/definitions/User.GeneralUser"
+        },
+        "autoEnglishPropertyFallback": {
+          "type": "boolean"
+        },
+        "properties": {
+          "description": "Firehose content is really a collection of metadata and \"properties\", which are the potentially-but-not-strictly localizable data that comprises the meat of whatever content is being shown.\r\nAs Cole Porter would have crooned, \"Anything Goes\" with Firehose properties. They are most often strings, but they can theoretically be anything. They are JSON encoded, and could be JSON structures, simple strings, numbers etc... The Content Type of the item (cType) will describe the properties, and thus how they ought to be deserialized.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "representations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.ContentRepresentation"
+          }
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "commentSummary": {
+          "$ref": "#/definitions/Content.CommentSummary"
+        }
+      }
+    },
+    "Content.ContentRepresentation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "validationString": {
+          "type": "string"
+        }
+      }
+    },
+    "Content.CommentSummary": {
+      "type": "object",
+      "properties": {
+        "topicId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "commentCount": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Queries.SearchResult": {
+      "type": "object",
+      "properties": {
+        "totalResults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        },
+        "query": {
+          "$ref": "#/definitions/Queries.PagedQuery"
+        },
+        "replacementContinuationToken": {
+          "type": "string"
+        },
+        "useTotalResults": {
+          "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Queries.PagedQuery": {
+      "type": "object",
+      "properties": {
+        "itemsPerPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "currentPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "requestContinuationToken": {
+          "type": "string"
+        }
+      }
+    },
+    "SearchResultOfContentItemPublicContract": {
+      "type": "object",
+      "properties": {
+        "results": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Content.ContentItemPublicContract"
+          }
+        },
+        "totalResults": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        },
+        "query": {
+          "$ref": "#/definitions/Queries.PagedQuery"
+        },
+        "replacementContinuationToken": {
+          "type": "string"
+        },
+        "useTotalResults": {
+          "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
+          "type": "boolean"
+        }
+      }
+    },
     "Forum.ForumTopicsCategoryFiltersEnum": {
       "format": "int32",
       "enum": [
@@ -8520,44 +9947,6 @@
           "identifier": "CommunityContent"
         }
       ]
-    },
-    "Queries.SearchResult": {
-      "type": "object",
-      "properties": {
-        "totalResults": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "hasMore": {
-          "type": "boolean"
-        },
-        "query": {
-          "$ref": "#/definitions/Queries.PagedQuery"
-        },
-        "replacementContinuationToken": {
-          "type": "string"
-        },
-        "useTotalResults": {
-          "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
-          "type": "boolean"
-        }
-      }
-    },
-    "Queries.PagedQuery": {
-      "type": "object",
-      "properties": {
-        "itemsPerPage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "currentPage": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "requestContinuationToken": {
-          "type": "string"
-        }
-      }
     },
     "SearchResultOfPostResponse": {
       "type": "object",
@@ -11360,6 +12749,11 @@
       "description": "A Vendor Interaction is a dialog shown by the vendor other than sale items or transfer screens. The vendor is showing you something, and asking you to reply to it by choosing an option or reward.",
       "type": "object",
       "properties": {
+        "interactionIndex": {
+          "format": "int32",
+          "description": "The position of this interaction in its parent array. Note that this is NOT content agnostic, and should not be used as such.",
+          "type": "integer"
+        },
         "replies": {
           "description": "The potential replies that the user can make to the interaction.",
           "type": "array",
@@ -12012,7 +13406,7 @@
           }
         },
         "bubbleSettings": {
-          "description": "A Destination may have many \"Bubbles\" zones with human readable properties.\r\nWe don't get as much info as I'd like about them - I'd love to return info like where on the map they are located - but at least this gives you the name of those bubbles. bubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.",
+          "description": "A Destination may have many \"Bubbles\" zones with human readable properties.\r\nWe don't get as much info as I'd like about them - I'd love to return info like where on the map they are located - but at least this gives you the name of those bubbles. bubbleSettings and bubbles both have the identical number of entries, and you should match up their indexes to provide matching bubble and bubbleSettings data.\r\nDEPRECATED - Just use bubbles, it now has this data.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationBubbleSettingDefinition"
@@ -14546,7 +15940,7 @@
       }
     },
     "Destiny.Definitions.DestinyDestinationBubbleSettingDefinition": {
-      "description": "Human readable data about the bubble. Combine with DestinyBubbleDefinition - see DestinyDestinationDefinition.bubbleSettings for more information.",
+      "description": "Human readable data about the bubble. Combine with DestinyBubbleDefinition - see DestinyDestinationDefinition.bubbleSettings for more information.\r\nDEPRECATED - Just use bubbles.",
       "type": "object",
       "properties": {
         "displayProperties": {
@@ -14562,6 +15956,15 @@
           "format": "uint32",
           "description": "The identifier for the bubble: only guaranteed to be unique within the Destination.",
           "type": "integer"
+        },
+        "displayProperties": {
+          "description": "The display properties of this bubble, so you don't have to look them up in a separate list anymore.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
         }
       }
     },
@@ -15376,7 +16779,7 @@
         {
           "numericValue": "1",
           "identifier": "InventorySourced",
-          "description": "Use plugs found in the player's inventory, based on the socket type rules (see DestinySocketTypeDefinition for more info)"
+          "description": "Use plugs found in the player's inventory, based on the socket type rules (see DestinySocketTypeDefinition for more info)\r\nNote that a socket - like Shaders - can have *both* reusable plugs and inventory items inserted theoretically."
         },
         {
           "numericValue": "2",
@@ -15582,7 +16985,7 @@
       }
     },
     "Destiny.Definitions.Sockets.DestinySocketCategoryDefinition": {
-      "description": "Sockets on an item are organized into Categories visually.\r\nYou can find references to the socket category defined on an item's DestinyInventoryItemDefinition.sockets.socketCategories property.\r\nThis has the display information for rendering the categories' header, and a hint for how the UI should handle showing this category.",
+      "description": "Sockets on an item are organized into Categories visually.\r\nYou can find references to the socket category defined on an item's DestinyInventoryItemDefinition.sockets.socketCategories property.\r\nThis has the display information for rendering the categories' header, and a hint for how the UI should handle showing this category.\r\nThe shitty thing about this, however, is that the socket categories' UI style can be overridden by the item's UI style. For instance, the Socket Category used by Emote Sockets says it's \"consumable,\" but that's a lie: they're all reusable, and overridden by the detail UI pages in ways that we can't easily account for in the API.\r\nAs a result, I will try to compile these rules into the individual sockets on items, and provide the best hint possible there through the plugSources property. In the future, I may attempt to use this information in conjunction with the item to provide a more usable UI hint on the socket layer, but for now improving the consistency of plugSources is the best I have time to provide. (See https://github.com/Bungie-net/api/issues/522 for more info)",
       "type": "object",
       "properties": {
         "displayProperties": {
@@ -16708,6 +18111,10 @@
         },
         "itemTypeRegex": {
           "description": "The janky regular expression we used against the item type to try and discern whether the item belongs to this category.",
+          "type": "string"
+        },
+        "plugCategoryIdentifier": {
+          "description": "If the item is a plug, this is the identifier we expect to find associated with it if it is in this category.",
           "type": "string"
         },
         "itemTypeRegexNot": {
@@ -21607,6 +23014,7 @@
         "101",
         "102",
         "103",
+        "104",
         "200",
         "201",
         "202",
@@ -21653,6 +23061,11 @@
           "numericValue": "103",
           "identifier": "ProfileCurrencies",
           "description": "This will get you a summary of items on your Profile that we consider to be \"currencies\", such as Glimmer. I mean, if there's Glimmer in Destiny 2. I didn't say there was Glimmer."
+        },
+        {
+          "numericValue": "104",
+          "identifier": "ProfileProgression",
+          "description": "This will get you any progression-related information that exists on a Profile-wide level, across all characters."
         },
         {
           "numericValue": "200",
@@ -21819,6 +23232,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "ItemSockets"
+        },
+        "profileProgression": {
+          "description": "When we have progression information - such as Checklists - that may apply profile-wide, it will be returned here rather than in the per-character progression data.\r\nCOMPONENT TYPE: ProfileProgression",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyProfileProgressionComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "ProfileProgression"
         },
         "characters": {
           "description": "Basic information about each character, keyed by the CharacterId.\r\nCOMPONENT TYPE: Characters",
@@ -22268,7 +23691,8 @@
       "enum": [
         "0",
         "1",
-        "2"
+        "2",
+        "3"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -22283,6 +23707,10 @@
         {
           "numericValue": "2",
           "identifier": "DLC1"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "DLC2"
         }
       ]
     },
@@ -22470,6 +23898,15 @@
       "description": "Sometimes, we have large sets of reusable plugs that are defined identically and thus can (and in some cases, are so large that they *must*) be shared across the places where they are used. These are the definitions for those reusable sets of plugs. \r\nSee DestinyItemSocketEntryDefinition.plugSource and reusablePlugSetHash for the relationship between these reusable plug sets and the sockets that leverage them (for starters, Emotes).",
       "type": "object",
       "properties": {
+        "displayProperties": {
+          "description": "If you want to show these plugs in isolation, these are the display properties for them.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
         "reusablePlugItems": {
           "description": "This is a list of pre-determined plugs that can be plugged into this socket, without the character having the plug in their inventory.\r\nIf this list is populated, you will not be allowed to plug an arbitrary item in the socket: you will only be able to choose from one of these reusable plugs.",
           "type": "array",
@@ -22499,6 +23936,161 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/Destiny.Components.PlugSets.DestinyPlugSetsComponent"
+        },
+        "privacy": {
+          "$ref": "#/definitions/Components.ComponentPrivacySetting"
+        }
+      }
+    },
+    "Destiny.Components.Profiles.DestinyProfileProgressionComponent": {
+      "description": "The set of progression-related information that applies at a Profile-wide level for your Destiny experience. This differs from the Jimi Hendrix Experience because there's less guitars on fire. Yet. #spoileralert?\r\nThis will include information such as Checklist info.",
+      "type": "object",
+      "properties": {
+        "checklists": {
+          "description": "The set of checklists that can be examined on a profile-wide basis, keyed by the hash identifier of the Checklist (DestinyChecklistDefinition)\r\nFor each checklist returned, its value is itself a Dictionary keyed by the checklist's hash identifier with the value being a boolean indicating if it's been discovered yet.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Checklists.DestinyChecklistDefinition"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "ProfileProgression"
+    },
+    "Destiny.Definitions.Checklists.DestinyChecklistDefinition": {
+      "description": "By public demand, Checklists are loose sets of \"things to do/things you have done\" in Destiny that we were actually able to track. They include easter eggs you find in the world, unique chests you unlock, and other such data where the first time you do it is significant enough to be tracked, and you have the potential to \"get them all\".\r\nThese may be account-wide, or may be per character. The status of these will be returned in related \"Checklist\" data coming down from API requests such as GetProfile or GetCharacter.\r\nGenerally speaking, the items in a checklist can be completed in any order: we return an ordered list which only implies the way we are showing them in our own UI, and you can feel free to alter it as you wish.\r\nNote that, in the future, there will be something resembling the old D1 Record Books in at least some vague form. When that is created, it may be that it will supercede much or all of this Checklist data. It remains to be seen if that will be the case, so for now assume that the Checklists will still exist even after the release of D2: Forsaken.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "viewActionString": {
+          "description": "A localized string prompting you to view the checklist.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Indicates whether you will find this checklist on the Profile or Character components.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.DestinyScope"
+            }
+          ]
+        },
+        "entries": {
+          "description": "The individual checklist items. Gotta catch 'em all.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Checklists.DestinyChecklistEntryDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Checklists"
+    },
+    "Destiny.DestinyScope": {
+      "format": "int32",
+      "description": "There's a lot of places where we need to know scope on more than just a profile or character level. For everything else, there's this more generic sense of scope.",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Profile"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Character"
+        }
+      ]
+    },
+    "Destiny.Definitions.Checklists.DestinyChecklistEntryDefinition": {
+      "description": "The properties of an individual checklist item. Note that almost everything is optional: it is *highly* variable what kind of data we'll actually be able to return: at times we may have no other relationships to entities at all.\r\nWhatever UI you build, do it with the knowledge that any given entry might not actually be able to be associated with some other Destiny entity.",
+      "type": "object",
+      "properties": {
+        "hash": {
+          "format": "uint32",
+          "description": "The identifier for this Checklist entry. Guaranteed unique only within this Checklist Definition, and not globally/for all checklists.",
+          "type": "integer"
+        },
+        "displayProperties": {
+          "description": "Even if no other associations exist, we will give you *something* for display properties. In cases where we have no associated entities, it may be as simple as a numerical identifier.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
+        "destinationHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
+          }
+        },
+        "locationHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyLocationDefinition"
+          }
+        },
+        "bubbleHash": {
+          "format": "uint32",
+          "description": "Note that a Bubble's hash doesn't uniquely identify a \"top level\" entity in Destiny. Only the combination of location and bubble can uniquely identify a place in the world of Destiny: so if bubbleHash is populated, locationHash must too be populated for it to have any meaning.\r\nYou can use this property if it is populated to look up the DestinyLocationDefinition's associated .locationReleases[].activityBubbleName property.",
+          "type": "integer"
+        },
+        "activityHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
+          }
+        },
+        "itemHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "vendorHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "vendorInteractionIndex": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "SingleComponentResponseOfDestinyProfileProgressionComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Components.Profiles.DestinyProfileProgressionComponent"
         },
         "privacy": {
           "$ref": "#/definitions/Components.ComponentPrivacySetting"
@@ -22803,7 +24395,7 @@
         },
         "mentorVendorHash": {
           "format": "uint32",
-          "description": "If the Class has a Mentor (all classes *should*), this will be the hash identifier for that Vendor if you care.",
+          "description": "Mentors don't really mean anything anymore. Don't expect this to be populated.",
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDefinition"
@@ -22907,6 +24499,19 @@
           },
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "checklists": {
+          "description": "The set of checklists that can be examined for this specific character, keyed by the hash identifier of the Checklist (DestinyChecklistDefinition)\r\nFor each checklist returned, its value is itself a Dictionary keyed by the checklist's hash identifier with the value being a boolean indicating if it's been discovered yet.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            }
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Checklists.DestinyChecklistDefinition"
           }
         }
       },
@@ -24038,6 +25643,14 @@
           },
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyActivityDefinition"
+          }
+        },
+        "destinationHash": {
+          "format": "uint32",
+          "description": "Sometimes, a Milestone's quest is related to an entire Destination rather than a specific activity. In that situation, this will be the hash of that Destination. Hotspots are currently the only Milestones that expose this data, but that does not preclude this data from being returned for other Milestones in the future.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDestinationDefinition"
           }
         }
       }
@@ -29527,97 +31140,6 @@
         }
       }
     },
-    "Content.ContentItemPublicContract": {
-      "type": "object",
-      "properties": {
-        "contentId": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "cType": {
-          "type": "string"
-        },
-        "cmsPath": {
-          "type": "string"
-        },
-        "creationDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "modifyDate": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "allowComments": {
-          "type": "boolean"
-        },
-        "hasAgeGate": {
-          "type": "boolean"
-        },
-        "minimumAge": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "ratingImagePath": {
-          "type": "string"
-        },
-        "author": {
-          "$ref": "#/definitions/User.GeneralUser"
-        },
-        "autoEnglishPropertyFallback": {
-          "type": "boolean"
-        },
-        "properties": {
-          "description": "Firehose content is really a collection of metadata and \"properties\", which are the potentially-but-not-strictly localizable data that comprises the meat of whatever content is being shown.\r\nAs Cole Porter would have crooned, \"Anything Goes\" with Firehose properties. They are most often strings, but they can theoretically be anything. They are JSON encoded, and could be JSON structures, simple strings, numbers etc... The Content Type of the item (cType) will describe the properties, and thus how they ought to be deserialized.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "representations": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Content.ContentRepresentation"
-          }
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "commentSummary": {
-          "$ref": "#/definitions/Content.CommentSummary"
-        }
-      }
-    },
-    "Content.ContentRepresentation": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "path": {
-          "type": "string"
-        },
-        "validationString": {
-          "type": "string"
-        }
-      }
-    },
-    "Content.CommentSummary": {
-      "type": "object",
-      "properties": {
-        "topicId": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "commentCount": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
     "Trending.TrendingEntrySupportArticle": {
       "type": "object",
       "properties": {
@@ -30123,6 +31645,234 @@
           "type": "boolean"
         }
       }
+    },
+    "Common.Models.CoreSettingsConfiguration": {
+      "type": "object",
+      "properties": {
+        "systems": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Common.Models.CoreSystem"
+          }
+        },
+        "ignoreReasons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "forumCategories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "groupAvatars": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "destinyMembershipTypes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "recruitmentPlatformTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "recruitmentMiscTags": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "recruitmentActivities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "userContentLocales": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "systemContentLocales": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerDecals": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerDecalColors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerGonfalons": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerGonfalonColors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerGonfalonDetails": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerGonfalonDetailColors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        },
+        "clanBannerStandards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        }
+      }
+    },
+    "Common.Models.CoreSystem": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean"
+        },
+        "parameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Common.Models.CoreSetting": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "isDefault": {
+          "type": "boolean"
+        },
+        "displayName": {
+          "type": "string"
+        },
+        "summary": {
+          "type": "string"
+        },
+        "imagePath": {
+          "type": "string"
+        },
+        "childSettings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Common.Models.CoreSetting"
+          }
+        }
+      }
+    },
+    "GlobalAlert": {
+      "type": "object",
+      "properties": {
+        "AlertKey": {
+          "type": "string"
+        },
+        "AlertHtml": {
+          "type": "string"
+        },
+        "AlertTimestamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "AlertLink": {
+          "type": "string"
+        },
+        "AlertLevel": {
+          "$ref": "#/definitions/GlobalAlertLevel"
+        },
+        "AlertType": {
+          "$ref": "#/definitions/GlobalAlertType"
+        },
+        "StreamInfo": {
+          "$ref": "#/definitions/StreamInfo"
+        }
+      }
+    },
+    "GlobalAlertLevel": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Blue"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Yellow"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Red"
+        }
+      ]
+    },
+    "GlobalAlertType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "GlobalAlert"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "StreamingAlert"
+        }
+      ]
+    },
+    "StreamInfo": {
+      "type": "object",
+      "properties": {
+        "ChannelName": {
+          "type": "string"
+        }
+      }
     }
   },
   "securityDefinitions": {
@@ -30164,6 +31914,10 @@
       "description": "user"
     },
     {
+      "name": "Content",
+      "description": "content"
+    },
+    {
       "name": "Forum",
       "description": "forum"
     },
@@ -30186,6 +31940,10 @@
     {
       "name": "Fireteam",
       "description": "fireteam"
+    },
+    {
+      "name": "",
+      "description": "core"
     }
   ],
   "externalDocs": {
