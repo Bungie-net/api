@@ -18,7 +18,7 @@
   - For now, this will only have checklists.  More will likely be added to it as time goes by.
 * Added the concept of [DestinyChecklistDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition.html#schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition), and checklist data to Progression components returned from the API.
 * Added some throwaway APIs for an upcoming update to the game.
-  - If you happen to dig through our Platform Client Javascript libraries to find our unpublished APIs, you'll likely see some APIs about "Triumphs."  Yes, Triumphs are coming.  Please don't build anything that relies on these endpoints: as the name of them implies, they're going to be thrown away once Triumphs is over.  Such is the ethereal and ever-changing nature of Triumphs.  It's very Zen-like, I assure you.  The data that will both be truly interesting and that will actually persist once Triumphs is over is in the new Checklists data.
+  - If you happen to dig through our Platform Client Javascript libraries to find our unpublished APIs, you'll likely see some APIs about "Triumphs."  Yes, Triumphs are coming.  Please don't build anything that relies on these endpoints: as the name of them implies, they're going to be thrown away once Triumphs is over.  Such is the ethereal and ever-changing nature of Triumphs.  It's very Zen-like, I assure you.  The data that will both be truly interesting and that will actually persist once Triumphs is over is in the new Checklists data.  (though not all checklists will be used in Triumphs, and vice-versa!  I tried to get you all as many checklists as I could find data for.)
 
 ## [2.2.1] - 2018-05-30
 
