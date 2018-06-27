@@ -10,23 +10,24 @@ This section will be added to as time goes by - we're working with it as we go!
 
 The previously mentioned workaround for the Equip Items restriction is now live.  You should be able to equip with any character as long as it is not actively logged in.
 
-## v2.2.1 Minor Update
+## v2.2.2 Triumphs?  Who said anything about Triumphs I don't know what you're talking about
 
 ### Fixed
-* #504 : Known issue: "Crucible Labs" Activity Mode won't be in data until May 30th, Crucible Labs PGCRs will return as "All" until then. bug ready for release
-* #501 : Equip Items (added a workaround where logged off characters can still equip)
-* #485 : New Warmind items are not appearing in screenshots bug ready for release
-* #476 : Official companion app doesn’t display the counter on Sentinel’s Shove bug ready for release
-* #470 : The new Warmind vendor's (Ana Bray) faction definition is lacking tokenValues property bug investigation ready for release
-* #469 : Since Warmind itemState property is not showing if an item is a masterwork bug ready for release
-* #468 : Known bug: Nightfall Score Multiplier and Handicap not being returned bug ready for release
-* #466 : Content Warning for DLC2: Several Activities removed from database, replaced with variants that have only changed identifiers definitions ready for release rfc
-
+* #539 Curse of Osiris milestones
+* #532 [question] where to get flashpoint location ?
+* #523 Known Issue: Clans may be inaccessible, increase in timeouts
+* #522 plugSources does not seem correct for shaders
+* #514 Wrong kills/deaths/assists numbers for Rumble
+* #513 "You're Welcome" ghost perk incorrectly classified as a Weapon Mod
+* #511 Glass modifier missing in DestinySandboxPerkDefinition
+* #506 /Platform/GlobalAlerts/ 
+* #493 Display properties for PlugSets
 ### Added
-
-* A new endpoint, ["GetLinkedProfiles"](https://bungie-net.github.io/multi/operation_get_Destiny2-GetLinkedProfiles.html#operation_get_Destiny2-GetLinkedProfiles), has been added to the Destiny 2 endpoints.  The hope is that this will simplify some of your workflows if you find you've had to do a lot of manual workarounds and querying to find out if linked Platform accounts actually have Destiny information.
-* A new activity mode, "Showdown", has been added.
-
+* Added a new component for Profile-level Progression data:  ProfileProgressions.
+  - For now, this will only have checklists.  More will likely be added to it as time goes by.
+* Added the concept of [DestinyChecklistDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition.html#schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition), and checklist data to Progression components returned from the API.
+* Added some throwaway APIs for an upcoming update to the game.
+  - If you happen to dig through our Platform Client Javascript libraries to find our unpublished APIs, you'll likely see some APIs about "Triumphs."  Yes, Triumphs are coming.  Please don't build anything that relies on these endpoints: as the name of them implies, they're going to be thrown away once Triumphs is over.  Such is the ethereal and ever-changing nature of Triumphs.  It's very Zen-like, I assure you.  The data that will both be truly interesting and that will actually persist once Triumphs is over is in the new Checklists data.
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
