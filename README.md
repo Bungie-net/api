@@ -74,11 +74,6 @@ It would be helpful to us and may also allow us to provide more detailed metrics
   - Read more in [DestinyItemSocketBlockDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyItemSocketBlockDefinition.html#schema_Destiny-Definitions-DestinyItemSocketBlockDefinition) and its children, as well as [DestinyItemPlugDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Items-DestinyItemPlugDefinition.html#schema_Destiny-Definitions-Items-DestinyItemPlugDefinition) to find out how Sockets and Plugs work.  (to note, both of these are child properties of [DestinyInventoryItemDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-DestinyInventoryItemDefinition.html#schema_Destiny-Definitions-DestinyInventoryItemDefinition), that old venerable bolt-on of functionality.
 
 - ### (Add more... probably redirect this to a set of wiki pages)
-
-# What Endpoints are not ready?
-
-- ### Vendors
-  - We discovered breaking changes with how Vendors work under the surface pretty late in our development cycle, and were unable to recover in time to stabilize both it and our other features in time to ship.  Those of you who used Vendors in Destiny 1 remember the great Vendor meltdown of 2016.  The implementation that I built to work around said performance meltdown will no longer work in Destiny 2, which puts me back at the drawing board for finding a way to expose Vendor data in an efficient enough manner to melt neither our servers nor the game's servers.  I regret this deeply - particularly discovering it so late and thus not having time to pivot - but I am using this opportunity to pre-release the proposal for the format in which the Vendor calls will return data for review while I continue to work on making Vendors function again.  It is one of the highest priorities on my plate for post-ship. (2017-12-07 as a small update, in practice this ended up not being my highest priority: but I've been chipping away at it as time allows, and hope to have something usable soon.)
   
 # Swagger/OpenAPI Specs (or, how to generate your own clients for the BNet API)
 
