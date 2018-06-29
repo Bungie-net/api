@@ -6,10 +6,6 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-2018-05-30
-
-The previously mentioned workaround for the Equip Items restriction is now live.  You should be able to equip with any character as long as it is not actively logged in.
-
 ## v2.2.2 Triumphs?  Who said anything about Triumphs I don't know what you're talking about
 
 ### Fixed
