@@ -80,7 +80,7 @@ It would be helpful to us and may also allow us to provide more detailed metrics
 - Grab [openapi.json](https://github.com/Bungie-net/api/blob/master/openapi.json) for the OpenAPI 3.0.0 specs
 - Grab [openapi-2.json](https://github.com/Bungie-net/api/blob/master/openapi-2.json) for the 2.0.0 specs
 
-NOTE: There are currently bugs in the generated documentation: it worked well enough to build the HTML documentation you'll see at the links above, but users are reporting a variety of issues - and in some cases, missing data - when they go to generate clients.  I will be looking into those issues this weekend!
+NOTE: There are currently bugs in the generated documentation: it worked well enough to build the HTML documentation you'll see at the links above, but users are reporting a variety of issues - and in some cases, missing data - when they go to generate clients.  Due to severe time constraints, I've not been able to prioritize fixing bugs in the documentation.  It's still on our backlog, but for now any client generators you build will have to work with what we've got.
 
 # Extension Properties on OpenAPI Specs (or, how to generate much cooler clients for the BNet API if you want to take the time to do so)
 
