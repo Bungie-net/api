@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2018-07-10 Brief update!
+
+Hey folks!  Just a heads up - we're knee deep in Forsaken-related work right now, so we may be MIA from the Github site for a few weeks while we work on finishing integrating all of the new features and changes coming in with the new release.  We'll be back - keep filing bugs and requests as you see fit in the meantime, and know that we're not ignoring you - well, not intentionally!  We've just got some hard deadlines coming up and we've got to make those a priority until they're ready to ship.  We'll go through the new issues that have come up once we're caught up!
+
 ## v2.2.2 Triumphs?  Who said anything about Triumphs I don't know what you're talking about
 
 ### Fixed
