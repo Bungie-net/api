@@ -6,6 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2018-07-17 API Down for v2.2.3 update
+
+I hope you all are [having a summah](https://www.youtube.com/watch?v=pv8yS8vaqXs)!  We've got some Summah secrets in store for you... well, I guess not so secret, as there's an article out about it.  But in the interim, we're going to be down until about 3pm today due to some ongoing issues we experience when the game servers transition to new content versions.  We're working on a more permanent fix for it, but for now we have to take the API offline while the game transitions off the old versions of the servers.
+
+When we go back online, you should get the new summer content and features!
+
 ## 2018-07-10 Brief update!
 
 Hey folks!  Just a heads up - we're knee deep in Forsaken-related work right now, so we may be MIA from the Github site for a few weeks while we work on finishing integrating all of the new features and changes coming in with the new release.  We'll be back - keep filing bugs and requests as you see fit in the meantime, and know that we're not ignoring you - well, not intentionally!  We've just got some hard deadlines coming up and we've got to make those a priority until they're ready to ship.  We'll go through the new issues that have come up once we're caught up!
