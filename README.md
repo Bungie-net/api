@@ -6,36 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2018-07-17 API Down for v2.2.3 update
+## 2018-07-17 Minor API update
 
-I hope you all are [having a summah](https://www.youtube.com/watch?v=pv8yS8vaqXs)!  We've got some Summah secrets in store for you... well, I guess not so secret, as there's an article out about it.  But in the interim, we're going to be down until about 3pm today due to some ongoing issues we experience when the game servers transition to new content versions.  We're working on a more permanent fix for it, but for now we have to take the API offline while the game transitions off the old versions of the servers.
-
-When we go back online, you should get the new summer content and features!
-
-UPDATE 2: Also, there will be a brief period where screenshots will begin to 404.  Hang tight, I'll be deploying a fix to restore them as soon as it is safe to do so.  It sounds like the root cause has been fixed for good, so this should be the last time for the forseeable future that screenshots will disappear unexpectedly.
-
-## 2018-07-10 Brief update!
-
-Hey folks!  Just a heads up - we're knee deep in Forsaken-related work right now, so we may be MIA from the Github site for a few weeks while we work on finishing integrating all of the new features and changes coming in with the new release.  We'll be back - keep filing bugs and requests as you see fit in the meantime, and know that we're not ignoring you - well, not intentionally!  We've just got some hard deadlines coming up and we've got to make those a priority until they're ready to ship.  We'll go through the new issues that have come up once we're caught up!
-
-## v2.2.2 Triumphs?  Who said anything about Triumphs I don't know what you're talking about
-
-### Fixed
-* #539 Curse of Osiris milestones
-* #532 [question] where to get flashpoint location ?
-* #523 Known Issue: Clans may be inaccessible, increase in timeouts
-* #522 plugSources does not seem correct for shaders
-* #514 Wrong kills/deaths/assists numbers for Rumble
-* #513 "You're Welcome" ghost perk incorrectly classified as a Weapon Mod
-* #511 Glass modifier missing in DestinySandboxPerkDefinition
-* #506 /Platform/GlobalAlerts/ 
-* #493 Display properties for PlugSets
-### Added
-* Added a new component for Profile-level Progression data:  ProfileProgressions.
-  - For now, this will only have checklists.  More will likely be added to it as time goes by.
-* Added the concept of [DestinyChecklistDefinition](https://bungie-net.github.io/multi/schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition.html#schema_Destiny-Definitions-Checklists-DestinyChecklistDefinition), and checklist data to Progression components returned from the API.
-* Added some throwaway APIs for an upcoming update to the game.
-  - If you happen to dig through our Platform Client Javascript libraries to find our unpublished APIs, you'll likely see some APIs about "Triumphs."  Yes, Triumphs are coming.  Please don't build anything that relies on these endpoints: as the name of them implies, they're going to be thrown away once Triumphs is over.  Such is the ethereal and ever-changing nature of Triumphs.  It's very Zen-like, I assure you.  The data that will both be truly interesting and that will actually persist once Triumphs is over is in the new Checklists data. (though not all checklists will be used in Triumphs, and vice-versa!  I tried to get you all as many checklists as I could find data for.)
+* no user-facing changes of any importance.
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
