@@ -6,9 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2018-07-17 Minor API update
+## 2018-07-24 Vendor API Issues
 
-* no user-facing changes of any importance.
+Please see "Known issues" below for details.  Some Vendors are returning incorrect information, and we will unfortunately not be able to resolve the issue until Forsaken goes live.  I apologize for the inconvenience this will cause many of you who rely on Vendor data.  I'm working on a solution to go live with Forsaken that should resolve the Vendor data consistency issue once and for all, in exchange for having to keep vendors off during game deployments (which we already have to do anyways, at least for now).
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
