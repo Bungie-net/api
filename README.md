@@ -121,3 +121,5 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
 # Known Issues
 
 - If our environment goes down entirely, to the point where we can no longer process your request, we are currently returning the same static error HTML page(s) to any API request that the website is returning.  If you get an HTML response to an API request, know that this is the undesirable side effect of our environment being down and handle it with your own messaging and error handling as needed.
+
+- Some Vendors are currently showing incorrect items in certain situations/times of day (and in some cases, all the time).  Unfortunately the fix we need will require work that isn't going to go live until Forsaken goes live, which means that the Vendor endpoint will be somewhat unreliable until that time.  I apologize for the inconvenience this is causing.  The fix which will go live with Forsaken will hopefully solve Vendor consistency issues once and for all.
