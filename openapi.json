@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.2.2"
+    "version": "2.2.3"
   },
   "servers": [
     {
@@ -4854,6 +4854,14 @@
             }
           },
           {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "in": "path",
             "description": "Zero based page",
@@ -4932,6 +4940,14 @@
             "required": true,
             "schema": {
               "$ref": "#/components/schemas/Fireteam.FireteamDateRange"
+            }
+          },
+          {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "schema": {
+              "type": "string"
             }
           },
           {
@@ -5016,10 +5032,19 @@
             }
           },
           {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
             "name": "page",
             "in": "path",
-            "description": "Zero based page",
+            "description": "Deprecated parameter, ignored.",
             "required": true,
+            "deprecated": true,
             "schema": {
               "type": "integer",
               "format": "int32"
@@ -5096,7 +5121,7 @@
         ]
       }
     },
-    "//GetAvailableLocales/": {
+    "/GetAvailableLocales/": {
       "summary": ".GetAvailableLocales",
       "description": "List of available localization cultures",
       "get": {
@@ -5114,7 +5139,7 @@
         "deprecated": false
       }
     },
-    "//Settings/": {
+    "/Settings/": {
       "summary": ".GetCommonSettings",
       "description": "Get the common settings used by the Bungie.Net environment.",
       "get": {
@@ -5132,7 +5157,7 @@
         "deprecated": false
       }
     },
-    "//GlobalAlerts/": {
+    "/GlobalAlerts/": {
       "summary": ".GetGlobalAlerts",
       "description": "Gets any active global alert for display in the forum banners, help pages, etc. Usually used for DOC alerts.",
       "get": {
@@ -9530,6 +9555,14 @@
           "isDisplayOnly": {
             "type": "boolean",
             "description": "If true, this category only displays items: you can't purchase anything in them."
+          },
+          "resetIntervalMinutesOverride": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "resetOffsetMinutesOverride": {
+            "type": "integer",
+            "format": "int32"
           }
         },
         "description": "This is the definition for a single Vendor Category, into which Sale Items are grouped."
@@ -10715,7 +10748,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -10930,6 +10966,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           },
@@ -11998,7 +12046,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -12213,6 +12264,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           },
@@ -12290,7 +12353,10 @@
           "56",
           "57",
           "58",
-          "59"
+          "59",
+          "60",
+          "61",
+          "62"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -12504,6 +12570,18 @@
           {
             "numericValue": "59",
             "identifier": "Showdown"
+          },
+          {
+            "numericValue": "60",
+            "identifier": "Lockdown"
+          },
+          {
+            "numericValue": "61",
+            "identifier": "Scorched"
+          },
+          {
+            "numericValue": "62",
+            "identifier": "ScorchedTeam"
           }
         ]
       },
@@ -16994,7 +17072,8 @@
           "3020",
           "3021",
           "3022",
-          "3023"
+          "3023",
+          "3024"
         ],
         "type": "integer",
         "format": "int32",
@@ -19656,6 +19735,10 @@
           {
             "numericValue": "3023",
             "identifier": "ClanFireteamAlreadyJoined"
+          },
+          {
+            "numericValue": "3024",
+            "identifier": "ClanFireteamScheduledFireteamsRange"
           }
         ]
       },
@@ -20627,7 +20710,7 @@
           "0",
           "1",
           "2",
-          "3"
+          "4"
         ],
         "type": "integer",
         "description": "A flags enumeration indicating the versions of the game that a given user has purchased.",
@@ -20646,7 +20729,7 @@
             "identifier": "DLC1"
           },
           {
-            "numericValue": "3",
+            "numericValue": "4",
             "identifier": "DLC2"
           }
         ]
@@ -21045,6 +21128,15 @@
             "type": "integer",
             "format": "int32",
             "nullable": true
+          },
+          "scope": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.DestinyScope"
+              }
+            ],
+            "description": "The scope at which this specific entry can be computed."
           }
         },
         "description": "The properties of an individual checklist item. Note that almost everything is optional: it is *highly* variable what kind of data we'll actually be able to return: at times we may have no other relationships to entities at all.\r\nWhatever UI you build, do it with the knowledge that any given entry might not actually be able to be associated with some other Destiny entity."
@@ -21837,7 +21929,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -22052,6 +22147,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           },
@@ -22158,7 +22265,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -22373,6 +22483,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           }
@@ -23145,7 +23267,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -23363,6 +23488,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           },
@@ -25806,6 +25943,12 @@
             "description": "Date and time for the activity.",
             "format": "date-time"
           },
+          "startingPhaseIndex": {
+            "type": "integer",
+            "description": "If this activity has \"phases\", this is the phase at which the activity was started.",
+            "format": "int32",
+            "nullable": true
+          },
           "activityDetails": {
             "type": "object",
             "allOf": [
@@ -27222,7 +27365,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -27437,6 +27583,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           }
@@ -27513,7 +27671,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -27728,6 +27889,18 @@
               {
                 "numericValue": "59",
                 "identifier": "Showdown"
+              },
+              {
+                "numericValue": "60",
+                "identifier": "Lockdown"
+              },
+              {
+                "numericValue": "61",
+                "identifier": "Scorched"
+              },
+              {
+                "numericValue": "62",
+                "identifier": "ScorchedTeam"
               }
             ]
           }

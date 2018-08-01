@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.2.2"
+    "version": "2.2.3"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -6517,7 +6517,10 @@
               "56",
               "57",
               "58",
-              "59"
+              "59",
+              "60",
+              "61",
+              "62"
             ]
           },
           {
@@ -7800,6 +7803,12 @@
             "format": "int64"
           },
           {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "type": "string"
+          },
+          {
             "name": "page",
             "in": "path",
             "description": "Zero based page",
@@ -7933,6 +7942,12 @@
             ]
           },
           {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "type": "string"
+          },
+          {
             "name": "page",
             "in": "path",
             "description": "Zero based page",
@@ -8043,10 +8058,17 @@
             "type": "boolean"
           },
           {
+            "name": "langFilter",
+            "in": "query",
+            "description": "An optional language filter.",
+            "type": "string"
+          },
+          {
             "name": "page",
             "in": "path",
-            "description": "Zero based page",
+            "description": "Deprecated parameter, ignored.",
             "required": true,
+            "deprecated": true,
             "type": "integer",
             "format": "int32"
           },
@@ -8180,7 +8202,7 @@
         }
       }
     },
-    "//GetAvailableLocales/": {
+    "/GetAvailableLocales/": {
       "get": {
         "tags": [
           ""
@@ -8229,7 +8251,7 @@
         }
       }
     },
-    "//Settings/": {
+    "/Settings/": {
       "get": {
         "tags": [
           ""
@@ -8275,7 +8297,7 @@
         }
       }
     },
-    "//GlobalAlerts/": {
+    "/GlobalAlerts/": {
       "get": {
         "tags": [
           ""
@@ -12653,6 +12675,14 @@
         "isDisplayOnly": {
           "description": "If true, this category only displays items: you can't purchase anything in them.",
           "type": "boolean"
+        },
+        "resetIntervalMinutesOverride": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resetOffsetMinutesOverride": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -13833,7 +13863,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -14045,6 +14078,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         },
@@ -15113,7 +15158,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -15325,6 +15373,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         },
@@ -15403,7 +15463,10 @@
         "56",
         "57",
         "58",
-        "59"
+        "59",
+        "60",
+        "61",
+        "62"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -15615,6 +15678,18 @@
         {
           "numericValue": "59",
           "identifier": "Showdown"
+        },
+        {
+          "numericValue": "60",
+          "identifier": "Lockdown"
+        },
+        {
+          "numericValue": "61",
+          "identifier": "Scorched"
+        },
+        {
+          "numericValue": "62",
+          "identifier": "ScorchedTeam"
         }
       ]
     },
@@ -20065,7 +20140,8 @@
         "3020",
         "3021",
         "3022",
-        "3023"
+        "3023",
+        "3024"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -22726,6 +22802,10 @@
         {
           "numericValue": "3023",
           "identifier": "ClanFireteamAlreadyJoined"
+        },
+        {
+          "numericValue": "3024",
+          "identifier": "ClanFireteamScheduledFireteamsRange"
         }
       ]
     },
@@ -23692,7 +23772,7 @@
         "0",
         "1",
         "2",
-        "3"
+        "4"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -23709,7 +23789,7 @@
           "identifier": "DLC1"
         },
         {
-          "numericValue": "3",
+          "numericValue": "4",
           "identifier": "DLC2"
         }
       ]
@@ -24083,6 +24163,15 @@
         "vendorInteractionIndex": {
           "format": "int32",
           "type": "integer"
+        },
+        "scope": {
+          "description": "The scope at which this specific entry can be computed.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.DestinyScope"
+            }
+          ]
         }
       }
     },
@@ -24827,7 +24916,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -25039,6 +25131,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         },
@@ -25146,7 +25250,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -25358,6 +25465,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         }
@@ -26095,7 +26214,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -26310,6 +26432,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         },
@@ -28632,6 +28766,11 @@
           "description": "Date and time for the activity.",
           "type": "string"
         },
+        "startingPhaseIndex": {
+          "format": "int32",
+          "description": "If this activity has \"phases\", this is the phase at which the activity was started.",
+          "type": "integer"
+        },
         "activityDetails": {
           "description": "Details about the activity.",
           "type": "object",
@@ -29997,7 +30136,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -30209,6 +30351,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         }
@@ -30286,7 +30440,10 @@
             "56",
             "57",
             "58",
-            "59"
+            "59",
+            "60",
+            "61",
+            "62"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -30498,6 +30655,18 @@
             {
               "numericValue": "59",
               "identifier": "Showdown"
+            },
+            {
+              "numericValue": "60",
+              "identifier": "Lockdown"
+            },
+            {
+              "numericValue": "61",
+              "identifier": "Scorched"
+            },
+            {
+              "numericValue": "62",
+              "identifier": "ScorchedTeam"
             }
           ]
         }
