@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.1] - 2018-09-14
+
+### Added
+* Changes related to new features in Forsaken (See [the Wiki](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release)) for more information)
+
+### Changed
+* See the wiki linked above for more information: it covers the significant changes in this release.
+
 ## [2.3.0] - 2018-08-28
 
 ### Added
