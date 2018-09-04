@@ -6,9 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2018-08-28 Destiny API v2.3.0, Pre-Release for Forsaken
+## 2018-09-14 Destiny API v2.3.1, Forsaken Release
 
 For this release, I've written up a larger wiki article.  [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
+
+All the changes mentioned in that article will be live as of ~1pm PDT 2018-09-14.  Please check out the latest swagger spec and documentation for changes to the API!
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
