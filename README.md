@@ -8,7 +8,30 @@ This section will be added to as time goes by - we're working with it as we go!
 
 ## 2018-09-18 Destiny API v2.3.2, Post-Forsaken Patch
 
-Details forthcoming later tonight itemizing the most important changes. the majority of work in this patch was to fix several late-breaking bugs and add useful data that was missing.  None of the changes should be breaking/all are compatible with your existing implementations, and should fix several bugs that you may have been experiencing.
+## [2.3.2] - 2018-09-19
+
+### Added/Changed
+* Many entities unredacted.  More to come in 2018-10-02 release.
+* Presentation Nodes now have an "Obscured" state, to reflect that state as it exists in the game
+* Ongoing work to fix Activity Modes that are broken, and add support for upcoming activity modes
+* Added Vendor and Item refresh/expiration dates (referenced through the issues below, but may be unclear unless you read all the details)
+* Github Issues Resolved:
+  * #646 - Forsaken Checklist Updates
+  * #666 - Nightfalls' (et al) manifest displayProperties.name is just "Nightfall"
+  * #665 - PGCR Returning Mode 0
+  * #659 - Expiration time for items (bounties)
+  * #654 - Vendors (esp. Spider): wrong RefreshDate
+  * #651 - GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now
+  * #650 - Stats not returning Bow, Beam Rifle weapon/precision weapon stats
+  * #649 - sourceString hash for collectibles
+  * #648 - Public Milestones reports wrong end dates for 4 day reset items
+  * #641 - Need a Forsaken flag in DestinyGameVersions
+  * #638 - DestinyUnhandledException for various Stats endpoint calls on some accounts/activity modes
+  * #637 - Legendary/Rare Energy/Power with Kinetic Damage Type
+  * #629 - Daily Crucible Challenge missing from Milestones when Weekly Flashpoint is completed
+  * #628 - Unable to map Daily Heroic Story Mission Activitiy to specific mission
+  * #624 - Feature request: collectableHash on items
+  * #622 - (Some?) Items with Kinetic Damage have damageTypes but empty damageTypeHashes
 
 More of such fixes and additional data will be forthcoming in the October 2nd release.
 
