@@ -144,6 +144,12 @@ NOTE: There are currently bugs in the generated documentation: it worked well en
   
 - Were you sent here by the devil?
   - No, good sir, I'm on the level!
+  
+- Do you like punch and pie?
+  - Why yes, good sir, I do.
+  
+- Are you EdgarVerona on Reddit?
+  - Yes, it's a long story.
 
 # Known Issues
 
