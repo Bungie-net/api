@@ -1474,6 +1474,34 @@
         "deprecated": false
       }
     },
+    "/GroupV2/NameV2/": {
+      "summary": "GroupV2.GetGroupByNameV2",
+      "description": "Get information about a specific group with the given name and type. The POST version.",
+      "post": {
+        "tags": [
+          "GroupV2"
+        ],
+        "description": "Get information about a specific group with the given name and type. The POST version.",
+        "operationId": "GroupV2.GetGroupByNameV2",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/GroupsV2.GroupNameSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/GroupsV2.GroupResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
     "/GroupV2/{groupId}/OptionalConversations/": {
       "summary": "GroupV2.GetGroupOptionalConversations",
       "description": "Gets a list of available optional conversation channels and their settings.",
@@ -3434,7 +3462,10 @@
               "MoveEquipDestinyItems"
             ]
           }
-        ]
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
       }
     },
     "/Destiny2/Actions/Items/PullFromPostmaster/": {
@@ -3469,7 +3500,10 @@
               "MoveEquipDestinyItems"
             ]
           }
-        ]
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
       }
     },
     "/Destiny2/Actions/Items/EquipItem/": {
@@ -3504,7 +3538,10 @@
               "MoveEquipDestinyItems"
             ]
           }
-        ]
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
       }
     },
     "/Destiny2/Actions/Items/EquipItems/": {
@@ -3539,7 +3576,10 @@
               "MoveEquipDestinyItems"
             ]
           }
-        ]
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
       }
     },
     "/Destiny2/Actions/Items/SetLockState/": {
@@ -3574,7 +3614,10 @@
               "MoveEquipDestinyItems"
             ]
           }
-        ]
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
       }
     },
     "/Destiny2/Actions/Items/InsertSocketPlug/": {
@@ -3611,7 +3654,10 @@
             ]
           }
         ],
-        "x-preview": true
+        "x-preview": true,
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "1"
+        }
       }
     },
     "/Destiny2/Stats/PostGameCarnageReport/{activityId}/": {
@@ -13271,12 +13317,12 @@
           {
             "numericValue": "2",
             "identifier": "PvP",
-            "description": "PvP activities, where you teabag other humans in the face."
+            "description": "PvP activities, where you shoot your \"friends\"."
           },
           {
             "numericValue": "3",
             "identifier": "PvECompetitive",
-            "description": "PVE competitive activities."
+            "description": "PVE competitive activities, where you shoot whoever you want whenever you want. Or run around collecting small glowing triangles."
           }
         ]
       },
@@ -16143,6 +16189,20 @@
             "x-dictionary-key": {
               "$ref": "#/components/schemas/Destiny.DestinyGender"
             }
+          },
+          "titlesByGenderHash": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "For those who prefer to use the definitions.",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
           }
         }
       },
@@ -16169,11 +16229,45 @@
           }
         ]
       },
+      "Destiny.Definitions.DestinyGenderDefinition": {
+        "type": "object",
+        "properties": {
+          "genderType": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.DestinyGender"
+              }
+            ],
+            "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames."
+          },
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "Gender is a social construct, and as such we have definitions for Genders. Right now there happens to only be two, but we'll see what the future holds.",
+        "x-mobile-manifest-name": "Genders"
+      },
       "Destiny.Definitions.Records.DestinyRecordCompletionBlock": {
         "type": "object",
         "properties": {
           "partialCompletionObjectiveCountThreshold": {
             "type": "integer",
+            "description": "The number of objectives that must be completed before the objective is considered \"complete\"",
             "format": "int32"
           },
           "ScoreValue": {
@@ -16926,6 +17020,17 @@
             "identifier": "GreaterThanOneHundred"
           }
         ]
+      },
+      "GroupsV2.GroupNameSearchRequest": {
+        "type": "object",
+        "properties": {
+          "groupName": {
+            "type": "string"
+          },
+          "groupType": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
+        }
       },
       "GroupsV2.GroupOptionalConversation": {
         "type": "object",
@@ -18201,6 +18306,12 @@
           "2048",
           "2049",
           "2050",
+          "2051",
+          "2052",
+          "2053",
+          "2054",
+          "2055",
+          "2056",
           "2100",
           "2101",
           "2102",
@@ -20691,6 +20802,30 @@
             "identifier": "BungieRewardNotYetClaimable"
           },
           {
+            "numericValue": "2051",
+            "identifier": "MissingOfferConfig"
+          },
+          {
+            "numericValue": "2052",
+            "identifier": "RAFQuestEntitlementRequiresBnet"
+          },
+          {
+            "numericValue": "2053",
+            "identifier": "RAFQuestEntitlementTransportFailure"
+          },
+          {
+            "numericValue": "2054",
+            "identifier": "RAFQuestEntitlementUnknownFailure"
+          },
+          {
+            "numericValue": "2055",
+            "identifier": "RAFVeteranRewardUnknownFailure"
+          },
+          {
+            "numericValue": "2056",
+            "identifier": "RAFTooEarlyToCancelBond"
+          },
+          {
             "numericValue": "2100",
             "identifier": "ApiExceededMaxKeys"
           },
@@ -21196,7 +21331,7 @@
           "profiles": {
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/User.UserInfoCard"
+              "$ref": "#/components/schemas/Destiny.Responses.DestinyProfileUserInfoCard"
             },
             "description": "Any Destiny account for whom we could successfully pull characters will be returned here, as the Platform-level summary of user data. (no character data, no Destiny account data other than the Membership ID and Type so you can make further queries)"
           },
@@ -21218,6 +21353,41 @@
           }
         },
         "description": "I know what you seek. You seek linked accounts. Found them, you have.\r\nThis contract returns a minimal amount of data about Destiny Accounts that are linked through your Bungie.Net account. We will not return accounts in this response whose"
+      },
+      "Destiny.Responses.DestinyProfileUserInfoCard": {
+        "type": "object",
+        "properties": {
+          "dateLastPlayed": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "supplementalDisplayName": {
+            "type": "string",
+            "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc."
+          },
+          "iconPath": {
+            "type": "string",
+            "description": "URL the Icon if available."
+          },
+          "membershipType": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/BungieMembershipType"
+              }
+            ],
+            "description": "Type of the membership."
+          },
+          "membershipId": {
+            "type": "integer",
+            "description": "Membership ID as they user is known in the Accounts service",
+            "format": "int64"
+          },
+          "displayName": {
+            "type": "string",
+            "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API."
+          }
+        }
       },
       "Destiny.Responses.DestinyErrorProfile": {
         "type": "object",
@@ -22034,7 +22204,8 @@
           "1",
           "2",
           "4",
-          "8"
+          "8",
+          "16"
         ],
         "type": "integer",
         "description": "A flags enumeration indicating the versions of the game that a given user has purchased.",
@@ -22059,6 +22230,10 @@
           {
             "numericValue": "8",
             "identifier": "Forsaken"
+          },
+          {
+            "numericValue": "16",
+            "identifier": "YearTwoAnnualPass"
           }
         ]
       },
@@ -22489,7 +22664,23 @@
             "$ref": "#/components/schemas/Destiny.DestinyPresentationNodeState"
           },
           "objective": {
-            "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
+              }
+            ],
+            "description": "An optional property: presentation nodes MAY have objectives, which can be used to infer more human readable data about the progress. However, progressValue and completionValue ought to be considered the canonical values for progress on Progression Nodes."
+          },
+          "progressValue": {
+            "type": "integer",
+            "description": "How much of the presentation node is considered to be completed so far by the given character/profile.",
+            "format": "int32"
+          },
+          "completionValue": {
+            "type": "integer",
+            "description": "The value at which the presentation ode is considered to be completed.",
+            "format": "int32"
           }
         }
       },
@@ -22694,7 +22885,7 @@
           "64"
         ],
         "type": "integer",
-        "description": "A Flags Enumeration where each bit represents a different state that the Collectible can be in. A collectible can be in any number of these states, and you can choose to use or ignore any or all of them when making your own UI that shows Collectible info. Our displays are going to honor them, but we're also the kind of people who only pretend to inhale before quickly passing it to the left. So, you know, do what you got to do.",
+        "description": "A Flags Enumeration where each bit represents a different state that the Collectible can be in. A collectible can be in any number of these states, and you can choose to use or ignore any or all of them when making your own UI that shows Collectible info. Our displays are going to honor them, but we're also the kind of people who only pretend to inhale before quickly passing it to the left. So, you know, do what you got to do.\r\n(All joking aside, please note the caveat I mention around the Invisible flag: there are cases where it is in the best interest of your users to honor these flags even if you're a \"show all the data\" person. Collector-oriented compulsion is a very unfortunate and real thing, and I would hate to instill that compulsion in others through showing them items that they cannot earn. Please consider this when you are making your own apps/sites.)",
         "format": "int32",
         "x-enum-values": [
           {
@@ -22714,7 +22905,7 @@
           {
             "numericValue": "4",
             "identifier": "Invisible",
-            "description": "If this flag is set, the collectible should not be shown to the user.\r\nBut, I mean do what you want: I'm not your mom. It's much more likely that I'm your Dad - wait, I promised your mom that I wouldn't tell you. Don't tell her that I told you."
+            "description": "If this flag is set, the collectible should not be shown to the user.\r\nPlease do consider honoring this flag. It is used - for example - to hide items that a person didn't get from the Eververse. I can't prevent these from being returned in definitions, because some people may have acquired them and thus they should show up: but I would hate for people to start feeling some variant of a Collector's Remorse about these items, and thus increasing their purchasing based on that compulsion. That would be a very unfortunate outcome, and one that I wouldn't like to see happen. So please, whether or not I'm your mom, consider honoring this flag and don't show people invisible collectibles."
           },
           {
             "numericValue": "8",
@@ -23002,6 +23193,19 @@
               "$ref": "#/components/schemas/Destiny.DestinyGender"
             }
           },
+          "genderedRaceNamesByGenderHash": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
           "hash": {
             "type": "integer",
             "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -23019,39 +23223,6 @@
         },
         "description": "In Destiny, \"Races\" are really more like \"Species\". Sort of. I mean, are the Awoken a separate species from humans? I'm not sure. But either way, they're defined here. You'll see Exo, Awoken, and Human as examples of these Species. Players will choose one for their character.",
         "x-mobile-manifest-name": "Races"
-      },
-      "Destiny.Definitions.DestinyGenderDefinition": {
-        "type": "object",
-        "properties": {
-          "genderType": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.DestinyGender"
-              }
-            ],
-            "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames."
-          },
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "Gender is a social construct, and as such we have definitions for Genders. Right now there happens to only be two, but we'll see what the future holds.",
-        "x-mobile-manifest-name": "Genders"
       },
       "Destiny.Definitions.DestinyClassDefinition": {
         "type": "object",
@@ -23076,6 +23247,19 @@
             "description": "A localized string referring to the singular form of the Class's name when referred to in gendered form. Keyed by the DestinyGender.",
             "x-dictionary-key": {
               "$ref": "#/components/schemas/Destiny.DestinyGender"
+            }
+          },
+          "genderedClassNamesByGenderHash": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
             }
           },
           "mentorVendorHash": {
@@ -24238,6 +24422,17 @@
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
             }
           },
+          "booleanActivityOptions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but saavy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
           "loadoutRequirementIndex": {
             "type": "integer",
             "description": "If returned, this is the index into the DestinyActivityDefinition's \"loadouts\" property, indicating the currently active loadout requirements.",
@@ -24766,6 +24961,13 @@
               "$ref": "#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneChallengeActivityGraphNodeEntry"
             },
             "description": "If the activity and its challenge is visible on any of these nodes, it will be returned."
+          },
+          "phases": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneChallengeActivityPhase"
+            },
+            "description": "Phases related to this activity, if there are any.\r\nThese will be listed in the order in which they will appear in the actual activity."
           }
         }
       },
@@ -24788,6 +24990,16 @@
           },
           "activityGraphNodeHash": {
             "type": "integer",
+            "format": "uint32"
+          }
+        }
+      },
+      "Destiny.Definitions.Milestones.DestinyMilestoneChallengeActivityPhase": {
+        "type": "object",
+        "properties": {
+          "phaseHash": {
+            "type": "integer",
+            "description": "The hash identifier of the activity's phase.",
             "format": "uint32"
           }
         }
@@ -30175,6 +30387,25 @@
             "description": "If returned, this is the index into the DestinyActivityDefinition's \"loadouts\" property, indicating the currently active loadout requirements.",
             "format": "int32",
             "nullable": true
+          },
+          "phaseHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "The ordered list of phases for this activity, if any. Note that we have no human readable info for phases, nor any entities to relate them to: relating these hashes to something human readable is up to you unfortunately."
+          },
+          "booleanActivityOptions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe have no human readable information for this data, so it's up to you if you want to associate it with such info to show it.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
           }
         }
       },
@@ -30964,7 +31195,9 @@
           "3",
           "4",
           "5",
-          "6"
+          "6",
+          "7",
+          "8"
         ],
         "type": "integer",
         "format": "int32",
@@ -30996,6 +31229,14 @@
           {
             "numericValue": "6",
             "identifier": "Gambit"
+          },
+          {
+            "numericValue": "7",
+            "identifier": "BlindWell"
+          },
+          {
+            "numericValue": "8",
+            "identifier": "EscalationProtocol"
           }
         ]
       },
