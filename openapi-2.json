@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.3.2"
+    "version": "2.3.3"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -6684,7 +6684,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ]
           },
           {
@@ -7943,7 +7946,8 @@
               "5",
               "6",
               "7",
-              "8"
+              "8",
+              "9"
             ]
           },
           {
@@ -8093,7 +8097,8 @@
               "5",
               "6",
               "7",
-              "8"
+              "8",
+              "9"
             ]
           },
           {
@@ -10019,7 +10024,7 @@
         }
       ]
     },
-    "Forum.ForumPostCategoryEnums": {
+    "Forums.ForumPostCategoryEnums": {
       "format": "int32",
       "enum": [
         "0",
@@ -10087,7 +10092,7 @@
         }
       ]
     },
-    "Forum.ForumFlagsEnum": {
+    "Forums.ForumFlagsEnum": {
       "format": "int32",
       "enum": [
         "0",
@@ -10842,6 +10847,19 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyFactionDefinition"
           }
+        },
+        "color": {
+          "description": "The #RGB string value for the color related to this progression, if there is one.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Misc.DestinyColor"
+            }
+          ]
+        },
+        "rankIcon": {
+          "description": "For progressions that have it, this is the rank icon we use in the Companion, displayed above the progressions' rank value.",
+          "type": "string"
         },
         "hash": {
           "format": "uint32",
@@ -14443,7 +14461,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -14679,6 +14700,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         },
@@ -15808,7 +15841,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -16044,6 +16080,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         },
@@ -16128,7 +16176,10 @@
         "62",
         "63",
         "64",
-        "65"
+        "65",
+        "66",
+        "67",
+        "68"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -16364,6 +16415,18 @@
         {
           "numericValue": "65",
           "identifier": "Breakthrough"
+        },
+        {
+          "numericValue": "66",
+          "identifier": "BlackArmoryRun"
+        },
+        {
+          "numericValue": "67",
+          "identifier": "Salvage"
+        },
+        {
+          "numericValue": "68",
+          "identifier": "IronBannerSalvage"
         }
       ]
     },
@@ -24397,6 +24460,12 @@
             "type": "string"
           }
         },
+        "jsonWorldContentPaths": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "mobileClanBannerDatabasePath": {
           "type": "string"
         },
@@ -26737,7 +26806,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26973,6 +27045,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         },
@@ -27086,7 +27170,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27322,6 +27409,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         }
@@ -28196,7 +28295,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -28435,6 +28537,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         },
@@ -32483,7 +32597,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -32719,6 +32836,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         }
@@ -32802,7 +32931,10 @@
             "62",
             "63",
             "64",
-            "65"
+            "65",
+            "66",
+            "67",
+            "68"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33038,6 +33170,18 @@
             {
               "numericValue": "65",
               "identifier": "Breakthrough"
+            },
+            {
+              "numericValue": "66",
+              "identifier": "BlackArmoryRun"
+            },
+            {
+              "numericValue": "67",
+              "identifier": "Salvage"
+            },
+            {
+              "numericValue": "68",
+              "identifier": "IronBannerSalvage"
             }
           ]
         }
@@ -33894,7 +34038,8 @@
         "5",
         "6",
         "7",
-        "8"
+        "8",
+        "9"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -33933,6 +34078,10 @@
         {
           "numericValue": "8",
           "identifier": "EscalationProtocol"
+        },
+        {
+          "numericValue": "9",
+          "identifier": "Forge"
         }
       ]
     },
@@ -34419,6 +34568,13 @@
         "medalsRootNode": {
           "format": "uint32",
           "type": "integer"
+        },
+        "currentRankProgressionHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
         },
         "undiscoveredCollectibleImage": {
           "type": "string"

@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.3.2"
+    "version": "2.3.3"
   },
   "servers": [
     {
@@ -6816,7 +6816,7 @@
           }
         ]
       },
-      "Forum.ForumPostCategoryEnums": {
+      "Forums.ForumPostCategoryEnums": {
         "enum": [
           "0",
           "1",
@@ -6884,7 +6884,7 @@
           }
         ]
       },
-      "Forum.ForumFlagsEnum": {
+      "Forums.ForumFlagsEnum": {
         "enum": [
           "0",
           "1",
@@ -7651,6 +7651,19 @@
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyFactionDefinition"
             }
+          },
+          "color": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
+              }
+            ],
+            "description": "The #RGB string value for the color related to this progression, if there is one."
+          },
+          "rankIcon": {
+            "type": "string",
+            "description": "For progressions that have it, this is the rank icon we use in the Companion, displayed above the progressions' rank value."
           },
           "hash": {
             "type": "integer",
@@ -11276,7 +11289,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -11515,6 +11531,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           },
@@ -12644,7 +12672,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -12883,6 +12914,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           },
@@ -12966,7 +13009,10 @@
           "62",
           "63",
           "64",
-          "65"
+          "65",
+          "66",
+          "67",
+          "68"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -13204,6 +13250,18 @@
           {
             "numericValue": "65",
             "identifier": "Breakthrough"
+          },
+          {
+            "numericValue": "66",
+            "identifier": "BlackArmoryRun"
+          },
+          {
+            "numericValue": "67",
+            "identifier": "Salvage"
+          },
+          {
+            "numericValue": "68",
+            "identifier": "IronBannerSalvage"
           }
         ]
       },
@@ -21298,6 +21356,15 @@
               "type": "string"
             }
           },
+          "jsonWorldContentPaths": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-dictionary-key": {
+              "type": "string"
+            }
+          },
           "mobileClanBannerDatabasePath": {
             "type": "string"
           },
@@ -23752,7 +23819,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -23991,6 +24061,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           },
@@ -24103,7 +24185,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -24342,6 +24427,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           }
@@ -25256,7 +25353,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -25498,6 +25598,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           },
@@ -29765,7 +29877,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -30004,6 +30119,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           }
@@ -30086,7 +30213,10 @@
               "62",
               "63",
               "64",
-              "65"
+              "65",
+              "66",
+              "67",
+              "68"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -30325,6 +30455,18 @@
               {
                 "numericValue": "65",
                 "identifier": "Breakthrough"
+              },
+              {
+                "numericValue": "66",
+                "identifier": "BlackArmoryRun"
+              },
+              {
+                "numericValue": "67",
+                "identifier": "Salvage"
+              },
+              {
+                "numericValue": "68",
+                "identifier": "IronBannerSalvage"
               }
             ]
           }
@@ -31197,7 +31339,8 @@
           "5",
           "6",
           "7",
-          "8"
+          "8",
+          "9"
         ],
         "type": "integer",
         "format": "int32",
@@ -31237,6 +31380,10 @@
           {
             "numericValue": "8",
             "identifier": "EscalationProtocol"
+          },
+          {
+            "numericValue": "9",
+            "identifier": "Forge"
           }
         ]
       },
@@ -31732,6 +31879,13 @@
           "medalsRootNode": {
             "type": "integer",
             "format": "uint32"
+          },
+          "currentRankProgressionHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            }
           },
           "undiscoveredCollectibleImage": {
             "type": "string"
