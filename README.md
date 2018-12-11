@@ -26,7 +26,6 @@ We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3
   * #696 Vendor Lord Saladin's manifest definition has missing info 
   * #694 Record Objective 
   * #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
-  * #566 The Fall Will Kill You Objective is still classified 
   * #77 genderedNames properties keyed by English strings
 
 If you haven't already seen the changes for Forsaken, [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
