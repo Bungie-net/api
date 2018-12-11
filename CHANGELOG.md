@@ -6,20 +6,20 @@ We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3
 
 ### Added/Changed
 * Github Issues Resolved:
-  #805 Sub-ranks for Valor and Glory are not reflected in the api
-  #785 The manifest will start including JSON-formatted Destiny definitions definitions 
-  #784 GameVersion in GetProfile once black armory comes out 
-  #771 Destiny endpoints will begin returning DestinyThrottledByGameServer in periods of high traffic
-  #753 titles on Seal records not populated 
-  #744 Too many items' data returned in ItemComponents with GetProfile/GetCharacter/etc requests 
-  #742 Leviathan in Milestone Endpoint returns 2 normal and 2 GG hashes 
-  #724 2 burst side arms report 'zero' rounds per minute in the api 
-  #714 Some weapon show not available masterwork Tier upgrades 
-  #696 Vendor Lord Saladin's manifest definition has missing info 
-  #694 Record Objective 
-  #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
-  #566 The Fall Will Kill You Objective is still classified 
-  #77 genderedNames properties keyed by English strings
+  * #805 Sub-ranks for Valor and Glory are not reflected in the api
+  * #785 The manifest will start including JSON-formatted Destiny definitions definitions 
+  * #784 GameVersion in GetProfile once black armory comes out 
+  * #771 Destiny endpoints will begin returning DestinyThrottledByGameServer in periods of high traffic
+  * #753 titles on Seal records not populated 
+  * #744 Too many items' data returned in ItemComponents with GetProfile/GetCharacter/etc requests 
+  * #742 Leviathan in Milestone Endpoint returns 2 normal and 2 GG hashes 
+  * #724 2 burst side arms report 'zero' rounds per minute in the api 
+  * #714 Some weapon show not available masterwork Tier upgrades 
+  * #696 Vendor Lord Saladin's manifest definition has missing info 
+  * #694 Record Objective 
+  * #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
+  * #566 The Fall Will Kill You Objective is still classified 
+  * #77 genderedNames properties keyed by English strings
 
 ## [2.3.2] - 2018-09-19
 
