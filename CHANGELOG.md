@@ -18,7 +18,6 @@ We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3
   * #696 Vendor Lord Saladin's manifest definition has missing info 
   * #694 Record Objective 
   * #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
-  * #566 The Fall Will Kill You Objective is still classified 
   * #77 genderedNames properties keyed by English strings
 
 ## [2.3.2] - 2018-09-19
