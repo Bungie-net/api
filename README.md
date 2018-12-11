@@ -6,34 +6,28 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2018-09-18 Destiny API v2.3.2, Post-Forsaken Patch
+## 2018-12-11 Destiny API v2.3.3, Dawning/Black Armory Patch
 
-## [2.3.2] - 2018-09-19
+## [2.3.3] - 2018-12-11
+
+We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3, but this is a rough outline of the changes as of today's deployment to catch us up.
 
 ### Added/Changed
-* Many entities unredacted.  More to come in 2018-10-02 release.
-* Presentation Nodes now have an "Obscured" state, to reflect that state as it exists in the game
-* Ongoing work to fix Activity Modes that are broken, and add support for upcoming activity modes
-* Added Vendor and Item refresh/expiration dates (referenced through the issues below, but may be unclear unless you read all the details)
 * Github Issues Resolved:
-  * #646 - Forsaken Checklist Updates
-  * #666 - Nightfalls' (et al) manifest displayProperties.name is just "Nightfall"
-  * #665 - PGCR Returning Mode 0
-  * #659 - Expiration time for items (bounties)
-  * #654 - Vendors (esp. Spider): wrong RefreshDate
-  * #651 - GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now
-  * #650 - Stats not returning Bow, Beam Rifle weapon/precision weapon stats
-  * #649 - sourceString hash for collectibles
-  * #648 - Public Milestones reports wrong end dates for 4 day reset items
-  * #641 - Need a Forsaken flag in DestinyGameVersions
-  * #638 - DestinyUnhandledException for various Stats endpoint calls on some accounts/activity modes
-  * #637 - Legendary/Rare Energy/Power with Kinetic Damage Type
-  * #629 - Daily Crucible Challenge missing from Milestones when Weekly Flashpoint is completed
-  * #628 - Unable to map Daily Heroic Story Mission Activitiy to specific mission
-  * #624 - Feature request: collectableHash on items
-  * #622 - (Some?) Items with Kinetic Damage have damageTypes but empty damageTypeHashes
-
-More of such fixes and additional data will be forthcoming in the October 2nd release.
+  #805 Sub-ranks for Valor and Glory are not reflected in the api
+  #785 The manifest will start including JSON-formatted Destiny definitions definitions 
+  #784 GameVersion in GetProfile once black armory comes out 
+  #771 Destiny endpoints will begin returning DestinyThrottledByGameServer in periods of high traffic
+  #753 titles on Seal records not populated 
+  #744 Too many items' data returned in ItemComponents with GetProfile/GetCharacter/etc requests 
+  #742 Leviathan in Milestone Endpoint returns 2 normal and 2 GG hashes 
+  #724 2 burst side arms report 'zero' rounds per minute in the api 
+  #714 Some weapon show not available masterwork Tier upgrades 
+  #696 Vendor Lord Saladin's manifest definition has missing info 
+  #694 Record Objective 
+  #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
+  #566 The Fall Will Kill You Objective is still classified 
+  #77 genderedNames properties keyed by English strings
 
 If you haven't already seen the changes for Forsaken, [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
 
