@@ -9077,7 +9077,8 @@
           "type": "boolean"
         },
         "ignoreFlags": {
-          "$ref": "#/definitions/Ignores.IgnoreStatus"
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -10501,7 +10502,8 @@
           "type": "integer"
         },
         "capabilities": {
-          "$ref": "#/definitions/GroupsV2.Capabilities"
+          "format": "int32",
+          "type": "integer"
         },
         "membershipTypes": {
           "type": "array",
@@ -15196,19 +15198,24 @@
       "type": "object",
       "properties": {
         "weaponPerformance": {
-          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances"
+          "format": "int32",
+          "type": "integer"
         },
         "impactEffects": {
-          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepImpactEffects"
+          "format": "int32",
+          "type": "integer"
         },
         "guardianAttributes": {
-          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes"
+          "format": "int32",
+          "type": "integer"
         },
         "lightAbilities": {
-          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepLightAbilities"
+          "format": "int32",
+          "type": "integer"
         },
         "damageTypes": {
-          "$ref": "#/definitions/Destiny.Definitions.DestinyTalentNodeStepDamageTypes"
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -25337,12 +25344,8 @@
         },
         "versionsOwned": {
           "description": "If you want to know what expansions they own, this will contain that data.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyGameVersions"
-            }
-          ]
+          "format": "int32",
+          "type": "integer"
         },
         "characterIds": {
           "description": "A list of the character IDs, for further querying on your part.",
@@ -25864,7 +25867,9 @@
       "type": "object",
       "properties": {
         "state": {
-          "$ref": "#/definitions/Destiny.DestinyRecordState"
+          "format": "int32",
+          "description": "A Flags enumeration where each bit represents a possible state that a Record/Triumph can be in.",
+          "type": "integer"
         },
         "objectives": {
           "type": "array",
@@ -28982,12 +28987,8 @@
         },
         "cannotEquipReason": {
           "description": "If you cannot equip the item, this is a flags enum that enumerates all of the reasons why you couldn't equip the item. You may need to refine your UI further by using unlockHashesRequiredToEquip and equipRequiredLevel.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.EquipFailureReason"
-            }
-          ]
+          "format": "int32",
+          "type": "integer"
         }
       },
       "x-destiny-component-type-dependency": "ItemInstances"
@@ -30286,12 +30287,8 @@
         },
         "saleStatus": {
           "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.VendorItemStatus"
-            }
-          ]
+          "format": "int32",
+          "type": "integer"
         },
         "costs": {
           "description": "A summary of the current costs of the item.",
@@ -30328,12 +30325,8 @@
         },
         "augments": {
           "description": "A flags enumeration value representing the current state of any \"state modifiers\" on the item being sold. These are meant to correspond with some sort of visual indicator as to the augmentation: for instance, if an item is on sale or if you already own the item in question.\r\nDetermining how you want to represent these in your own app (or if you even want to) is an exercise left for the reader.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.DestinyVendorItemState"
-            }
-          ]
+          "format": "int32",
+          "type": "integer"
         },
         "overrideNextRefreshDate": {
           "format": "date-time",

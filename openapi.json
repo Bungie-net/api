@@ -553,7 +553,8 @@
             "description": "A category filter",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Forum.ForumTopicsCategoryFiltersEnum"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -645,7 +646,8 @@
             "description": "The category filter.",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Forum.ForumTopicsCategoryFiltersEnum"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -4510,7 +4512,8 @@
             "description": "The type of media to get",
             "required": true,
             "schema": {
-              "$ref": "#/components/schemas/Forum.ForumTopicsCategoryFiltersEnum"
+              "type": "integer",
+              "format": "int32"
             }
           },
           {
@@ -5857,7 +5860,8 @@
             "type": "boolean"
           },
           "ignoreFlags": {
-            "$ref": "#/components/schemas/Ignores.IgnoreStatus"
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -7301,7 +7305,8 @@
             "format": "int32"
           },
           "capabilities": {
-            "$ref": "#/components/schemas/GroupsV2.Capabilities"
+            "type": "integer",
+            "format": "int32"
           },
           "membershipTypes": {
             "type": "array",
@@ -12028,19 +12033,24 @@
         "type": "object",
         "properties": {
           "weaponPerformance": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances"
+            "type": "integer",
+            "format": "int32"
           },
           "impactEffects": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepImpactEffects"
+            "type": "integer",
+            "format": "int32"
           },
           "guardianAttributes": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes"
+            "type": "integer",
+            "format": "int32"
           },
           "lightAbilities": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepLightAbilities"
+            "type": "integer",
+            "format": "int32"
           },
           "damageTypes": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepDamageTypes"
+            "type": "integer",
+            "format": "int32"
           }
         },
         "description": "These properties are an attempt to categorize talent node steps by certain common properties. See the related enumerations for the type of properties being categorized."
@@ -16889,7 +16899,8 @@
             "$ref": "#/components/schemas/GroupsV2.MembershipOption"
           },
           "capabilities": {
-            "$ref": "#/components/schemas/GroupsV2.Capabilities"
+            "type": "integer",
+            "format": "int32"
           },
           "clanInfo": {
             "$ref": "#/components/schemas/GroupsV2.GroupV2ClanInfo"
@@ -22245,13 +22256,9 @@
             "format": "date-time"
           },
           "versionsOwned": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.DestinyGameVersions"
-              }
-            ],
-            "description": "If you want to know what expansions they own, this will contain that data."
+            "type": "integer",
+            "description": "If you want to know what expansions they own, this will contain that data.",
+            "format": "int32"
           },
           "characterIds": {
             "type": "array",
@@ -22808,7 +22815,9 @@
         "type": "object",
         "properties": {
           "state": {
-            "$ref": "#/components/schemas/Destiny.DestinyRecordState"
+            "type": "integer",
+            "description": "A Flags enumeration where each bit represents a possible state that a Record/Triumph can be in.",
+            "format": "int32"
           },
           "objectives": {
             "type": "array",
@@ -26083,13 +26092,9 @@
             }
           },
           "cannotEquipReason": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.EquipFailureReason"
-              }
-            ],
-            "description": "If you cannot equip the item, this is a flags enum that enumerates all of the reasons why you couldn't equip the item. You may need to refine your UI further by using unlockHashesRequiredToEquip and equipRequiredLevel."
+            "type": "integer",
+            "description": "If you cannot equip the item, this is a flags enum that enumerates all of the reasons why you couldn't equip the item. You may need to refine your UI further by using unlockHashesRequiredToEquip and equipRequiredLevel.",
+            "format": "int32"
           }
         },
         "description": "If an item is \"instanced\", this will contain information about the item's instance that doesn't fit easily into other components. One might say this is the \"essential\" instance data for the item.\r\nItems are instanced if they require information or state that can vary. For instance, weapons are Instanced: they are given a unique identifier, uniquely generated stats, and can have their properties altered. Non-instanced items have none of these things: for instance, Glimmer has no unique properties aside from how much of it you own.\r\nYou can tell from an item's definition whether it will be instanced or not by looking at the DestinyInventoryItemDefinition's definition.inventory.isInstanceItem property.",
@@ -27451,13 +27456,9 @@
             "format": "int32"
           },
           "saleStatus": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.VendorItemStatus"
-              }
-            ],
-            "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it."
+            "type": "integer",
+            "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it.",
+            "format": "int32"
           },
           "costs": {
             "type": "array",
@@ -27493,13 +27494,9 @@
             "description": "Indexes in to the \"failureStrings\" lookup table in DestinyVendorDefinition for the given Vendor. Gives some more reliable failure information for why you can't purchase an item.\r\nIt is preferred to use these over requiredUnlocks and unlockStatuses: the latter are provided mostly in case someone can do something interesting with it that I didn't anticipate."
           },
           "augments": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.DestinyVendorItemState"
-              }
-            ],
-            "description": "A flags enumeration value representing the current state of any \"state modifiers\" on the item being sold. These are meant to correspond with some sort of visual indicator as to the augmentation: for instance, if an item is on sale or if you already own the item in question.\r\nDetermining how you want to represent these in your own app (or if you even want to) is an exercise left for the reader."
+            "type": "integer",
+            "description": "A flags enumeration value representing the current state of any \"state modifiers\" on the item being sold. These are meant to correspond with some sort of visual indicator as to the augmentation: for instance, if an item is on sale or if you already own the item in question.\r\nDetermining how you want to represent these in your own app (or if you even want to) is an exercise left for the reader.",
+            "format": "int32"
           },
           "overrideNextRefreshDate": {
             "type": "string",
