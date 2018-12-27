@@ -1,3 +1,7 @@
+## Time-sensitive Updates:
+
+[Check out the Winter Wishlist, and add your suggestions here!](https://github.com/Bungie-net/api/issues/756)  I only have a couple of days this winter to work on it, so we're probably going to only hit the lowest-hanging fruit this time around: but I'd value your input into what you'd find valuable in the API and what frustrations you experience!
+
 # The Bungie.Net API
 
 Full Documentation: https://bungie-net.github.io/multi/index.html
