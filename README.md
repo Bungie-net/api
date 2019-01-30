@@ -1,7 +1,3 @@
-## Time-sensitive Updates:
-
-[Check out the Winter Wishlist, and add your suggestions here!](https://github.com/Bungie-net/api/issues/756)  I only have a couple of days this winter to work on it, so we're probably going to only hit the lowest-hanging fruit this time around: but I'd value your input into what you'd find valuable in the API and what frustrations you experience!
-
 # The Bungie.Net API
 
 Full Documentation: https://bungie-net.github.io/multi/index.html
@@ -10,28 +6,32 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2018-12-11 Destiny API v2.3.3, Dawning/Black Armory Patch
+## 2019-01-29 Destiny API v2.3.4, Crimson Days Patch and Winter Wishlist!
 
-## [2.3.3] - 2018-12-11
+## [2.3.4] - 2019-01-29
 
-We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3, but this is a rough outline of the changes as of today's deployment to catch us up.
+In this patch, we have several changes from the Winter Wishlist, along with new content for Crimson Days and a variety of other smaller changes.
 
 ### Added/Changed
 * Github Issues Resolved:
-  * #805 Sub-ranks for Valor and Glory are not reflected in the api
-  * #785 The manifest will start including JSON-formatted Destiny definitions definitions 
-  * #784 GameVersion in GetProfile once black armory comes out 
-  * #771 Destiny endpoints will begin returning DestinyThrottledByGameServer in periods of high traffic
-  * #753 titles on Seal records not populated 
-  * #744 Too many items' data returned in ItemComponents with GetProfile/GetCharacter/etc requests 
-  * #742 Leviathan in Milestone Endpoint returns 2 normal and 2 GG hashes 
-  * #724 2 burst side arms report 'zero' rounds per minute in the api 
-  * #714 Some weapon show not available masterwork Tier upgrades 
-  * #696 Vendor Lord Saladin's manifest definition has missing info 
-  * #694 Record Objective 
-  * #651 GetHistoricalStats (account or character) endpoints will not return Gambit/PvECompetitive stats for now 
-  * #77 genderedNames properties keyed by English strings
-
+  #148 Add data to schema to indicate Flag enumerations
+  #77 gendered*Names properties keyed by English strings
+  #472 allPvP is including private matches
+  #502 Provide a public Xur API
+  #566 The Fall Will Kill You Objective is still classified 
+  #642 Release custom icon font
+  #696 Vendor Lord Saladin's manifest definition has missing info
+  #712 Can Competitive be added to the DestinyActivityModeType?
+  #761 Feature Request: Add Vendor Hash to Applicable Items
+  #796 Add Lord Saladin to Iron Banner Milestone [3427325023]
+  #803 Add Triumph rewards to manifest
+  #805 Sub-ranks for Valor and Glory are not reflected in the api
+  #808 Clan Staffs are Classified
+  #811 Account for randomized perks in base item definition stats
+  #833 ActivityMode 68 (IronBannerSalvage) returning Iron Banner Control activities
+  #844 Vendor caching is f'd
+  #849 Activity history for forges
+  
 If you haven't already seen the changes for Forsaken, [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
 
 # I'm New to the API.  What can I do with it?
