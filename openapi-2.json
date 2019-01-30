@@ -71,7 +71,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -121,7 +124,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -177,7 +183,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -234,7 +243,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -284,7 +296,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -348,7 +363,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -402,7 +420,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -461,7 +482,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -516,7 +540,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -585,7 +612,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -660,7 +690,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -752,7 +785,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -841,7 +877,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -949,7 +988,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1035,7 +1077,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1143,7 +1188,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1244,7 +1292,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1306,7 +1357,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1368,7 +1422,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1425,7 +1482,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1482,7 +1542,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1538,7 +1601,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1602,7 +1668,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1666,7 +1735,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1738,7 +1810,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1802,7 +1877,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1852,7 +1930,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1902,7 +1983,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -1952,7 +2036,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2015,7 +2102,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2086,7 +2176,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2160,7 +2253,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2207,7 +2303,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2263,7 +2362,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2326,7 +2428,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2373,7 +2478,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2432,7 +2540,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2486,7 +2597,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2550,7 +2664,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2614,7 +2731,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2678,7 +2798,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2742,7 +2865,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2814,7 +2940,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2891,7 +3020,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -2955,7 +3087,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3043,7 +3178,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3122,7 +3260,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3202,7 +3343,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3282,7 +3426,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3353,7 +3500,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3425,7 +3575,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3496,7 +3649,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3567,7 +3723,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3638,7 +3797,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3709,7 +3871,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3775,7 +3940,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3841,7 +4009,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3907,7 +4078,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -3986,7 +4160,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4052,7 +4229,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4132,7 +4312,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4212,7 +4395,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4291,7 +4477,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4370,7 +4559,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4417,7 +4609,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4480,7 +4675,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4546,7 +4744,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4610,7 +4811,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4653,7 +4857,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -4685,7 +4892,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4736,7 +4946,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -4768,7 +4981,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4824,7 +5040,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4867,7 +5086,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -4907,7 +5129,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -4958,7 +5183,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -4990,7 +5218,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5041,7 +5272,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -5081,7 +5315,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5125,7 +5362,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           }
         ],
@@ -5141,7 +5381,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5201,7 +5444,10 @@
             "items": {
               "format": "int32",
               "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyComponentType"
+              }
             }
           },
           {
@@ -5233,7 +5479,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5288,7 +5537,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5346,7 +5598,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5404,7 +5659,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5461,7 +5719,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5519,7 +5780,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5577,7 +5841,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5637,7 +5904,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5701,7 +5971,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5751,7 +6024,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5833,7 +6109,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5900,7 +6179,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -5991,7 +6273,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6090,7 +6375,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6160,7 +6448,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6233,7 +6524,10 @@
             "items": {
               "format": "int32",
               "description": "If the enum value is > 100, it is a \"special\" group that cannot be queried for directly (special cases apply to when they are returned, and are not relevant in general cases)",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
+              }
             }
           },
           {
@@ -6252,7 +6546,10 @@
             "items": {
               "format": "int32",
               "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+              }
             }
           },
           {
@@ -6278,7 +6575,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6329,7 +6629,10 @@
             "items": {
               "format": "int32",
               "description": "If the enum value is > 100, it is a \"special\" group that cannot be queried for directly (special cases apply to when they are returned, and are not relevant in general cases)",
-              "type": "integer"
+              "type": "integer",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
+              }
             }
           },
           {
@@ -6353,7 +6656,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6446,7 +6752,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6518,7 +6827,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6590,7 +6902,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6646,7 +6961,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6696,7 +7014,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6750,7 +7071,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6798,7 +7122,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6860,7 +7187,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -6932,7 +7262,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7017,7 +7350,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7089,7 +7425,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7161,7 +7500,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7239,7 +7581,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7311,7 +7656,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7358,7 +7706,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7421,7 +7772,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7484,7 +7838,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7548,7 +7905,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7665,7 +8025,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7766,7 +8129,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7865,7 +8231,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7936,7 +8305,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -7986,7 +8358,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -8033,7 +8408,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -8090,7 +8468,10 @@
                 },
                 "ErrorCode": {
                   "format": "int32",
-                  "type": "integer"
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
                 },
                 "ThrottleSeconds": {
                   "format": "int32",
@@ -8276,7 +8657,10 @@
       "properties": {
         "applicationType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Applications.OAuthApplicationType"
+          }
         },
         "applicationId": {
           "format": "int32",
@@ -8307,7 +8691,10 @@
         "status": {
           "format": "int32",
           "description": "Current status of the application.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Applications.ApplicationStatus"
+          }
         },
         "creationDate": {
           "format": "date-time",
@@ -8401,7 +8788,10 @@
       "properties": {
         "role": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Applications.DeveloperRole"
+          }
         },
         "apiEulaVersion": {
           "format": "int32",
@@ -8442,7 +8832,10 @@
         "membershipType": {
           "format": "int32",
           "description": "Type of the membership.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "membershipId": {
           "format": "int64",
@@ -8515,7 +8908,10 @@
         "membershipType": {
           "format": "int32",
           "description": "Type of the membership.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "membershipId": {
           "format": "int64",
@@ -8657,7 +9053,10 @@
         },
         "ignoreFlags": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Ignores.IgnoreStatus"
+          }
         }
       }
     },
@@ -8740,7 +9139,10 @@
       "properties": {
         "partnerType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Partnerships.PartnershipType"
+          }
         },
         "identifier": {
           "type": "string"
@@ -8925,7 +9327,10 @@
         },
         "datatype": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Content.Models.ContentPropertyDataTypeEnum"
+          }
         },
         "attributes": {
           "type": "object",
@@ -9501,14 +9906,20 @@
         },
         "urlMediaType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Forum.ForumMediaType"
+          }
         },
         "thumbnail": {
           "type": "string"
         },
         "popularity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Forum.ForumPostPopularity"
+          }
         },
         "isActive": {
           "type": "boolean"
@@ -9846,7 +10257,10 @@
         },
         "allianceStatus": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupAllianceStatus"
+          }
         },
         "groupJoinInviteCount": {
           "format": "int32",
@@ -9880,7 +10294,10 @@
         },
         "groupType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
         },
         "membershipIdCreated": {
           "format": "int64",
@@ -9924,7 +10341,10 @@
         },
         "chatSecurity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
+          }
         },
         "locale": {
           "type": "string"
@@ -9935,15 +10355,24 @@
         },
         "homepage": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupHomepage"
+          }
         },
         "membershipOption": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.MembershipOption"
+          }
         },
         "defaultPublicity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupPostPublicity"
+          }
         },
         "theme": {
           "type": "string"
@@ -10092,14 +10521,20 @@
         },
         "capabilities": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.Capabilities"
+          }
         },
         "membershipTypes": {
           "type": "array",
           "items": {
             "format": "int32",
             "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            }
           }
         },
         "invitePermissionOverride": {
@@ -10113,7 +10548,10 @@
         "hostGuidedGamePermissionOverride": {
           "format": "int32",
           "description": "Minimum Member Level allowed to host guided games\r\nAlways Allowed: Founder, Acting Founder, Admin\r\nAllowed Overrides: None, Member, Beginner\r\nDefault is Member for clans, None for groups, although this means nothing for groups.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.HostGuidedGamesPermissionLevel"
+          }
         },
         "updateBannerPermissionOverride": {
           "description": "Minimum Member Level allowed to update banner\r\nAlways Allowed: Founder, Acting Founder\r\nTrue means admins have this power, false means they don't\r\nDefault is false for clans, true for groups.",
@@ -10122,7 +10560,10 @@
         "joinLevel": {
           "format": "int32",
           "description": "Level to join a member at when accepting an invite, application, or joining an open clan\r\nDefault is Beginner.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.RuntimeGroupMemberType"
+          }
         }
       }
     },
@@ -10179,7 +10620,10 @@
       "items": {
         "format": "int32",
         "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-        "type": "integer"
+        "type": "integer",
+        "x-enum-reference": {
+          "$ref": "#/components/schemas/BungieMembershipType"
+        }
       }
     },
     "GroupsV2.HostGuidedGamesPermissionLevel": {
@@ -10402,7 +10846,10 @@
         "scope": {
           "format": "int32",
           "description": "The \"Scope\" of the progression indicates the source of the progression's live data.\r\nSee the DestinyProgressionScope enum for more info: but essentially, a Progression can either be backed by a stored value, or it can be a calculated derivative of other values.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyProgressionScope"
+          }
         },
         "repeatLastStep": {
           "description": "If this is True, then the progression doesn't have a maximum level.",
@@ -10567,7 +11014,10 @@
         "displayEffectType": {
           "format": "int32",
           "description": "This appears to be, when you \"level up\", whether a visual effect will display and on what entity. See DestinyProgressionStepDisplayEffect for slightly more info.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyProgressionStepDisplayEffect"
+          }
         },
         "progressTotal": {
           "format": "int32",
@@ -10923,22 +11373,34 @@
         "specialItemType": {
           "format": "int32",
           "description": "In Destiny 1, we identified some items as having particular categories that we'd like to know about for various internal logic purposes. These are defined in SpecialItemType, and while these days the itemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.SpecialItemType"
+          }
         },
         "itemType": {
           "format": "int32",
           "description": "A value indicating the \"base\" the of the item. This enum is a useful but dramatic oversimplification of what it means for an item to have a \"Type\". Still, it's handy in many situations.\r\nitemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemType"
+          }
         },
         "itemSubType": {
           "format": "int32",
           "description": "A value indicating the \"sub-type\" of the item. For instance, where an item might have an itemType value \"Weapon\", this will be something more specific like \"Auto Rifle\".\r\nitemCategoryHashes are the preferred way of identifying types, we have retained this enum for its convenience.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemSubType"
+          }
         },
         "classType": {
           "format": "int32",
           "description": "We run a similarly weak-sauce algorithm to try and determine whether an item is restricted to a specific class. If we find it to be restricted in such a way, we set this classType property to match the class' enumeration value so that users can easily identify class restricted items.\r\nIf you see a mis-classed item, please inform the developers in the Bungie API forum.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyClass"
+          }
         },
         "equippable": {
           "description": "If true, then you will be allowed to equip the item if you pass its other requirements.\r\nThis being false means that you cannot equip the item under any circumstances.",
@@ -10960,13 +11422,19 @@
           "type": "array",
           "items": {
             "format": "int32",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DamageType"
+            }
           }
         },
         "defaultDamageType": {
           "format": "int32",
           "description": "If the item has a damage type that could be considered to be default, it will be populated here.\r\nFor various upsetting reasons, it's surprisingly cumbersome to figure this out. I hope you're happy.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "defaultDamageTypeHash": {
           "format": "uint32",
@@ -11212,7 +11680,10 @@
         "tierType": {
           "format": "int32",
           "description": "The enumeration matching the tier type of the item to known values, again for convenience sake.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.TierType"
+          }
         },
         "expirationTooltip": {
           "description": "The tooltip message to show, if any, when the item expires.",
@@ -11284,12 +11755,18 @@
         "scope": {
           "format": "int32",
           "description": "Where the bucket is found. 0 = Character, 1 = Account",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.BucketScope"
+          }
         },
         "category": {
           "format": "int32",
           "description": "An enum value for what items can be found in the bucket. See the BucketCategory enum for more details.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.BucketCategory"
+          }
         },
         "bucketOrder": {
           "format": "int32",
@@ -11304,7 +11781,10 @@
         "location": {
           "format": "int32",
           "description": "Sometimes, inventory buckets represent conceptual \"locations\" in the game that might not be expected. This value indicates the conceptual location of the bucket, regardless of where it is actually contained on the character/account. \r\nSee ItemLocation for details. \r\nNote that location includes the Vault and the Postmaster (both of whom being just inventory buckets with additional actions that can be performed on them through a Vendor)",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemLocation"
+          }
         },
         "hasTransferDestination": {
           "description": "If TRUE, there is at least one Vendor that can transfer items to/from this bucket. See the DestinyVendorDefinition's acceptedItems property for more information on how transferring works.",
@@ -11590,7 +12070,10 @@
         "aggregationType": {
           "format": "int32",
           "description": "Stats can exist on a character or an item, and they may potentially be aggregated in different ways. The DestinyStatAggregationType enum value indicates the way that this stat is being aggregated.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyStatAggregationType"
+          }
         },
         "hasComputedBlock": {
           "description": "True if the stat is computed rather than being delivered as a raw value on items.\r\nFor instance, the Light stat in Destiny 1 was a computed stat.",
@@ -11599,7 +12082,10 @@
         "statCategory": {
           "format": "int32",
           "description": "The category of the stat, according to the game.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyStatCategory"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -11814,12 +12300,18 @@
         "attributes": {
           "format": "int32",
           "description": "These are custom attributes on the equippability of the item.\r\nFor now, this can only be \"equip on acquire\", which would mean that the item will be automatically equipped as soon as you pick it up.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.EquippingItemBlockAttributes"
+          }
         },
         "ammoType": {
           "format": "int32",
           "description": "Ammo type used by a weapon is no longer determined by the bucket in which it is contained. If the item has an ammo type - i.e. if it is a weapon - this will be the type of ammunition expected.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyAmmunitionType"
+          }
         },
         "displayStrings": {
           "description": "These are strings that represent the possible Game/Account/Character state failure conditions that can occur when trying to equip the item. They match up one-to-one with requiredUnlockExpressions.",
@@ -12520,7 +13012,10 @@
         "sortOrder": {
           "format": "int32",
           "description": "If this category sorts items in a nonstandard way, this will be the way we sort.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.VendorDisplayCategorySortOrder"
+          }
         },
         "displayStyleHash": {
           "format": "uint32",
@@ -12596,7 +13091,10 @@
         "interactionType": {
           "format": "int32",
           "description": "The enumerated version of the possible UI hints for vendor interactions, which is a little easier to grok than the hash found in uiInteractionType.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.VendorInteractionType"
+          }
         },
         "rewardBlockLabel": {
           "description": "If this interaction is displaying rewards, this is the text to use for the header of the reward-displaying section of the interaction.",
@@ -12637,7 +13135,10 @@
         "itemRewardsSelection": {
           "format": "int32",
           "description": "The rewards granted upon responding to the vendor.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorInteractionRewardSelection"
+          }
         },
         "reply": {
           "description": "The localized text for the reply.",
@@ -12646,7 +13147,10 @@
         "replyType": {
           "format": "int32",
           "description": "An enum indicating the type of reply being made.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorReplyType"
+          }
         }
       }
     },
@@ -12835,7 +13339,10 @@
         "sortItemsBy": {
           "format": "int32",
           "description": "The methodology to use for sorting items from the flyout.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemSortType"
+          }
         }
       }
     },
@@ -12903,7 +13410,10 @@
         "refundPolicy": {
           "format": "int32",
           "description": "If this item can be refunded, this is the policy for what will be refundd, how, and in what time period.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorItemRefundPolicy"
+          }
         },
         "refundTimeLimit": {
           "format": "int32",
@@ -12963,17 +13473,26 @@
         "visibilityScope": {
           "format": "int32",
           "description": "The most restrictive scope that determines whether the item is available in the Vendor's inventory. See DestinyGatingScope's documentation for more information.\r\nThis can be determined by Unlock gating, or by whether or not the item has purchase level requirements (minimumLevel and maximumLevel properties).",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
+          }
         },
         "purchasableScope": {
           "format": "int32",
           "description": "Similar to visibilityScope, it represents the most restrictive scope that determines whether the item can be purchased. It will at least be as restrictive as visibilityScope, but could be more restrictive if the item has additional purchase requirements beyond whether it is merely visible or not.\r\nSee DestinyGatingScope's documentation for more information.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
+          }
         },
         "exclusivity": {
           "format": "int32",
           "description": "If this item can only be purchased by a given platform, this indicates the platform to which it is restricted.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "isOffer": {
           "description": "If this sale can only be performed as the result of an offer check, this is true.",
@@ -13189,7 +13708,10 @@
         "visibility": {
           "format": "int32",
           "description": "Sometimes a socket isn't visible. These are some of the conditions under which sockets of this type are not visible. Unfortunately, the truth of visibility is much, much more complex. Best to rely on the live data for whether the socket is visible and enabled.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinySocketVisibility"
+          }
         },
         "alwaysRandomizeSockets": {
           "type": "boolean"
@@ -13242,7 +13764,10 @@
         "actionType": {
           "format": "int32",
           "description": "The type of action being performed when you act on this Socket Type. The most common value is \"insert plug\", but there are others as well (for instance, a \"Masterwork\" socket may allow for Re-initialization, and an Infusion socket allows for items to be consumed to upgrade the item)",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.SocketTypeActionType"
+          }
         }
       }
     },
@@ -13349,7 +13874,10 @@
         "categoryStyle": {
           "format": "int32",
           "description": "Same as uiCategoryStyle, but in a more usable enumeration form.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinySocketCategoryStyle"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -13664,7 +14192,10 @@
         "highlightType": {
           "format": "int32",
           "description": "The node can be highlighted in a variety of ways - the game iterates through these and finds the first FeaturingState that is valid at the present moment given the Game, Account, and Character state, and renders the node in that state. See the ActivityGraphNodeHighlightType enum for possible values.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ActivityGraphNodeHighlightType"
+          }
         }
       }
     },
@@ -14245,7 +14776,10 @@
           "items": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         },
         "isPvP": {
@@ -14380,7 +14914,10 @@
         "scope": {
           "format": "int32",
           "description": "A shortcut for determining the most restrictive gating that this Objective is set to use. This includes both the dynamic determination of progress and of completion values. See the DestinyGatingScope enum's documentation for more details.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
+          }
         },
         "locationHash": {
           "format": "uint32",
@@ -14405,7 +14942,10 @@
         "valueStyle": {
           "format": "int32",
           "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
+          }
         },
         "progressDescription": {
           "description": "Text to describe the progress bar.",
@@ -14445,12 +14985,18 @@
         "completedValueStyle": {
           "format": "int32",
           "description": "The style to use when the objective is completed.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
+          }
         },
         "inProgressValueStyle": {
           "format": "int32",
           "description": "The style to use when the objective is still in progress.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -14552,7 +15098,10 @@
         "style": {
           "format": "int32",
           "description": "An enumeration indicating whether it will be applied as long as the Objective is active, when it's completed, or until it's completed.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyObjectiveGrantStyle"
+          }
         }
       }
     },
@@ -14604,7 +15153,10 @@
         "damageType": {
           "format": "int32",
           "description": "If this perk grants a damage type to a weapon, the damage type will be defined here.\r\nUnless you have a compelling reason to use this enum value, use the damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -14681,23 +15233,38 @@
       "properties": {
         "weaponPerformance": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepWeaponPerformances"
+          }
         },
         "impactEffects": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepImpactEffects"
+          }
         },
         "guardianAttributes": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepGuardianAttributes"
+          }
         },
         "lightAbilities": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepLightAbilities"
+          }
         },
         "damageTypes": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepDamageTypes"
+          }
         }
       }
     },
@@ -14992,7 +15559,10 @@
         "style": {
           "format": "int32",
           "description": "Whether it will be applied as long as the objective is active, when it's completed, or until it's completed.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyObjectiveGrantStyle"
+          }
         }
       }
     },
@@ -15126,7 +15696,10 @@
         "navPointType": {
           "format": "int32",
           "description": "The type of Nav Point that this represents. See the enumeration for more info.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityNavPointType"
+          }
         },
         "worldPosition": {
           "description": "Looks like it should be the position on the map, but sadly it does not look populated... yet?",
@@ -15623,7 +16196,10 @@
           "items": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         }
       }
@@ -15987,12 +16563,18 @@
         "modeType": {
           "format": "int32",
           "description": "The Enumeration value for this Activity Mode. Pass this identifier into Stats endpoints to get aggregate stats for this mode.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+          }
         },
         "activityModeCategory": {
           "format": "int32",
           "description": "The type of play being performed in broad terms (PVP, PVE)",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityModeCategory"
+          }
         },
         "isTeamBased": {
           "description": "If True, this mode has oppositional teams fighting against each other rather than \"Free-For-All\" or Co-operative modes of play.\r\nNote that Aggregate modes are never marked as team based, even if they happen to be team based at the moment. At any time, an aggregate whose subordinates are only team based could be changed so that one or more aren't team based, and then this boolean won't make much sense (the aggregation would become \"sometimes team based\"). Let's not deal with that right now.",
@@ -16020,7 +16602,10 @@
           "additionalProperties": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         },
         "display": {
@@ -16169,7 +16754,10 @@
           "items": {
             "format": "int32",
             "description": "This Enumeration further classifies items by more specific categorizations than DestinyItemType. The \"Sub-Type\" is where we classify and categorize items one step further in specificity: \"Auto Rifle\" instead of just \"Weapon\" for example, or \"Vanguard Bounty\" instead of merely \"Bounty\".\r\nThese sub-types are provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\nNOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyItemSubType"
+            }
           }
         }
       }
@@ -16438,7 +17026,10 @@
       "properties": {
         "state": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGraphNodeState"
+          }
         }
       }
     },
@@ -16573,7 +17164,10 @@
         "scope": {
           "format": "int32",
           "description": "A shortcut for determining the most restrictive gating that this expression performs. See the DestinyGatingScope enum's documentation for more details.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
+          }
         }
       }
     },
@@ -16882,7 +17476,10 @@
         "exclusive": {
           "format": "int32",
           "description": "If we found that this item is exclusive to a specific platform, this will be set to the BungieMembershipType enumeration that matches that platform.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "vendorSources": {
           "description": "A denormalized reference back to vendors that potentially sell this item.",
@@ -16952,7 +17549,10 @@
         "category": {
           "format": "int32",
           "description": "Sources are grouped into categories: common ways that items are provided. I hope to see this expand in Destiny 2 once we have time to generate accurate reward source data.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyRewardSourceCategory"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -17168,7 +17768,10 @@
         },
         "plugStyle": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.PlugUiStyles"
+          }
         },
         "isPseudoPlug": {
           "description": "If TRUE, the plug doesn't actually convey any benefit: it only exists to show information in the UI.",
@@ -17177,7 +17780,10 @@
         "plugAvailability": {
           "format": "int32",
           "description": "Indicates the rules about when this plug can be used. See the PlugAvailabilityMode enumeration for more information!",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.PlugAvailabilityMode"
+          }
         },
         "alternateUiPlugLabel": {
           "description": "If the plug meets certain state requirements, it may have an alternative label applied to it. This is the alternative label that will be applied in such a situation.",
@@ -17186,7 +17792,10 @@
         "alternatePlugStyle": {
           "format": "int32",
           "description": "The alternate plug of the plug: only applies when the item is in states that only the server can know about and control, unfortunately. See AlternateUiPlugLabel for the related label info.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.PlugUiStyles"
+          }
         },
         "isDummyPlug": {
           "description": "If TRUE, this plug is used for UI display purposes only, and doesn't have any interesting effects of its own.",
@@ -17440,7 +18049,10 @@
         "plugSources": {
           "format": "int32",
           "description": "Indicates where you should go to get plugs for this socket. This will affect how you populate your UI, as well as what plugs are valid for this socket. It's an alternative to having to check for the existence of certain properties (reusablePlugItems for example) to infer where plugs should come from.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.SocketPlugSources"
+          }
         },
         "reusablePlugSetHash": {
           "format": "uint32",
@@ -17608,7 +18220,10 @@
         "hudDamageType": {
           "format": "int32",
           "description": "If the talent grid implies a damage type, this is the enum value for that damage type.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "hudIcon": {
           "description": "If the talent grid has a special icon that's shown in the game UI (like builds, funny that), this is the identifier for that icon. Sadly, we don't actually get that icon right now. I'll be looking to replace this with a path to the actual icon itself.",
@@ -17852,7 +18467,10 @@
         "damageType": {
           "format": "int32",
           "description": "An enum representing a damage type granted by activating this step, if any.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -17983,7 +18601,10 @@
         "enumValue": {
           "format": "int32",
           "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "hash": {
           "format": "uint32",
@@ -18136,7 +18757,10 @@
         "perkVisibility": {
           "format": "int32",
           "description": "Indicates whether this perk should be shown, or if it should be shown disabled.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemPerkVisibility"
+          }
         }
       }
     },
@@ -18410,7 +19034,10 @@
         "scope": {
           "format": "int32",
           "description": "Indicates whether this Collectible's state is determined on a per-character or on an account-wide basis.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyScope"
+          }
         },
         "sourceString": {
           "description": "A human readable string for a hint about how to acquire the item.",
@@ -18542,7 +19169,10 @@
       "properties": {
         "presentationNodeType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationNodeType"
+          }
         },
         "parentPresentationNodeHashes": {
           "type": "array",
@@ -18556,7 +19186,10 @@
         },
         "displayStyle": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationDisplayStyle"
+          }
         }
       }
     },
@@ -18640,12 +19273,18 @@
         },
         "nodeType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationNodeType"
+          }
         },
         "scope": {
           "format": "int32",
           "description": "Indicates whether this presentation node's state is determined on a per-character or on an account-wide basis.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyScope"
+          }
         },
         "objectiveHash": {
           "format": "uint32",
@@ -18675,12 +19314,18 @@
         "displayStyle": {
           "format": "int32",
           "description": "A hint for how to display this presentation node when it's shown in a list.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationDisplayStyle"
+          }
         },
         "screenStyle": {
           "format": "int32",
           "description": "A hint for how to display this presentation node when it's shown in its own detail screen.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationScreenStyle"
+          }
         },
         "requirements": {
           "description": "The requirements for being able to interact with this presentation node and its children.",
@@ -18792,7 +19437,10 @@
         "scope": {
           "format": "int32",
           "description": "Indicates whether this Record's state is determined on a per-character or on an account-wide basis.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyScope"
+          }
         },
         "presentationInfo": {
           "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationChildBlock"
@@ -18816,7 +19464,10 @@
         },
         "recordValueStyle": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyRecordValueStyle"
+          }
         },
         "titleInfo": {
           "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordTitleBlock"
@@ -18944,7 +19595,10 @@
         "genderType": {
           "format": "int32",
           "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGender"
+          }
         },
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
@@ -18983,7 +19637,10 @@
         },
         "toastStyle": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyRecordToastStyle"
+          }
         }
       }
     },
@@ -19117,17 +19774,26 @@
         "grantDestinyItemType": {
           "format": "int32",
           "description": "If an item belongs to this category, it will also receive this item type. This is now how DestinyItemType is populated for items: it used to be an even jankier process, but that's a story that requires more alcohol.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemType"
+          }
         },
         "grantDestinySubType": {
           "format": "int32",
           "description": "If an item belongs to this category, it will also receive this subtype enum value.\r\nI know what you're thinking - what if it belongs to multiple categories that provide sub-types?\r\nThe last one processed wins, as is the case with all of these \"grant\" enums. Now you can see one reason why we moved away from these enums... but they're so convenient when they work, aren't they?",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemSubType"
+          }
         },
         "grantDestinyClass": {
           "format": "int32",
           "description": "If an item belongs to this category, it will also get this class restriction enum value.\r\nSee the other \"grant\"-prefixed properties on this definition for my color commentary.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyClass"
+          }
         },
         "groupedCategoryHashes": {
           "description": "If this category is a \"parent\" category of other categories, those children will have their hashes listed in rendering order here, and can be looked up using these hashes against DestinyItemCategoryDefinition.\r\nIn this way, you can build up a visual hierarchy of item categories. That's what we did, and you can do it too. I believe in you. Yes, you, Carl.\r\n(I hope someone named Carl reads this someday)",
@@ -19193,7 +19859,10 @@
       "properties": {
         "memberType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.RuntimeGroupMemberType"
+          }
         },
         "isOnline": {
           "type": "boolean"
@@ -19242,7 +19911,10 @@
       "properties": {
         "potentialStatus": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupPotentialMemberStatus"
+          }
         },
         "groupId": {
           "format": "int64",
@@ -19348,11 +20020,17 @@
         },
         "intensity": {
           "format": "byte",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Forum.ForumRecruitmentIntensityLabel"
+          }
         },
         "tone": {
           "format": "byte",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Forum.ForumRecruitmentToneLabel"
+          }
         },
         "approved": {
           "type": "boolean"
@@ -19521,7 +20199,10 @@
         },
         "groupType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
         },
         "creationDate": {
           "format": "date-time",
@@ -19542,11 +20223,17 @@
         },
         "membershipOption": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.MembershipOption"
+          }
         },
         "capabilities": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.Capabilities"
+          }
         },
         "clanInfo": {
           "$ref": "#/definitions/GroupsV2.GroupV2ClanInfo"
@@ -19624,15 +20311,24 @@
         },
         "groupType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
         },
         "creationDate": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupDateRange"
+          }
         },
         "sortBy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupSortBy"
+          }
         },
         "groupMemberCountFilter": {
           "format": "int32",
@@ -19745,7 +20441,10 @@
         },
         "groupType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
         }
       }
     },
@@ -19768,7 +20467,10 @@
         },
         "chatSecurity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
+          }
         }
       }
     },
@@ -19787,7 +20489,10 @@
         "groupType": {
           "format": "int32",
           "description": "Type of group, either Bungie.net hosted group, or a game services hosted clan.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupType"
+          }
         },
         "name": {
           "type": "string"
@@ -19813,7 +20518,10 @@
         },
         "membershipOption": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.MembershipOption"
+          }
         },
         "isPublicTopicAdminOnly": {
           "type": "boolean"
@@ -19829,7 +20537,10 @@
         },
         "chatSecurity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
+          }
         },
         "callsign": {
           "type": "string"
@@ -19839,12 +20550,18 @@
         },
         "homepage": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupHomepage"
+          }
         },
         "platformMembershipType": {
           "format": "int32",
           "description": "When operation needs a platform specific account ID for the present user, use this property. In particular, groupType of Clan requires this value to be set.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -20065,7 +20782,10 @@
         },
         "chatSecurity": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
+          }
         }
       }
     },
@@ -20145,7 +20865,10 @@
         },
         "length": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Ignores.IgnoreLength"
+          }
         }
       }
     },
@@ -20282,7 +21005,10 @@
       "properties": {
         "resolution": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupApplicationResolveState"
+          }
         }
       }
     },
@@ -20335,7 +21061,10 @@
         },
         "resolveState": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GroupsV2.GroupApplicationResolveState"
+          }
         },
         "resolveDate": {
           "format": "date-time",
@@ -20396,7 +21125,10 @@
         },
         "result": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+          }
         }
       }
     },
@@ -24113,7 +24845,10 @@
         "membershipType": {
           "format": "int32",
           "description": "Type of the membership.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "membershipId": {
           "format": "int64",
@@ -24133,7 +24868,10 @@
         "errorCode": {
           "format": "int32",
           "description": "The error that we encountered. You should be able to look up localized text to show to the user for these failures.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+          }
         },
         "infoCard": {
           "description": "Basic info about the account that failed. Don't expect anything other than membership ID, Membership Type, and displayName to be populated.",
@@ -24617,7 +25355,10 @@
         "refundPolicy": {
           "format": "int32",
           "description": "Whether you can get a refund, and what happens in order for the refund to be received. See the DestinyVendorItemRefundPolicy enum for details.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorItemRefundPolicy"
+          }
         },
         "sequenceNumber": {
           "format": "int32",
@@ -24642,7 +25383,10 @@
       "properties": {
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -24678,7 +25422,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -24720,12 +25467,18 @@
         "bindStatus": {
           "format": "int32",
           "description": "If the item is bound to a location, it will be specified in this enum.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemBindStatus"
+          }
         },
         "location": {
           "format": "int32",
           "description": "An easy reference for where the item is located. Redundant if you got the item from an Inventory, but useful when making detail calls on specific items.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemLocation"
+          }
         },
         "bucketHash": {
           "format": "uint32",
@@ -24738,7 +25491,10 @@
         "transferStatus": {
           "format": "int32",
           "description": "If there is a known error state that would cause this item to not be transferable, this Flags enum will indicate all of those error states. Otherwise, it will be 0 (CanTransfer).",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.TransferStatuses"
+          }
         },
         "lockable": {
           "description": "If the item can be locked, this will indicate that state.",
@@ -24747,7 +25503,10 @@
         "state": {
           "format": "int32",
           "description": "A flags enumeration indicating the transient/custom states of the item that affect how it is rendered: whether it's tracked or locked for example, or whether it has a masterwork plug inserted.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemState"
+          }
         },
         "overrideStyleItemHash": {
           "format": "uint32",
@@ -24865,7 +25624,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -24890,7 +25652,10 @@
         "versionsOwned": {
           "format": "int32",
           "description": "If you want to know what expansions they own, this will contain that data.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGameVersions"
+          }
         },
         "characterIds": {
           "description": "A list of the character IDs, for further querying on your part.",
@@ -24950,7 +25715,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25061,7 +25829,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25174,7 +25945,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25212,7 +25986,10 @@
         "scope": {
           "format": "int32",
           "description": "Indicates whether you will find this checklist on the Profile or Character components.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyScope"
+          }
         },
         "entries": {
           "description": "The individual checklist items. Gotta catch 'em all.",
@@ -25300,7 +26077,10 @@
         "scope": {
           "format": "int32",
           "description": "The scope at which this specific entry can be computed.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyScope"
+          }
         }
       }
     },
@@ -25312,7 +26092,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25333,7 +26116,10 @@
       "properties": {
         "state": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationNodeState"
+          }
         },
         "objective": {
           "description": "An optional property: presentation nodes MAY have objectives, which can be used to infer more human readable data about the progress. However, progressValue and completionValue ought to be considered the canonical values for progress on Progression Nodes.",
@@ -25390,7 +26176,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25411,7 +26200,10 @@
       "properties": {
         "state": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyRecordState"
+          }
         },
         "objectives": {
           "type": "array",
@@ -25511,7 +26303,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25532,7 +26327,10 @@
       "properties": {
         "state": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyCollectibleState"
+          }
         }
       }
     },
@@ -25634,7 +26432,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25650,7 +26451,10 @@
         "membershipType": {
           "format": "int32",
           "description": "membershipType tells you the platform on which the character plays. Examine the BungieMembershipType enumeration for possible values.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "characterId": {
           "format": "int64",
@@ -25712,17 +26516,26 @@
         "raceType": {
           "format": "int32",
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's race.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyRace"
+          }
         },
         "classType": {
           "format": "int32",
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's class.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyClass"
+          }
         },
         "genderType": {
           "format": "int32",
           "description": "Mostly for historical purposes at this point, this is an enumeration for the character's Gender.\r\nIt'll be preferable in the general case to look up the related definition: but for some people this was too convenient to remove. And yeah, it's an enumeration and not a boolean. Fight me.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGender"
+          }
         },
         "emblemPath": {
           "description": "A shortcut path to the user's currently equipped emblem image. If you're just showing summary info for a user, this is more convenient than examining their equipped emblem and looking up the definition.",
@@ -25817,7 +26630,10 @@
         "raceType": {
           "format": "int32",
           "description": "An enumeration defining the existing, known Races/Species for player characters. This value will be the enum value matching this definition.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyRace"
+          }
         },
         "genderedRaceNames": {
           "description": "A localized string referring to the singular form of the Race's name when referred to in gendered form. Keyed by the DestinyGender.",
@@ -25859,7 +26675,10 @@
         "classType": {
           "format": "int32",
           "description": "In Destiny 1, we added a convenience Enumeration for referring to classes. We've kept it, though mostly for posterity. This is the enum value for this definition's class.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyClass"
+          }
         },
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
@@ -25917,7 +26736,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -25932,7 +26754,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -27182,7 +28007,10 @@
         "milestoneType": {
           "format": "int32",
           "description": "An enumeration listing one of the possible types of milestones. Check out the DestinyMilestoneType enum for more info!",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneType"
+          }
         },
         "recruitable": {
           "description": "If True, then the Milestone has been integrated with BNet's recruiting feature.",
@@ -27644,7 +28472,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -27784,7 +28615,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28185,7 +29019,10 @@
           "items": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         },
         "currentPlaylistActivityHash": {
@@ -28252,7 +29089,10 @@
         "difficultyTier": {
           "format": "int32",
           "description": "A DestinyActivityDifficultyTier enum value indicating the difficulty of the activity.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityDifficultyTier"
+          }
         }
       }
     },
@@ -28317,7 +29157,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28333,7 +29176,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28349,7 +29195,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28402,7 +29251,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28418,7 +29270,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28456,7 +29311,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28472,7 +29330,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28497,7 +29358,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28545,7 +29409,10 @@
         "damageType": {
           "format": "int32",
           "description": "If the item has a damage type, this is the item's current damage type.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
         },
         "damageTypeHash": {
           "format": "uint32",
@@ -28601,7 +29468,10 @@
         "cannotEquipReason": {
           "format": "int32",
           "description": "If you cannot equip the item, this is a flags enum that enumerates all of the reasons why you couldn't equip the item. You may need to refine your UI further by using unlockHashesRequiredToEquip and equipRequiredLevel.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.EquipFailureReason"
+          }
         }
       },
       "x-destiny-component-type-dependency": "ItemInstances"
@@ -28717,7 +29587,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28773,7 +29646,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28808,7 +29684,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28841,7 +29720,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28926,7 +29808,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -28982,7 +29867,10 @@
         "state": {
           "format": "int32",
           "description": "An DestinyTalentNodeState enum value indicating the node's state: whether it can be activated or swapped, and why not if neither can be performed.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyTalentNodeState"
+          }
         },
         "isActivated": {
           "description": "If true, the node is activated: it's current step then provides its benefits.",
@@ -29135,7 +30023,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29197,7 +30088,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29231,7 +30125,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29387,7 +30284,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29399,7 +30299,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29411,7 +30314,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29423,7 +30329,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29435,7 +30344,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29447,7 +30359,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29459,7 +30374,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29562,7 +30480,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29574,7 +30495,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29586,7 +30510,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29598,7 +30525,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29610,7 +30540,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29622,7 +30555,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29634,7 +30570,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29646,7 +30585,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29759,7 +30701,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29846,7 +30791,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29895,7 +30843,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -29951,7 +30902,10 @@
         "saleStatus": {
           "format": "int32",
           "description": "A flag indicating whether the requesting character can buy the item, and if not the reasons why the character can't buy it.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.VendorItemStatus"
+          }
         },
         "requiredUnlocks": {
           "description": "If you can't buy the item due to a complex character state, these will be hashes for DestinyUnlockDefinitions that you can check to see messages regarding the failure (if the unlocks have human readable information: it is not guaranteed that Unlocks will have human readable strings, and your application will have to handle that)\r\nPrefer using failureIndexes instead. These are provided for informational purposes, but have largely been supplanted by failureIndexes.",
@@ -29982,7 +30936,10 @@
         "augments": {
           "format": "int32",
           "description": "A flags enumeration value representing the current state of any \"state modifiers\" on the item being sold. These are meant to correspond with some sort of visual indicator as to the augmentation: for instance, if an item is on sale or if you already own the item in question.\r\nDetermining how you want to represent these in your own app (or if you even want to) is an exercise left for the reader.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorItemState"
+          }
         },
         "vendorItemIndex": {
           "format": "int32",
@@ -30239,7 +31196,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30264,7 +31224,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30317,7 +31280,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30333,7 +31299,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30349,7 +31318,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30365,7 +31337,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30381,7 +31356,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30397,7 +31375,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30464,7 +31445,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30476,7 +31460,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30492,7 +31479,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30578,7 +31568,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30665,7 +31658,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30743,7 +31739,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30759,7 +31758,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30775,7 +31777,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30791,7 +31796,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30807,7 +31815,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30823,7 +31834,10 @@
         },
         "privacy": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
         }
       }
     },
@@ -30832,7 +31846,10 @@
       "properties": {
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30845,7 +31862,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30862,7 +31882,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30890,7 +31913,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30915,7 +31941,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30943,7 +31972,10 @@
         "equipStatus": {
           "format": "int32",
           "description": "A PlatformErrorCodes enum indicating whether it succeeded, and if it failed why.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+          }
         }
       }
     },
@@ -30963,7 +31995,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -30983,7 +32018,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -31056,7 +32094,10 @@
         },
         "membershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -31072,7 +32113,10 @@
         "socketArrayType": {
           "format": "int32",
           "description": "This property, combined with the socketIndex, tells us which socket we are referring to (since operations can be performed on both Intrinsic and \"default\" sockets, and they occupy different arrays in the Inventory Item Definition). I know, I know. Don't give me that look.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Requests.Actions.DestinySocketArrayType"
+          }
         },
         "plugItemHash": {
           "format": "uint32",
@@ -31166,7 +32210,10 @@
         "mode": {
           "format": "int32",
           "description": "Indicates the most specific game mode of the activity that we could find.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+          }
         },
         "modes": {
           "description": "The list of all Activity Modes to which this activity applies, including aggregates. This will let you see, for example, whether the activity was both Clash and part of the Trials of the Nine event.",
@@ -31174,7 +32221,10 @@
           "items": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         },
         "isPrivate": {
@@ -31505,14 +32555,20 @@
         "group": {
           "format": "int32",
           "description": "Statistic group",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsGroupType"
+          }
         },
         "periodTypes": {
           "description": "Time periods the statistic covers",
           "type": "array",
           "items": {
             "format": "int32",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.PeriodType"
+            }
           }
         },
         "modes": {
@@ -31521,13 +32577,19 @@
           "items": {
             "format": "int32",
             "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-            "type": "integer"
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+            }
           }
         },
         "category": {
           "format": "int32",
           "description": "Category for the stat.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType"
+          }
         },
         "statName": {
           "description": "Display name",
@@ -31544,7 +32606,10 @@
         "unitType": {
           "format": "int32",
           "description": "Unit, if any, for the statistic",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.UnitType"
+          }
         },
         "iconImage": {
           "description": "Optional URI to an icon for the statistic",
@@ -31656,7 +32721,10 @@
       "type": "array",
       "items": {
         "format": "int32",
-        "type": "integer"
+        "type": "integer",
+        "x-enum-reference": {
+          "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.PeriodType"
+        }
       }
     },
     "Destiny.HistoricalStats.Definitions.DestinyActivityModeType[]": {
@@ -31664,7 +32732,10 @@
       "items": {
         "format": "int32",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
-        "type": "integer"
+        "type": "integer",
+        "x-enum-reference": {
+          "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+        }
       }
     },
     "Destiny.HistoricalStats.Definitions.DestinyStatsCategoryType": {
@@ -31946,7 +33017,10 @@
         "mode": {
           "format": "int32",
           "description": "The id of the mode of stats (allPvp, allPvE, etc)",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.HistoricalStats.Definitions.DestinyActivityModeType"
+          }
         },
         "statId": {
           "description": "The id of the stat",
@@ -33245,7 +34319,10 @@
         "type": {
           "format": "int32",
           "description": "Type of advanced write action.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Advanced.AwaType"
+          }
         },
         "affectedItemId": {
           "format": "int64",
@@ -33255,7 +34332,10 @@
         "membershipType": {
           "format": "int32",
           "description": "Destiny membership type of the account to modify.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         },
         "characterId": {
           "format": "int64",
@@ -33289,7 +34369,10 @@
         "selection": {
           "format": "int32",
           "description": "Indication of the selection the user has made (Approving or rejecting the action)",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Advanced.AwaUserSelection"
+          }
         },
         "correlationId": {
           "description": "Correlation ID of the request",
@@ -33334,11 +34417,17 @@
         "userSelection": {
           "format": "int32",
           "description": "Indication of how the user responded to the request. If the value is \"Approved\" the actionToken will contain the token that can be presented when performing the advanced write action.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Advanced.AwaUserSelection"
+          }
         },
         "responseReason": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Advanced.AwaResponseReason"
+          }
         },
         "developerNote": {
           "description": "Message to the app developer to help understand the response.",
@@ -33361,12 +34450,18 @@
         "type": {
           "format": "int32",
           "description": "Advanced Write Action Type from the permission request.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.Advanced.AwaType"
+          }
         },
         "membershipType": {
           "format": "int32",
           "description": "MembershipType from the permission request.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -33467,7 +34562,10 @@
         },
         "partnershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Partnerships.PartnershipType"
+          }
         },
         "thumbnail": {
           "type": "string"
@@ -33607,7 +34705,10 @@
         "entityType": {
           "format": "int32",
           "description": "An enum - unfortunately - dictating all of the possible kinds of trending items that you might get in your result set, in case you want to do custom rendering or call to get the details of the item.",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Trending.TrendingEntryType"
+          }
         },
         "displayName": {
           "description": "The localized \"display name/article title/'primary localized identifier'\" of the entity.",
@@ -33762,7 +34863,10 @@
         },
         "entityType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Trending.TrendingEntryType"
+          }
         },
         "news": {
           "$ref": "#/definitions/Trending.TrendingEntryNews"
@@ -33945,7 +35049,10 @@
         },
         "partnershipType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Partnerships.PartnershipType"
+          }
         }
       }
     },
@@ -34127,11 +35234,17 @@
         },
         "platform": {
           "format": "byte",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Fireteam.FireteamPlatform"
+          }
         },
         "activityType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Fireteam.FireteamActivityType"
+          }
         },
         "isImmediate": {
           "type": "boolean"
@@ -34260,7 +35373,10 @@
         },
         "lastPlatformInviteAttemptResult": {
           "format": "byte",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Fireteam.FireteamPlatformInviteResult"
+          }
         }
       }
     },
@@ -34533,11 +35649,17 @@
         },
         "AlertLevel": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GlobalAlertLevel"
+          }
         },
         "AlertType": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/GlobalAlertType"
+          }
         },
         "StreamInfo": {
           "$ref": "#/definitions/StreamInfo"
