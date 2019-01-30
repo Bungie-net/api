@@ -14,23 +14,23 @@ In this patch, we have several changes from the Winter Wishlist, along with new 
 
 ### Added/Changed
 * Github Issues Resolved:
-  #148 Add data to schema to indicate Flag enumerations
-  #77 gendered*Names properties keyed by English strings
-  #472 allPvP is including private matches
-  #502 Provide a public Xur API
-  #566 The Fall Will Kill You Objective is still classified 
-  #642 Release custom icon font
-  #696 Vendor Lord Saladin's manifest definition has missing info
-  #712 Can Competitive be added to the DestinyActivityModeType?
-  #761 Feature Request: Add Vendor Hash to Applicable Items
-  #796 Add Lord Saladin to Iron Banner Milestone [3427325023]
-  #803 Add Triumph rewards to manifest
-  #805 Sub-ranks for Valor and Glory are not reflected in the api
-  #808 Clan Staffs are Classified
-  #811 Account for randomized perks in base item definition stats
-  #833 ActivityMode 68 (IronBannerSalvage) returning Iron Banner Control activities
-  #844 Vendor caching is f'd
-  #849 Activity history for forges
+  * #148 Add data to schema to indicate Flag enumerations
+  * #77 gendered*Names properties keyed by English strings
+  * #472 allPvP is including private matches
+  * #502 Provide a public Xur API
+  * #566 The Fall Will Kill You Objective is still classified 
+  * #642 Release custom icon font
+  * #696 Vendor Lord Saladin's manifest definition has missing info
+  * #712 Can Competitive be added to the DestinyActivityModeType?
+  * #761 Feature Request: Add Vendor Hash to Applicable Items
+  * #796 Add Lord Saladin to Iron Banner Milestone [3427325023]
+  * #803 Add Triumph rewards to manifest
+  * #805 Sub-ranks for Valor and Glory are not reflected in the api
+  * #808 Clan Staffs are Classified
+  * #811 Account for randomized perks in base item definition stats
+  * #833 ActivityMode 68 (IronBannerSalvage) returning Iron Banner Control activities
+  * #844 Vendor caching is f'd
+  * #849 Activity history for forges
   
 If you haven't already seen the changes for Forsaken, [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
 
