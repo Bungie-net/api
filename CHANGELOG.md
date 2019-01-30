@@ -1,5 +1,29 @@
 # Changelog
 
+## [2.3.4] - 2019-01-29
+
+In this patch, we have several changes from the Winter Wishlist, along with new content for Crimson Days and a variety of other smaller changes.
+
+### Added/Changed
+* Github Issues Resolved:
+  * #148 Add data to schema to indicate Flag enumerations
+  * #77 gendered*Names properties keyed by English strings
+  * #472 allPvP is including private matches
+  * #502 Provide a public Xur API
+  * #566 The Fall Will Kill You Objective is still classified 
+  * #642 Release custom icon font
+  * #696 Vendor Lord Saladin's manifest definition has missing info
+  * #712 Can Competitive be added to the DestinyActivityModeType?
+  * #761 Feature Request: Add Vendor Hash to Applicable Items
+  * #796 Add Lord Saladin to Iron Banner Milestone [3427325023]
+  * #803 Add Triumph rewards to manifest
+  * #805 Sub-ranks for Valor and Glory are not reflected in the api
+  * #808 Clan Staffs are Classified
+  * #811 Account for randomized perks in base item definition stats
+  * #833 ActivityMode 68 (IronBannerSalvage) returning Iron Banner Control activities
+  * #844 Vendor caching is f'd
+  * #849 Activity history for forges
+
 ## [2.3.3] - 2018-12-11
 
 We've actually had a series of smaller updates and fixes between 2.3.2 and 2.3.3, but this is a rough outline of the changes as of today's deployment to catch us up.
