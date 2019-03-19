@@ -1,5 +1,13 @@
 # Changelog
 
+## [2.3.5] - 2019-03-19
+
+I've been gone for a bit, so there's some other mostly content changes that have occurred between 2.3.4 and 2.3.5, but aside from that only some small changes have occurred in the API.
+
+* Activity Categories and Modes now includes Gambit Prime and Reckoning, though Reckoning is experiencing ongoing issues with data consistency that may not be resolved given the way that the activity is set up.  For the forseeable future, we recommend not attempting to build features around Reckoning historical stats.
+* Removed some API endpoints that aren't actually possible to use with the rights we allow Applications to ask for.
+* Some minor bug fixes for Milestones, and addition of new Vendor and PGCR data for Season of the Drifter.
+
 ## [2.3.4] - 2019-01-29
 
 In this patch, we have several changes from the Winter Wishlist, along with new content for Crimson Days and a variety of other smaller changes.
