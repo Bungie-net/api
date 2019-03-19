@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.3.4"
+    "version": "2.3.5"
   },
   "servers": [
     {
@@ -1077,164 +1077,6 @@
         "deprecated": false
       }
     },
-    "/Forum/Recruit/Join/{topicId}/": {
-      "summary": "Forum.JoinFireteamThread",
-      "description": "Allows a user to slot themselves into a recruitment thread fireteam slot. Returns the new state of the fireteam.",
-      "post": {
-        "tags": [
-          "Forum"
-        ],
-        "description": "Allows a user to slot themselves into a recruitment thread fireteam slot. Returns the new state of the fireteam.",
-        "operationId": "Forum.JoinFireteamThread",
-        "parameters": [
-          {
-            "name": "topicId",
-            "in": "path",
-            "description": "The post id of the recruitment topic you wish to join.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Forum.ForumRecruitmentDetail"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "WriteGroups",
-              "BnetWrite"
-            ]
-          }
-        ]
-      }
-    },
-    "/Forum/Recruit/Leave/{topicId}/": {
-      "summary": "Forum.LeaveFireteamThread",
-      "description": "Allows a user to remove themselves from a recruitment thread fireteam slot. Returns the new state of the fireteam.",
-      "post": {
-        "tags": [
-          "Forum"
-        ],
-        "description": "Allows a user to remove themselves from a recruitment thread fireteam slot. Returns the new state of the fireteam.",
-        "operationId": "Forum.LeaveFireteamThread",
-        "parameters": [
-          {
-            "name": "topicId",
-            "in": "path",
-            "description": "The post id of the recruitment topic you wish to leave.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Forum.ForumRecruitmentDetail"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "WriteGroups",
-              "BnetWrite"
-            ]
-          }
-        ]
-      }
-    },
-    "/Forum/Recruit/KickBan/{topicId}/{targetMembershipId}/": {
-      "summary": "Forum.KickBanFireteamApplicant",
-      "description": "Allows a recruitment thread owner to kick a join user from the fireteam. Returns the new state of the fireteam.",
-      "post": {
-        "tags": [
-          "Forum"
-        ],
-        "description": "Allows a recruitment thread owner to kick a join user from the fireteam. Returns the new state of the fireteam.",
-        "operationId": "Forum.KickBanFireteamApplicant",
-        "parameters": [
-          {
-            "name": "targetMembershipId",
-            "in": "path",
-            "description": "The id of the user you wish to kick.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "topicId",
-            "in": "path",
-            "description": "The post id of the recruitment topic you wish to join.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Forum.ForumRecruitmentDetail"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "WriteGroups",
-              "BnetWrite"
-            ]
-          }
-        ]
-      }
-    },
-    "/Forum/Recruit/Approve/{topicId}/": {
-      "summary": "Forum.ApproveFireteamThread",
-      "description": "Allows the owner of a fireteam thread to approve all joined members and start a private message conversation with them.",
-      "post": {
-        "tags": [
-          "Forum"
-        ],
-        "description": "Allows the owner of a fireteam thread to approve all joined members and start a private message conversation with them.",
-        "operationId": "Forum.ApproveFireteamThread",
-        "parameters": [
-          {
-            "name": "topicId",
-            "in": "path",
-            "description": "The post id of the recruitment topic to approve.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/Messages.Responses.SaveMessageResult"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "WriteGroups",
-              "BnetWrite"
-            ]
-          }
-        ]
-      }
-    },
     "/Forum/Recruit/Summaries/": {
       "summary": "Forum.GetRecruitmentThreadSummaries",
       "description": "Allows the caller to get a list of to 25 recruitment thread summary information objects.",
@@ -1339,56 +1181,6 @@
           {
             "oauth2": [
               "ReadUserData"
-            ]
-          }
-        ]
-      }
-    },
-    "/GroupV2/SetUserClanInviteSetting/{mType}/{allowInvites}/": {
-      "summary": "GroupV2.SetUserClanInviteSetting",
-      "description": "Sets the state of the user's clan invite preferences - true if they wish to be invited to clans, false otherwise.",
-      "post": {
-        "tags": [
-          "GroupV2"
-        ],
-        "description": "Sets the state of the user's clan invite preferences - true if they wish to be invited to clans, false otherwise.",
-        "operationId": "GroupV2.SetUserClanInviteSetting",
-        "parameters": [
-          {
-            "name": "allowInvites",
-            "in": "path",
-            "description": "True to allow invites of this user to clans, false otherwise.",
-            "required": true,
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "mType",
-            "in": "path",
-            "description": "The Destiny membership type of linked account we are manipulating.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/int32"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "EditUserData"
             ]
           }
         ]
@@ -1602,41 +1394,6 @@
           }
         },
         "deprecated": false
-      }
-    },
-    "/GroupV2/Create/": {
-      "summary": "GroupV2.CreateGroup",
-      "description": "Create a new group.",
-      "post": {
-        "tags": [
-          "GroupV2"
-        ],
-        "description": "Create a new group.",
-        "operationId": "GroupV2.CreateGroup",
-        "parameters": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GroupsV2.GroupAction"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/GroupsV2.GroupCreationResponse"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "BnetWrite"
-            ]
-          }
-        ]
       }
     },
     "/GroupV2/{groupId}/Edit/": {
@@ -2348,67 +2105,6 @@
         "deprecated": false
       }
     },
-    "/GroupV2/{groupId}/Members/Apply/{membershipType}/": {
-      "summary": "GroupV2.RequestGroupMembership",
-      "description": "Request permission to join the given group.",
-      "post": {
-        "tags": [
-          "GroupV2"
-        ],
-        "description": "Request permission to join the given group.",
-        "operationId": "GroupV2.RequestGroupMembership",
-        "parameters": [
-          {
-            "name": "groupId",
-            "in": "path",
-            "description": "ID of the group you would like to join.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "membershipType",
-            "in": "path",
-            "description": "MembershipType of the account to use when joining.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/GroupsV2.GroupApplicationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/GroupsV2.GroupApplicationResponse"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "BnetWrite"
-            ]
-          }
-        ]
-      }
-    },
     "/GroupV2/{groupId}/Members/Pending/": {
       "summary": "GroupV2.GetPendingMemberships",
       "description": "Get the list of users who are awaiting a decision on their application to join a given group. Modified to include application info.",
@@ -2496,57 +2192,6 @@
           {
             "oauth2": [
               "AdminGroups"
-            ]
-          }
-        ]
-      }
-    },
-    "/GroupV2/{groupId}/Members/Rescind/{membershipType}/": {
-      "summary": "GroupV2.RescindGroupMembership",
-      "description": "Rescind your application to join the given group or leave the group if you are already a member..",
-      "post": {
-        "tags": [
-          "GroupV2"
-        ],
-        "description": "Rescind your application to join the given group or leave the group if you are already a member..",
-        "operationId": "GroupV2.RescindGroupMembership",
-        "parameters": [
-          {
-            "name": "groupId",
-            "in": "path",
-            "description": "ID of the group.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "membershipType",
-            "in": "path",
-            "description": "MembershipType of the account to leave.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/GroupsV2.GroupMemberLeaveResult"
-          }
-        },
-        "deprecated": false,
-        "security": [
-          {
-            "oauth2": [
-              "BnetWrite"
             ]
           }
         ]
@@ -11933,7 +11578,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -12208,6 +11855,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -13387,7 +13042,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -13662,6 +13319,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -13761,7 +13426,9 @@
           "71",
           "72",
           "73",
-          "74"
+          "74",
+          "75",
+          "76"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -14035,6 +13702,14 @@
           {
             "numericValue": "74",
             "identifier": "ControlCompetitive"
+          },
+          {
+            "numericValue": "75",
+            "identifier": "GambitPrime"
+          },
+          {
+            "numericValue": "76",
+            "identifier": "Reckoning"
           }
         ],
         "x-enum-is-bitmask": false
@@ -17450,6 +17125,10 @@
           "isOnline": {
             "type": "boolean"
           },
+          "lastOnlineStatusChange": {
+            "type": "integer",
+            "format": "int64"
+          },
           "groupId": {
             "type": "integer",
             "format": "int64"
@@ -17717,19 +17396,6 @@
           }
         ],
         "x-enum-is-bitmask": false
-      },
-      "Messages.Responses.SaveMessageResult": {
-        "type": "object",
-        "properties": {
-          "conversationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "messageId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
       },
       "Config.GroupTheme": {
         "type": "object",
@@ -18074,102 +17740,6 @@
             "format": "int32",
             "x-enum-reference": {
               "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "GroupsV2.GroupCreationResponse": {
-        "type": "object",
-        "properties": {
-          "groupId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "GroupsV2.GroupAction": {
-        "type": "object",
-        "properties": {
-          "groupType": {
-            "type": "integer",
-            "description": "Type of group, either Bungie.net hosted group, or a game services hosted clan.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/GroupsV2.GroupType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "name": {
-            "type": "string"
-          },
-          "about": {
-            "type": "string"
-          },
-          "motto": {
-            "type": "string"
-          },
-          "theme": {
-            "type": "string"
-          },
-          "avatarImageIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "tags": {
-            "type": "string"
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "membershipOption": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/GroupsV2.MembershipOption"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "isPublicTopicAdminOnly": {
-            "type": "boolean"
-          },
-          "isDefaultPostPublic": {
-            "type": "boolean"
-          },
-          "allowChat": {
-            "type": "boolean"
-          },
-          "isDefaultPostAlliance": {
-            "type": "boolean"
-          },
-          "chatSecurity": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/GroupsV2.ChatSecuritySetting"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "callsign": {
-            "type": "string"
-          },
-          "locale": {
-            "type": "string"
-          },
-          "homepage": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/GroupsV2.GroupHomepage"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "platformMembershipType": {
-            "type": "integer",
-            "description": "When operation needs a platform specific account ID for the present user, use this property. In particular, groupType of Clan requires this value to be set.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/BungieMembershipType"
             },
             "x-enum-is-bitmask": false
           }
@@ -18636,56 +18206,6 @@
           }
         }
       },
-      "GroupsV2.GroupApplicationResponse": {
-        "type": "object",
-        "properties": {
-          "resolution": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/GroupsV2.GroupApplicationResolveState"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "GroupsV2.GroupApplicationResolveState": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unresolved"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Accepted"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Denied"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Rescinded"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "GroupsV2.GroupApplicationRequest": {
-        "type": "object",
-        "properties": {
-          "message": {
-            "type": "string"
-          }
-        }
-      },
       "GroupsV2.GroupMemberApplication": {
         "type": "object",
         "properties": {
@@ -18728,6 +18248,35 @@
             "$ref": "#/components/schemas/User.UserInfoCard"
           }
         }
+      },
+      "GroupsV2.GroupApplicationResolveState": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Unresolved"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Accepted"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Denied"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "Rescinded"
+          }
+        ],
+        "x-enum-is-bitmask": false
       },
       "SearchResultOfGroupMemberApplication": {
         "type": "object",
@@ -18946,6 +18495,7 @@
           "227",
           "228",
           "229",
+          "230",
           "300",
           "301",
           "302",
@@ -20141,6 +19691,10 @@
           {
             "numericValue": "229",
             "identifier": "UserEmailValidationLimit"
+          },
+          {
+            "numericValue": "230",
+            "identifier": "TransactionEmailSendFailure"
           },
           {
             "numericValue": "300",
@@ -22190,6 +21744,14 @@
         ],
         "x-enum-is-bitmask": false
       },
+      "GroupsV2.GroupApplicationRequest": {
+        "type": "object",
+        "properties": {
+          "message": {
+            "type": "string"
+          }
+        }
+      },
       "GroupsV2.GroupApplicationListRequest": {
         "type": "object",
         "properties": {
@@ -22367,6 +21929,19 @@
           "useTotalResults": {
             "type": "boolean",
             "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one."
+          }
+        }
+      },
+      "GroupsV2.GroupApplicationResponse": {
+        "type": "object",
+        "properties": {
+          "resolution": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/GroupsV2.GroupApplicationResolveState"
+            },
+            "x-enum-is-bitmask": false
           }
         }
       },
@@ -24982,7 +24557,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -25257,6 +24834,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -25379,7 +24964,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -25654,6 +25241,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -26589,7 +26184,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -26867,6 +26464,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -31770,7 +31375,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -32045,6 +31652,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -32137,7 +31752,9 @@
               "71",
               "72",
               "73",
-              "74"
+              "74",
+              "75",
+              "76"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -32412,6 +32029,14 @@
               {
                 "numericValue": "74",
                 "identifier": "ControlCompetitive"
+              },
+              {
+                "numericValue": "75",
+                "identifier": "GambitPrime"
+              },
+              {
+                "numericValue": "76",
+                "identifier": "Reckoning"
               }
             ],
             "x-enum-is-bitmask": false
@@ -33312,7 +32937,8 @@
           "6",
           "7",
           "8",
-          "9"
+          "9",
+          "10"
         ],
         "type": "integer",
         "format": "int32",
@@ -33356,6 +32982,10 @@
           {
             "numericValue": "9",
             "identifier": "Forge"
+          },
+          {
+            "numericValue": "10",
+            "identifier": "Reckoning"
           }
         ],
         "x-enum-is-bitmask": false
@@ -34590,96 +34220,6 @@
           }
         }
       },
-      "Forum.ForumRecruitmentDetail": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/Forum.ForumRecruitmentDetail"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "Messages.Responses.SaveMessageResult": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/Messages.Responses.SaveMessageResult"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
       "CEListOfForumRecruitmentDetail": {
         "description": "Look at the Response property for more information about the nature of this response",
         "content": {
@@ -34837,52 +34377,6 @@
               "properties": {
                 "Response": {
                   "type": "boolean"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "int32": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "type": "integer",
-                  "format": "int32"
                 },
                 "ErrorCode": {
                   "type": "integer",
@@ -35105,7 +34599,7 @@
           }
         }
       },
-      "GroupsV2.GroupCreationResponse": {
+      "int32": {
         "description": "Look at the Response property for more information about the nature of this response",
         "content": {
           "application/json": {
@@ -35113,7 +34607,8 @@
               "type": "object",
               "properties": {
                 "Response": {
-                  "$ref": "#/components/schemas/GroupsV2.GroupCreationResponse"
+                  "type": "integer",
+                  "format": "int32"
                 },
                 "ErrorCode": {
                   "type": "integer",
@@ -35249,51 +34744,6 @@
               "properties": {
                 "Response": {
                   "$ref": "#/components/schemas/SearchResultOfGroupBan"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "GroupsV2.GroupApplicationResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/GroupsV2.GroupApplicationResponse"
                 },
                 "ErrorCode": {
                   "type": "integer",
@@ -35477,6 +34927,51 @@
               "properties": {
                 "Response": {
                   "$ref": "#/components/schemas/GroupsV2.GroupPotentialMembershipSearchResponse"
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "GroupsV2.GroupApplicationResponse": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/GroupsV2.GroupApplicationResponse"
                 },
                 "ErrorCode": {
                   "type": "integer",
