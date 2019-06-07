@@ -6,11 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## IMPORTANT INFO: Non-200 HTTP Status Codes going live in July!
+## IMPORTANT INFO: Non-200 HTTP Status Codes are live!
 
-We were delayed previously from deploying the support for non-200 HTTP status codes, but the current plan is that we'll be rolling that out at some point in July.
-
-Please check https://github.com/Bungie-net/api/issues/895 for more information, and make sure that your code can support non-200 HTTP status codes by the time July comes around!
+Please check https://github.com/Bungie-net/api/issues/895 for more information.  Of note, there are some situations were we are over-aggressively defaulting to returning 500 error codes.  We'll be investigating changing error codes for some of our responses to match other error codes.
 
 ## 2019-03-19 Destiny API v2.3.5, Small Changes
 
