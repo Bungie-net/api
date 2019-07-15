@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.3.5"
+    "version": "2.3.6"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -874,6 +874,71 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/SearchResultOfContentItemPublicContract"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Content/SearchHelpArticles/{searchtext}/{size}": {
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Search for Help Articles.",
+        "operationId": "Content.SearchHelpArticles",
+        "parameters": [
+          {
+            "name": "searchtext",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "size",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object"
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -3787,6 +3852,81 @@
         }
       }
     },
+    "/GroupV2/Recover/{membershipType}/{membershipId}/{groupType}/": {
+      "get": {
+        "tags": [
+          "GroupV2"
+        ],
+        "description": "Allows a founder to manually recover a group they can see in game but not on bungie.net",
+        "operationId": "GroupV2.RecoverGroupForFounder",
+        "parameters": [
+          {
+            "name": "groupType",
+            "in": "path",
+            "description": "Type of group the supplied member founded.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "Membership ID to for which to find founded groups.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          },
+          {
+            "name": "membershipType",
+            "in": "path",
+            "description": "Membership type of the supplied membership ID.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/GroupsV2.GroupMembershipSearchResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/GroupV2/User/Potential/{membershipType}/{membershipId}/{filter}/{groupType}/": {
       "get": {
         "tags": [
@@ -4227,6 +4367,12 @@
         "description": "Returns a summary information about all profiles linked to the requesting membership type/membership ID that have valid Destiny information. The passed-in Membership Type/Membership ID may be a Bungie.Net membership or a Destiny membership. It only returns the minimal amount of data to begin making more substantive requests, but will hopefully serve as a useful alternative to UserServices for people who just care about Destiny data. Note that it will only return linked accounts whose linkages you are allowed to view.",
         "operationId": "Destiny2.GetLinkedProfiles",
         "parameters": [
+          {
+            "name": "getAllMemberships",
+            "in": "query",
+            "description": "(optional) if set to 'true', all memberships regardless of whether they're obscured by overrides will be returned. Normal privacy restrictions on account linking will still apply no matter what.",
+            "type": "boolean"
+          },
           {
             "name": "membershipId",
             "in": "path",
@@ -5942,14 +6088,14 @@
           {
             "name": "dayend",
             "in": "query",
-            "description": "Last day to return when daily stats are requested. Use the format YYYY-MM-DD.",
+            "description": "Last day to return when daily stats are requested. Use the format YYYY-MM-DD. Currently, we cannot allow more than 31 days of daily data to be requested in a single request.",
             "type": "string",
             "format": "date-time"
           },
           {
             "name": "daystart",
             "in": "query",
-            "description": "First day to return when daily stats are requested. Use the format YYYY-MM-DD",
+            "description": "First day to return when daily stats are requested. Use the format YYYY-MM-DD. Currently, we cannot allow more than 31 days of daily data to be requested in a single request.",
             "type": "string",
             "format": "date-time"
           },
@@ -8300,7 +8446,9 @@
         "0",
         "1",
         "2",
+        "3",
         "4",
+        "5",
         "10",
         "254",
         "-1"
@@ -8320,8 +8468,16 @@
           "identifier": "TigerPsn"
         },
         {
+          "numericValue": "3",
+          "identifier": "TigerSteam"
+        },
+        {
           "numericValue": "4",
           "identifier": "TigerBlizzard"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "TigerStadia"
         },
         {
           "numericValue": "10",
@@ -10258,6 +10414,32 @@
           "format": "int32",
           "description": "The total amount of progression (i.e. \"Experience\") needed in order to reach the next level.",
           "type": "integer"
+        },
+        "currentResetCount": {
+          "format": "int32",
+          "description": "The number of resets of this progression you've executed this season, if applicable to this progression.",
+          "type": "integer"
+        },
+        "seasonResets": {
+          "description": "Information about historical resets of this progression, if there is any data for it.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.DestinyProgressionResetEntry"
+          }
+        }
+      }
+    },
+    "Destiny.DestinyProgressionResetEntry": {
+      "description": "Represents a season and the number of resets you had in that season.\r\n We do not necessarily - even for progressions with resets - track it over all seasons. So be careful and check the season numbers being returned.",
+      "type": "object",
+      "properties": {
+        "season": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resets": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -10367,6 +10549,10 @@
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
           "type": "string"
         },
+        "highResIcon": {
+          "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here.",
+          "type": "string"
+        },
         "hasIcon": {
           "type": "boolean"
         }
@@ -10387,6 +10573,10 @@
         },
         "icon": {
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
+          "type": "string"
+        },
+        "highResIcon": {
+          "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here.",
           "type": "string"
         },
         "hasIcon": {
@@ -10888,6 +11078,18 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyDamageTypeDefinition"
           }
+        },
+        "seasonHash": {
+          "format": "uint32",
+          "description": "If this item is related directly to a Season of Destiny, this is the hash identifier for that season.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+          }
+        },
+        "isWrapper": {
+          "description": "If true, this is a dummy vendor-wrapped item template. Items purchased from Eververse will be \"wrapped\" by one of these items so that we can safely provide refund capabilities before the item is \"unwrapped\".",
+          "type": "boolean"
         },
         "hash": {
           "format": "uint32",
@@ -12259,6 +12461,10 @@
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
           "type": "string"
         },
+        "highResIcon": {
+          "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here.",
+          "type": "string"
+        },
         "hasIcon": {
           "type": "boolean"
         }
@@ -12670,7 +12876,8 @@
         "6",
         "7",
         "8",
-        "9"
+        "9",
+        "10"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -12680,46 +12887,51 @@
         },
         {
           "numericValue": "1",
+          "identifier": "Undefined",
+          "description": "An empty interaction. If this ends up in content, it is probably a game bug."
+        },
+        {
+          "numericValue": "2",
           "identifier": "QuestComplete",
           "description": "An interaction shown when you complete a quest and receive a reward."
         },
         {
-          "numericValue": "2",
+          "numericValue": "3",
           "identifier": "QuestContinue",
           "description": "An interaction shown when you talk to a Vendor as an intermediary step of a quest."
         },
         {
-          "numericValue": "3",
+          "numericValue": "4",
           "identifier": "ReputationPreview",
           "description": "An interaction shown when you are previewing the vendor's reputation rewards."
         },
         {
-          "numericValue": "4",
+          "numericValue": "5",
           "identifier": "RankUpReward",
           "description": "An interaction shown when you rank up with the vendor."
         },
         {
-          "numericValue": "5",
+          "numericValue": "6",
           "identifier": "TokenTurnIn",
           "description": "An interaction shown when you have tokens to turn in for the vendor."
         },
         {
-          "numericValue": "6",
+          "numericValue": "7",
           "identifier": "QuestAccept",
           "description": "An interaction shown when you're accepting a new quest."
         },
         {
-          "numericValue": "7",
+          "numericValue": "8",
           "identifier": "ProgressTab",
           "description": "Honestly, this doesn't seem consistent to me. It is used to give you choices in the Cryptarch as well as some reward prompts by the Eververse vendor. I'll have to look into that further at some point."
         },
         {
-          "numericValue": "8",
+          "numericValue": "9",
           "identifier": "End",
           "description": "These seem even less consistent. I don't know what these are."
         },
         {
-          "numericValue": "9",
+          "numericValue": "10",
           "identifier": "Start",
           "description": "Also seem inconsistent. I also don't know what these are offhand."
         }
@@ -13924,7 +14136,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -14204,6 +14417,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         },
@@ -15361,7 +15578,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -15641,6 +15859,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         },
@@ -15741,7 +15963,8 @@
         "73",
         "74",
         "75",
-        "76"
+        "76",
+        "77"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -16021,6 +16244,10 @@
         {
           "numericValue": "76",
           "identifier": "Reckoning"
+        },
+        {
+          "numericValue": "77",
+          "identifier": "Menagerie"
         }
       ]
     },
@@ -18369,7 +18596,8 @@
         "23",
         "24",
         "25",
-        "26"
+        "26",
+        "27"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -18468,6 +18696,10 @@
         {
           "numericValue": "26",
           "identifier": "Bounty"
+        },
+        {
+          "numericValue": "27",
+          "identifier": "Wrapper"
         }
       ]
     },
@@ -19309,6 +19541,34 @@
         }
       },
       "x-mobile-manifest-name": "ItemCategories"
+    },
+    "Destiny.Definitions.Seasons.DestinySeasonDefinition": {
+      "description": "Defines a canonical \"Season\" of Destiny: a range of a few months where the game highlights certain challenges, provides new loot, has new Clan-related rewards and celebrates various seasonal events.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "seasonNumber": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Seasons"
     },
     "GroupsV2.GroupUserBase": {
       "type": "object",
@@ -20661,6 +20921,8 @@
         "228",
         "229",
         "230",
+        "231",
+        "232",
         "300",
         "301",
         "302",
@@ -21171,7 +21433,27 @@
         "3023",
         "3024",
         "3025",
-        "3026"
+        "3026",
+        "3027",
+        "3200",
+        "3201",
+        "3202",
+        "3203",
+        "3204",
+        "3206",
+        "3207",
+        "3208",
+        "3209",
+        "3210",
+        "3211",
+        "3212",
+        "3213",
+        "3214",
+        "3215",
+        "3216",
+        "3217",
+        "3218",
+        "3300"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -21859,6 +22141,14 @@
         {
           "numericValue": "230",
           "identifier": "TransactionEmailSendFailure"
+        },
+        {
+          "numericValue": "231",
+          "identifier": "MailHookPermissionFailure"
+        },
+        {
+          "numericValue": "232",
+          "identifier": "MailServiceRateLimit"
         },
         {
           "numericValue": "300",
@@ -23904,6 +24194,86 @@
         {
           "numericValue": "3026",
           "identifier": "ClanFireteamExpired"
+        },
+        {
+          "numericValue": "3027",
+          "identifier": "ClanFireteamInvalidAuthProvider"
+        },
+        {
+          "numericValue": "3200",
+          "identifier": "CrossSaveOverriddenAccountNotFound"
+        },
+        {
+          "numericValue": "3201",
+          "identifier": "CrossSaveTooManyOverriddenPlatforms"
+        },
+        {
+          "numericValue": "3202",
+          "identifier": "CrossSaveNoOverriddenPlatforms"
+        },
+        {
+          "numericValue": "3203",
+          "identifier": "CrossSavePrimaryAccountNotFound"
+        },
+        {
+          "numericValue": "3204",
+          "identifier": "CrossSaveRequestInvalid"
+        },
+        {
+          "numericValue": "3206",
+          "identifier": "CrossSaveBungieAccountValidationFailure"
+        },
+        {
+          "numericValue": "3207",
+          "identifier": "CrossSaveOverriddenPlatformNotAllowed"
+        },
+        {
+          "numericValue": "3208",
+          "identifier": "CrossSaveThresholdExceeded"
+        },
+        {
+          "numericValue": "3209",
+          "identifier": "CrossSaveIncompatibleMembershipType"
+        },
+        {
+          "numericValue": "3210",
+          "identifier": "CrossSaveCouldNotFindLinkedAccountForMembershipType"
+        },
+        {
+          "numericValue": "3211",
+          "identifier": "CrossSaveCouldNotCreateDestinyProfileForMembershipType"
+        },
+        {
+          "numericValue": "3212",
+          "identifier": "CrossSaveErrorCreatingDestinyProfileForMembershipType"
+        },
+        {
+          "numericValue": "3213",
+          "identifier": "CrossSaveCannotOverrideSelf"
+        },
+        {
+          "numericValue": "3214",
+          "identifier": "CrossSaveRecentSilverPurchase"
+        },
+        {
+          "numericValue": "3215",
+          "identifier": "CrossSaveSilverBalanceNegative"
+        },
+        {
+          "numericValue": "3216",
+          "identifier": "CrossSaveAccountNotAuthenticated"
+        },
+        {
+          "numericValue": "3217",
+          "identifier": "ErrorOneAccountAlreadyActive"
+        },
+        {
+          "numericValue": "3218",
+          "identifier": "ErrorOneAccountDestinyRestriction"
+        },
+        {
+          "numericValue": "3300",
+          "identifier": "AuthVerificationNotLinkedToAccount"
         }
       ]
     },
@@ -24214,6 +24584,26 @@
           "format": "date-time",
           "type": "string"
         },
+        "applicableMembershipTypes": {
+          "description": "The list of membership types/Platforms that this Destiny Account can be used on - either its own original platform, or any subservient platforms hooked up to it through Cross Save.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            }
+          }
+        },
+        "isOverridden": {
+          "description": "If this profile is being overridden/obscured by Cross Save, this will be set to true. We will still return the profile for display purposes where users need to know the info: it is up to any given area of the app/site to determine if this profile should still be shown.",
+          "type": "boolean"
+        },
+        "isCrossSavePrimary": {
+          "description": "If true, this account is hooked up as the \"Primary\" cross save account for one or more platforms.",
+          "type": "boolean"
+        },
         "supplementalDisplayName": {
           "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc.",
           "type": "string"
@@ -24240,6 +24630,241 @@
           "type": "string"
         }
       }
+    },
+    "Destiny.Components.Inventory.DestinyPlatformSilverComponent": {
+      "type": "object",
+      "properties": {
+        "platformSilver": {
+          "description": "If a Profile is played on multiple platforms, this is the silver they have for each platform, keyed by Membership Type.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemComponent"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "PlatformSilver"
+    },
+    "Destiny.Entities.Items.DestinyItemComponent": {
+      "description": "The base item component, filled with properties that are generally useful to know in any item request or that don't feel worthwhile to put in their own component.",
+      "type": "object",
+      "properties": {
+        "itemHash": {
+          "format": "uint32",
+          "description": "The identifier for the item's definition, which is where most of the useful static information for the item can be found.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "itemInstanceId": {
+          "format": "int64",
+          "description": "If the item is instanced, it will have an instance ID. Lack of an instance ID implies that the item has no distinct local qualities aside from stack size.",
+          "type": "integer"
+        },
+        "quantity": {
+          "format": "int32",
+          "description": "The quantity of the item in this stack. Note that Instanced items cannot stack. If an instanced item, this value will always be 1 (as the stack has exactly one item in it)",
+          "type": "integer"
+        },
+        "bindStatus": {
+          "format": "int32",
+          "description": "If the item is bound to a location, it will be specified in this enum.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemBindStatus"
+          }
+        },
+        "location": {
+          "format": "int32",
+          "description": "An easy reference for where the item is located. Redundant if you got the item from an Inventory, but useful when making detail calls on specific items.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemLocation"
+          }
+        },
+        "bucketHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the specific inventory bucket in which the item is located.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryBucketDefinition"
+          }
+        },
+        "transferStatus": {
+          "format": "int32",
+          "description": "If there is a known error state that would cause this item to not be transferable, this Flags enum will indicate all of those error states. Otherwise, it will be 0 (CanTransfer).",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.TransferStatuses"
+          }
+        },
+        "lockable": {
+          "description": "If the item can be locked, this will indicate that state.",
+          "type": "boolean"
+        },
+        "state": {
+          "format": "int32",
+          "description": "A flags enumeration indicating the transient/custom states of the item that affect how it is rendered: whether it's tracked or locked for example, or whether it has a masterwork plug inserted.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemState"
+          }
+        },
+        "overrideStyleItemHash": {
+          "format": "uint32",
+          "description": "If populated, this is the hash of the item whose icon (and other secondary styles, but *not* the human readable strings) should override whatever icons/styles are on the item being sold.\r\nIf you don't do this, certain items whose styles are being overridden by socketed items - such as the \"Recycle Shader\" item - would show whatever their default icon/style is, and it wouldn't be pretty or look accurate.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "expirationDate": {
+          "format": "date-time",
+          "description": "If the item can expire, this is the date at which it will/did expire.",
+          "type": "string"
+        },
+        "isWrapper": {
+          "description": "If this is true, the object is actually a \"wrapper\" of the object it's representing. This means that it's not the actual item itself, but rather an item that must be \"opened\" in game before you have and can use the item.\r\n Wrappers are an evolution of \"bundles\", which give an easy way to let you preview the contents of what you purchased while still letting you get a refund before you \"open\" it.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Destiny.ItemBindStatus": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "NotBound"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "BoundToCharacter"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "BoundToAccount"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "BoundToGuild"
+        }
+      ]
+    },
+    "Destiny.TransferStatuses": {
+      "format": "int32",
+      "description": "Whether you can transfer an item, and why not if you can't.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "CanTransfer",
+          "description": "The item can be transferred."
+        },
+        {
+          "numericValue": "1",
+          "identifier": "ItemIsEquipped",
+          "description": "You can't transfer the item because it is equipped on a character."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "NotTransferrable",
+          "description": "The item is defined as not transferrable in its DestinyInventoryItemDefinition.nonTransferrable property."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "NoRoomInDestination",
+          "description": "You could transfer the item, but the place you're trying to put it has run out of room! Check your remaining Vault and/or character space."
+        }
+      ]
+    },
+    "Destiny.ItemState": {
+      "format": "int32",
+      "description": "A flags enumeration/bitmask where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Locked",
+          "description": "If this bit is set, the item has been \"locked\" by the user and cannot be deleted. You may want to represent this visually with a \"lock\" icon."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Tracked",
+          "description": "If this bit is set, the item is a quest that's being tracked by the user. You may want a visual indicator to show that this is a tracked quest."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Masterwork",
+          "description": "If this bit is set, the item has a Masterwork plug inserted. This usually coincides with having a special \"glowing\" effect applied to the item's icon."
+        }
+      ]
+    },
+    "Destiny.DestinyGameVersions": {
+      "format": "int32",
+      "description": "A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Destiny2"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "DLC1"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "DLC2"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Forsaken"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "YearTwoAnnualPass"
+        },
+        {
+          "numericValue": "32",
+          "identifier": "Shadowkeep"
+        }
+      ]
     },
     "Destiny.Responses.DestinyErrorProfile": {
       "description": "If a Destiny Profile can't be returned, but we're pretty certain it's a valid Destiny account, this will contain as much info as we can get about the profile for your use.\r\nAssume that the most you'll get is the Error Code, the Membership Type and the Membership ID.",
@@ -24274,6 +24899,7 @@
         "102",
         "103",
         "104",
+        "105",
         "200",
         "201",
         "202",
@@ -24328,6 +24954,11 @@
           "numericValue": "104",
           "identifier": "ProfileProgression",
           "description": "This will get you any progression-related information that exists on a Profile-wide level, across all characters."
+        },
+        {
+          "numericValue": "105",
+          "identifier": "PlatformSilver",
+          "description": "This will get you information about the silver that this profile has on every platform on which it plays.\r\n You may only request this component for the logged in user's Profile, and will not recieve it if you request it for another Profile."
         },
         {
           "numericValue": "200",
@@ -24489,6 +25120,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "Profiles"
+        },
+        "platformSilver": {
+          "description": "Silver quantities for any platform on which this Profile plays destiny.\r\n COMPONENT TYPE: PlatformSilver",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyPlatformSilverComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "PlatformSilver"
         },
         "profileKiosks": {
           "description": "Items available from Kiosks that are available Profile-wide (i.e. across all characters)\r\nThis component returns information about what Kiosk items are available to you on a *Profile* level. It is theoretically possible for Kiosks to have items gated by specific Character as well. If you ever have those, you will find them on the characterKiosks property.\r\nCOMPONENT TYPE: Kiosks",
@@ -24822,180 +25463,6 @@
         }
       }
     },
-    "Destiny.Entities.Items.DestinyItemComponent": {
-      "description": "The base item component, filled with properties that are generally useful to know in any item request or that don't feel worthwhile to put in their own component.",
-      "type": "object",
-      "properties": {
-        "itemHash": {
-          "format": "uint32",
-          "description": "The identifier for the item's definition, which is where most of the useful static information for the item can be found.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
-          }
-        },
-        "itemInstanceId": {
-          "format": "int64",
-          "description": "If the item is instanced, it will have an instance ID. Lack of an instance ID implies that the item has no distinct local qualities aside from stack size.",
-          "type": "integer"
-        },
-        "quantity": {
-          "format": "int32",
-          "description": "The quantity of the item in this stack. Note that Instanced items cannot stack. If an instanced item, this value will always be 1 (as the stack has exactly one item in it)",
-          "type": "integer"
-        },
-        "bindStatus": {
-          "format": "int32",
-          "description": "If the item is bound to a location, it will be specified in this enum.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.ItemBindStatus"
-          }
-        },
-        "location": {
-          "format": "int32",
-          "description": "An easy reference for where the item is located. Redundant if you got the item from an Inventory, but useful when making detail calls on specific items.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.ItemLocation"
-          }
-        },
-        "bucketHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the specific inventory bucket in which the item is located.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryBucketDefinition"
-          }
-        },
-        "transferStatus": {
-          "format": "int32",
-          "description": "If there is a known error state that would cause this item to not be transferable, this Flags enum will indicate all of those error states. Otherwise, it will be 0 (CanTransfer).",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.TransferStatuses"
-          }
-        },
-        "lockable": {
-          "description": "If the item can be locked, this will indicate that state.",
-          "type": "boolean"
-        },
-        "state": {
-          "format": "int32",
-          "description": "A flags enumeration indicating the transient/custom states of the item that affect how it is rendered: whether it's tracked or locked for example, or whether it has a masterwork plug inserted.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.ItemState"
-          }
-        },
-        "overrideStyleItemHash": {
-          "format": "uint32",
-          "description": "If populated, this is the hash of the item whose icon (and other secondary styles, but *not* the human readable strings) should override whatever icons/styles are on the item being sold.\r\nIf you don't do this, certain items whose styles are being overridden by socketed items - such as the \"Recycle Shader\" item - would show whatever their default icon/style is, and it wouldn't be pretty or look accurate.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
-          }
-        },
-        "expirationDate": {
-          "format": "date-time",
-          "description": "If the item can expire, this is the date at which it will/did expire.",
-          "type": "string"
-        }
-      }
-    },
-    "Destiny.ItemBindStatus": {
-      "format": "int32",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "NotBound"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "BoundToCharacter"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "BoundToAccount"
-        },
-        {
-          "numericValue": "3",
-          "identifier": "BoundToGuild"
-        }
-      ]
-    },
-    "Destiny.TransferStatuses": {
-      "format": "int32",
-      "description": "Whether you can transfer an item, and why not if you can't.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "4"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "CanTransfer",
-          "description": "The item can be transferred."
-        },
-        {
-          "numericValue": "1",
-          "identifier": "ItemIsEquipped",
-          "description": "You can't transfer the item because it is equipped on a character."
-        },
-        {
-          "numericValue": "2",
-          "identifier": "NotTransferrable",
-          "description": "The item is defined as not transferrable in its DestinyInventoryItemDefinition.nonTransferrable property."
-        },
-        {
-          "numericValue": "4",
-          "identifier": "NoRoomInDestination",
-          "description": "You could transfer the item, but the place you're trying to put it has run out of room! Check your remaining Vault and/or character space."
-        }
-      ]
-    },
-    "Destiny.ItemState": {
-      "format": "int32",
-      "description": "A flags enumeration/bitmask where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "4"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Locked",
-          "description": "If this bit is set, the item has been \"locked\" by the user and cannot be deleted. You may want to represent this visually with a \"lock\" icon."
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Tracked",
-          "description": "If this bit is set, the item is a quest that's being tracked by the user. You may want a visual indicator to show that this is a tracked quest."
-        },
-        {
-          "numericValue": "4",
-          "identifier": "Masterwork",
-          "description": "If this bit is set, the item has a Masterwork plug inserted. This usually coincides with having a special \"glowing\" effect applied to the item's icon."
-        }
-      ]
-    },
     "SingleComponentResponseOfDestinyInventoryComponent": {
       "type": "object",
       "properties": {
@@ -25031,7 +25498,7 @@
         },
         "versionsOwned": {
           "format": "int32",
-          "description": "If you want to know what expansions they own, this will contain that data.",
+          "description": "If you want to know what expansions they own, this will contain that data.\r\n IMPORTANT: This field may not return the data you're interested in for Cross-Saved users. It returns the last ownership data we saw for this account - which is to say, what they've purchased on the platform on which they last played, which now could be a different platform.\r\n If you don't care about per-platform ownership and only care about whatever platform it seems they are playing on most recently, then this should be \"good enough.\" Otherwise, this should be considered deprecated. We do not have a good alternative to provide at this time with platform specific ownership data for DLC.",
           "type": "integer",
           "x-enum-reference": {
             "$ref": "#/components/schemas/Destiny.DestinyGameVersions"
@@ -25048,50 +25515,26 @@
       },
       "x-destiny-component-type-dependency": "Profiles"
     },
-    "Destiny.DestinyGameVersions": {
-      "format": "int32",
-      "description": "A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "4",
-        "8",
-        "16"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Destiny2"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "DLC1"
-        },
-        {
-          "numericValue": "4",
-          "identifier": "DLC2"
-        },
-        {
-          "numericValue": "8",
-          "identifier": "Forsaken"
-        },
-        {
-          "numericValue": "16",
-          "identifier": "YearTwoAnnualPass"
-        }
-      ]
-    },
     "SingleComponentResponseOfDestinyProfileComponent": {
       "type": "object",
       "properties": {
         "data": {
           "$ref": "#/definitions/Destiny.Entities.Profiles.DestinyProfileComponent"
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        }
+      }
+    },
+    "SingleComponentResponseOfDestinyPlatformSilverComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Components.Inventory.DestinyPlatformSilverComponent"
         },
         "privacy": {
           "format": "int32",
@@ -26285,6 +26728,18 @@
           "format": "int32",
           "description": "The total amount of progression (i.e. \"Experience\") needed in order to reach the next level.",
           "type": "integer"
+        },
+        "currentResetCount": {
+          "format": "int32",
+          "description": "The number of resets of this progression you've executed this season, if applicable to this progression.",
+          "type": "integer"
+        },
+        "seasonResets": {
+          "description": "Information about historical resets of this progression, if there is any data for it.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.DestinyProgressionResetEntry"
+          }
         }
       }
     },
@@ -26550,7 +27005,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26830,6 +27286,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         },
@@ -26954,7 +27414,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27234,6 +27695,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         }
@@ -28126,7 +28591,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-mapped-definition": {
@@ -28409,6 +28875,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         },
@@ -31640,6 +32110,14 @@
         "isPrivate": {
           "description": "Whether or not the match was a private match. There's no private matches in Destiny 2... yet... DUN DUN DUNNNN",
           "type": "boolean"
+        },
+        "membershipType": {
+          "format": "int32",
+          "description": "The Membership Type indicating the platform on which this match was played.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
         }
       }
     },
@@ -32978,7 +33456,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33258,6 +33737,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         }
@@ -33352,7 +33835,8 @@
             "73",
             "74",
             "75",
-            "76"
+            "76",
+            "77"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33632,6 +34116,10 @@
             {
               "numericValue": "76",
               "identifier": "Reckoning"
+            },
+            {
+              "numericValue": "77",
+              "identifier": "Menagerie"
             }
           ]
         }
@@ -34499,7 +34987,8 @@
         "7",
         "8",
         "9",
-        "10"
+        "10",
+        "11"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -34546,6 +35035,10 @@
         {
           "numericValue": "10",
           "identifier": "Reckoning"
+        },
+        {
+          "numericValue": "11",
+          "identifier": "Menagerie"
         }
       ]
     },
@@ -34879,6 +35372,9 @@
     "Common.Models.CoreSettingsConfiguration": {
       "type": "object",
       "properties": {
+        "environment": {
+          "type": "string"
+        },
         "systems": {
           "type": "object",
           "additionalProperties": {
@@ -34983,6 +35479,9 @@
         },
         "destiny2CoreSettings": {
           "$ref": "#/definitions/Common.Models.Destiny2CoreSettings"
+        },
+        "emailSettings": {
+          "$ref": "#/definitions/User.EmailSettings"
         }
       }
     },
@@ -35063,6 +35562,213 @@
         },
         "ammoTypePrimaryIcon": {
           "type": "string"
+        }
+      }
+    },
+    "User.EmailSettings": {
+      "description": "The set of all email subscription/opt-in settings and definitions.",
+      "type": "object",
+      "properties": {
+        "optInDefinitions": {
+          "description": "Keyed by the name identifier of the opt-in definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User.EmailOptInDefinition"
+          }
+        },
+        "subscriptionDefinitions": {
+          "description": "Keyed by the name identifier of the Subscription definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User.EmailSubscriptionDefinition"
+          }
+        },
+        "views": {
+          "description": "Keyed by the name identifier of the View definition.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User.EmailViewDefinition"
+          }
+        }
+      }
+    },
+    "User.EmailOptInDefinition": {
+      "description": "Defines a single opt-in category: a wide-scoped permission to send emails for the subject related to the opt-in.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The unique identifier for this opt-in category.",
+          "type": "string"
+        },
+        "value": {
+          "format": "int64",
+          "description": "The flag value for this opt-in category. For historical reasons, this is defined as a flags enum.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/User.OptInFlags"
+          }
+        },
+        "setByDefault": {
+          "description": "If true, this opt-in setting should be set by default in situations where accounts are created without explicit choices about what they're opting into.",
+          "type": "boolean"
+        },
+        "dependentSubscriptions": {
+          "description": "Information about the dependent subscriptions for this opt-in.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User.EmailSubscriptionDefinition"
+          }
+        }
+      }
+    },
+    "User.OptInFlags": {
+      "format": "int64",
+      "enum": [
+        "1",
+        "2",
+        "4",
+        "8",
+        "16",
+        "32"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "1",
+          "identifier": "Newsletter"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "System"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Marketing"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "UserResearch"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "CustomerService"
+        },
+        {
+          "numericValue": "32",
+          "identifier": "Social"
+        }
+      ]
+    },
+    "User.EmailSubscriptionDefinition": {
+      "description": "Defines a single subscription: permission to send emails for a specific, focused subject (generally timeboxed, such as for a specific release of a product or feature).",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The unique identifier for this subscription.",
+          "type": "string"
+        },
+        "localization": {
+          "description": "A dictionary of localized text for the EMail Opt-in setting, keyed by the locale.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User.EMailSettingSubscriptionLocalization"
+          }
+        },
+        "value": {
+          "format": "int64",
+          "description": "The bitflag value for this subscription. Should be a unique power of two value.",
+          "type": "integer"
+        }
+      }
+    },
+    "User.EMailSettingLocalization": {
+      "description": "Localized text relevant to a given EMail setting in a given localization.",
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "User.EMailSettingSubscriptionLocalization": {
+      "description": "Localized text relevant to a given EMail setting in a given localization. Extra settings specifically for subscriptions.",
+      "type": "object",
+      "properties": {
+        "unknownUserDescription": {
+          "type": "string"
+        },
+        "registeredUserDescription": {
+          "type": "string"
+        },
+        "unregisteredUserDescription": {
+          "type": "string"
+        },
+        "unknownUserActionText": {
+          "type": "string"
+        },
+        "knownUserActionText": {
+          "type": "string"
+        },
+        "title": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "User.EmailViewDefinition": {
+      "description": "Represents a data-driven view for Email settings. Web/Mobile UI can use this data to show new EMail settings consistently without further manual work.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The identifier for this view.",
+          "type": "string"
+        },
+        "viewSettings": {
+          "description": "The ordered list of settings to show in this view.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User.EmailViewDefinitionSetting"
+          }
+        }
+      }
+    },
+    "User.EmailViewDefinitionSetting": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The identifier for this UI Setting, which can be used to relate it to custom strings or other data as desired.",
+          "type": "string"
+        },
+        "localization": {
+          "description": "A dictionary of localized text for the EMail setting, keyed by the locale.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/User.EMailSettingLocalization"
+          }
+        },
+        "setByDefault": {
+          "description": "If true, this setting should be set by default if the user hasn't chosen whether it's set or cleared yet.",
+          "type": "boolean"
+        },
+        "optInAggregateValue": {
+          "format": "int64",
+          "description": "The OptInFlags value to set or clear if this setting is set or cleared in the UI. It is the aggregate of all underlying opt-in flags related to this setting.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/User.OptInFlags"
+          }
+        },
+        "subscriptions": {
+          "description": "The subscriptions to show as children of this setting, if any.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User.EmailSubscriptionDefinition"
+          }
         }
       }
     },
