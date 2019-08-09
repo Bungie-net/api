@@ -6,9 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## IMPORTANT INFO: Non-200 HTTP Status Codes are live!
+## 2019-08-09 - Late Changes to Cross Save and Name Search
 
-Please check https://github.com/Bungie-net/api/issues/895 for more information.  Of note, there are some situations were we are over-aggressively defaulting to returning 500 error codes.  We'll be investigating changing error codes for some of our responses to match other error codes.
+See https://github.com/Bungie-net/api/issues/1003 for more information.  If you do gamertag/platform name search as part of your application, this will impact what you have returned for Cross Saved accounts.  Options will be available for returning historical accounts as a result of this search for those of you who would like to continue showing historical data.
 
 ## 2019-03-19 Destiny API v2.3.5, Small Changes
 
