@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+Important side note:
+
+Please, for the love of God and all that is holy, make sure your friends and fans of your apps do PC Migration and Cross save BEFORE they jump on and start playing Shadowkeep.  This isn't directly API related, but they will thank you for the Public Service Announcement.
+
 ## 2019-09-26 Pre-release Shadowkeep API Changes
 
 Head here for more information: https://github.com/Bungie-net/api/wiki/2.4.0-(Shadowkeep)-API-Changes
