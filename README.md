@@ -6,22 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2019-08-09 - Late Changes to Cross Save and Name Search
+## 2019-09-26 Pre-release Shadowkeep API Changes
 
-See https://github.com/Bungie-net/api/issues/1003 for more information.  If you do gamertag/platform name search as part of your application, this will impact what you have returned for Cross Saved accounts.  Options will be available for returning historical accounts as a result of this search for those of you who would like to continue showing historical data.
-
-## 2019-03-19 Destiny API v2.3.5, Small Changes
-
-## [2.3.5] - 2019-03-19
-
-I've been gone for a bit, so there's some other mostly content changes that have occurred between 2.3.4 and 2.3.5, but aside from that only some small changes have occurred in the API.
-
-* Activity Categories and Modes now includes Gambit Prime and Reckoning, though Reckoning is experiencing ongoing issues with data consistency that may not be resolved given the way that the activity is set up.  For the forseeable future, we recommend not attempting to build features around Reckoning historical stats.
-* Removed some API endpoints that aren't actually possible to use with the rights we allow Applications to ask for.
-* Some minor bug fixes for Milestones, and addition of new Vendor and PGCR data for Season of the Drifter.
-
-  
-If you haven't already seen the changes for Forsaken, [Please click here for more information](https://github.com/Bungie-net/api/wiki/2.3.0-and-2.3.1-Changes-(Forsaken-Release))!
+Head here for more information: https://github.com/Bungie-net/api/wiki/2.4.0-(Shadowkeep)-API-Changes
 
 # I'm New to the API.  What can I do with it?
 - (TODO: Create a grand overview tour of Destiny API features for new users in wiki, including how to get mobile databases and what the heck a mobile database is)
