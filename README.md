@@ -6,9 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-Important side note:
+## 2019-10-16 IMPORTANT Breaking Changes to Sockets and Plugs
 
-Please, for the love of God and all that is holy, make sure your friends and fans of your apps do PC Migration and Cross save BEFORE they jump on and start playing Shadowkeep.  This isn't directly API related, but they will thank you for the Public Service Announcement.
+Load issues with socket and plug information have necessitated an emergency change to the API.  I have written the following guide to the changes being made, and will be updating this document once we upload the preview specs and documentation for the next deployment which will have these changes.
+
+Read here for more information: https://github.com/Bungie-net/api/wiki/2019-10-API-Updates-for-Sockets-and-Plugs-(and-removal-of-a-long-deprecated-Stats-property)
+
 
 ## 2019-09-26 Pre-release Shadowkeep API Changes
 
