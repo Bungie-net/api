@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.4.0"
+    "version": "2.4.1"
   },
   "servers": [
     {
@@ -261,6 +261,49 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/CEListOfPublicPartnershipDetail"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/User/GetMembershipFromHardLinkedCredential/{crType}/{credential}/": {
+      "summary": "User.GetMembershipFromHardLinkedCredential",
+      "description": "Gets any hard linked membership given a credential. Only works for credentials that are public (just SteamID64 right now). Cross Save aware.",
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Gets any hard linked membership given a credential. Only works for credentials that are public (just SteamID64 right now). Cross Save aware.",
+        "operationId": "User.GetMembershipFromHardLinkedCredential",
+        "parameters": [
+          {
+            "name": "credential",
+            "in": "path",
+            "description": "The credential to look up. Must be a valid SteamID64.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "crType",
+            "in": "path",
+            "description": "The credential type. 'SteamId' is the only valid value at present.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
+              "format": "byte",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/BungieCredentialType"
+              },
+              "x-enum-is-bitmask": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User.HardLinkedUserMembership"
           }
         },
         "deprecated": false
@@ -6183,6 +6226,9 @@
           },
           "steamDisplayName": {
             "type": "string"
+          },
+          "stadiaDisplayName": {
+            "type": "string"
           }
         }
       },
@@ -6404,6 +6450,106 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "BungieCredentialType": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "8",
+          "9",
+          "10",
+          "12",
+          "14",
+          "16"
+        ],
+        "type": "integer",
+        "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
+        "format": "byte",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Xuid"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Psnid"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "Wlid"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "Fake"
+          },
+          {
+            "numericValue": "5",
+            "identifier": "Facebook"
+          },
+          {
+            "numericValue": "8",
+            "identifier": "Google"
+          },
+          {
+            "numericValue": "9",
+            "identifier": "Windows"
+          },
+          {
+            "numericValue": "10",
+            "identifier": "DemonId"
+          },
+          {
+            "numericValue": "12",
+            "identifier": "SteamId"
+          },
+          {
+            "numericValue": "14",
+            "identifier": "BattleNetId"
+          },
+          {
+            "numericValue": "16",
+            "identifier": "StadiaId"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "User.HardLinkedUserMembership": {
+        "type": "object",
+        "properties": {
+          "membershipType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "membershipId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "CrossSaveOverriddenType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "CrossSaveOverriddenMembershipId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          }
+        }
       },
       "Content.Models.ContentTypeDescription": {
         "type": "object",
@@ -8139,7 +8285,7 @@
               },
               "x-enum-is-bitmask": true
             },
-            "description": "Information about historical resets of this progression, if there is any data for it."
+            "description": "Information about historical rewards for this progression, if there is any data for it."
           }
         },
         "description": "Information about a current character's status with a Progression. A progression is a value that can increase with activity and has levels. Think Character Level and Reputation Levels. Combine this \"live\" data with the related DestinyProgressionDefinition for a full picture of the Progression."
@@ -16115,6 +16261,10 @@
             },
             "description": "This is a list of pre-determined plugs that can be plugged into this socket, without the character having the plug in their inventory.\r\nIf this list is populated, you will not be allowed to plug an arbitrary item in the socket: you will only be able to choose from one of these reusable plugs."
           },
+          "isFakePlugSet": {
+            "type": "boolean",
+            "description": "Mostly for our debugging or reporting bugs, BNet is making \"fake\" plug sets in a desperate effort to reduce socket sizes.\r\n If this is true, the plug set was generated by BNet: if it looks wrong, that's a good indicator that it's bungie.net that fucked this up."
+          },
           "hash": {
             "type": "integer",
             "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -16916,7 +17066,8 @@
           "25",
           "26",
           "27",
-          "28"
+          "28",
+          "29"
         ],
         "type": "integer",
         "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various weapon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.\r\n I keep updating these because they're so damn convenient. I guess I shouldn't fight it.",
@@ -17025,6 +17176,10 @@
           {
             "numericValue": "28",
             "identifier": "SeasonalArtifact"
+          },
+          {
+            "numericValue": "29",
+            "identifier": "Finisher"
           }
         ],
         "x-enum-is-bitmask": false
@@ -18082,6 +18237,15 @@
           },
           "rewardProgressionHash": {
             "type": "integer",
+            "description": "This is the progression definition related to the progression for the initial levels 1-100 that provide item rewards for the Season pass. Further experience after you reach the limit is provided in the \"Prestige\" progression referred to by prestigeProgressionHash.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyProgressionDefinition"
+            }
+          },
+          "prestigeProgressionHash": {
+            "type": "integer",
+            "description": "I know what you're thinking, but I promise we're not going to duplicate and drown you. Instead, we're giving you sweet, sweet power bonuses.\r\n Prestige progression is further progression that you can make on the Season pass after you gain max ranks, that will ultimately increase your power/light level over the theoretical limit.",
             "format": "uint32",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyProgressionDefinition"
@@ -23866,6 +24030,8 @@
           "306",
           "307",
           "308",
+          "309",
+          "310",
           "400",
           "401",
           "402",
@@ -23988,6 +24154,16 @@
             "numericValue": "308",
             "identifier": "ItemPlugStates",
             "description": "Items that are \"Plugs\" can be inserted into sockets. This returns statuses about those plugs and why they can/can't be inserted. I hear you giggling, there's nothing funny about inserting plugs. Get your head out of the gutter and pay attention!"
+          },
+          {
+            "numericValue": "309",
+            "identifier": "ItemPlugObjectives",
+            "description": "Sometimes, plugs have objectives on them. This data can get really large, so we split it into its own component. Please, don't grab it unless you need it."
+          },
+          {
+            "numericValue": "310",
+            "identifier": "ItemReusablePlugs",
+            "description": "Sometimes, designers create thousands of reusable plugs and suddenly your response sizes are almost 3MB, and something has to give.\r\n Reusable Plugs were split off as their own component, away from ItemSockets, as a result of the Plug changes in Shadowkeep that made plug data infeasibly large for the most common use cases.\r\n Request this component if and only if you need to know what plugs *could* be inserted into a socket, and need to know it before \"drilling\" into the details of an item in your application (for instance, if you're doing some sort of interesting sorting or aggregation based on available plugs.\r\n When you get this, you will also need to combine it with \"Plug Sets\" data if you want a full picture of all of the available plugs: this component will only return plugs that have state data that is per-item. See Plug Sets for available plugs that have Character, Profile, or no state-specific restrictions."
           },
           {
             "numericValue": "400",
@@ -24684,7 +24860,7 @@
         "description": "Sockets may refer to a \"Plug Set\": a set of reusable plugs that may be shared across multiple sockets (or even, in theory, multiple sockets over multiple items).\r\nThis is the set of those plugs that we came across in the users' inventory, along with the values for plugs in the set. Any given set in this component may be represented in Character and Profile-level, as some plugs may be Profile-level restricted, and some character-level restricted. (note that the ones that are even more specific will remain on the actual socket component itself, as they cannot be reused)",
         "x-destiny-component-type-dependency": "ItemSockets"
       },
-      "Destiny.Sockets.DestinyItemPlug": {
+      "Destiny.Sockets.DestinyItemPlugBase": {
         "type": "object",
         "properties": {
           "plugItemHash": {
@@ -24695,12 +24871,49 @@
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
           },
+          "canInsert": {
+            "type": "boolean",
+            "description": "If true, this plug has met all of its insertion requirements. Big if true."
+          },
+          "enabled": {
+            "type": "boolean",
+            "description": "If true, this plug will provide its benefits while inserted."
+          },
+          "insertFailIndexes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted."
+          },
+          "enableFailIndexes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+          }
+        }
+      },
+      "Destiny.Sockets.DestinyItemPlug": {
+        "type": "object",
+        "properties": {
           "plugObjectives": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
             },
             "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data."
+          },
+          "plugItemHash": {
+            "type": "integer",
+            "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           },
           "canInsert": {
             "type": "boolean",
@@ -26240,7 +26453,7 @@
               },
               "x-enum-is-bitmask": true
             },
-            "description": "Information about historical resets of this progression, if there is any data for it."
+            "description": "Information about historical rewards for this progression, if there is any data for it."
           }
         },
         "description": "Mostly for historical purposes, we segregate Faction progressions from other progressions. This is just a DestinyProgression with a shortcut for finding the DestinyFactionDefinition of the faction related to the progression."
@@ -27424,6 +27637,15 @@
           "displayProperties": {
             "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
           },
+          "displayPreference": {
+            "type": "integer",
+            "description": "A hint to the UI to indicate what to show as the display properties for this Milestone when showing \"Live\" milestone data. Feel free to show more than this if desired: this hint is meant to simplify our own UI, but it may prove useful to you as well.",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference"
+            },
+            "x-enum-is-bitmask": false
+          },
           "image": {
             "type": "string",
             "description": "A custom image someone made just for the milestone. Isn't that special?"
@@ -27536,6 +27758,34 @@
         },
         "description": "Milestones are an in-game concept where they're attempting to tell you what you can do next in-game.\r\nIf that sounds a lot like Advisors in Destiny 1, it is! So we threw out Advisors in the Destiny 2 API and tacked all of the data we would have put on Advisors onto Milestones instead.\r\nEach Milestone represents something going on in the game right now:\r\n- A \"ritual activity\" you can perform, like nightfall\r\n- A \"special event\" that may have activities related to it, like Taco Tuesday (there's no Taco Tuesday in Destiny 2)\r\n- A checklist you can fulfill, like helping your Clan complete all of its weekly objectives\r\n- A tutorial quest you can play through, like the introduction to the Crucible.\r\nMost of these milestones appear in game as well. Some of them are BNet only, because we're so extra. You're welcome.\r\nThere are some important caveats to understand about how we currently render Milestones and their deficiencies. The game currently doesn't have any content that actually tells you oughtright *what* the Milestone is: that is to say, what you'll be doing. The best we get is either a description of the overall Milestone, or of the Quest that the Milestone is having you partake in: which is usually something that assumes you already know what it's talking about, like \"Complete 5 Challenges\". 5 Challenges for what? What's a challenge? These are not questions that the Milestone data will answer for you unfortunately.\r\nThis isn't great, and in the future I'd like to add some custom text to give you more contextual information to pass on to your users. But for now, you can do what we do to render what little display info we do have:\r\nStart by looking at the currently active quest (ideally, you've fetched DestinyMilestone or DestinyPublicMilestone data from the API, so you know the currently active quest for the Milestone in question). Look up the Quests property in the Milestone Definition, and check if it has display properties. If it does, show that as the description of the Milestone. If it doesn't, fall back on the Milestone's description.\r\nThis approach will let you avoid, whenever possible, the even less useful (and sometimes nonexistant) milestone-level names and descriptions.",
         "x-mobile-manifest-name": "Milestones"
+      },
+      "Destiny.Definitions.Milestones.DestinyMilestoneDisplayPreference": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "description": "A hint for the UI as to what display information ought to be shown. Defaults to showing the static MilestoneDefinition's display properties.\r\n If for some reason the indicated property is not populated, fall back to the MilestoneDefinition.displayProperties.",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "MilestoneDefinition",
+            "description": "Indicates you should show DestinyMilestoneDefinition.displayProperties for this Milestone."
+          },
+          {
+            "numericValue": "1",
+            "identifier": "CurrentQuestSteps",
+            "description": "Indicates you should show the displayProperties for any currently active Quest Steps in DestinyMilestone.availableQuests."
+          },
+          {
+            "numericValue": "2",
+            "identifier": "CurrentActivityChallenges",
+            "description": "Indicates you should show the displayProperties for any currently active Activities and their Challenges in DestinyMilestone.activities."
+          }
+        ],
+        "x-enum-is-bitmask": false
       },
       "Destiny.Definitions.Milestones.DestinyMilestoneType": {
         "enum": [
@@ -28262,9 +28512,6 @@
             "description": "And the current activity's most specific mode type, if it can be found.",
             "format": "int32",
             "nullable": true,
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
-            },
             "x-enum-values": [
               {
                 "numericValue": "0",
@@ -28662,6 +28909,40 @@
               "$ref": "#/components/schemas/Destiny.DestinyActivityDifficultyTier"
             },
             "x-enum-is-bitmask": false
+          },
+          "challenges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Challenges.DestinyChallengeStatus"
+            }
+          },
+          "modifierHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
+            }
+          },
+          "booleanActivityOptions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "boolean"
+            },
+            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but saavy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "loadoutRequirementIndex": {
+            "type": "integer",
+            "description": "If returned, this is the index into the DestinyActivityDefinition's \"loadouts\" property, indicating the currently active loadout requirements.",
+            "format": "int32",
+            "nullable": true
           }
         },
         "description": "Represents the \"Live\" data that we can obtain about a Character's status with a specific Activity. This will tell you whether the character can participate in the activity, as well as some other basic mutable information. \r\nMeant to be combined with static DestinyActivityDefinition data for a full picture of the Activity."
@@ -29004,6 +29285,14 @@
             "x-destiny-component-type-dependency": "ItemSockets",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfint64AndDestinyItemSocketsComponent"
           },
+          "reusablePlugs": {
+            "x-destiny-component-type-dependency": "ItemReusablePlugs",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint64AndDestinyItemReusablePlugsComponent"
+          },
+          "plugObjectives": {
+            "x-destiny-component-type-dependency": "ItemPlugObjectives",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint64AndDestinyItemPlugObjectivesComponent"
+          },
           "talentGrids": {
             "x-destiny-component-type-dependency": "ItemTalentGrids",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfint64AndDestinyItemTalentGridComponent"
@@ -29158,11 +29447,6 @@
           "value": {
             "type": "integer",
             "description": "The current value of the Stat.",
-            "format": "int32"
-          },
-          "maximumValue": {
-            "type": "integer",
-            "description": "The highest possible value for the stat, if we were able to compute it. (I wouldn't necessarily trust this value right now. I would like to improve its calculation in later iterations of the API. Consider this a placeholder for desired future functionality)",
             "format": "int32"
           }
         },
@@ -29502,46 +29786,6 @@
               "format": "int32"
             },
             "description": "If a plug is inserted but not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled."
-          },
-          "reusablePlugHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "description": "If the item supports reusable plugs, this is the list of plug item hashes that are currently allowed to be used for this socket. See the \"reusablePlugs\" property, which has rendered this obsolete, for more information.",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
-            }
-          },
-          "plugObjectives": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
-            },
-            "description": "Sometimes, Plugs may have objectives: generally, these are used for flavor and display purposes. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data."
-          },
-          "reusablePlugs": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Sockets.DestinyItemPlug"
-            },
-            "description": "If the item supports reusable plugs, this is the list of plugs that are allowed to be used for the socket, and any relevant information about whether they are \"enabled\", whether they are allowed to be inserted, and any other information such as objectives.\r\nA Reusable Plug is a plug that you can always insert into this socket as long as its insertion rules are passed, regardless of whether or not you have the plug in your inventory. An example of it failing an insertion rule would be if it has an Objective that needs to be completed before it can be inserted, and that objective hasn't been completed yet.\r\nIn practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info."
-          },
-          "plugSetHash": {
-            "type": "integer",
-            "description": "If this socket has a plug set to be checked for plugs (either Character or Profile scoped), this is the hash identifier for that plug set to be checked.\r\n Use this to lookup the additional plugs in ProfilePlugSets (DestinyProfileResponse.profilePlugSets) or CharacterPlugSets (DestinyProfileResponse.characterPlugSets). To determine which to check (one or both), check the plugSources property for their respective source flags.",
-            "format": "uint32",
-            "nullable": true
-          },
-          "plugSources": {
-            "type": "integer",
-            "description": "A Flags Enumeration convenience property that indicates the different locations at which this socket may have plugs.\r\n Each possible flag indicates somewhere in the Profile/Character data that needs to be checked for valid plugs. See the definition of this enumeration for more details.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.SocketPlugSources"
-            },
-            "x-enum-is-bitmask": true
           }
         },
         "description": "The status of a given item's socket. (which plug is inserted, if any: whether it is enabled, what \"reusable\" plugs can be inserted, etc...)\r\nIf I had it to do over, this would probably have a DestinyItemPlug representing the inserted item instead of most of these properties. :shrug:"
@@ -29554,6 +29798,97 @@
             "additionalProperties": {
               "x-destiny-component-type-dependency": "ItemSockets",
               "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemSocketsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "Destiny.Components.Items.DestinyItemReusablePlugsComponent": {
+        "type": "object",
+        "properties": {
+          "plugs": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Destiny.Sockets.DestinyItemPlugBase"
+              }
+            },
+            "description": "If the item supports reusable plugs, this is the list of plugs that are allowed to be used for the socket, and any relevant information about whether they are \"enabled\", whether they are allowed to be inserted, and any other information such as objectives.\r\n A Reusable Plug is a plug that you can always insert into this socket as long as its insertion rules are passed, regardless of whether or not you have the plug in your inventory. An example of it failing an insertion rule would be if it has an Objective that needs to be completed before it can be inserted, and that objective hasn't been completed yet.\r\n In practice, a socket will *either* have reusable plugs *or* it will allow for plugs in your inventory to be inserted. See DestinyInventoryItemDefinition.socket for more info.\r\n KEY = The INDEX into the item's list of sockets. VALUE = The set of plugs for that socket.\r\n If a socket doesn't have any reusable plugs defined at the item scope, there will be no entry for that socket.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        },
+        "x-destiny-component-type-dependency": "ItemReusablePlugs"
+      },
+      "DictionaryComponentResponseOfint64AndDestinyItemReusablePlugsComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemReusablePlugs",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "Destiny.Components.Items.DestinyItemPlugObjectivesComponent": {
+        "type": "object",
+        "properties": {
+          "objectivesPerPlug": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
+              }
+            },
+            "description": "This set of data is keyed by the Item Hash (DestinyInventoryItemDefinition) of the plug whose objectives are being returned, with the value being the list of those objectives.\r\n What if two plugs with the same hash are returned for an item, you ask?\r\n Good question! They share the same item-scoped state, and as such would have identical objective state as a result. How's that for convenient.\r\n Sometimes, Plugs may have objectives: generally, these are used for flavor and display purposes. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          }
+        },
+        "x-destiny-component-type-dependency": "ItemPlugObjectives"
+      },
+      "DictionaryComponentResponseOfint64AndDestinyItemPlugObjectivesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemPlugObjectives",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent"
             },
             "x-dictionary-key": {
               "type": "integer",
@@ -29795,6 +30130,13 @@
       "Destiny.Components.Items.DestinyItemPlugComponent": {
         "type": "object",
         "properties": {
+          "plugObjectives": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
+            },
+            "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data."
+          },
           "plugItemHash": {
             "type": "integer",
             "description": "The hash identifier of the DestinyInventoryItemDefinition that represents this plug.",
@@ -29802,13 +30144,6 @@
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
-          },
-          "plugObjectives": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
-            },
-            "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data."
           },
           "canInsert": {
             "type": "boolean",
@@ -30252,6 +30587,26 @@
             ],
             "description": "Information about the sockets of the item: which are currently active, what potential sockets you could have and the stats/abilities/perks you can gain from them.\r\nCOMPONENT TYPE: ItemSockets",
             "x-destiny-component-type-dependency": "ItemSockets"
+          },
+          "reusablePlugs": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyItemReusablePlugsComponent"
+              }
+            ],
+            "description": "Information about the Reusable Plugs for sockets on an item. These are plugs that you can insert into the given socket regardless of if you actually own an instance of that plug: they are logic-driven plugs rather than inventory-driven.\r\n These may need to be combined with Plug Set component data to get a full picture of available plugs on a given socket.\r\n COMPONENT TYPE: ItemReusablePlugs",
+            "x-destiny-component-type-dependency": "ItemReusablePlugs"
+          },
+          "plugObjectives": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyItemPlugObjectivesComponent"
+              }
+            ],
+            "description": "Information about objectives on Plugs for a given item. See the component's documentation for more info.\r\nCOMPONENT TYPE: ItemPlugObjectives",
+            "x-destiny-component-type-dependency": "ItemPlugObjectives"
           }
         },
         "description": "The response object for retrieving an individual instanced item. None of these components are relevant for an item that doesn't have an \"itemInstanceId\": for those, get your information from the DestinyInventoryDefinition."
@@ -30373,6 +30728,38 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemSocketsComponent"
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "SingleComponentResponseOfDestinyItemReusablePlugsComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent"
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "SingleComponentResponseOfDestinyItemPlugObjectivesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent"
           },
           "privacy": {
             "type": "integer",
@@ -31088,6 +31475,14 @@
             "x-destiny-component-type-dependency": "ItemSockets",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent"
           },
+          "reusablePlugs": {
+            "x-destiny-component-type-dependency": "ItemReusablePlugs",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemReusablePlugsComponent"
+          },
+          "plugObjectives": {
+            "x-destiny-component-type-dependency": "ItemPlugObjectives",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemPlugObjectivesComponent"
+          },
           "talentGrids": {
             "x-destiny-component-type-dependency": "ItemTalentGrids",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemTalentGridComponent"
@@ -31206,6 +31601,54 @@
             "additionalProperties": {
               "x-destiny-component-type-dependency": "ItemSockets",
               "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemSocketsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "DictionaryComponentResponseOfint32AndDestinyItemReusablePlugsComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemReusablePlugs",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "DictionaryComponentResponseOfint32AndDestinyItemPlugObjectivesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemPlugObjectives",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent"
             },
             "x-dictionary-key": {
               "type": "integer",
@@ -31604,6 +32047,14 @@
             "x-destiny-component-type-dependency": "ItemSockets",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndDestinyItemSocketsComponent"
           },
+          "reusablePlugs": {
+            "x-destiny-component-type-dependency": "ItemReusablePlugs",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndDestinyItemReusablePlugsComponent"
+          },
+          "plugObjectives": {
+            "x-destiny-component-type-dependency": "ItemPlugObjectives",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndDestinyItemPlugObjectivesComponent"
+          },
           "talentGrids": {
             "x-destiny-component-type-dependency": "ItemTalentGrids",
             "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndDestinyItemTalentGridComponent"
@@ -31722,6 +32173,54 @@
             "additionalProperties": {
               "x-destiny-component-type-dependency": "ItemSockets",
               "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemSocketsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "DictionaryComponentResponseOfuint32AndDestinyItemReusablePlugsComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemReusablePlugs",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "DictionaryComponentResponseOfuint32AndDestinyItemPlugObjectivesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "ItemPlugObjectives",
+              "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent"
             },
             "x-dictionary-key": {
               "type": "integer",
@@ -35191,7 +35690,9 @@
           "10",
           "11",
           "12",
-          "13"
+          "13",
+          "14",
+          "15"
         ],
         "type": "integer",
         "format": "int32",
@@ -35251,6 +35752,14 @@
           {
             "numericValue": "13",
             "identifier": "VexOffensive"
+          },
+          {
+            "numericValue": "14",
+            "identifier": "AltarsOfSorrow"
+          },
+          {
+            "numericValue": "15",
+            "identifier": "Dungeon"
           }
         ],
         "x-enum-is-bitmask": false
@@ -36506,6 +37015,51 @@
                   "items": {
                     "$ref": "#/components/schemas/Partnerships.PublicPartnershipDetail"
                   }
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "User.HardLinkedUserMembership": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/User.HardLinkedUserMembership"
                 },
                 "ErrorCode": {
                   "type": "integer",
