@@ -6,12 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2019-10-16 IMPORTANT Breaking Changes to Sockets and Plugs
+## 2019-12-05 Winter Wishlist!  File your requests here!
 
-Load issues with socket and plug information have necessitated an emergency change to the API.  I have written the following guide to the changes being made, and will be updating this document once we upload the preview specs and documentation for the next deployment which will have these changes.
+Go here for more information: https://github.com/Bungie-net/api/issues/1158
 
-Read here for more information: https://github.com/Bungie-net/api/wiki/2019-10-API-Updates-for-Sockets-and-Plugs-(and-removal-of-a-long-deprecated-Stats-property)
-
+We would love your input!  Even though we will have a very limited amount of time to work on improvements over the upcoming holiday season, it'll still be useful to know what you folks consider to be the highest priorities so that we can hopefully push in those directions in the coming year!
 
 ## 2019-09-26 Pre-release Shadowkeep API Changes
 
