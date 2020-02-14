@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.4.1"
+    "version": "2.7.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -973,7 +973,7 @@
         }
       }
     },
-    "/Content/SearchHelpArticles/{searchtext}/{size}": {
+    "/Content/SearchHelpArticles/{searchtext}/{size}/": {
       "get": {
         "tags": [
           "Content"
@@ -4207,6 +4207,214 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/GroupsV2.GroupApplicationResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tokens/Partner/ClaimOffer/": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Claim a partner offer as the authenticated user.",
+        "operationId": "Tokens.ClaimPartnerOffer",
+        "parameters": [],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "PartnerOfferGrant"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tokens/Partner/ApplyMissingOffers/{partnerApplicationId}/{targetBnetMembershipId}/": {
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Apply a partner offer to the targeted user. This endpoint does not claim a new offer, but any already claimed offers will be applied to the game if not already.",
+        "operationId": "Tokens.ApplyMissingPartnerOffersWithoutClaim",
+        "parameters": [
+          {
+            "name": "partnerApplicationId",
+            "in": "path",
+            "description": "The partner application identifier.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "targetBnetMembershipId",
+            "in": "path",
+            "description": "The bungie.net user to apply missing offers to. If not self, elevated permissions are required.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "PartnerOfferGrant"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tokens/Partner/History/{partnerApplicationId}/{targetBnetMembershipId}/": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns the partner sku and offer history of the targeted user. Elevated permissions are required to see users that are not yourself.",
+        "operationId": "Tokens.GetPartnerOfferSkuHistory",
+        "parameters": [
+          {
+            "name": "partnerApplicationId",
+            "in": "path",
+            "description": "The partner application identifier.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "targetBnetMembershipId",
+            "in": "path",
+            "description": "The bungie.net user to apply missing offers to. If not self, elevated permissions are required.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "PartnerOfferGrant"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Tokens.PartnerOfferSkuHistoryResponse"
+                  }
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -8177,7 +8385,8 @@
         "256",
         "512",
         "1024",
-        "2048"
+        "2048",
+        "4096"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -8204,7 +8413,7 @@
         {
           "numericValue": "16",
           "identifier": "BnetWrite",
-          "description": "Create new groups, clans, and forum posts."
+          "description": "Create new groups, clans, and forum posts, along with other actions that are reserved for Bungie.net elevated scope: not meant to be used by third party applications."
         },
         {
           "numericValue": "32",
@@ -8240,6 +8449,11 @@
           "numericValue": "2048",
           "identifier": "AdvancedWriteActions",
           "description": "Can perform actions that will result in a prompt to the user via the Destiny app."
+        },
+        {
+          "numericValue": "4096",
+          "identifier": "PartnerOfferGrant",
+          "description": "Can user the partner offer api to claim rewards defined for a partner"
         }
       ]
     },
@@ -8878,6 +9092,11 @@
             "$ref": "#/definitions/GroupsV2.GroupUserInfoCard"
           }
         },
+        "primaryMembershipId": {
+          "format": "int64",
+          "description": "If this property is populated, it will have the membership ID of the account considered to be \"primary\" in this user's cross save relationship.\r\n If null, this user has no cross save relationship, nor primary account.",
+          "type": "integer"
+        },
         "bungieNetUser": {
           "$ref": "#/definitions/User.GeneralUser"
         }
@@ -9177,6 +9396,9 @@
       "type": "object",
       "properties": {
         "name": {
+          "type": "string"
+        },
+        "rootPropertyName": {
           "type": "string"
         },
         "readableName": {
@@ -11486,6 +11708,13 @@
           "description": "If true, this is a dummy vendor-wrapped item template. Items purchased from Eververse will be \"wrapped\" by one of these items so that we can safely provide refund capabilities before the item is \"unwrapped\".",
           "type": "boolean"
         },
+        "traitIds": {
+          "description": "Traits are metadata tags applied to this item. For example: armor slot, weapon type, foundry, faction, etc. These IDs come from the game and don't map to any content, but should still be useful.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -12022,6 +12251,10 @@
         "setType": {
           "description": "A string identifier we can use to attempt to identify the category of the Quest.",
           "type": "string"
+        },
+        "questLineName": {
+          "description": "The name of the quest line that this quest step is a part of.",
+          "type": "string"
         }
       }
     },
@@ -12109,6 +12342,11 @@
         "maximum": {
           "format": "int32",
           "description": "The maximum possible value for this stat that we think the item can roll.\r\nWARNING: In Destiny 1, this field was calculated using the potential stat rolls on the item's talent grid. In Destiny 2, items no longer have meaningful talent grids and instead have sockets: but the calculation of this field was never altered to adapt to this change. As such, this field should be considered deprecated until we can address this oversight.",
+          "type": "integer"
+        },
+        "displayMaximum": {
+          "format": "int32",
+          "description": "The maximum possible value for the stat as shown in the UI, if it is being shown somewhere that reveals maximum in the UI (such as a bar chart-style view).\r\nThis is pulled directly from the item's DestinyStatGroupDefinition, and placed here for convenience.\r\nIf not returned, there is no maximum to use (and thus the stat should not be shown in a way that assumes there is a limit to the stat)",
           "type": "integer"
         }
       }
@@ -14565,7 +14803,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -14865,6 +15105,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         },
@@ -16027,7 +16275,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -16327,6 +16577,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         },
@@ -16432,7 +16690,9 @@
         "78",
         "79",
         "80",
-        "81"
+        "81",
+        "82",
+        "83"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -16732,6 +16992,14 @@
         {
           "numericValue": "81",
           "identifier": "Momentum"
+        },
+        {
+          "numericValue": "82",
+          "identifier": "Dungeon"
+        },
+        {
+          "numericValue": "83",
+          "identifier": "Sundial"
         }
       ]
     },
@@ -20461,6 +20729,20 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
           }
         },
+        "artifactItemHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "sealPresentationNodeHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+          }
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -21817,6 +22099,8 @@
         "55",
         "56",
         "57",
+        "58",
+        "59",
         "89",
         "90",
         "91",
@@ -22304,6 +22588,11 @@
         "1680",
         "1681",
         "1682",
+        "1683",
+        "1684",
+        "1685",
+        "1686",
+        "1687",
         "1800",
         "1801",
         "1802",
@@ -22384,6 +22673,13 @@
         "2056",
         "2057",
         "2058",
+        "2059",
+        "2060",
+        "2061",
+        "2062",
+        "2063",
+        "2064",
+        "2065",
         "2100",
         "2101",
         "2102",
@@ -22400,6 +22696,7 @@
         "2113",
         "2114",
         "2115",
+        "2116",
         "2200",
         "2201",
         "2202",
@@ -22455,6 +22752,7 @@
         "3025",
         "3026",
         "3027",
+        "3028",
         "3200",
         "3201",
         "3202",
@@ -22492,7 +22790,8 @@
         "3411",
         "3412",
         "3413",
-        "3500"
+        "3500",
+        "3600"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -22728,6 +23027,14 @@
         {
           "numericValue": "57",
           "identifier": "PerUserThrottleExceeded"
+        },
+        {
+          "numericValue": "58",
+          "identifier": "PayloadSignatureVerificationFailure"
+        },
+        {
+          "numericValue": "59",
+          "identifier": "InvalidServiceAuthContext"
         },
         {
           "numericValue": "89",
@@ -24679,6 +24986,26 @@
           "identifier": "DestinyPublicAccountNotAccessible"
         },
         {
+          "numericValue": "1683",
+          "identifier": "DestinyClaimsItemAlreadyClaimed"
+        },
+        {
+          "numericValue": "1684",
+          "identifier": "DestinyClaimsNoInventorySpace"
+        },
+        {
+          "numericValue": "1685",
+          "identifier": "DestinyClaimsRequiredLevelNotMet"
+        },
+        {
+          "numericValue": "1686",
+          "identifier": "DestinyClaimsInvalidState"
+        },
+        {
+          "numericValue": "1687",
+          "identifier": "DestinyNotEnoughRoomForMultipleRewards"
+        },
+        {
           "numericValue": "1800",
           "identifier": "FbInvalidRequest"
         },
@@ -24999,6 +25326,34 @@
           "identifier": "UnclaimedLoyaltyRewardEntryNotFound"
         },
         {
+          "numericValue": "2059",
+          "identifier": "PartnerOfferPartialFailure"
+        },
+        {
+          "numericValue": "2060",
+          "identifier": "PartnerOfferAlreadyClaimed"
+        },
+        {
+          "numericValue": "2061",
+          "identifier": "PartnerOfferSkuNotFound"
+        },
+        {
+          "numericValue": "2062",
+          "identifier": "PartnerOfferSkuExpired"
+        },
+        {
+          "numericValue": "2063",
+          "identifier": "PartnerOfferPermissionFailure"
+        },
+        {
+          "numericValue": "2064",
+          "identifier": "PartnerOfferNoDestinyAccount"
+        },
+        {
+          "numericValue": "2065",
+          "identifier": "PartnerOfferApplyDataNotFound"
+        },
+        {
           "numericValue": "2100",
           "identifier": "ApiExceededMaxKeys"
         },
@@ -25061,6 +25416,10 @@
         {
           "numericValue": "2115",
           "identifier": "OAuthAccessTokenExpired"
+        },
+        {
+          "numericValue": "2116",
+          "identifier": "ApplicationTokenKeyIdDoesNotExist"
         },
         {
           "numericValue": "2200",
@@ -25283,6 +25642,10 @@
           "identifier": "ClanFireteamInvalidAuthProvider"
         },
         {
+          "numericValue": "3028",
+          "identifier": "ClanFireteamInvalidAuthProviderXuid"
+        },
+        {
           "numericValue": "3200",
           "identifier": "CrossSaveOverriddenAccountNotFound"
         },
@@ -25433,6 +25796,10 @@
         {
           "numericValue": "3500",
           "identifier": "UnsupportedBrowser"
+        },
+        {
+          "numericValue": "3600",
+          "identifier": "StadiaAccountRequired"
         }
       ]
     },
@@ -25670,6 +26037,134 @@
         }
       }
     },
+    "Tokens.PartnerOfferClaimRequest": {
+      "type": "object",
+      "properties": {
+        "PartnerOfferId": {
+          "type": "string"
+        },
+        "BungieNetMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "TransactionId": {
+          "type": "string"
+        }
+      }
+    },
+    "Tokens.PartnerOfferSkuHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "SkuIdentifier": {
+          "type": "string"
+        },
+        "LocalizedName": {
+          "type": "string"
+        },
+        "LocalizedDescription": {
+          "type": "string"
+        },
+        "ClaimDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "AllOffersApplied": {
+          "type": "boolean"
+        },
+        "TransactionId": {
+          "type": "string"
+        },
+        "SkuOffers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tokens.PartnerOfferHistoryResponse"
+          }
+        }
+      }
+    },
+    "Tokens.PartnerOfferHistoryResponse": {
+      "type": "object",
+      "properties": {
+        "PartnerOfferKey": {
+          "type": "string"
+        },
+        "MembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "MembershipType": {
+          "format": "int32",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "254",
+            "-1"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "1",
+              "identifier": "TigerXbox"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "TigerPsn"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "TigerSteam"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "TigerBlizzard"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "TigerStadia"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "TigerDemon"
+            },
+            {
+              "numericValue": "254",
+              "identifier": "BungieNext"
+            },
+            {
+              "numericValue": "-1",
+              "identifier": "All",
+              "description": "\"All\" is only valid for searching capabilities: you need to pass the actual matching BungieMembershipType for any query where you pass a known membershipId."
+            }
+          ]
+        },
+        "LocalizedName": {
+          "type": "string"
+        },
+        "LocalizedDescription": {
+          "type": "string"
+        },
+        "IsConsumable": {
+          "type": "boolean"
+        },
+        "QuantityApplied": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "ApplyDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
     "Destiny.Config.DestinyManifest": {
       "description": "DestinyManifest is the external-facing contract for just the properties needed by those calling the Destiny Platform.",
       "type": "object",
@@ -25693,9 +26188,20 @@
           }
         },
         "jsonWorldContentPaths": {
+          "description": "This points to the generated JSON that contains all the Definitions. Each key is a locale. The value is a path to the aggregated world definitions (warning: large file!)",
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          }
+        },
+        "jsonWorldComponentContentPaths": {
+          "description": "This points to the generated JSON that contains all the Definitions. Each key is a locale. The value is a dictionary, where the key is a definition type by name, and the value is the path to the file for that definition. WARNING: This is unsafe and subject to change - do not depend on data in these files staying around long-term.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
           }
         },
         "mobileClanBannerDatabasePath": {
@@ -26703,6 +27209,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -26742,6 +27252,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -26770,6 +27284,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -26808,12 +27326,20 @@
           }
         },
         "seasonHashes": {
-          "description": "A list of seasons that this profile owns. Unlike versionsOwned, these stay with the profile across Platforms, and thus will be valid.",
+          "description": "A list of seasons that this profile owns. Unlike versionsOwned, these stay with the profile across Platforms, and thus will be valid.\r\n It turns out that Stadia Pro subscriptions will give access to seasons but only while playing on Stadia and with an active subscription. So some users (users who have Stadia Pro but choose to play on some other platform) won't see these as available: it will be whatever seasons are available for the platform on which they last played.",
           "type": "array",
           "items": {
             "format": "uint32",
             "type": "integer"
           },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+          }
+        },
+        "currentSeasonHash": {
+          "format": "uint32",
+          "description": "If populated, this is a reference to the season that is currently active.",
+          "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonDefinition"
           }
@@ -26833,6 +27359,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -26848,6 +27378,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -26962,6 +27496,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27078,6 +27616,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27261,6 +27803,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27302,7 +27848,7 @@
         },
         "completionValue": {
           "format": "int32",
-          "description": "The value at which the presentation ode is considered to be completed.",
+          "description": "The value at which the presentation node is considered to be completed.",
           "type": "integer"
         }
       }
@@ -27345,6 +27891,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27482,6 +28032,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27611,6 +28165,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -27940,6 +28498,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -28244,6 +28806,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -28262,6 +28828,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -28712,7 +29282,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -29012,6 +29584,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         },
@@ -29141,7 +29721,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -29441,6 +30023,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         }
@@ -30181,6 +30771,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -30324,6 +30918,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -30436,7 +31034,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -30736,6 +31336,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         },
@@ -30927,6 +31535,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -30946,6 +31558,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -30965,6 +31581,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31021,6 +31641,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31040,6 +31664,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31081,6 +31709,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31100,6 +31732,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31128,6 +31764,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31442,6 +32082,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31501,6 +32145,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31539,6 +32187,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31575,6 +32227,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31638,6 +32294,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31673,6 +32333,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31711,6 +32375,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31926,6 +32594,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -31991,6 +32663,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32028,6 +32704,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32187,6 +32867,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32202,6 +32886,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32217,6 +32905,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32232,6 +32924,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32247,6 +32943,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32262,6 +32962,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32277,6 +32981,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32403,6 +33111,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32418,6 +33130,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32433,6 +33149,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32448,6 +33168,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32463,6 +33187,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32478,6 +33206,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32493,6 +33225,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32508,6 +33244,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32523,6 +33263,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32538,6 +33282,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32654,6 +33402,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32744,6 +33496,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -32796,6 +33552,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33149,6 +33909,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33177,6 +33941,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33241,6 +34009,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33260,6 +34032,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33279,6 +34055,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33298,6 +34078,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33317,6 +34101,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33336,6 +34124,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33355,6 +34147,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33374,6 +34170,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33444,6 +34244,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33459,6 +34263,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33478,6 +34286,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33567,6 +34379,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33657,6 +34473,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33746,6 +34566,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33765,6 +34589,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33784,6 +34612,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33803,6 +34635,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33822,6 +34658,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33841,6 +34681,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33860,6 +34704,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -33879,6 +34727,10 @@
           "x-enum-reference": {
             "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
           }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
         }
       }
     },
@@ -34269,7 +35121,7 @@
           }
         },
         "isPrivate": {
-          "description": "Whether or not the match was a private match. There's no private matches in Destiny 2... yet... DUN DUN DUNNNN",
+          "description": "Whether or not the match was a private match.",
           "type": "boolean"
         },
         "membershipType": {
@@ -35622,7 +36474,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -35922,6 +36776,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         }
@@ -36021,7 +36883,9 @@
             "78",
             "79",
             "80",
-            "81"
+            "81",
+            "82",
+            "83"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -36321,6 +37185,14 @@
             {
               "numericValue": "81",
               "identifier": "Momentum"
+            },
+            {
+              "numericValue": "82",
+              "identifier": "Dungeon"
+            },
+            {
+              "numericValue": "83",
+              "identifier": "Sundial"
             }
           ]
         }
@@ -37193,7 +38065,8 @@
         "12",
         "13",
         "14",
-        "15"
+        "15",
+        "16"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -37260,6 +38133,10 @@
         {
           "numericValue": "15",
           "identifier": "Dungeon"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "Sundial"
         }
       ]
     },
@@ -37303,7 +38180,8 @@
         "1",
         "2",
         "3",
-        "4"
+        "4",
+        "5"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -37326,6 +38204,10 @@
         {
           "numericValue": "4",
           "identifier": "Steam"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Stadia"
         }
       ]
     },
@@ -37449,6 +38331,9 @@
         },
         "datePlayerModified": {
           "format": "date-time",
+          "type": "string"
+        },
+        "titleBeforeModeration": {
           "type": "string"
         }
       }
@@ -37873,6 +38758,13 @@
             "format": "uint32",
             "type": "integer"
           }
+        },
+        "pastSeasonHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
         }
       }
     },
@@ -37941,7 +38833,8 @@
         "4",
         "8",
         "16",
-        "32"
+        "32",
+        "64"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -37972,6 +38865,10 @@
         {
           "numericValue": "32",
           "identifier": "Social"
+        },
+        {
+          "numericValue": "64",
+          "identifier": "PlayTests"
         }
       ]
     },
@@ -38196,14 +39093,15 @@
         "ReadGroups": "Read Group/Clan Forums, Wall, and Members for groups and clans that the \r\nuser has joined.",
         "WriteGroups": "Write Group/Clan Forums, Wall, and Members for groups and clans that the \r\nuser has joined.",
         "AdminGroups": "Administer Group/Clan Forums, Wall, and Members for groups and clans that the \r\nuser is a founder or an administrator.",
-        "BnetWrite": "Create new groups, clans, and forum posts.",
+        "BnetWrite": "Create new groups, clans, and forum posts, along with other actions that are reserved for Bungie.net\r\nelevated scope: not meant to be used by third party applications.",
         "MoveEquipDestinyItems": "Move or equip Destiny items",
         "ReadDestinyInventoryAndVault": "Read Destiny 1 Inventory and Vault contents.\r\nFor Destiny 2, this scope is needed to read anything regarded as private. This is the only scope a\r\nDestiny 2 app needs for read operations against Destiny 2 data such as inventory, vault, currency,\r\nvendors, milestones, progression, etc.",
         "ReadUserData": "Read user data such as who they are web notifications, \r\nclan/group memberships, recent activity, muted users.",
         "EditUserData": "Edit user data such as preferred language, status, motto, avatar selection and theme.",
         "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
         "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
-        "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app."
+        "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
+        "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner"
       }
     }
   },
@@ -38227,6 +39125,10 @@
     {
       "name": "GroupV2",
       "description": "groupV2"
+    },
+    {
+      "name": "Tokens",
+      "description": "tokens"
     },
     {
       "name": "Destiny2",
