@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-02-13 Late Winter Refresh
+
+Upkeep update.  Includes traits info and new activity types.
+
 ## 2019-12-05 Winter Wishlist!  File your requests here!
 
 Go here for more information: https://github.com/Bungie-net/api/issues/1158
