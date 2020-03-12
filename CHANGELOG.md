@@ -1,5 +1,11 @@
 # Changelog
 
+## [2.8.0] - 2019-03-10
+
+Almost a year since we last touched this changelog!
+
+For this release, we've updated content for the Season of the Worthy and Trials of Osiris, and added support for new Traits, Trait Categories, and Metrics (aka Stat Trackers). We've also added 'icon sequences' to display properties, so that all of the icon frames from the game are now included in the content definitions.
+
 ## [2.3.5] - 2019-03-19
 
 I've been gone for a bit, so there's some other mostly content changes that have occurred between 2.3.4 and 2.3.5, but aside from that only some small changes have occurred in the API.
