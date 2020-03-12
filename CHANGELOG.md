@@ -1,6 +1,6 @@
 # Changelog
 
-## [2.8.0] - 2019-03-10
+## [2.8.0] - 2020-03-10
 
 Almost a year since we last touched this changelog!
 
