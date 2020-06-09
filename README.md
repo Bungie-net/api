@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-06-09 Update for Season of Arrivals
+
+Includes changes for Season of Arrivals, item versions, and power caps.
+
 ## 2020-03-10 Update for Season of the Worthy
 
 Includes changes for Season of the Worthy, Trials of Osiris, and Stat Trackers (aka Metrics).
