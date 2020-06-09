@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.8.0"
+    "version": "2.8.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -5005,6 +5005,13 @@
             "required": true,
             "type": "integer",
             "format": "int64"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The filter of what vendors and items to return, if any.",
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "membershipType",
@@ -13382,6 +13389,10 @@
           "items": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyVendorItemSocketOverride"
           }
+        },
+        "unpurchasable": {
+          "description": "If true, this item is some sort of dummy sale item that cannot actually be purchased. It may be a display only item, or some fluff left by a content designer for testing purposes, or something that got disabled because it was a terrible idea. You get the picture. We won't know *why* it can't be purchased, only that it can't be. Sorry.\r\nThis is also only whether it's unpurchasable as a static property according to game content. There are other reasons why an item may or may not be purchasable at runtime, so even if this isn't set to True you should trust the runtime value for this sale item over the static definition if this is unset.",
+          "type": "boolean"
         }
       }
     },
@@ -17511,8 +17522,67 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition"
           }
+        },
+        "currentVersion": {
+          "format": "uint32",
+          "description": "The latest version available for this item.",
+          "type": "integer"
+        },
+        "versions": {
+          "description": "The list of versions available for this item.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyItemVersionDefinition"
+          }
+        },
+        "displayVersionWatermarkIcons": {
+          "description": "Icon overlays to denote the item version and power cap status.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
+    },
+    "Destiny.Definitions.DestinyItemVersionDefinition": {
+      "description": "The version definition currently just holds a reference to the power cap.",
+      "type": "object",
+      "properties": {
+        "powerCapHash": {
+          "format": "uint32",
+          "description": "A reference to the power cap for this item version.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.PowerCaps.DestinyPowerCapDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.PowerCaps.DestinyPowerCapDefinition": {
+      "description": "Defines a 'power cap' (limit) for gear items, based on the rarity tier and season of release.",
+      "type": "object",
+      "properties": {
+        "powerCap": {
+          "format": "int32",
+          "description": "The raw value for a power cap.",
+          "type": "integer"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "PowerCaps"
     },
     "Destiny.Definitions.Progression.DestinyProgressionLevelRequirementDefinition": {
       "description": "These are pre-constructed collections of data that can be used to determine the Level Requirement for an item given a Progression to be tested (such as the Character's level).\r\nFor instance, say a character receives a new Auto Rifle, and that Auto Rifle's DestinyInventoryItemDefinition.quality.progressionLevelRequirementHash property is pointing at one of these DestinyProgressionLevelRequirementDefinitions. Let's pretend also that the progressionHash it is pointing at is the Character Level progression. In that situation, the character's level will be used to interpolate a value in the requirementCurve property. The value picked up from that interpolation will be the required level for the item.",
@@ -22617,6 +22687,16 @@
         "2114",
         "2115",
         "2116",
+        "2117",
+        "2118",
+        "2119",
+        "2120",
+        "2121",
+        "2122",
+        "2123",
+        "2124",
+        "2125",
+        "2126",
         "2200",
         "2201",
         "2202",
@@ -22631,6 +22711,8 @@
         "2502",
         "2503",
         "2504",
+        "2505",
+        "2506",
         "2600",
         "2601",
         "2700",
@@ -25345,6 +25427,46 @@
           "identifier": "ApplicationTokenKeyIdDoesNotExist"
         },
         {
+          "numericValue": "2117",
+          "identifier": "ProvidedTokenNotValidRefreshToken"
+        },
+        {
+          "numericValue": "2118",
+          "identifier": "RefreshTokenExpired"
+        },
+        {
+          "numericValue": "2119",
+          "identifier": "AuthorizationRecordInvalid"
+        },
+        {
+          "numericValue": "2120",
+          "identifier": "TokenPreviouslyRevoked"
+        },
+        {
+          "numericValue": "2121",
+          "identifier": "TokenInvalidMembership"
+        },
+        {
+          "numericValue": "2122",
+          "identifier": "AuthorizationCodeStale"
+        },
+        {
+          "numericValue": "2123",
+          "identifier": "AuthorizationRecordExpired"
+        },
+        {
+          "numericValue": "2124",
+          "identifier": "AuthorizationRecordRevoked"
+        },
+        {
+          "numericValue": "2125",
+          "identifier": "AuthorizationRecordInactiveApiKey"
+        },
+        {
+          "numericValue": "2126",
+          "identifier": "AuthorizationRecordApiKeyMatching"
+        },
+        {
           "numericValue": "2200",
           "identifier": "PartnershipInvalidType"
         },
@@ -25399,6 +25521,14 @@
         {
           "numericValue": "2504",
           "identifier": "TwitchCouldNotUnregisterUser"
+        },
+        {
+          "numericValue": "2505",
+          "identifier": "TwitchRequiresRelinking"
+        },
+        {
+          "numericValue": "2506",
+          "identifier": "TwitchNoPlatformChosen"
         },
         {
           "numericValue": "2600",
@@ -26448,6 +26578,11 @@
               "$ref": "#/definitions/Destiny.Quests.DestinyObjectiveProgress"
             }
           ]
+        },
+        "versionNumber": {
+          "format": "int32",
+          "description": "The version of this item, used to index into the versions list in the item definition quality block.",
+          "type": "integer"
         }
       }
     },
@@ -27782,6 +27917,9 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Destiny.Components.Presentation.DestinyPresentationNodeComponent"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
           }
         }
       },
@@ -28043,6 +28181,9 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Destiny.Components.Collectibles.DestinyCollectibleComponent"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Collectibles.DestinyCollectibleDefinition"
           }
         },
         "collectionCategoriesRootNodeHash": {
@@ -28161,6 +28302,9 @@
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Destiny.Components.Collectibles.DestinyCollectibleComponent"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Collectibles.DestinyCollectibleDefinition"
           }
         },
         "collectionCategoriesRootNodeHash": {
@@ -33398,6 +33542,20 @@
         }
       }
     },
+    "Destiny.DestinyVendorFilter": {
+      "format": "int32",
+      "description": "Indicates the type of filter to apply to Vendor results.",
+      "enum": [
+        "0"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        }
+      ]
+    },
     "Destiny.Responses.DestinyVendorsResponse": {
       "description": "A response containing all of the components for all requested vendors.",
       "type": "object",
@@ -33547,7 +33705,7 @@
       "type": "object",
       "properties": {
         "canPurchase": {
-          "description": "If True, you can purchase from the Vendor.\r\nTheoretically, Vendors can be restricted from selling items. In practice, none do that (yet?).",
+          "description": "If True, you can purchase from the Vendor.",
           "type": "boolean"
         },
         "progression": {
@@ -33918,7 +34076,8 @@
         "512",
         "1024",
         "2048",
-        "4096"
+        "4096",
+        "8192"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -33991,6 +34150,11 @@
           "numericValue": "4096",
           "identifier": "DailyOffer",
           "description": "This indicates that the item is a daily offer."
+        },
+        {
+          "numericValue": "8192",
+          "identifier": "Charity",
+          "description": "This indicates that the item is for charity."
         }
       ]
     },
@@ -38720,7 +38884,8 @@
         "16",
         "32",
         "64",
-        "128"
+        "128",
+        "256"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -38759,6 +38924,10 @@
         {
           "numericValue": "128",
           "identifier": "PlayTestsLocal"
+        },
+        {
+          "numericValue": "256",
+          "identifier": "Careers"
         }
       ]
     },
