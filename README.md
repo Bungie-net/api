@@ -8,7 +8,7 @@ This section will be added to as time goes by - we're working with it as we go!
 
 ## 2020-07-07 Update for Bungie Day 2020
 
-Includes the the 'SetTrackedState' API and the current season reward power cap.
+Includes changes for the 'SetTrackedState' API and the current season reward power cap.
 
 ## 2020-06-09 Update for Season of Arrivals
 
