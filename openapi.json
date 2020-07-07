@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.8.1"
+    "version": "2.8.2"
   },
   "servers": [
     {
@@ -3827,6 +3827,44 @@
         ],
         "x-documentation-attributes": {
           "ThrottleSecondsBetweenActionPerUser": "0.1"
+        }
+      }
+    },
+    "/Destiny2/Actions/Items/SetTrackedState/": {
+      "summary": "Destiny2.SetQuestTrackedState",
+      "description": "Set the Tracking State for an instanced item, if that item is a Quest or Bounty. You must have a valid Destiny Account. Yeah, it's an item.",
+      "post": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Set the Tracking State for an instanced item, if that item is a Quest or Bounty. You must have a valid Destiny Account. Yeah, it's an item.",
+        "operationId": "Destiny2.SetQuestTrackedState",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Destiny.Requests.Actions.DestinyItemStateRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/int32"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "MoveEquipDestinyItems"
+            ]
+          }
+        ],
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "1"
         }
       }
     },
@@ -25407,6 +25445,12 @@
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
             }
+          },
+          "currentSeasonRewardPowerCap": {
+            "type": "integer",
+            "description": "If populated, this is the reward power cap for the current season.",
+            "format": "int32",
+            "nullable": true
           }
         },
         "description": "The most essential summary information about a Profile (in Destiny 1, we called these \"Accounts\").",
