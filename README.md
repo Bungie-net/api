@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-07-07 Update for Bungie Day 2020
+
+Includes the the 'SetTrackedState' API and the current season reward power cap.
+
 ## 2020-06-09 Update for Season of Arrivals
 
 Includes changes for Season of Arrivals, item versions, and power caps.
