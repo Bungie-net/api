@@ -6,6 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-11-10 Update for Beyond Light and the Season of the Hunt
+
+Includes changes for Stasis, item icon watermarks, 'Active' and 'Legacy' Triumphs, and scored presentation nodes.
+
+Caveat - The new energy type for Ghost mods is not yet implemented.
+
 ## 2020-07-07 Update for Bungie Day 2020
 
 Includes changes for the 'SetTrackedState' API and the current season reward power cap.

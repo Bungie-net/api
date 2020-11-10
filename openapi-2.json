@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.8.2"
+    "version": "2.9.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -239,6 +239,68 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/User.GeneralUser"
+                  }
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/GetCredentialTypesForTargetAccount/{membershipId}/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Returns a list of credential types attached to the requested account",
+        "operationId": "User.GetCredentialTypesForTargetAccount",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The user's membership id",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/User.Models.GetCredentialTypesForAccountResponse"
                   }
                 },
                 "ErrorCode": {
@@ -5161,7 +5223,7 @@
         }
       }
     },
-    "/Destiny2//Vendors/": {
+    "/Destiny2/Vendors/": {
       "get": {
         "tags": [
           "Destiny2",
@@ -7921,6 +7983,59 @@
         }
       }
     },
+    "/UserSystemOverrides/": {
+      "get": {
+        "tags": [
+          ""
+        ],
+        "description": "Get the user-specific system overrides that should be respected alongside common systems.",
+        "operationId": ".GetUserSystemOverrides",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/Common.Models.CoreSystem"
+                  }
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/GlobalAlerts/": {
       "get": {
         "tags": [
@@ -8072,15 +8187,6 @@
     "Applications.ApiUsage": {
       "type": "object",
       "properties": {
-        "range": {
-          "description": "The date range for the data being reported.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Dates.DateRange"
-            }
-          ]
-        },
         "apiCalls": {
           "description": "Counts for on API calls made for the time range.",
           "type": "array",
@@ -8094,19 +8200,6 @@
           "items": {
             "$ref": "#/definitions/Applications.Series"
           }
-        }
-      }
-    },
-    "Dates.DateRange": {
-      "type": "object",
-      "properties": {
-        "start": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "end": {
-          "format": "date-time",
-          "type": "string"
         }
       }
     },
@@ -8144,13 +8237,6 @@
     "Applications.Application": {
       "type": "object",
       "properties": {
-        "applicationType": {
-          "format": "int32",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Applications.OAuthApplicationType"
-          }
-        },
         "applicationId": {
           "format": "int32",
           "description": "Unique ID assigned to the application",
@@ -8208,31 +8294,6 @@
           }
         }
       }
-    },
-    "Applications.OAuthApplicationType": {
-      "format": "int32",
-      "enum": [
-        "0",
-        "1",
-        "2"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Confidential",
-          "description": "Indicates the application is server based and can keep its secrets from end users and other potential snoops."
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Public",
-          "description": "Indicates the application runs in a public place, and it can't be trusted to keep a secret."
-        }
-      ]
     },
     "Applications.ApplicationStatus": {
       "format": "int32",
@@ -8682,6 +8743,101 @@
         }
       ]
     },
+    "User.Models.GetCredentialTypesForAccountResponse": {
+      "type": "object",
+      "properties": {
+        "credentialType": {
+          "format": "byte",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieCredentialType"
+          }
+        },
+        "credentialDisplayName": {
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "credentialAsString": {
+          "type": "string"
+        }
+      }
+    },
+    "BungieCredentialType": {
+      "format": "byte",
+      "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "8",
+        "9",
+        "10",
+        "12",
+        "14",
+        "16",
+        "18"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Xuid"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Psnid"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Wlid"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Fake"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Facebook"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Google"
+        },
+        {
+          "numericValue": "9",
+          "identifier": "Windows"
+        },
+        {
+          "numericValue": "10",
+          "identifier": "DemonId"
+        },
+        {
+          "numericValue": "12",
+          "identifier": "SteamId"
+        },
+        {
+          "numericValue": "14",
+          "identifier": "BattleNetId"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "StadiaId"
+        },
+        {
+          "numericValue": "18",
+          "identifier": "TwitchId"
+        }
+      ]
+    },
     "Config.UserTheme": {
       "type": "object",
       "properties": {
@@ -8782,80 +8938,6 @@
           "type": "string"
         }
       }
-    },
-    "BungieCredentialType": {
-      "format": "byte",
-      "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "8",
-        "9",
-        "10",
-        "12",
-        "14",
-        "16",
-        "18"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Xuid"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Psnid"
-        },
-        {
-          "numericValue": "3",
-          "identifier": "Wlid"
-        },
-        {
-          "numericValue": "4",
-          "identifier": "Fake"
-        },
-        {
-          "numericValue": "5",
-          "identifier": "Facebook"
-        },
-        {
-          "numericValue": "8",
-          "identifier": "Google"
-        },
-        {
-          "numericValue": "9",
-          "identifier": "Windows"
-        },
-        {
-          "numericValue": "10",
-          "identifier": "DemonId"
-        },
-        {
-          "numericValue": "12",
-          "identifier": "SteamId"
-        },
-        {
-          "numericValue": "14",
-          "identifier": "BattleNetId"
-        },
-        {
-          "numericValue": "16",
-          "identifier": "StadiaId"
-        },
-        {
-          "numericValue": "18",
-          "identifier": "TwitchId"
-        }
-      ]
     },
     "User.HardLinkedUserMembership": {
       "type": "object",
@@ -10938,6 +11020,14 @@
             "$ref": "#/definitions/Destiny.Definitions.Collectibles.DestinyCollectibleDefinition"
           }
         },
+        "iconWatermark": {
+          "description": "If available, this is the original 'active' release watermark overlay for the icon. If the item has different versions, this can be overridden by the 'display version watermark icon' from the 'quality' block. Alternatively, if there is no watermark for the version, and the item version has a power cap below the current season power cap, this can be overridden by the iconWatermarkShelved property.",
+          "type": "string"
+        },
+        "iconWatermarkShelved": {
+          "description": "If available, this is the 'shelved' release watermark overlay for the icon. If the item version has a power cap below the current season power cap, it can be treated as 'shelved', and should be shown with this 'shelved' watermark overlay.",
+          "type": "string"
+        },
         "secondaryIcon": {
           "description": "A secondary icon associated with the item. Currently this is used in very context specific applications, such as Emblem Nameplates.",
           "type": "string"
@@ -11866,6 +11956,14 @@
         "questLineName": {
           "description": "The name of the quest line that this quest step is a part of.",
           "type": "string"
+        },
+        "questLineDescription": {
+          "description": "The description of the quest line that this quest step is a part of.",
+          "type": "string"
+        },
+        "questStepSummary": {
+          "description": "An additional summary of this step in the quest line.",
+          "type": "string"
         }
       }
     },
@@ -12753,6 +12851,19 @@
           "type": "string"
         },
         "type": {
+          "type": "string"
+        }
+      }
+    },
+    "Dates.DateRange": {
+      "type": "object",
+      "properties": {
+        "start": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "end": {
+          "format": "date-time",
           "type": "string"
         }
       }
@@ -13836,7 +13947,9 @@
         "3",
         "4",
         "5",
-        "6"
+        "6",
+        "7",
+        "8"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13867,6 +13980,14 @@
         {
           "numericValue": "6",
           "identifier": "LargePerk"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Abilities"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Supers"
         }
       ]
     },
@@ -15212,7 +15333,8 @@
         "2",
         "3",
         "4",
-        "5"
+        "5",
+        "6"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -15239,6 +15361,10 @@
         {
           "numericValue": "5",
           "identifier": "Raid"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Stasis"
         }
       ]
     },
@@ -16909,7 +17035,8 @@
         "28",
         "29",
         "30",
-        "31"
+        "31",
+        "32"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -17032,6 +17159,10 @@
         {
           "numericValue": "31",
           "identifier": "Bow"
+        },
+        {
+          "numericValue": "32",
+          "identifier": "DummyRepeatableBounty"
         }
       ]
     },
@@ -18146,6 +18277,63 @@
       },
       "x-mobile-manifest-name": "TraitCategories"
     },
+    "Destiny.Definitions.Presentation.DestinyScoredPresentationNodeBaseDefinition": {
+      "type": "object",
+      "properties": {
+        "maxCategoryRecordScore": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "presentationNodeType": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyPresentationNodeType"
+          }
+        },
+        "traitIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "traitHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
+          }
+        },
+        "parentNodeHashes": {
+          "description": "A quick reference to presentation nodes that have this node as a child. Presentation nodes can be parented under multiple parents.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      }
+    },
     "Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition": {
       "description": "A PresentationNode is an entity that represents a logical grouping of other entities visually/organizationally.\r\nFor now, Presentation Nodes may contain the following... but it may be used for more in the future:\r\n- Collectibles - Records (Or, as the public will call them, \"Triumphs.\" Don't ask me why we're overloading the term \"Triumph\", it still hurts me to think about it) - Metrics (aka Stat Trackers) - Other Presentation Nodes, allowing a tree of Presentation Nodes to be created\r\nPart of me wants to break these into conceptual definitions per entity being collected, but the possibility of these different types being mixed in the same UI and the possibility that it could actually be more useful to return the \"bare metal\" presentation node concept has resulted in me deciding against that for the time being.\r\nWe'll see if I come to regret this as well.",
       "type": "object",
@@ -18229,6 +18417,10 @@
         "disableChildSubscreenNavigation": {
           "description": "If this presentation node has children, but the game doesn't let you inspect the details of those children, that is indicated here.",
           "type": "boolean"
+        },
+        "maxCategoryRecordScore": {
+          "format": "int32",
+          "type": "integer"
         },
         "presentationNodeType": {
           "format": "int32",
@@ -22644,6 +22836,7 @@
         "1685",
         "1686",
         "1687",
+        "1688",
         "1800",
         "1801",
         "1802",
@@ -25070,6 +25263,10 @@
         {
           "numericValue": "1687",
           "identifier": "DestinyNotEnoughRoomForMultipleRewards"
+        },
+        {
+          "numericValue": "1688",
+          "identifier": "DestinyDirectBabelClientTimeout"
         },
         {
           "numericValue": "1800",
@@ -28019,6 +28216,11 @@
           "format": "int32",
           "description": "The value at which the presentation node is considered to be completed.",
           "type": "integer"
+        },
+        "recordCategoryScore": {
+          "format": "int32",
+          "description": "If available, this is the current score for the record category that this node represents.",
+          "type": "integer"
         }
       }
     },
@@ -28185,7 +28387,22 @@
       "properties": {
         "score": {
           "format": "int32",
-          "description": "Your \"Triumphs\" score.",
+          "description": "Your 'active' Triumphs score, maintained for backwards compatibility.",
+          "type": "integer"
+        },
+        "activeScore": {
+          "format": "int32",
+          "description": "Your 'active' Triumphs score.",
+          "type": "integer"
+        },
+        "legacyScore": {
+          "format": "int32",
+          "description": "Your 'legacy' Triumphs score.",
+          "type": "integer"
+        },
+        "lifetimeScore": {
+          "format": "int32",
+          "description": "Your 'lifetime' Triumphs score.",
           "type": "integer"
         },
         "trackedRecordHash": {
@@ -38837,6 +39054,34 @@
           "type": "integer"
         },
         "metricsRootNode": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "activeTriumphsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "activeSealsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "legacyTriumphsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "legacySealsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "medalsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "exoticCatalystsRootNodeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "loreRootNodeHash": {
           "format": "uint32",
           "type": "integer"
         },
