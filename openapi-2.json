@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.9.0"
+    "version": "2.9.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -19532,12 +19532,14 @@
     },
     "Destiny.DestinyEnergyType": {
       "format": "int32",
-      "description": "Represents an Energy Type for systems that require payment of energy of certain types, such as with Armor 2.0.",
+      "description": "Represents the socket energy types for Armor 2.0, Ghosts 2.0, and Stasis subclasses.",
       "enum": [
         "0",
         "1",
         "2",
-        "3"
+        "3",
+        "4",
+        "5"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19556,6 +19558,14 @@
         {
           "numericValue": "3",
           "identifier": "Void"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Ghost"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Subclass"
         }
       ]
     },
@@ -23050,7 +23060,11 @@
         "3413",
         "3414",
         "3500",
-        "3600"
+        "3600",
+        "3702",
+        "3703",
+        "3705",
+        "3706"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -26123,6 +26137,22 @@
         {
           "numericValue": "3600",
           "identifier": "StadiaAccountRequired"
+        },
+        {
+          "numericValue": "3702",
+          "identifier": "ErrorPhoneValidationTooManyUses"
+        },
+        {
+          "numericValue": "3703",
+          "identifier": "ErrorPhoneValidationNoAssociatedPhone"
+        },
+        {
+          "numericValue": "3705",
+          "identifier": "ErrorPhoneValidationCodeInvalid"
+        },
+        {
+          "numericValue": "3706",
+          "identifier": "ErrorPhoneValidationBanned"
         }
       ]
     },

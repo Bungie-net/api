@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-11-19 Update for Ghost Energy
+
+Includes new enum values for Ghost and Subclass energy types.
+
 ## 2020-11-10 Update for Beyond Light and the Season of the Hunt
 
 Includes changes for Stasis, item icon watermarks, 'Active' and 'Legacy' Triumphs, and scored presentation nodes.
