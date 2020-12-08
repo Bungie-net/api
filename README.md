@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2020-12-08 Update for Destiny 2 version 3.0.1
+
+Includes 'ApiPurchasable' values for vendor items, and 'currentlyCanRoll' for randomized socket plugs.
+
 ## 2020-11-19 Update for Ghost Energy
 
 Includes new enum values for Ghost and Subclass energy types.
