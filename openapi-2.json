@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.9.1"
+    "version": "2.9.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -19891,6 +19891,10 @@
     "Destiny.Definitions.DestinyItemSocketEntryPlugItemRandomizedDefinition": {
       "type": "object",
       "properties": {
+        "currentlyCanRoll": {
+          "description": "Indicates if the plug can be rolled on the current version of the item. For example, older versions of weapons may have plug rolls that are no longer possible on the current versions.",
+          "type": "boolean"
+        },
         "plugItemHash": {
           "format": "uint32",
           "description": "The hash identifier of a DestinyInventoryItemDefinition representing the plug that can be inserted.",
@@ -33859,13 +33863,18 @@
       "format": "int32",
       "description": "Indicates the type of filter to apply to Vendor results.",
       "enum": [
-        "0"
+        "0",
+        "1"
       ],
       "type": "integer",
       "x-enum-values": [
         {
           "numericValue": "0",
           "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "ApiPurchasable"
         }
       ]
     },
@@ -34180,6 +34189,10 @@
           "format": "date-time",
           "description": "If this item has its own custom date where it may be removed from the Vendor's rotation, this is that date.\r\nNote that there's not actually any guarantee that it will go away: it could be chosen again and end up still being in the Vendor's sale items! But this is the next date where that test will occur, and is also the date that the game shows for availability on things like Bounties being sold. So it's the best we can give.",
           "type": "string"
+        },
+        "apiPurchasable": {
+          "description": "If true, this item can be purchased through the Bungie.net API.",
+          "type": "boolean"
         }
       },
       "x-destiny-component-type-dependency": "VendorSales"
@@ -34267,6 +34280,10 @@
           "format": "date-time",
           "description": "If this item has its own custom date where it may be removed from the Vendor's rotation, this is that date.\r\nNote that there's not actually any guarantee that it will go away: it could be chosen again and end up still being in the Vendor's sale items! But this is the next date where that test will occur, and is also the date that the game shows for availability on things like Bounties being sold. So it's the best we can give.",
           "type": "string"
+        },
+        "apiPurchasable": {
+          "description": "If true, this item can be purchased through the Bungie.net API.",
+          "type": "boolean"
         }
       },
       "x-destiny-component-type-dependency": "VendorSales"
@@ -35031,6 +35048,10 @@
           "format": "date-time",
           "description": "If this item has its own custom date where it may be removed from the Vendor's rotation, this is that date.\r\nNote that there's not actually any guarantee that it will go away: it could be chosen again and end up still being in the Vendor's sale items! But this is the next date where that test will occur, and is also the date that the game shows for availability on things like Bounties being sold. So it's the best we can give.",
           "type": "string"
+        },
+        "apiPurchasable": {
+          "description": "If true, this item can be purchased through the Bungie.net API.",
+          "type": "boolean"
         }
       },
       "x-destiny-component-type-dependency": "VendorSales"
