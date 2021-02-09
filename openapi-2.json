@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.9.2"
+    "version": "2.10.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -11057,6 +11057,9 @@
           "description": "The localized title/name of the item's type. This can be whatever the designers want, and has no guarantee of consistency between items.",
           "type": "string"
         },
+        "flavorText": {
+          "type": "string"
+        },
         "uiItemDisplayStyle": {
           "description": "A string identifier that the game's UI uses to determine how the item should be rendered in inventory screens and the like. This could really be anything - at the moment, we don't have the time to really breakdown and maintain all the possible strings this could be, partly because new ones could be added ad hoc. But if you want to use it to dictate your own UI, or look for items with a certain display style, go for it!",
           "type": "string"
@@ -12589,6 +12592,14 @@
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.DestinyVendorDisplayPropertiesDefinition"
         },
+        "vendorProgressionType": {
+          "format": "int32",
+          "description": "The type of reward progression that this vendor has. Default - The original rank progression from token redemption. Ritual - Progression from ranks in ritual content. For example: Crucible (Shaxx), Gambit (Drifter), and Battlegrounds (War Table).",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyVendorProgressionType"
+          }
+        },
         "buyString": {
           "description": "If the vendor has a custom localized string describing the \"buy\" action, that is returned here.",
           "type": "string"
@@ -12854,6 +12865,27 @@
           "type": "string"
         }
       }
+    },
+    "Destiny.DestinyVendorProgressionType": {
+      "format": "int32",
+      "description": "Describes the type of progression that a vendor has.",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Default",
+          "description": "The original rank progression from token redemption."
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Ritual",
+          "description": "Progression from ranks in ritual content. For example: Crucible (Shaxx), Gambit (Drifter), and Season 13 Battlegrounds (War Table)."
+        }
+      ]
     },
     "Dates.DateRange": {
       "type": "object",
@@ -14351,11 +14383,6 @@
         "releaseTime": {
           "format": "int32",
           "description": "If the activity will not be visible until a specific and known time, this will be the seconds since the Epoch when it will become visible.",
-          "type": "integer"
-        },
-        "activityLevel": {
-          "format": "int32",
-          "description": "The difficulty level of the activity.",
           "type": "integer"
         },
         "activityLightLevel": {
@@ -18873,6 +18900,9 @@
             "$ref": "#/components/schemas/Destiny.DestinyRecordValueStyle"
           }
         },
+        "forTitleGilding": {
+          "type": "boolean"
+        },
         "titleInfo": {
           "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordTitleBlock"
         },
@@ -19009,6 +19039,13 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyGenderDefinition"
           }
+        },
+        "gildingTrackingRecordHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordDefinition"
+          }
         }
       }
     },
@@ -19099,7 +19136,9 @@
         "2",
         "3",
         "4",
-        "5"
+        "5",
+        "6",
+        "7"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19126,6 +19165,14 @@
         {
           "numericValue": "5",
           "identifier": "MedalComplete"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "SeasonChallengeComplete"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "GildedTitleComplete"
         }
       ]
     },
@@ -19165,6 +19212,12 @@
             "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordIntervalObjective"
           }
         },
+        "intervalRewards": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordIntervalRewards"
+          }
+        },
         "originalObjectiveArrayInsertionIndex": {
           "format": "int32",
           "type": "integer"
@@ -19181,6 +19234,17 @@
         "intervalScoreValue": {
           "format": "int32",
           "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.Records.DestinyRecordIntervalRewards": {
+      "type": "object",
+      "properties": {
+        "intervalRewardItems": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.DestinyItemQuantity"
+          }
         }
       }
     },
@@ -21000,6 +21064,22 @@
             "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
           }
         },
+        "seasonalChallengesPresentationNodeHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+          }
+        },
+        "preview": {
+          "description": "Optional - Defines the promotional text, images, and links to preview this season.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPreviewDefinition"
+            }
+          ]
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -21016,6 +21096,45 @@
         }
       },
       "x-mobile-manifest-name": "Seasons"
+    },
+    "Destiny.Definitions.Seasons.DestinySeasonPreviewDefinition": {
+      "description": "Defines the promotional text, images, and links to preview this season.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "A localized description of the season.",
+          "type": "string"
+        },
+        "linkPath": {
+          "description": "A relative path to learn more about the season. Web browsers should be automatically redirected to the user's Bungie.net locale. For example: \"/SeasonOfTheChosen\" will redirect to \"/7/en/Seasons/SeasonOfTheChosen\" for English users.",
+          "type": "string"
+        },
+        "videoLink": {
+          "description": "An optional link to a localized video, probably YouTube.",
+          "type": "string"
+        },
+        "images": {
+          "description": "A list of images to preview the seasonal content. Should have at least three to show.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPreviewImageDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Seasons.DestinySeasonPreviewImageDefinition": {
+      "description": "Defines the thumbnail icon, high-res image, and video link for promotional images",
+      "type": "object",
+      "properties": {
+        "thumbnailImage": {
+          "description": "A thumbnail icon path to preview seasonal content, probably 480x270.",
+          "type": "string"
+        },
+        "highResImage": {
+          "description": "An optional path to a high-resolution image, probably 1920x1080.",
+          "type": "string"
+        }
+      }
     },
     "Destiny.Definitions.Seasons.DestinySeasonPassDefinition": {
       "type": "object",
@@ -22687,6 +22806,7 @@
         "707",
         "750",
         "751",
+        "752",
         "801",
         "802",
         "803",
@@ -22734,6 +22854,9 @@
         "1237",
         "1238",
         "1239",
+        "1240",
+        "1241",
+        "1242",
         "1300",
         "1301",
         "1302",
@@ -24630,6 +24753,10 @@
           "identifier": "ClanNameRestricted"
         },
         {
+          "numericValue": "752",
+          "identifier": "ClanCreationBan"
+        },
+        {
           "numericValue": "801",
           "identifier": "ItemAlreadyFollowed"
         },
@@ -24816,6 +24943,18 @@
         {
           "numericValue": "1239",
           "identifier": "PsnApiTargetUserBlocked"
+        },
+        {
+          "numericValue": "1240",
+          "identifier": "PsnApiJwksMissing"
+        },
+        {
+          "numericValue": "1241",
+          "identifier": "PsnApiJwtMalformedHeader"
+        },
+        {
+          "numericValue": "1242",
+          "identifier": "PsnApiJwtMalformedPayload"
         },
         {
           "numericValue": "1300",
@@ -26668,7 +26807,8 @@
             "4",
             "8",
             "16",
-            "32"
+            "32",
+            "64"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -26699,6 +26839,10 @@
             {
               "numericValue": "32",
               "identifier": "Shadowkeep"
+            },
+            {
+              "numericValue": "64",
+              "identifier": "BeyondLight"
             }
           ]
         },
@@ -27029,7 +27173,8 @@
         "4",
         "8",
         "16",
-        "32"
+        "32",
+        "64"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -27060,6 +27205,10 @@
         {
           "numericValue": "32",
           "identifier": "Shadowkeep"
+        },
+        {
+          "numericValue": "64",
+          "identifier": "BeyondLight"
         }
       ]
     },
@@ -34407,7 +34556,8 @@
         "1024",
         "2048",
         "4096",
-        "8192"
+        "8192",
+        "16384"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -34485,6 +34635,11 @@
           "numericValue": "8192",
           "identifier": "Charity",
           "description": "This indicates that the item is for charity."
+        },
+        {
+          "numericValue": "16384",
+          "identifier": "SeasonalRewardExpiration",
+          "description": "This indicates that the item has a seasonal reward expiration."
         }
       ]
     },
@@ -39162,6 +39317,13 @@
         "currentSeasonHash": {
           "format": "uint32",
           "type": "integer"
+        },
+        "seasonalChallengesPresentationNodeHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+          }
         },
         "futureSeasonHashes": {
           "type": "array",
