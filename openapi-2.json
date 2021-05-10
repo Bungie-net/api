@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.10.0"
+    "version": "2.11.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -7709,7 +7709,7 @@
         "tags": [
           "Fireteam"
         ],
-        "description": "Gets a listing of all clan fireteams that caller is an applicant, a member, or an alternate of.",
+        "description": "Gets a listing of all fireteams that caller is an applicant, a member, or an alternate of.",
         "operationId": "Fireteam.GetMyClanFireteams",
         "parameters": [
           {
@@ -7811,7 +7811,7 @@
         "tags": [
           "Fireteam"
         ],
-        "description": "Gets a specific clan fireteam.",
+        "description": "Gets a specific fireteam.",
         "operationId": "Fireteam.GetClanFireteam",
         "parameters": [
           {
@@ -8113,7 +8113,8 @@
         "512",
         "1024",
         "2048",
-        "4096"
+        "4096",
+        "8192"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -8181,6 +8182,11 @@
           "numericValue": "4096",
           "identifier": "PartnerOfferGrant",
           "description": "Can user the partner offer api to claim rewards defined for a partner"
+        },
+        {
+          "numericValue": "8192",
+          "identifier": "DestinyUnlockValueQuery",
+          "description": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
         }
       ]
     },
@@ -10995,6 +11001,10 @@
           "format": "int32",
           "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
           "type": "integer"
+        },
+        "hasConditionalVisibility": {
+          "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress.",
+          "type": "boolean"
         }
       }
     },
@@ -11417,6 +11427,14 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "traitHashes": {
+          "description": "These are the corresponding trait definition hashes for the entries in traitIds.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
           }
         },
         "hash": {
@@ -13621,6 +13639,10 @@
           "format": "int32",
           "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
           "type": "integer"
+        },
+        "hasConditionalVisibility": {
+          "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress.",
+          "type": "boolean"
         }
       }
     },
@@ -21215,6 +21237,10 @@
           "format": "int32",
           "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
           "type": "integer"
+        },
+        "hasConditionalVisibility": {
+          "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress.",
+          "type": "boolean"
         }
       }
     },
@@ -22807,6 +22833,7 @@
         "750",
         "751",
         "752",
+        "753",
         "801",
         "802",
         "803",
@@ -23148,6 +23175,9 @@
         "3026",
         "3027",
         "3028",
+        "3029",
+        "3030",
+        "3031",
         "3200",
         "3201",
         "3202",
@@ -23191,7 +23221,19 @@
         "3702",
         "3703",
         "3705",
-        "3706"
+        "3706",
+        "3707",
+        "3708",
+        "3709",
+        "3710",
+        "3800",
+        "3801",
+        "3802",
+        "3803",
+        "3804",
+        "3805",
+        "3806",
+        "3807"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -24757,6 +24799,10 @@
           "identifier": "ClanCreationBan"
         },
         {
+          "numericValue": "753",
+          "identifier": "ClanCreationTenureRequirementsNotMet"
+        },
+        {
           "numericValue": "801",
           "identifier": "ItemAlreadyFollowed"
         },
@@ -26122,6 +26168,18 @@
           "identifier": "ClanFireteamInvalidAuthProviderXuid"
         },
         {
+          "numericValue": "3029",
+          "identifier": "ClanFireteamThrottle"
+        },
+        {
+          "numericValue": "3030",
+          "identifier": "ClanFireteamTooManyOpenScheduledFireteams"
+        },
+        {
+          "numericValue": "3031",
+          "identifier": "ClanFireteamCannotReopenScheduledFireteams"
+        },
+        {
           "numericValue": "3200",
           "identifier": "CrossSaveOverriddenAccountNotFound"
         },
@@ -26296,6 +26354,54 @@
         {
           "numericValue": "3706",
           "identifier": "ErrorPhoneValidationBanned"
+        },
+        {
+          "numericValue": "3707",
+          "identifier": "ErrorPhoneValidationCodeTooRecentlySent"
+        },
+        {
+          "numericValue": "3708",
+          "identifier": "ErrorPhoneValidationCodeExpired"
+        },
+        {
+          "numericValue": "3709",
+          "identifier": "ErrorPhoneValidationInvalidNumberType"
+        },
+        {
+          "numericValue": "3710",
+          "identifier": "ErrorPhoneValidationCodeTooRecentlyChecked"
+        },
+        {
+          "numericValue": "3800",
+          "identifier": "ApplePushErrorUnknown"
+        },
+        {
+          "numericValue": "3801",
+          "identifier": "ApplePushErrorNull"
+        },
+        {
+          "numericValue": "3802",
+          "identifier": "ApplePushErrorTimeout"
+        },
+        {
+          "numericValue": "3803",
+          "identifier": "ApplePushBadRequest"
+        },
+        {
+          "numericValue": "3804",
+          "identifier": "ApplePushFailedAuth"
+        },
+        {
+          "numericValue": "3805",
+          "identifier": "ApplePushThrottled"
+        },
+        {
+          "numericValue": "3806",
+          "identifier": "ApplePushServiceUnavailable"
+        },
+        {
+          "numericValue": "3807",
+          "identifier": "NotAnImageOrVideo"
         }
       ]
     },
@@ -27019,6 +27125,13 @@
           "format": "int32",
           "description": "The version of this item, used to index into the versions list in the item definition quality block.",
           "type": "integer"
+        },
+        "itemValueVisibility": {
+          "description": "If available, a list that describes which item values (rewards) should be shown (true) or hidden (false).",
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -27272,7 +27385,8 @@
         "800",
         "900",
         "1000",
-        "1100"
+        "1100",
+        "1200"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -27444,6 +27558,11 @@
           "numericValue": "1100",
           "identifier": "Metrics",
           "description": "Returns summary status information about all \"Metrics\" (also known in the game as \"Stat Trackers\")."
+        },
+        {
+          "numericValue": "1200",
+          "identifier": "StringVariables",
+          "description": "Returns a mapping of localized string variable hashes to values, on a per-account or per-character basis."
         }
       ]
     },
@@ -27581,6 +27700,16 @@
           ],
           "x-destiny-component-type-dependency": "Metrics"
         },
+        "profileStringVariables": {
+          "description": "COMPONENT TYPE: StringVariables",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyStringVariablesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "StringVariables"
+        },
         "characters": {
           "description": "Basic information about each character, keyed by the CharacterId.\r\nCOMPONENT TYPE: Characters",
           "type": "object",
@@ -27697,6 +27826,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "Collectibles"
+        },
+        "characterStringVariables": {
+          "description": "COMPONENT TYPE: StringVariables",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyStringVariablesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "StringVariables"
         },
         "itemComponents": {
           "description": "Information about instanced items across all returned characters, keyed by the item's instance ID.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]",
@@ -28505,6 +28644,13 @@
         "intervalsRedeemedCount": {
           "format": "int32",
           "type": "integer"
+        },
+        "rewardVisibilty": {
+          "description": "If available, a list that describes which reward rewards should be shown (true) or hidden (false). This property is for regular record rewards, and not for interval objective rewards.",
+          "type": "array",
+          "items": {
+            "type": "boolean"
+          }
         }
       }
     },
@@ -29179,6 +29325,38 @@
       "properties": {
         "data": {
           "$ref": "#/definitions/Destiny.Components.Metrics.DestinyMetricsComponent"
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "Destiny.Components.StringVariables.DestinyStringVariablesComponent": {
+      "type": "object",
+      "properties": {
+        "integerValuesByHash": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "StringVariables"
+    },
+    "SingleComponentResponseOfDestinyStringVariablesComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/Destiny.Components.StringVariables.DestinyStringVariablesComponent"
         },
         "privacy": {
           "format": "int32",
@@ -31175,6 +31353,10 @@
           "format": "int32",
           "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
           "type": "integer"
+        },
+        "hasConditionalVisibility": {
+          "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress.",
+          "type": "boolean"
         }
       }
     },
@@ -32443,6 +32625,29 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "Collectibles",
             "$ref": "#/definitions/Destiny.Components.Collectibles.DestinyCollectiblesComponent"
+          }
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DictionaryComponentResponseOfint64AndDestinyStringVariablesComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "StringVariables",
+            "$ref": "#/definitions/Destiny.Components.StringVariables.DestinyStringVariablesComponent"
           }
         },
         "privacy": {
@@ -34390,6 +34595,13 @@
           "type": "integer",
           "x-enum-reference": {
             "$ref": "#/components/schemas/Destiny.DestinyVendorItemState"
+          }
+        },
+        "itemValueVisibility": {
+          "description": "If available, a list that describes which item values (rewards) should be shown (true) or hidden (false).",
+          "type": "array",
+          "items": {
+            "type": "boolean"
           }
         },
         "vendorItemIndex": {
@@ -39684,7 +39896,8 @@
         "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
         "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
         "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
-        "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner"
+        "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner",
+        "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
       }
     }
   },

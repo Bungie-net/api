@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.10.0"
+    "version": "2.11.0"
   },
   "servers": [
     {
@@ -5252,12 +5252,12 @@
     },
     "/Fireteam/Clan/{groupId}/My/{platform}/{includeClosed}/{page}/": {
       "summary": "Fireteam.GetMyClanFireteams",
-      "description": "Gets a listing of all clan fireteams that caller is an applicant, a member, or an alternate of.",
+      "description": "Gets a listing of all fireteams that caller is an applicant, a member, or an alternate of.",
       "get": {
         "tags": [
           "Fireteam"
         ],
-        "description": "Gets a listing of all clan fireteams that caller is an applicant, a member, or an alternate of.",
+        "description": "Gets a listing of all fireteams that caller is an applicant, a member, or an alternate of.",
         "operationId": "Fireteam.GetMyClanFireteams",
         "parameters": [
           {
@@ -5338,12 +5338,12 @@
     },
     "/Fireteam/Clan/{groupId}/Summary/{fireteamId}/": {
       "summary": "Fireteam.GetClanFireteam",
-      "description": "Gets a specific clan fireteam.",
+      "description": "Gets a specific fireteam.",
       "get": {
         "tags": [
           "Fireteam"
         ],
-        "description": "Gets a specific clan fireteam.",
+        "description": "Gets a specific fireteam.",
         "operationId": "Fireteam.GetClanFireteam",
         "parameters": [
           {
@@ -5480,7 +5480,8 @@
           "512",
           "1024",
           "2048",
-          "4096"
+          "4096",
+          "8192"
         ],
         "type": "integer",
         "format": "int64",
@@ -5549,6 +5550,11 @@
             "numericValue": "4096",
             "identifier": "PartnerOfferGrant",
             "description": "Can user the partner offer api to claim rewards defined for a partner"
+          },
+          {
+            "numericValue": "8192",
+            "identifier": "DestinyUnlockValueQuery",
+            "description": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
           }
         ],
         "x-enum-is-bitmask": true
@@ -8470,6 +8476,10 @@
             "type": "integer",
             "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
             "format": "int32"
+          },
+          "hasConditionalVisibility": {
+            "type": "boolean",
+            "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress."
           }
         },
         "description": "Used in a number of Destiny contracts to return data about an item stack and its quantity. Can optionally return an itemInstanceId if the item is instanced - in which case, the quantity returned will be 1. If it's not... uh, let me know okay? Thanks."
@@ -8907,6 +8917,14 @@
               "type": "string"
             },
             "description": "Traits are metadata tags applied to this item. For example: armor slot, weapon type, foundry, faction, etc. These IDs come from the game and don't map to any content, but should still be useful."
+          },
+          "traitHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "These are the corresponding trait definition hashes for the entries in traitIds."
           },
           "hash": {
             "type": "integer",
@@ -11163,6 +11181,10 @@
             "type": "integer",
             "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
             "format": "int32"
+          },
+          "hasConditionalVisibility": {
+            "type": "boolean",
+            "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress."
           }
         },
         "description": "In addition to item quantity information for vendor prices, this also has any optional information that may exist about how the item's quantity can be modified. (unfortunately not information that is able to be read outside of the BNet servers, but it's there)"
@@ -18918,6 +18940,10 @@
             "type": "integer",
             "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
             "format": "int32"
+          },
+          "hasConditionalVisibility": {
+            "type": "boolean",
+            "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress."
           }
         }
       },
@@ -20564,6 +20590,7 @@
           "750",
           "751",
           "752",
+          "753",
           "801",
           "802",
           "803",
@@ -20905,6 +20932,9 @@
           "3026",
           "3027",
           "3028",
+          "3029",
+          "3030",
+          "3031",
           "3200",
           "3201",
           "3202",
@@ -20948,7 +20978,19 @@
           "3702",
           "3703",
           "3705",
-          "3706"
+          "3706",
+          "3707",
+          "3708",
+          "3709",
+          "3710",
+          "3800",
+          "3801",
+          "3802",
+          "3803",
+          "3804",
+          "3805",
+          "3806",
+          "3807"
         ],
         "type": "integer",
         "format": "int32",
@@ -22515,6 +22557,10 @@
             "identifier": "ClanCreationBan"
           },
           {
+            "numericValue": "753",
+            "identifier": "ClanCreationTenureRequirementsNotMet"
+          },
+          {
             "numericValue": "801",
             "identifier": "ItemAlreadyFollowed"
           },
@@ -23880,6 +23926,18 @@
             "identifier": "ClanFireteamInvalidAuthProviderXuid"
           },
           {
+            "numericValue": "3029",
+            "identifier": "ClanFireteamThrottle"
+          },
+          {
+            "numericValue": "3030",
+            "identifier": "ClanFireteamTooManyOpenScheduledFireteams"
+          },
+          {
+            "numericValue": "3031",
+            "identifier": "ClanFireteamCannotReopenScheduledFireteams"
+          },
+          {
             "numericValue": "3200",
             "identifier": "CrossSaveOverriddenAccountNotFound"
           },
@@ -24054,6 +24112,54 @@
           {
             "numericValue": "3706",
             "identifier": "ErrorPhoneValidationBanned"
+          },
+          {
+            "numericValue": "3707",
+            "identifier": "ErrorPhoneValidationCodeTooRecentlySent"
+          },
+          {
+            "numericValue": "3708",
+            "identifier": "ErrorPhoneValidationCodeExpired"
+          },
+          {
+            "numericValue": "3709",
+            "identifier": "ErrorPhoneValidationInvalidNumberType"
+          },
+          {
+            "numericValue": "3710",
+            "identifier": "ErrorPhoneValidationCodeTooRecentlyChecked"
+          },
+          {
+            "numericValue": "3800",
+            "identifier": "ApplePushErrorUnknown"
+          },
+          {
+            "numericValue": "3801",
+            "identifier": "ApplePushErrorNull"
+          },
+          {
+            "numericValue": "3802",
+            "identifier": "ApplePushErrorTimeout"
+          },
+          {
+            "numericValue": "3803",
+            "identifier": "ApplePushBadRequest"
+          },
+          {
+            "numericValue": "3804",
+            "identifier": "ApplePushFailedAuth"
+          },
+          {
+            "numericValue": "3805",
+            "identifier": "ApplePushThrottled"
+          },
+          {
+            "numericValue": "3806",
+            "identifier": "ApplePushServiceUnavailable"
+          },
+          {
+            "numericValue": "3807",
+            "identifier": "NotAnImageOrVideo"
           }
         ],
         "x-enum-is-bitmask": false
@@ -24825,6 +24931,13 @@
             "description": "The version of this item, used to index into the versions list in the item definition quality block.",
             "format": "int32",
             "nullable": true
+          },
+          "itemValueVisibility": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "description": "If available, a list that describes which item values (rewards) should be shown (true) or hidden (false)."
           }
         },
         "description": "The base item component, filled with properties that are generally useful to know in any item request or that don't feel worthwhile to put in their own component."
@@ -25085,7 +25198,8 @@
           "800",
           "900",
           "1000",
-          "1100"
+          "1100",
+          "1200"
         ],
         "type": "integer",
         "description": "Represents the possible components that can be returned from Destiny \"Get\" calls such as GetProfile, GetCharacter, GetVendor etc...\r\nWhen making one of these requests, you will pass one or more of these components as a comma separated list in the \"?components=\" querystring parameter. For instance, if you want baseline Profile data, Character Data, and character progressions, you would pass \"?components=Profiles,Characters,CharacterProgressions\" You may use either the numerical or string values.",
@@ -25259,6 +25373,11 @@
             "numericValue": "1100",
             "identifier": "Metrics",
             "description": "Returns summary status information about all \"Metrics\" (also known in the game as \"Stat Trackers\")."
+          },
+          {
+            "numericValue": "1200",
+            "identifier": "StringVariables",
+            "description": "Returns a mapping of localized string variable hashes to values, on a per-account or per-character basis."
           }
         ],
         "x-enum-is-bitmask": false
@@ -25396,6 +25515,16 @@
             "description": "COMPONENT TYPE: Metrics",
             "x-destiny-component-type-dependency": "Metrics"
           },
+          "profileStringVariables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyStringVariablesComponent"
+              }
+            ],
+            "description": "COMPONENT TYPE: StringVariables",
+            "x-destiny-component-type-dependency": "StringVariables"
+          },
           "characters": {
             "type": "object",
             "allOf": [
@@ -25516,6 +25645,16 @@
             ],
             "description": "COMPONENT TYPE: Collectibles",
             "x-destiny-component-type-dependency": "Collectibles"
+          },
+          "characterStringVariables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/DictionaryComponentResponseOfint64AndDestinyStringVariablesComponent"
+              }
+            ],
+            "description": "COMPONENT TYPE: StringVariables",
+            "x-destiny-component-type-dependency": "StringVariables"
           },
           "itemComponents": {
             "type": "object",
@@ -26385,6 +26524,13 @@
           "intervalsRedeemedCount": {
             "type": "integer",
             "format": "int32"
+          },
+          "rewardVisibilty": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "description": "If available, a list that describes which reward rewards should be shown (true) or hidden (false). This property is for regular record rewards, and not for interval objective rewards."
           }
         }
       },
@@ -27100,6 +27246,44 @@
         "properties": {
           "data": {
             "$ref": "#/components/schemas/Destiny.Components.Metrics.DestinyMetricsComponent"
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "If true, this component is disabled.",
+            "nullable": true
+          }
+        }
+      },
+      "Destiny.Components.StringVariables.DestinyStringVariablesComponent": {
+        "type": "object",
+        "properties": {
+          "integerValuesByHash": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          }
+        },
+        "x-destiny-component-type-dependency": "StringVariables"
+      },
+      "SingleComponentResponseOfDestinyStringVariablesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "$ref": "#/components/schemas/Destiny.Components.StringVariables.DestinyStringVariablesComponent"
           },
           "privacy": {
             "type": "integer",
@@ -29213,6 +29397,10 @@
             "type": "integer",
             "description": "The amount of the item needed/available depending on the context of where DestinyItemQuantity is being used.",
             "format": "int32"
+          },
+          "hasConditionalVisibility": {
+            "type": "boolean",
+            "description": "Indicates that this item quantity may be conditionally shown or hidden, based on various sources of state. For example: server flags, account state, or character progress."
           }
         },
         "description": "A subclass of DestinyItemQuantity, that provides not just the item and its quantity but also information that BNet can - at some point - use internally to provide more robust runtime information about the item's qualities.\r\nIf you want it, please ask! We're just out of time to wire it up right now. Or a clever person just may do it with our existing endpoints."
@@ -30557,6 +30745,35 @@
             "additionalProperties": {
               "x-destiny-component-type-dependency": "Collectibles",
               "$ref": "#/components/schemas/Destiny.Components.Collectibles.DestinyCollectiblesComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "If true, this component is disabled.",
+            "nullable": true
+          }
+        }
+      },
+      "DictionaryComponentResponseOfint64AndDestinyStringVariablesComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "x-destiny-component-type-dependency": "StringVariables",
+              "$ref": "#/components/schemas/Destiny.Components.StringVariables.DestinyStringVariablesComponent"
             },
             "x-dictionary-key": {
               "type": "integer",
@@ -32667,6 +32884,13 @@
               "$ref": "#/components/schemas/Destiny.DestinyVendorItemState"
             },
             "x-enum-is-bitmask": true
+          },
+          "itemValueVisibility": {
+            "type": "array",
+            "items": {
+              "type": "boolean"
+            },
+            "description": "If available, a list that describes which item values (rewards) should be shown (true) or hidden (false)."
           },
           "vendorItemIndex": {
             "type": "integer",
@@ -41624,7 +41848,8 @@
               "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
               "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
               "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
-              "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner"
+              "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner",
+              "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
             }
           }
         }
