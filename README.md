@@ -6,6 +6,16 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-05-11 Update for the Season of the Splicer
+
+Includes reward item visibility and string variables.
+- String variable placeholders (formatted as {var:1234567890}) are found in Destiny definition localized strings.
+- D2 Profile API clients can request the new StringVariables component to get per-character integer values by hash.
+- Clients can then replace the {var:(hash)} placeholders with the corresponding integer values.
+- String variables are currently used in the following places:
+  - Armor Synthesis bounties from Ada-1 (descriptions, reward names, tooltips, failure strings)
+  - A single Seasonal Challenge record description
+
 ## 2021-02-09 Update for the Season of the Chosen
 
 Includes seasonal challenges, item flavor text, gilded titles, record interval rewards, and season preview definitions.
