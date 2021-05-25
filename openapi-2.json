@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.11.0"
+    "version": "2.11.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -8114,7 +8114,8 @@
         "1024",
         "2048",
         "4096",
-        "8192"
+        "8192",
+        "16384"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -8187,6 +8188,11 @@
           "numericValue": "8192",
           "identifier": "DestinyUnlockValueQuery",
           "description": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
+        },
+        {
+          "numericValue": "16384",
+          "identifier": "UserPiiRead",
+          "description": "Allows an app to query sensitive user PII, most notably email information."
         }
       ]
     },
@@ -34292,6 +34298,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "CurrencyLookups"
+        },
+        "stringVariables": {
+          "description": "A map of string variable values by hash for this character context.\r\nCOMPONENT TYPE: StringVariables",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyStringVariablesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "StringVariables"
         }
       }
     },
@@ -35217,6 +35233,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "CurrencyLookups"
+        },
+        "stringVariables": {
+          "description": "A map of string variable values by hash for this character context.\r\nCOMPONENT TYPE: StringVariables",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyStringVariablesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "StringVariables"
         }
       }
     },
@@ -35324,6 +35350,16 @@
             }
           ],
           "x-destiny-component-type-dependency": "VendorSales"
+        },
+        "stringVariables": {
+          "description": "A set of string variable values by hash for a public vendors context.\r\nCOMPONENT TYPE: StringVariables",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/SingleComponentResponseOfDestinyStringVariablesComponent"
+            }
+          ],
+          "x-destiny-component-type-dependency": "StringVariables"
         }
       }
     },
@@ -39897,7 +39933,8 @@
         "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
         "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
         "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner",
-        "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
+        "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods.",
+        "UserPiiRead": "Allows an app to query sensitive user PII, most notably email information."
       }
     }
   },

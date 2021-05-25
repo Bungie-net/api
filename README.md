@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-05-25 Update for Vendor String Variables
+
+Added the 'StringVariables' component option to the D2 Vendor APIs.
+
 ## 2021-05-11 Update for the Season of the Splicer
 
 Includes reward item visibility and string variables.

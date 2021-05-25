@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.11.0"
+    "version": "2.11.1"
   },
   "servers": [
     {
@@ -5481,7 +5481,8 @@
           "1024",
           "2048",
           "4096",
-          "8192"
+          "8192",
+          "16384"
         ],
         "type": "integer",
         "format": "int64",
@@ -5555,6 +5556,11 @@
             "numericValue": "8192",
             "identifier": "DestinyUnlockValueQuery",
             "description": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
+          },
+          {
+            "numericValue": "16384",
+            "identifier": "UserPiiRead",
+            "description": "Allows an app to query sensitive user PII, most notably email information."
           }
         ],
         "x-enum-is-bitmask": true
@@ -32560,6 +32566,16 @@
             ],
             "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
             "x-destiny-component-type-dependency": "CurrencyLookups"
+          },
+          "stringVariables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyStringVariablesComponent"
+              }
+            ],
+            "description": "A map of string variable values by hash for this character context.\r\nCOMPONENT TYPE: StringVariables",
+            "x-destiny-component-type-dependency": "StringVariables"
           }
         },
         "description": "A response containing all of the components for all requested vendors."
@@ -33578,6 +33594,16 @@
             ],
             "description": "A \"lookup\" convenience component that can be used to quickly check if the character has access to items that can be used for purchasing.\r\nCOMPONENT TYPE: CurrencyLookups",
             "x-destiny-component-type-dependency": "CurrencyLookups"
+          },
+          "stringVariables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyStringVariablesComponent"
+              }
+            ],
+            "description": "A map of string variable values by hash for this character context.\r\nCOMPONENT TYPE: StringVariables",
+            "x-destiny-component-type-dependency": "StringVariables"
           }
         },
         "description": "A response containing all of the components for a vendor."
@@ -33695,6 +33721,16 @@
             ],
             "description": "Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.\r\nNote that within the Sale Item Set component, the sales are themselves keyed by the vendorSaleIndex, so you can relate it to the corrent sale item definition within the Vendor's definition.\r\nCOMPONENT TYPE: VendorSales",
             "x-destiny-component-type-dependency": "VendorSales"
+          },
+          "stringVariables": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/SingleComponentResponseOfDestinyStringVariablesComponent"
+              }
+            ],
+            "description": "A set of string variable values by hash for a public vendors context.\r\nCOMPONENT TYPE: StringVariables",
+            "x-destiny-component-type-dependency": "StringVariables"
           }
         },
         "description": "A response containing all valid components for the public Vendors endpoint.\r\n It is a decisively smaller subset of data compared to what we can get when we know the specific user making the request.\r\n If you want any of the other data - item details, whether or not you can buy it, etc... you'll have to call in the context of a character. I know, sad but true."
@@ -41849,7 +41885,8 @@
               "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
               "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
               "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner",
-              "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods."
+              "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods.",
+              "UserPiiRead": "Allows an app to query sensitive user PII, most notably email information."
             }
           }
         }
