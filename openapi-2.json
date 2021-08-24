@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.11.1"
+    "version": "2.12.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -180,66 +180,6 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/User.GeneralUser"
-                },
-                "ErrorCode": {
-                  "format": "int32",
-                  "type": "integer",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  }
-                },
-                "ThrottleSeconds": {
-                  "format": "int32",
-                  "type": "integer"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/User/SearchUsers/": {
-      "get": {
-        "tags": [
-          "User"
-        ],
-        "description": "Returns a list of possible users based on the search string",
-        "operationId": "User.SearchUsers",
-        "parameters": [
-          {
-            "name": "q",
-            "in": "query",
-            "description": "The search string.",
-            "type": "string"
-          }
-        ],
-        "deprecated": false,
-        "responses": {
-          "200": {
-            "description": "Look at the Response property for more information about the nature of this response",
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/definitions/User.GeneralUser"
-                  }
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -4569,29 +4509,23 @@
         "tags": [
           "Destiny2"
         ],
-        "description": "Returns a list of Destiny memberships given a full Gamertag or PSN ID. Unless you pass returnOriginalProfile=true, this will return membership information for the users' Primary Cross Save Profile if they are engaged in cross save rather than any original Destiny profile that is now being overridden.",
+        "description": "Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.",
         "operationId": "Destiny2.SearchDestinyPlayer",
         "parameters": [
           {
             "name": "displayName",
             "in": "path",
-            "description": "The full gamertag or PSN id of the player. Spaces and case are ignored.",
+            "description": "The full bungie global display name to look up, include the # and the code at the end. This is an exact match lookup.",
             "required": true,
             "type": "string"
           },
           {
             "name": "membershipType",
             "in": "path",
-            "description": "A valid non-BungieNet membership type, or All.",
+            "description": "A valid non-BungieNet membership type, or All. Indicates which memberships to return. You probably want this set to All.",
             "required": true,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "returnOriginalProfile",
-            "in": "query",
-            "description": "(optional) If passed in and set to true, we will return the original Destiny Profile(s) linked to that gamertag, and not their currently active Destiny Profile.",
-            "type": "boolean"
           }
         ],
         "deprecated": false,
@@ -4908,6 +4842,56 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/Destiny.Milestones.DestinyMilestone"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Destiny2/Clan/ClanBannerDictionary/": {
+      "get": {
+        "tags": [
+          "Destiny2"
+        ],
+        "description": "Returns the dictionary of values for the Clan Banner",
+        "operationId": "Destiny2.GetClanBannerSource",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Config.ClanBanner.ClanBannerSource"
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -7880,6 +7864,511 @@
         }
       }
     },
+    "/Social/Friends/": {
+      "get": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Returns your Bungie Friend list",
+        "operationId": "Social.GetFriendList",
+        "parameters": [],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadUserData"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Social.Friends.BungieFriendListResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Requests/": {
+      "get": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Returns your friend request queue.",
+        "operationId": "Social.GetFriendRequestList",
+        "parameters": [],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadUserData"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Social.Friends.BungieFriendRequestListResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Add/{membershipId}/": {
+      "post": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Requests a friend relationship with the target user. Any of the target user's linked membership ids are valid inputs.",
+        "operationId": "Social.IssueFriendRequest",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id of the user you wish to add.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Requests/Accept/{membershipId}/": {
+      "post": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Accepts a friend relationship with the target user. The user must be on your incoming friend request list, though no error will occur if they are not.",
+        "operationId": "Social.AcceptFriendRequest",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id of the user you wish to accept.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Requests/Decline/{membershipId}/": {
+      "post": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Declines a friend relationship with the target user. The user must be on your incoming friend request list, though no error will occur if they are not.",
+        "operationId": "Social.DeclineFriendRequest",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id of the user you wish to decline.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Remove/{membershipId}/": {
+      "post": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Remove a friend relationship with the target user. The user must be on your friend list, though no error will occur if they are not.",
+        "operationId": "Social.RemoveFriend",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id of the user you wish to remove.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/Friends/Requests/Remove/{membershipId}/": {
+      "post": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Remove a friend relationship with the target user. The user must be on your outgoing request friend list, though no error will occur if they are not.",
+        "operationId": "Social.RemoveFriendRequest",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The membership id of the user you wish to remove.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "BnetWrite"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "boolean"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Social/PlatformFriends/{friendPlatform}/{page}/": {
+      "get": {
+        "tags": [
+          "Social"
+        ],
+        "description": "Gets the platform friend of the requested type, with additional information if they have Bungie accounts. Must have a recent login session with said platform.",
+        "operationId": "Social.GetPlatformFriendList",
+        "parameters": [
+          {
+            "name": "friendPlatform",
+            "in": "path",
+            "description": "The platform friend type.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "The zero based page to return. Page size is 100.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Social.Friends.PlatformFriendResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/GetAvailableLocales/": {
       "get": {
         "tags": [
@@ -8304,6 +8793,10 @@
           "items": {
             "$ref": "#/definitions/Applications.ApplicationDeveloper"
           }
+        },
+        "overrideAuthorizeViewName": {
+          "description": "An optional override for the Authorize view name.",
+          "type": "string"
         }
       }
     },
@@ -8407,6 +8900,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -8509,6 +9011,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -8564,6 +9075,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -8679,6 +9199,13 @@
         },
         "twitchDisplayName": {
           "type": "string"
+        },
+        "cachedBungieGlobalDisplayName": {
+          "type": "string"
+        },
+        "cachedBungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "type": "integer"
         }
       }
     },
@@ -8948,6 +9475,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -22631,6 +23167,8 @@
         "233",
         "234",
         "235",
+        "236",
+        "237",
         "300",
         "301",
         "302",
@@ -23152,6 +23690,8 @@
         "2806",
         "2900",
         "2901",
+        "2902",
+        "2903",
         "3000",
         "3001",
         "3002",
@@ -23184,6 +23724,7 @@
         "3029",
         "3030",
         "3031",
+        "3032",
         "3200",
         "3201",
         "3202",
@@ -23239,7 +23780,14 @@
         "3804",
         "3805",
         "3806",
-        "3807"
+        "3807",
+        "3900",
+        "3901",
+        "3902",
+        "3903",
+        "3904",
+        "3905",
+        "3906"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -23971,6 +24519,14 @@
         {
           "numericValue": "235",
           "identifier": "NonTransactionalEmailSendFailure"
+        },
+        {
+          "numericValue": "236",
+          "identifier": "UnknownErrorSettingGlobalDisplayName"
+        },
+        {
+          "numericValue": "237",
+          "identifier": "DuplicateGlobalDisplayName"
         },
         {
           "numericValue": "300",
@@ -26058,6 +26614,14 @@
           "identifier": "SteamWebNullResponseError"
         },
         {
+          "numericValue": "2902",
+          "identifier": "SteamAccountRequired"
+        },
+        {
+          "numericValue": "2903",
+          "identifier": "SteamNotAuthorized"
+        },
+        {
           "numericValue": "3000",
           "identifier": "ClanFireteamNotFound"
         },
@@ -26184,6 +26748,10 @@
         {
           "numericValue": "3031",
           "identifier": "ClanFireteamCannotReopenScheduledFireteams"
+        },
+        {
+          "numericValue": "3032",
+          "identifier": "ClanFireteamJoinNoAccountSpecified"
         },
         {
           "numericValue": "3200",
@@ -26408,6 +26976,34 @@
         {
           "numericValue": "3807",
           "identifier": "NotAnImageOrVideo"
+        },
+        {
+          "numericValue": "3900",
+          "identifier": "ErrorBungieFriendsBlockFailed"
+        },
+        {
+          "numericValue": "3901",
+          "identifier": "ErrorBungieFriendsAutoReject"
+        },
+        {
+          "numericValue": "3902",
+          "identifier": "ErrorBungieFriendsNoRequestFound"
+        },
+        {
+          "numericValue": "3903",
+          "identifier": "ErrorBungieFriendsAlreadyFriends"
+        },
+        {
+          "numericValue": "3904",
+          "identifier": "ErrorBungieFriendsUnableToRemoveRequest"
+        },
+        {
+          "numericValue": "3905",
+          "identifier": "ErrorBungieFriendsUnableToRemove"
+        },
+        {
+          "numericValue": "3906",
+          "identifier": "ErrorBungieFriendsIdenticalSourceTarget"
         }
       ]
     },
@@ -27006,6 +27602,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -28649,6 +29254,11 @@
         },
         "intervalsRedeemedCount": {
           "format": "int32",
+          "type": "integer"
+        },
+        "completedCount": {
+          "format": "int32",
+          "description": "If available, this is the number of times this record has been completed. For example, the number of times a seal title has been gilded.",
           "type": "integer"
         },
         "rewardVisibilty": {
@@ -33918,6 +34528,23 @@
         }
       }
     },
+    "Config.ClanBanner.ClanBannerSource": {
+      "type": "object"
+    },
+    "Config.ClanBanner.ClanBannerDecal": {
+      "type": "object",
+      "properties": {
+        "identifier": {
+          "type": "string"
+        },
+        "foregroundPath": {
+          "type": "string"
+        },
+        "backgroundPath": {
+          "type": "string"
+        }
+      }
+    },
     "Destiny.Responses.DestinyItemResponse": {
       "description": "The response object for retrieving an individual instanced item. None of these components are relevant for an item that doesn't have an \"itemInstanceId\": for those, get your information from the DestinyInventoryDefinition.",
       "type": "object",
@@ -34785,7 +35412,9 @@
         "2048",
         "4096",
         "8192",
-        "16384"
+        "16384",
+        "32768",
+        "65536"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -34868,6 +35497,16 @@
           "numericValue": "16384",
           "identifier": "SeasonalRewardExpiration",
           "description": "This indicates that the item has a seasonal reward expiration."
+        },
+        {
+          "numericValue": "32768",
+          "identifier": "BestDeal",
+          "description": "This indicates that the sale item is the best deal among different choices."
+        },
+        {
+          "numericValue": "65536",
+          "identifier": "Popular",
+          "description": "This indicates that the sale item is popular."
         }
       ]
     },
@@ -38966,7 +39605,7 @@
       "x-enum-values": [
         {
           "numericValue": "0",
-          "identifier": "Unknown"
+          "identifier": "Any"
         },
         {
           "numericValue": "1",
@@ -39208,12 +39847,6 @@
             "$ref": "#/components/schemas/BungieMembershipType"
           }
         },
-        "FireteamPlatformProfileUrl": {
-          "type": "string"
-        },
-        "FireteamPlatformUniqueIdentifier": {
-          "type": "string"
-        },
         "supplementalDisplayName": {
           "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc.",
           "type": "string"
@@ -39262,6 +39895,15 @@
         "displayName": {
           "description": "Display Name the player has chosen for themselves. The display name is optional when the data type is used as input to a platform API.",
           "type": "string"
+        },
+        "bungieGlobalDisplayName": {
+          "description": "The bungie global display name, if set.",
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "description": "The bungie global display name code, if set.",
+          "type": "integer"
         }
       }
     },
@@ -39323,6 +39965,284 @@
         "useTotalResults": {
           "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one.",
           "type": "boolean"
+        }
+      }
+    },
+    "Social.Friends.BungieFriendListResponse": {
+      "type": "object",
+      "properties": {
+        "friends": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Social.Friends.BungieFriend"
+          }
+        }
+      }
+    },
+    "Social.Friends.BungieFriend": {
+      "type": "object",
+      "properties": {
+        "lastSeenAsMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "lastSeenAsBungieMembershipType": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
+        },
+        "bungieGlobalDisplayName": {
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "type": "integer"
+        },
+        "onlineStatus": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Social.Friends.PresenceStatus"
+          }
+        },
+        "onlineTitle": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Social.Friends.PresenceOnlineStateFlags"
+          }
+        },
+        "relationship": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Social.Friends.FriendRelationshipState"
+          }
+        },
+        "bungieNetUser": {
+          "$ref": "#/definitions/User.GeneralUser"
+        }
+      }
+    },
+    "Social.Friends.PresenceStatus": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "OfflineOrUnknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Online"
+        }
+      ]
+    },
+    "Social.Friends.PresenceOnlineStateFlags": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Destiny1"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Destiny2"
+        }
+      ]
+    },
+    "Social.Friends.FriendRelationshipState": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Friend"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "IncomingRequest"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "OutgoingRequest"
+        }
+      ]
+    },
+    "Social.Friends.BungieFriendRequestListResponse": {
+      "type": "object",
+      "properties": {
+        "incomingRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Social.Friends.BungieFriend"
+          }
+        },
+        "outgoingRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Social.Friends.BungieFriend"
+          }
+        }
+      }
+    },
+    "Social.Friends.PlatformFriendType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Xbox"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "PSN"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Steam"
+        }
+      ]
+    },
+    "Social.Friends.PlatformFriendResponse": {
+      "type": "object",
+      "properties": {
+        "itemsPerPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "currentPage": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        },
+        "platformFriends": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Social.Friends.PlatformFriend"
+          }
+        }
+      }
+    },
+    "Social.Friends.PlatformFriend": {
+      "type": "object",
+      "properties": {
+        "platformDisplayName": {
+          "type": "string"
+        },
+        "friendPlatform": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Social.Friends.PlatformFriendType"
+          }
+        },
+        "destinyMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "destinyMembershipType": {
+          "format": "int32",
+          "enum": [
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "10",
+            "254",
+            "-1"
+          ],
+          "type": "integer",
+          "x-enum-values": [
+            {
+              "numericValue": "0",
+              "identifier": "None"
+            },
+            {
+              "numericValue": "1",
+              "identifier": "TigerXbox"
+            },
+            {
+              "numericValue": "2",
+              "identifier": "TigerPsn"
+            },
+            {
+              "numericValue": "3",
+              "identifier": "TigerSteam"
+            },
+            {
+              "numericValue": "4",
+              "identifier": "TigerBlizzard"
+            },
+            {
+              "numericValue": "5",
+              "identifier": "TigerStadia"
+            },
+            {
+              "numericValue": "10",
+              "identifier": "TigerDemon"
+            },
+            {
+              "numericValue": "254",
+              "identifier": "BungieNext"
+            },
+            {
+              "numericValue": "-1",
+              "identifier": "All",
+              "description": "\"All\" is only valid for searching capabilities: you need to pass the actual matching BungieMembershipType for any query where you pass a known membershipId."
+            }
+          ]
+        },
+        "bungieNetMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "bungieGlobalDisplayName": {
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "type": "integer"
         }
       }
     },
@@ -39978,6 +40898,10 @@
     {
       "name": "Fireteam",
       "description": "fireteam"
+    },
+    {
+      "name": "Social",
+      "description": "social"
     },
     {
       "name": "",
