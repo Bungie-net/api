@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-08-24 Update for Cross Play and the Season of the Lost
+
+Added Bungie Names and Bungie Friends.
+
 ## 2021-05-25 Update for Vendor String Variables
 
 Added the 'StringVariables' component option to the D2 Vendor APIs.
