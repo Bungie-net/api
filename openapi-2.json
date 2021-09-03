@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.0"
+    "version": "2.12.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -485,6 +485,72 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/User.HardLinkedUserMembership"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/Search/Prefix/{displayNamePrefix}/{page}/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "operationId": "User.SearchByGlobalNamePrefix",
+        "parameters": [
+          {
+            "name": "displayNamePrefix",
+            "in": "path",
+            "description": "The display name prefix you're looking for.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "The zero-based page of results you desire.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/User.UserSearchResponse"
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -9511,6 +9577,46 @@
         "CrossSaveOverriddenMembershipId": {
           "format": "int64",
           "type": "integer"
+        }
+      }
+    },
+    "User.UserSearchResponse": {
+      "type": "object",
+      "properties": {
+        "searchResults": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User.UserSearchResponseDetail"
+          }
+        },
+        "page": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "hasMore": {
+          "type": "boolean"
+        }
+      }
+    },
+    "User.UserSearchResponseDetail": {
+      "type": "object",
+      "properties": {
+        "bungieGlobalDisplayName": {
+          "type": "string"
+        },
+        "bungieGlobalDisplayNameCode": {
+          "format": "int16",
+          "type": "integer"
+        },
+        "bungieNetMembershipId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "destinyMemberships": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/User.UserInfoCard"
+          }
         }
       }
     },
@@ -20167,7 +20273,8 @@
         "2",
         "3",
         "4",
-        "5"
+        "5",
+        "6"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -20194,6 +20301,10 @@
         {
           "numericValue": "5",
           "identifier": "Subclass"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Stasis"
         }
       ]
     },

@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.0"
+    "version": "2.12.1"
   },
   "servers": [
     {
@@ -277,6 +277,44 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/User.HardLinkedUserMembership"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/User/Search/Prefix/{displayNamePrefix}/{page}/": {
+      "summary": "User.SearchByGlobalNamePrefix",
+      "description": "Given the prefix of a global display name, returns all users who share that name.",
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "operationId": "User.SearchByGlobalNamePrefix",
+        "parameters": [
+          {
+            "name": "displayNamePrefix",
+            "in": "path",
+            "description": "The display name prefix you're looking for.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "The zero-based page of results you desire.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User.UserSearchResponse"
           }
         },
         "deprecated": false
@@ -6678,6 +6716,48 @@
             "type": "integer",
             "format": "int64",
             "nullable": true
+          }
+        }
+      },
+      "User.UserSearchResponse": {
+        "type": "object",
+        "properties": {
+          "searchResults": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User.UserSearchResponseDetail"
+            }
+          },
+          "page": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hasMore": {
+            "type": "boolean"
+          }
+        }
+      },
+      "User.UserSearchResponseDetail": {
+        "type": "object",
+        "properties": {
+          "bungieGlobalDisplayName": {
+            "type": "string"
+          },
+          "bungieGlobalDisplayNameCode": {
+            "type": "integer",
+            "format": "int16",
+            "nullable": true
+          },
+          "bungieNetMembershipId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "destinyMemberships": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/User.UserInfoCard"
+            }
           }
         }
       },
@@ -17595,7 +17675,8 @@
           "2",
           "3",
           "4",
-          "5"
+          "5",
+          "6"
         ],
         "type": "integer",
         "description": "Represents the socket energy types for Armor 2.0, Ghosts 2.0, and Stasis subclasses.",
@@ -17624,6 +17705,10 @@
           {
             "numericValue": "5",
             "identifier": "Subclass"
+          },
+          {
+            "numericValue": "6",
+            "identifier": "Stasis"
           }
         ],
         "x-enum-is-bitmask": false
@@ -39503,6 +39588,51 @@
               "properties": {
                 "Response": {
                   "$ref": "#/components/schemas/User.HardLinkedUserMembership"
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "User.UserSearchResponse": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/User.UserSearchResponse"
                 },
                 "ErrorCode": {
                   "type": "integer",

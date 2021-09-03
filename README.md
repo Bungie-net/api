@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-09-03 Update for Display Name Search and Stasis Energy
+
+Added docs for the new Bungie Name search API and the Stasis Energy type enum value.
+
 ## 2021-08-24 Update for Cross Play and the Season of the Lost
 
 Added Bungie Names and Bungie Friends.
