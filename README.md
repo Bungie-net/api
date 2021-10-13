@@ -6,6 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-10-12 Update for Uninstanced Item Perks
+
+Added support for perk state components on uninstanced items.
+- Mostly just for the Trials of Osiris 'Passage' quest items to show whether a 'Mercy' has been used or not.
+
 ## 2021-09-03 Update for Display Name Search and Stasis Energy
 
 Added docs for the new Bungie Name search API and the Stasis Energy type enum value.

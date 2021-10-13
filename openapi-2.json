@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.1"
+    "version": "2.12.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -30482,6 +30482,17 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
         },
+        "uninstancedItemPerks": {
+          "description": "Sometimes, you have items in your inventory that don't have instances, but still have perks (for example: Trials passage cards). This gives you the perk information for uninstanced items.\r\nThis dictionary is keyed by item hash, which you can use to look up the corresponding item definition. The value is the list of perks states for the item.",
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "ItemPerks",
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
         "checklists": {
           "description": "The set of checklists that can be examined for this specific character, keyed by the hash identifier of the Checklist (DestinyChecklistDefinition)\r\nFor each checklist returned, its value is itself a Dictionary keyed by the checklist's hash identifier with the value being a boolean indicating if it's been discovered yet.",
           "type": "object",
@@ -32299,6 +32310,46 @@
         }
       }
     },
+    "Destiny.Entities.Items.DestinyItemPerksComponent": {
+      "description": "Instanced items can have perks: benefits that the item bestows.\r\nThese are related to DestinySandboxPerkDefinition, and sometimes - but not always - have human readable info. When they do, they are the icons and text that you see in an item's tooltip.\r\nTalent Grids, Sockets, and the item itself can apply Perks, which are then summarized here for your convenience.",
+      "type": "object",
+      "properties": {
+        "perks": {
+          "description": "The list of perks to display in an item tooltip - and whether or not they have been activated.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Perks.DestinyPerkReference"
+          }
+        }
+      },
+      "x-destiny-component-type-dependency": "ItemPerks"
+    },
+    "Destiny.Perks.DestinyPerkReference": {
+      "description": "The list of perks to display in an item tooltip - and whether or not they have been activated.\r\nPerks apply a variety of effects to a character, and are generally either intrinsic to the item or provided in activated talent nodes or sockets.",
+      "type": "object",
+      "properties": {
+        "perkHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the perk, which can be used to look up DestinySandboxPerkDefinition if it exists. Be warned, perks frequently do not have user-viewable information. You should examine whether you actually found a name/description in the perk's definition before you show it to the user.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinySandboxPerkDefinition"
+          }
+        },
+        "iconPath": {
+          "description": "The icon for the perk.",
+          "type": "string"
+        },
+        "isActive": {
+          "description": "Whether this perk is currently active. (We may return perks that you have not actually activated yet: these represent perks that you should show in the item's tooltip, but that the user has not yet activated.)",
+          "type": "boolean"
+        },
+        "visible": {
+          "description": "Some perks provide benefits, but aren't visible in the UI. This value will let you know if this is perk should be shown in your UI.",
+          "type": "boolean"
+        }
+      }
+    },
     "Destiny.Artifacts.DestinyArtifactCharacterScoped": {
       "type": "object",
       "properties": {
@@ -33206,6 +33257,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemPerksComponent"
         }
       }
     },
@@ -33245,6 +33300,29 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "ItemObjectives",
             "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemObjectivesComponent"
+          }
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DictionaryComponentResponseOfuint32AndDestinyItemPerksComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "ItemPerks",
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
           }
         },
         "privacy": {
@@ -33396,6 +33474,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemPerksComponent"
         }
       }
     },
@@ -33422,16 +33504,35 @@
         }
       }
     },
+    "DictionaryComponentResponseOfint64AndDestinyItemPerksComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "ItemPerks",
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
+          }
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
+        }
+      }
+    },
     "DestinyItemComponentSetOfint64": {
       "type": "object",
       "properties": {
         "instances": {
           "x-destiny-component-type-dependency": "ItemInstances",
           "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemInstanceComponent"
-        },
-        "perks": {
-          "x-destiny-component-type-dependency": "ItemPerks",
-          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemPerksComponent"
         },
         "renderData": {
           "x-destiny-component-type-dependency": "ItemRenderData",
@@ -33464,6 +33565,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfint64AndDestinyItemPerksComponent"
         }
       }
     },
@@ -33725,69 +33830,6 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "ItemInstances",
             "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemInstanceComponent"
-          }
-        },
-        "privacy": {
-          "format": "int32",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
-          }
-        },
-        "disabled": {
-          "description": "If true, this component is disabled.",
-          "type": "boolean"
-        }
-      }
-    },
-    "Destiny.Entities.Items.DestinyItemPerksComponent": {
-      "description": "Instanced items can have perks: benefits that the item bestows.\r\nThese are related to DestinySandboxPerkDefinition, and sometimes - but not always - have human readable info. When they do, they are the icons and text that you see in an item's tooltip.\r\nTalent Grids, Sockets, and the item itself can apply Perks, which are then summarized here for your convenience.",
-      "type": "object",
-      "properties": {
-        "perks": {
-          "description": "The list of perks to display in an item tooltip - and whether or not they have been activated.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Perks.DestinyPerkReference"
-          }
-        }
-      },
-      "x-destiny-component-type-dependency": "ItemPerks"
-    },
-    "Destiny.Perks.DestinyPerkReference": {
-      "description": "The list of perks to display in an item tooltip - and whether or not they have been activated.\r\nPerks apply a variety of effects to a character, and are generally either intrinsic to the item or provided in activated talent nodes or sockets.",
-      "type": "object",
-      "properties": {
-        "perkHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the perk, which can be used to look up DestinySandboxPerkDefinition if it exists. Be warned, perks frequently do not have user-viewable information. You should examine whether you actually found a name/description in the perk's definition before you show it to the user.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinySandboxPerkDefinition"
-          }
-        },
-        "iconPath": {
-          "description": "The icon for the perk.",
-          "type": "string"
-        },
-        "isActive": {
-          "description": "Whether this perk is currently active. (We may return perks that you have not actually activated yet: these represent perks that you should show in the item's tooltip, but that the user has not yet activated.)",
-          "type": "boolean"
-        },
-        "visible": {
-          "description": "Some perks provide benefits, but aren't visible in the UI. This value will let you know if this is perk should be shown in your UI.",
-          "type": "boolean"
-        }
-      }
-    },
-    "DictionaryComponentResponseOfint64AndDestinyItemPerksComponent": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "additionalProperties": {
-            "x-destiny-component-type-dependency": "ItemPerks",
-            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
           }
         },
         "privacy": {
@@ -35676,6 +35718,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemPerksComponent"
         }
       }
     },
@@ -35702,16 +35748,35 @@
         }
       }
     },
+    "DictionaryComponentResponseOfint32AndDestinyItemPerksComponent": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "object",
+          "additionalProperties": {
+            "x-destiny-component-type-dependency": "ItemPerks",
+            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
+          }
+        },
+        "privacy": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+          }
+        },
+        "disabled": {
+          "description": "If true, this component is disabled.",
+          "type": "boolean"
+        }
+      }
+    },
     "DestinyItemComponentSetOfint32": {
       "type": "object",
       "properties": {
         "instances": {
           "x-destiny-component-type-dependency": "ItemInstances",
           "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent"
-        },
-        "perks": {
-          "x-destiny-component-type-dependency": "ItemPerks",
-          "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemPerksComponent"
         },
         "renderData": {
           "x-destiny-component-type-dependency": "ItemRenderData",
@@ -35744,6 +35809,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfint32AndDestinyItemPerksComponent"
         }
       }
     },
@@ -35755,29 +35824,6 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "ItemInstances",
             "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemInstanceComponent"
-          }
-        },
-        "privacy": {
-          "format": "int32",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
-          }
-        },
-        "disabled": {
-          "description": "If true, this component is disabled.",
-          "type": "boolean"
-        }
-      }
-    },
-    "DictionaryComponentResponseOfint32AndDestinyItemPerksComponent": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "additionalProperties": {
-            "x-destiny-component-type-dependency": "ItemPerks",
-            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
           }
         },
         "privacy": {
@@ -36290,10 +36336,6 @@
           "x-destiny-component-type-dependency": "ItemInstances",
           "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemInstanceComponent"
         },
-        "perks": {
-          "x-destiny-component-type-dependency": "ItemPerks",
-          "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemPerksComponent"
-        },
         "renderData": {
           "x-destiny-component-type-dependency": "ItemRenderData",
           "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemRenderComponent"
@@ -36325,6 +36367,10 @@
         "objectives": {
           "x-destiny-component-type-dependency": "ItemObjectives",
           "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemObjectivesComponent"
+        },
+        "perks": {
+          "x-destiny-component-type-dependency": "ItemPerks",
+          "$ref": "#/definitions/DictionaryComponentResponseOfuint32AndDestinyItemPerksComponent"
         }
       }
     },
@@ -36336,29 +36382,6 @@
           "additionalProperties": {
             "x-destiny-component-type-dependency": "ItemInstances",
             "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemInstanceComponent"
-          }
-        },
-        "privacy": {
-          "format": "int32",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
-          }
-        },
-        "disabled": {
-          "description": "If true, this component is disabled.",
-          "type": "boolean"
-        }
-      }
-    },
-    "DictionaryComponentResponseOfuint32AndDestinyItemPerksComponent": {
-      "type": "object",
-      "properties": {
-        "data": {
-          "type": "object",
-          "additionalProperties": {
-            "x-destiny-component-type-dependency": "ItemPerks",
-            "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemPerksComponent"
           }
         },
         "privacy": {
