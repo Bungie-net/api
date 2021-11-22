@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.2"
+    "version": "2.12.3"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -523,7 +523,7 @@
         "tags": [
           "User"
         ],
-        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "description": "[OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead.",
         "operationId": "User.SearchByGlobalNamePrefix",
         "parameters": [
           {
@@ -533,6 +533,65 @@
             "required": true,
             "type": "string"
           },
+          {
+            "name": "page",
+            "in": "path",
+            "description": "The zero-based page of results you desire.",
+            "required": true,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/User.UserSearchResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/Search/GlobalName/{page}/": {
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "operationId": "User.SearchByGlobalNamePost",
+        "parameters": [
           {
             "name": "page",
             "in": "path",
@@ -4570,21 +4629,14 @@
         }
       }
     },
-    "/Destiny2/SearchDestinyPlayer/{membershipType}/{displayName}/": {
-      "get": {
+    "/Destiny2/SearchDestinyPlayerByBungieName/{membershipType}/": {
+      "post": {
         "tags": [
           "Destiny2"
         ],
         "description": "Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.",
-        "operationId": "Destiny2.SearchDestinyPlayer",
+        "operationId": "Destiny2.SearchDestinyPlayerByBungieName",
         "parameters": [
-          {
-            "name": "displayName",
-            "in": "path",
-            "description": "The full bungie global display name to look up, include the # and the code at the end. This is an exact match lookup.",
-            "required": true,
-            "type": "string"
-          },
           {
             "name": "membershipType",
             "in": "path",
@@ -9617,6 +9669,14 @@
           "items": {
             "$ref": "#/definitions/User.UserInfoCard"
           }
+        }
+      }
+    },
+    "User.UserSearchPrefixRequest": {
+      "type": "object",
+      "properties": {
+        "displayNamePrefix": {
+          "type": "string"
         }
       }
     },
@@ -23516,6 +23576,7 @@
         "1007",
         "1008",
         "1009",
+        "1010",
         "1100",
         "1204",
         "1205",
@@ -25584,6 +25645,10 @@
           "identifier": "IgnoreUserIgnored"
         },
         {
+          "numericValue": "1010",
+          "identifier": "TargetUserIgnored"
+        },
+        {
           "numericValue": "1100",
           "identifier": "NotificationSettingInvalid"
         },
@@ -27563,6 +27628,18 @@
         }
       }
     },
+    "User.ExactSearchRequest": {
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "type": "string"
+        },
+        "displayNameCode": {
+          "format": "int16",
+          "type": "integer"
+        }
+      }
+    },
     "Destiny.Responses.DestinyLinkedProfilesResponse": {
       "description": "I know what you seek. You seek linked accounts. Found them, you have.\r\nThis contract returns a minimal amount of data about Destiny Accounts that are linked through your Bungie.Net account. We will not return accounts in this response whose",
       "type": "object",
@@ -27627,7 +27704,9 @@
             "8",
             "16",
             "32",
-            "64"
+            "64",
+            "128",
+            "256"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -27662,6 +27741,14 @@
             {
               "numericValue": "64",
               "identifier": "BeyondLight"
+            },
+            {
+              "numericValue": "128",
+              "identifier": "Anniversary30th"
+            },
+            {
+              "numericValue": "256",
+              "identifier": "TheWitchQueen"
             }
           ]
         },
@@ -28009,7 +28096,9 @@
         "8",
         "16",
         "32",
-        "64"
+        "64",
+        "128",
+        "256"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -28044,6 +28133,14 @@
         {
           "numericValue": "64",
           "identifier": "BeyondLight"
+        },
+        {
+          "numericValue": "128",
+          "identifier": "Anniversary30th"
+        },
+        {
+          "numericValue": "256",
+          "identifier": "TheWitchQueen"
         }
       ]
     },

@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.2"
+    "version": "2.12.3"
   },
   "servers": [
     {
@@ -284,12 +284,12 @@
     },
     "/User/Search/Prefix/{displayNamePrefix}/{page}/": {
       "summary": "User.SearchByGlobalNamePrefix",
-      "description": "Given the prefix of a global display name, returns all users who share that name.",
+      "description": "[OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead.",
       "get": {
         "tags": [
           "User"
         ],
-        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "description": "[OBSOLETE] Do not use this to search users, use SearchByGlobalNamePost instead.",
         "operationId": "User.SearchByGlobalNamePrefix",
         "parameters": [
           {
@@ -312,6 +312,45 @@
             }
           }
         ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/User.UserSearchResponse"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/User/Search/GlobalName/{page}/": {
+      "summary": "User.SearchByGlobalNamePost",
+      "description": "Given the prefix of a global display name, returns all users who share that name.",
+      "post": {
+        "tags": [
+          "User"
+        ],
+        "description": "Given the prefix of a global display name, returns all users who share that name.",
+        "operationId": "User.SearchByGlobalNamePost",
+        "parameters": [
+          {
+            "name": "page",
+            "in": "path",
+            "description": "The zero-based page of results you desire.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User.UserSearchPrefixRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "$ref": "#/components/responses/User.UserSearchResponse"
@@ -3060,25 +3099,16 @@
         "deprecated": false
       }
     },
-    "/Destiny2/SearchDestinyPlayer/{membershipType}/{displayName}/": {
-      "summary": "Destiny2.SearchDestinyPlayer",
+    "/Destiny2/SearchDestinyPlayerByBungieName/{membershipType}/": {
+      "summary": "Destiny2.SearchDestinyPlayerByBungieName",
       "description": "Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.",
-      "get": {
+      "post": {
         "tags": [
           "Destiny2"
         ],
         "description": "Returns a list of Destiny memberships given a global Bungie Display Name. This method will hide overridden memberships due to cross save.",
-        "operationId": "Destiny2.SearchDestinyPlayer",
+        "operationId": "Destiny2.SearchDestinyPlayerByBungieName",
         "parameters": [
-          {
-            "name": "displayName",
-            "in": "path",
-            "description": "The full bungie global display name to look up, include the # and the code at the end. This is an exact match lookup.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
           {
             "name": "membershipType",
             "in": "path",
@@ -3095,6 +3125,16 @@
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/User.ExactSearchRequest"
+              }
+            }
+          },
+          "required": true
+        },
         "responses": {
           "200": {
             "$ref": "#/components/responses/IEnumerableOfUserInfoCard"
@@ -6758,6 +6798,14 @@
             "items": {
               "$ref": "#/components/schemas/User.UserInfoCard"
             }
+          }
+        }
+      },
+      "User.UserSearchPrefixRequest": {
+        "type": "object",
+        "properties": {
+          "displayNamePrefix": {
+            "type": "string"
           }
         }
       },
@@ -21013,6 +21061,7 @@
           "1007",
           "1008",
           "1009",
+          "1010",
           "1100",
           "1204",
           "1205",
@@ -23082,6 +23131,10 @@
             "identifier": "IgnoreUserIgnored"
           },
           {
+            "numericValue": "1010",
+            "identifier": "TargetUserIgnored"
+          },
+          {
             "numericValue": "1100",
             "identifier": "NotificationSettingInvalid"
           },
@@ -25087,6 +25140,18 @@
           }
         }
       },
+      "User.ExactSearchRequest": {
+        "type": "object",
+        "properties": {
+          "displayName": {
+            "type": "string"
+          },
+          "displayNameCode": {
+            "type": "integer",
+            "format": "int16"
+          }
+        }
+      },
       "Destiny.Responses.DestinyLinkedProfilesResponse": {
         "type": "object",
         "properties": {
@@ -25149,7 +25214,9 @@
               "8",
               "16",
               "32",
-              "64"
+              "64",
+              "128",
+              "256"
             ],
             "type": "integer",
             "description": "If this profile is not in a cross save pairing, this will return the game versions that we believe this profile has access to.\r\n For the time being, we will not return this information for any membership that is in a cross save pairing. The gist is that, once the pairing occurs, we do not currently have a consistent way to get that information for the profile's original Platform, and thus gameVersions would be too inconsistent (based on the last platform they happened to play on) for the info to be useful.\r\n If we ever can get this data, this field will be deprecated and replaced with data on the DestinyLinkedProfileResponse itself, with game versions per linked Platform. But since we can't get that, we have this as a stop-gap measure for getting the data in the only situation that we currently need it.",
@@ -25187,6 +25254,14 @@
               {
                 "numericValue": "64",
                 "identifier": "BeyondLight"
+              },
+              {
+                "numericValue": "128",
+                "identifier": "Anniversary30th"
+              },
+              {
+                "numericValue": "256",
+                "identifier": "TheWitchQueen"
               }
             ],
             "x-enum-is-bitmask": true
@@ -25561,7 +25636,9 @@
           "8",
           "16",
           "32",
-          "64"
+          "64",
+          "128",
+          "256"
         ],
         "type": "integer",
         "description": "A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.",
@@ -25598,6 +25675,14 @@
           {
             "numericValue": "64",
             "identifier": "BeyondLight"
+          },
+          {
+            "numericValue": "128",
+            "identifier": "Anniversary30th"
+          },
+          {
+            "numericValue": "256",
+            "identifier": "TheWitchQueen"
           }
         ],
         "x-enum-is-bitmask": true

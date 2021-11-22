@@ -6,6 +6,11 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-11-18 Update for Bungie Name Search
+
+Added new Bungie Name search APIs with POST requests for special characters.
+- You can call these to find player names that have colons, slashes, angle brackets, etc.
+
 ## 2021-10-12 Update for Uninstanced Item Perks
 
 Added support for perk state components on uninstanced items.
