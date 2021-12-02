@@ -9,7 +9,7 @@ This section will be added to as time goes by - we're working with it as we go!
 ## 2021-12-07 Update for Bungie's 30th Anniversary
 
 Added a new `InsertSocketPlugFree` API for 'free and reversible' socket actions available to 3rd-party Destiny 2 apps (no new application scopes required).
-- This includes Armor 2.0 mods, Weapon perks, Shaders, and Ornaments, and Ghost Projections.
+- This includes Armor 2.0 mods, Weapon perks, Stasis abilities, Shaders, Ornaments, and Ghost Projections.
   - Only 'randomized' or 'reusable' socket plugs items with no 'insertion material requirements' will be allowed.
   - You will not be able to overwrite a 'non-free' plug item with a 'free' plug item (for example: replacing a Weapon mod with an 'Empty Socket Mod').
 - 3rd-party Destiny 2 apps will still not be able to spend your currencies for socket actions.
