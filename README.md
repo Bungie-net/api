@@ -6,6 +6,20 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2021-12-07 Update for Bungie's 30th Anniversary
+
+Added a new `InsertSocketPlugFree` API for 'free and reversible' socket actions available to 3rd-party Destiny 2 apps (no new application scopes required).
+- This includes Armor 2.0 mods, Weapon perks, Shaders, and Ornaments, and Ghost Projections.
+  - Only 'randomized' or 'reusable' socket plugs items with no 'insertion material requirements' will be allowed.
+  - You will not be able to overwrite a 'non-free' plug item with a 'free' plug item (for example: replacing a Weapon mod with an 'Empty Socket Mod').
+- 3rd-party Destiny 2 apps will still not be able to spend your currencies for socket actions.
+  - As such, 3rd-party Destiny 2 apps won’t be able to apply Weapon and Armor Masterwork tiers, Weapon mods, Armor 1.0 mods, Ghost 2.0 mods, and Ship Transmat effects.
+- `Destiny2CoreSettings` includes new hash arrays for some additional restrictions:
+  - Check `insertPlugFreeProtectedPlugItemHashes` for protected plug item hashes that you can't overwrite (currently just Riven's Curse and Transcendent Blessing mods).
+  - Check `insertPlugFreeBlockedSocketTypeHashes` for blocked socket type hashes that you can't change (currently just Weapon 'Kill Tracker' sockets).
+- The `InsertSocketPlugFree` API will initially be rate-limited to 2 socket actions per-second, per-user.
+  - This rate can be adjusted based on your feedback and service stability.
+
 ## 2021-11-18 Update for Bungie Name Search
 
 Added new Bungie Name search APIs with POST requests for special characters.

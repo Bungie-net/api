@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.3"
+    "version": "2.13.0"
   },
   "servers": [
     {
@@ -3994,7 +3994,47 @@
         ],
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "1"
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
+        }
+      }
+    },
+    "/Destiny2/Actions/Items/InsertSocketPlugFree/": {
+      "summary": "Destiny2.InsertSocketPlugFree",
+      "description": "Insert a 'free' plug into an item's socket. This does not require 'Advanced Write Action' authorization and is available to 3rd-party apps, but will only work on 'free and reversible' socket actions (Perks, Armor Mods, Shaders, Ornaments, etc.). You must have a valid Destiny Account, and the character must either be in a social space, in orbit, or offline.",
+      "post": {
+        "tags": [
+          "Destiny2",
+          "Preview"
+        ],
+        "description": "Insert a 'free' plug into an item's socket. This does not require 'Advanced Write Action' authorization and is available to 3rd-party apps, but will only work on 'free and reversible' socket actions (Perks, Armor Mods, Shaders, Ornaments, etc.). You must have a valid Destiny Account, and the character must either be in a social space, in orbit, or offline.",
+        "operationId": "Destiny2.InsertSocketPlugFree",
+        "parameters": [],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/Destiny.Requests.Actions.DestinyInsertPlugsFreeActionRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Destiny.Responses.DestinyItemChangeResponse"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "MoveEquipDestinyItems"
+            ]
+          }
+        ],
+        "x-preview": true,
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
         }
       }
     },
@@ -10843,7 +10883,8 @@
       "Destiny.DestinyVendorProgressionType": {
         "enum": [
           "0",
-          "1"
+          "1",
+          "2"
         ],
         "type": "integer",
         "description": "Describes the type of progression that a vendor has.",
@@ -10858,6 +10899,11 @@
             "numericValue": "1",
             "identifier": "Ritual",
             "description": "Progression from ranks in ritual content. For example: Crucible (Shaxx), Gambit (Drifter), and Season 13 Battlegrounds (War Table)."
+          },
+          {
+            "numericValue": "2",
+            "identifier": "NoSeasonalRefresh",
+            "description": "A vendor progression with no seasonal refresh. For example: Xur in the Eternity destination for the 30th Anniversary."
           }
         ],
         "x-enum-is-bitmask": false
@@ -12585,7 +12631,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -12900,6 +12947,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -14119,7 +14170,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -14434,6 +14486,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -14543,7 +14599,8 @@
           "81",
           "82",
           "83",
-          "84"
+          "84",
+          "85"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -14857,6 +14914,10 @@
           {
             "numericValue": "84",
             "identifier": "TrialsOfOsiris"
+          },
+          {
+            "numericValue": "85",
+            "identifier": "Dares"
           }
         ],
         "x-enum-is-bitmask": false
@@ -21444,7 +21505,11 @@
           "3903",
           "3904",
           "3905",
-          "3906"
+          "3906",
+          "3907",
+          "3908",
+          "3910",
+          "3911"
         ],
         "type": "integer",
         "format": "int32",
@@ -24666,6 +24731,22 @@
           {
             "numericValue": "3906",
             "identifier": "ErrorBungieFriendsIdenticalSourceTarget"
+          },
+          {
+            "numericValue": "3907",
+            "identifier": "ErrorBungieFriendsSelf"
+          },
+          {
+            "numericValue": "3908",
+            "identifier": "ErrorBungieBlockSelf"
+          },
+          {
+            "numericValue": "3910",
+            "identifier": "ErrorBungieFriendsListFull"
+          },
+          {
+            "numericValue": "3911",
+            "identifier": "ErrorBungieBlockListFull"
           }
         ],
         "x-enum-is-bitmask": false
@@ -28728,7 +28809,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -29043,6 +29125,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -29175,7 +29261,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -29490,6 +29577,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -30589,7 +30680,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -30904,6 +30996,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -33695,7 +33791,8 @@
           "8192",
           "16384",
           "32768",
-          "65536"
+          "65536",
+          "131072"
         ],
         "type": "integer",
         "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration/bitmask for v3.2.0.",
@@ -33790,6 +33887,11 @@
             "numericValue": "65536",
             "identifier": "Popular",
             "description": "This indicates that the sale item is popular."
+          },
+          {
+            "numericValue": "131072",
+            "identifier": "Free",
+            "description": "This indicates that the sale item is free."
           }
         ],
         "x-enum-is-bitmask": true
@@ -34844,6 +34946,7 @@
         "properties": {
           "itemId": {
             "type": "integer",
+            "description": "The instance ID of the item for this action request.",
             "format": "int64"
           },
           "characterId": {
@@ -34876,6 +34979,7 @@
           },
           "itemId": {
             "type": "integer",
+            "description": "The instance ID of the item for this action request.",
             "format": "int64"
           },
           "characterId": {
@@ -34905,6 +35009,7 @@
           },
           "itemId": {
             "type": "integer",
+            "description": "The instance ID of the item for this action request.",
             "format": "int64"
           },
           "characterId": {
@@ -34985,6 +35090,7 @@
           },
           "itemId": {
             "type": "integer",
+            "description": "The instance ID of the item for this action request.",
             "format": "int64"
           },
           "characterId": {
@@ -35122,6 +35228,37 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "Destiny.Requests.Actions.DestinyInsertPlugsFreeActionRequest": {
+        "type": "object",
+        "properties": {
+          "plug": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry"
+              }
+            ],
+            "description": "The plugs being inserted."
+          },
+          "itemId": {
+            "type": "integer",
+            "description": "The instance ID of the item for this action request.",
+            "format": "int64"
+          },
+          "characterId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "membershipType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieMembershipType"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
       },
       "Destiny.HistoricalStats.DestinyPostGameCarnageReportData": {
         "type": "object",
@@ -36632,7 +36769,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -36947,6 +37085,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -37049,7 +37191,8 @@
               "81",
               "82",
               "83",
-              "84"
+              "84",
+              "85"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -37364,6 +37507,10 @@
               {
                 "numericValue": "84",
                 "identifier": "TrialsOfOsiris"
+              },
+              {
+                "numericValue": "85",
+                "identifier": "Dares"
               }
             ],
             "x-enum-is-bitmask": false
@@ -39021,6 +39168,20 @@
             "format": "uint32"
           },
           "currentRankProgressionHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "insertPlugFreeProtectedPlugItemHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "insertPlugFreeBlockedSocketTypeHashes": {
             "type": "array",
             "items": {
               "type": "integer",

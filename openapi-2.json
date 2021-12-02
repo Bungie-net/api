@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.12.3"
+    "version": "2.13.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -5912,7 +5912,69 @@
         },
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "1"
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
+        }
+      }
+    },
+    "/Destiny2/Actions/Items/InsertSocketPlugFree/": {
+      "post": {
+        "tags": [
+          "Destiny2",
+          "Preview"
+        ],
+        "description": "Insert a 'free' plug into an item's socket. This does not require 'Advanced Write Action' authorization and is available to 3rd-party apps, but will only work on 'free and reversible' socket actions (Perks, Armor Mods, Shaders, Ornaments, etc.). You must have a valid Destiny Account, and the character must either be in a social space, in orbit, or offline.",
+        "operationId": "Destiny2.InsertSocketPlugFree",
+        "parameters": [],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "MoveEquipDestinyItems"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/definitions/Destiny.Responses.DestinyItemChangeResponse"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "x-preview": true,
+        "x-documentation-attributes": {
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
         }
       }
     },
@@ -13597,7 +13659,8 @@
       "description": "Describes the type of progression that a vendor has.",
       "enum": [
         "0",
-        "1"
+        "1",
+        "2"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -13610,6 +13673,11 @@
           "numericValue": "1",
           "identifier": "Ritual",
           "description": "Progression from ranks in ritual content. For example: Crucible (Shaxx), Gambit (Drifter), and Season 13 Battlegrounds (War Table)."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "NoSeasonalRefresh",
+          "description": "A vendor progression with no seasonal refresh. For example: Xur in the Eternity destination for the 30th Anniversary."
         }
       ]
     },
@@ -15305,7 +15373,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -15617,6 +15686,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         },
@@ -16812,7 +16885,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -17124,6 +17198,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         },
@@ -17232,7 +17310,8 @@
         "81",
         "82",
         "83",
-        "84"
+        "84",
+        "85"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -17544,6 +17623,10 @@
         {
           "numericValue": "84",
           "identifier": "TrialsOfOsiris"
+        },
+        {
+          "numericValue": "85",
+          "identifier": "Dares"
         }
       ]
     },
@@ -23959,7 +24042,11 @@
         "3903",
         "3904",
         "3905",
-        "3906"
+        "3906",
+        "3907",
+        "3908",
+        "3910",
+        "3911"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -27180,6 +27267,22 @@
         {
           "numericValue": "3906",
           "identifier": "ErrorBungieFriendsIdenticalSourceTarget"
+        },
+        {
+          "numericValue": "3907",
+          "identifier": "ErrorBungieFriendsSelf"
+        },
+        {
+          "numericValue": "3908",
+          "identifier": "ErrorBungieBlockSelf"
+        },
+        {
+          "numericValue": "3910",
+          "identifier": "ErrorBungieFriendsListFull"
+        },
+        {
+          "numericValue": "3911",
+          "identifier": "ErrorBungieBlockListFull"
         }
       ]
     },
@@ -30986,7 +31089,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -31298,6 +31402,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         },
@@ -31430,7 +31538,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -31742,6 +31851,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         }
@@ -32792,7 +32905,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33104,6 +33218,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         },
@@ -35664,7 +35782,8 @@
         "8192",
         "16384",
         "32768",
-        "65536"
+        "65536",
+        "131072"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -35757,6 +35876,11 @@
           "numericValue": "65536",
           "identifier": "Popular",
           "description": "This indicates that the sale item is popular."
+        },
+        {
+          "numericValue": "131072",
+          "identifier": "Free",
+          "description": "This indicates that the sale item is free."
         }
       ]
     },
@@ -36665,6 +36789,7 @@
       "properties": {
         "itemId": {
           "format": "int64",
+          "description": "The instance ID of the item for this action request.",
           "type": "integer"
         },
         "characterId": {
@@ -36696,6 +36821,7 @@
         },
         "itemId": {
           "format": "int64",
+          "description": "The instance ID of the item for this action request.",
           "type": "integer"
         },
         "characterId": {
@@ -36724,6 +36850,7 @@
         },
         "itemId": {
           "format": "int64",
+          "description": "The instance ID of the item for this action request.",
           "type": "integer"
         },
         "characterId": {
@@ -36801,6 +36928,7 @@
         },
         "itemId": {
           "format": "int64",
+          "description": "The instance ID of the item for this action request.",
           "type": "integer"
         },
         "characterId": {
@@ -36934,6 +37062,36 @@
           "identifier": "Intrinsic"
         }
       ]
+    },
+    "Destiny.Requests.Actions.DestinyInsertPlugsFreeActionRequest": {
+      "type": "object",
+      "properties": {
+        "plug": {
+          "description": "The plugs being inserted.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Requests.Actions.DestinyInsertPlugsRequestEntry"
+            }
+          ]
+        },
+        "itemId": {
+          "format": "int64",
+          "description": "The instance ID of the item for this action request.",
+          "type": "integer"
+        },
+        "characterId": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "membershipType": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieMembershipType"
+          }
+        }
+      }
     },
     "Destiny.HistoricalStats.DestinyPostGameCarnageReportData": {
       "type": "object",
@@ -38375,7 +38533,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -38687,6 +38846,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         }
@@ -38789,7 +38952,8 @@
             "81",
             "82",
             "83",
-            "84"
+            "84",
+            "85"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -39101,6 +39265,10 @@
             {
               "numericValue": "84",
               "identifier": "TrialsOfOsiris"
+            },
+            {
+              "numericValue": "85",
+              "identifier": "Dares"
             }
           ]
         }
@@ -40691,6 +40859,20 @@
           "type": "integer"
         },
         "currentRankProgressionHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "insertPlugFreeProtectedPlugItemHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "insertPlugFreeBlockedSocketTypeHashes": {
           "type": "array",
           "items": {
             "format": "uint32",
