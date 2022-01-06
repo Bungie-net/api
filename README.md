@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-01-06 Update for Mapped Definition Attributes
+
+Added hash-to-definition-type mapping attributes that were missing for many contract class properties.
+
 ## 2021-12-07 Update for Bungie's 30th Anniversary
 
 Added a new `InsertSocketPlugFree` API for 'free and reversible' socket actions available to 3rd-party Destiny 2 apps (no new application scopes required).

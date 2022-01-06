@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.13.0"
+    "version": "2.13.1"
   },
   "servers": [
     {
@@ -10502,7 +10502,10 @@
         "properties": {
           "classHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyClassDefinition"
+            }
           },
           "artArrangementHash": {
             "type": "integer",
@@ -10510,93 +10513,161 @@
           }
         }
       },
-      "Destiny.Definitions.DestinyItemPreviewBlockDefinition": {
+      "Destiny.Definitions.DestinyClassDefinition": {
         "type": "object",
         "properties": {
-          "screenStyle": {
-            "type": "string",
-            "description": "A string that the game UI uses as a hint for which detail screen to show for the item. You, too, can leverage this for your own custom screen detail views. Note, however, that these are arbitrarily defined by designers: there's no guarantees of a fixed, known number of these - so fall back to something reasonable if you don't recognize it."
-          },
-          "previewVendorHash": {
+          "classType": {
             "type": "integer",
-            "description": "If the preview data is derived from a fake \"Preview\" Vendor, this will be the hash identifier for the DestinyVendorDefinition of that fake vendor.",
+            "description": "In Destiny 1, we added a convenience Enumeration for referring to classes. We've kept it, though mostly for posterity. This is the enum value for this definition's class.",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyClass"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "genderedClassNames": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "description": "A localized string referring to the singular form of the Class's name when referred to in gendered form. Keyed by the DestinyGender.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyGender"
+              },
+              "x-enum-is-bitmask": false
+            }
+          },
+          "genderedClassNamesByGenderHash": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "mentorVendorHash": {
+            "type": "integer",
+            "description": "Mentors don't really mean anything anymore. Don't expect this to be populated.",
             "format": "uint32",
+            "nullable": true,
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
             }
           },
-          "artifactHash": {
+          "hash": {
             "type": "integer",
-            "description": "If this item should show you Artifact information when you preview it, this is the hash identifier of the DestinyArtifactDefinition for the artifact whose data should be shown.",
-            "format": "uint32",
-            "nullable": true,
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Artifacts.DestinyArtifactDefinition"
-            }
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
           },
-          "previewActionString": {
-            "type": "string",
-            "description": "If the preview has an associated action (like \"Open\"), this will be the localized string for that action."
-          },
-          "derivedItemCategories": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyDerivedItemCategoryDefinition"
-            },
-            "description": "This is a list of the items being previewed, categorized in the same way as they are in the preview UI."
-          }
-        },
-        "description": "Items like Sacks or Boxes can have items that it shows in-game when you view details that represent the items you can obtain if you use or acquire the item.\r\nThis defines those categories, and gives some insights into that data's source."
-      },
-      "Destiny.Definitions.Items.DestinyDerivedItemCategoryDefinition": {
-        "type": "object",
-        "properties": {
-          "categoryDescription": {
-            "type": "string",
-            "description": "The localized string for the category title. This will be something describing the items you can get as a group, or your likelihood/the quantity you'll get."
-          },
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyDerivedItemDefinition"
-            },
-            "description": "This is the list of all of the items for this category and the basic properties we'll know about them."
-          }
-        },
-        "description": "A shortcut for the fact that some items have a \"Preview Vendor\" - See DestinyInventoryItemDefinition.preview.previewVendorHash - that is intended to be used to show what items you can get as a result of acquiring or using this item.\r\nA common example of this in Destiny 1 was Eververse \"Boxes,\" which could have many possible items. This \"Preview Vendor\" is not a vendor you can actually see in the game, but it defines categories and sale items for all of the possible items you could get from the Box so that the game can show them to you. We summarize that info here so that you don't have to do that Vendor lookup and aggregation manually."
-      },
-      "Destiny.Definitions.Items.DestinyDerivedItemDefinition": {
-        "type": "object",
-        "properties": {
-          "itemHash": {
+          "index": {
             "type": "integer",
-            "description": "The hash for the DestinyInventoryItemDefinition of this derived item, if there is one. Sometimes we are given this information as a manual override, in which case there won't be an actual DestinyInventoryItemDefinition for what we display, but you can still show the strings from this object itself.",
-            "format": "uint32",
-            "nullable": true
-          },
-          "itemName": {
-            "type": "string",
-            "description": "The name of the derived item."
-          },
-          "itemDetail": {
-            "type": "string",
-            "description": "Additional details about the derived item, in addition to the description."
-          },
-          "itemDescription": {
-            "type": "string",
-            "description": "A brief description of the item."
-          },
-          "iconPath": {
-            "type": "string",
-            "description": "An icon for the item."
-          },
-          "vendorItemIndex": {
-            "type": "integer",
-            "description": "If the item was derived from a \"Preview Vendor\", this will be an index into the DestinyVendorDefinition's itemList property. Otherwise, -1.",
+            "description": "The index of the entity as it was found in the investment tables.",
             "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
           }
         },
-        "description": "This is a reference to, and summary data for, a specific item that you can get as a result of Using or Acquiring some other Item (For example, this could be summary information for an Emote that you can get by opening an an Eververse Box) See DestinyDerivedItemCategoryDefinition for more information."
+        "description": "Defines a Character Class in Destiny 2. These are types of characters you can play, like Titan, Warlock, and Hunter.",
+        "x-mobile-manifest-name": "Classes"
+      },
+      "Destiny.DestinyClass": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Titan"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Hunter"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Warlock"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "Unknown"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.DestinyGender": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Male"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Female"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Unknown"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.DestinyGenderDefinition": {
+        "type": "object",
+        "properties": {
+          "genderType": {
+            "type": "integer",
+            "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames.",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyGender"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "Gender is a social construct, and as such we have definitions for Genders. Right now there happens to only be two, but we'll see what the future holds.",
+        "x-mobile-manifest-name": "Genders"
       },
       "Destiny.Definitions.DestinyVendorDefinition": {
         "type": "object",
@@ -11058,7 +11129,10 @@
             "type": "integer",
             "description": "If this overlay has a currency item that it features, this is said featured item.",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           }
         },
         "description": "The details of an overlay prompt to show to a user. They are all fairly self-explanatory localized strings that can be shown."
@@ -11572,7 +11646,10 @@
           "inventoryBucketHash": {
             "type": "integer",
             "description": "The inventory bucket into which this item will be placed upon purchase.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryBucketDefinition"
+            }
           },
           "visibilityScope": {
             "type": "integer",
@@ -11978,7 +12055,10 @@
         "properties": {
           "currencyItemHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           },
           "scalarValue": {
             "type": "integer",
@@ -13399,7 +13479,10 @@
             "type": "integer",
             "description": "The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk has a damage type.\r\nThis is preferred over using the damageType enumeration value, which has been left purely because it is occasionally convenient.",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyDamageTypeDefinition"
+            }
           },
           "perkGroups": {
             "type": "object",
@@ -13797,6 +13880,53 @@
           }
         ],
         "x-enum-is-bitmask": true
+      },
+      "Destiny.Definitions.DestinyDamageTypeDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+              }
+            ],
+            "description": "The description of the damage type, icon etc..."
+          },
+          "transparentIconPath": {
+            "type": "string",
+            "description": "A variant of the icon that is transparent and colorless."
+          },
+          "showIcon": {
+            "type": "boolean",
+            "description": "If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether you show it or not is up to you."
+          },
+          "enumValue": {
+            "type": "integer",
+            "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DamageType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "All damage types that are possible in the game are defined here, along with localized info and icons as needed.",
+        "x-mobile-manifest-name": "DamageTypes"
       },
       "Destiny.Definitions.DestinyObjectiveStatEntryDefinition": {
         "type": "object",
@@ -15739,6 +15869,94 @@
         },
         "description": "These definitions represent faction vendors at different points in the game.\r\nA single faction may contain multiple vendors, or the same vendor available at two different locations."
       },
+      "Destiny.Definitions.DestinyItemPreviewBlockDefinition": {
+        "type": "object",
+        "properties": {
+          "screenStyle": {
+            "type": "string",
+            "description": "A string that the game UI uses as a hint for which detail screen to show for the item. You, too, can leverage this for your own custom screen detail views. Note, however, that these are arbitrarily defined by designers: there's no guarantees of a fixed, known number of these - so fall back to something reasonable if you don't recognize it."
+          },
+          "previewVendorHash": {
+            "type": "integer",
+            "description": "If the preview data is derived from a fake \"Preview\" Vendor, this will be the hash identifier for the DestinyVendorDefinition of that fake vendor.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
+          },
+          "artifactHash": {
+            "type": "integer",
+            "description": "If this item should show you Artifact information when you preview it, this is the hash identifier of the DestinyArtifactDefinition for the artifact whose data should be shown.",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Artifacts.DestinyArtifactDefinition"
+            }
+          },
+          "previewActionString": {
+            "type": "string",
+            "description": "If the preview has an associated action (like \"Open\"), this will be the localized string for that action."
+          },
+          "derivedItemCategories": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyDerivedItemCategoryDefinition"
+            },
+            "description": "This is a list of the items being previewed, categorized in the same way as they are in the preview UI."
+          }
+        },
+        "description": "Items like Sacks or Boxes can have items that it shows in-game when you view details that represent the items you can obtain if you use or acquire the item.\r\nThis defines those categories, and gives some insights into that data's source."
+      },
+      "Destiny.Definitions.Items.DestinyDerivedItemCategoryDefinition": {
+        "type": "object",
+        "properties": {
+          "categoryDescription": {
+            "type": "string",
+            "description": "The localized string for the category title. This will be something describing the items you can get as a group, or your likelihood/the quantity you'll get."
+          },
+          "items": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyDerivedItemDefinition"
+            },
+            "description": "This is the list of all of the items for this category and the basic properties we'll know about them."
+          }
+        },
+        "description": "A shortcut for the fact that some items have a \"Preview Vendor\" - See DestinyInventoryItemDefinition.preview.previewVendorHash - that is intended to be used to show what items you can get as a result of acquiring or using this item.\r\nA common example of this in Destiny 1 was Eververse \"Boxes,\" which could have many possible items. This \"Preview Vendor\" is not a vendor you can actually see in the game, but it defines categories and sale items for all of the possible items you could get from the Box so that the game can show them to you. We summarize that info here so that you don't have to do that Vendor lookup and aggregation manually."
+      },
+      "Destiny.Definitions.Items.DestinyDerivedItemDefinition": {
+        "type": "object",
+        "properties": {
+          "itemHash": {
+            "type": "integer",
+            "description": "The hash for the DestinyInventoryItemDefinition of this derived item, if there is one. Sometimes we are given this information as a manual override, in which case there won't be an actual DestinyInventoryItemDefinition for what we display, but you can still show the strings from this object itself.",
+            "format": "uint32",
+            "nullable": true
+          },
+          "itemName": {
+            "type": "string",
+            "description": "The name of the derived item."
+          },
+          "itemDetail": {
+            "type": "string",
+            "description": "Additional details about the derived item, in addition to the description."
+          },
+          "itemDescription": {
+            "type": "string",
+            "description": "A brief description of the item."
+          },
+          "iconPath": {
+            "type": "string",
+            "description": "An icon for the item."
+          },
+          "vendorItemIndex": {
+            "type": "integer",
+            "description": "If the item was derived from a \"Preview Vendor\", this will be an index into the DestinyVendorDefinition's itemList property. Otherwise, -1.",
+            "format": "int32"
+          }
+        },
+        "description": "This is a reference to, and summary data for, a specific item that you can get as a result of Using or Acquiring some other Item (For example, this could be summary information for an Emote that you can get by opening an an Eververse Box) See DestinyDerivedItemCategoryDefinition for more information."
+      },
       "Destiny.Definitions.Artifacts.DestinyArtifactDefinition": {
         "type": "object",
         "properties": {
@@ -15821,7 +16039,10 @@
           "itemHash": {
             "type": "integer",
             "description": "The identifier of the Plug Item unlocked by activating this item in the Artifact.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           }
         }
       },
@@ -17220,63 +17441,6 @@
           }
         }
       },
-      "Destiny.DestinyGender": {
-        "enum": [
-          "0",
-          "1",
-          "2"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Male"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Female"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Unknown"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.DestinyGenderDefinition": {
-        "type": "object",
-        "properties": {
-          "genderType": {
-            "type": "integer",
-            "description": "This is a quick reference enumeration for all of the currently defined Genders. We use the enumeration for quicker lookups in related data, like DestinyClassDefinition.genderedClassNames.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.DestinyGender"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "Gender is a social construct, and as such we have definitions for Genders. Right now there happens to only be two, but we'll see what the future holds.",
-        "x-mobile-manifest-name": "Genders"
-      },
       "Destiny.Definitions.Records.DestinyRecordCompletionBlock": {
         "type": "object",
         "properties": {
@@ -17404,7 +17568,10 @@
         "properties": {
           "intervalObjectiveHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyObjectiveDefinition"
+            }
           },
           "intervalScoreValue": {
             "type": "integer",
@@ -17855,12 +18022,18 @@
             "type": "integer",
             "description": "If this Energy Type can be used for determining the Type of Energy that an item can consume, this is the hash for the DestinyInvestmentStatDefinition that represents the stat which holds the Capacity for that energy type. (Note that this is optional because \"Any\" is a valid cost, but not valid for Capacity - an Armor must have a specific Energy Type for determining the energy type that the Armor is restricted to use)",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyStatDefinition"
+            }
           },
           "costStatHash": {
             "type": "integer",
             "description": "If this Energy Type can be used as a cost to pay for socketing Armor 2.0 items, this is the hash for the DestinyInvestmentStatDefinition that stores the plug's raw cost.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyStatDefinition"
+            }
           },
           "hash": {
             "type": "integer",
@@ -18613,53 +18786,6 @@
         },
         "description": "This is a bit of an odd duck. Apparently, if talent nodes steps have this data, the game will go through on step activation and alter the first Socket it finds on the item that has a type matching the given socket type, inserting the indicated plug item."
       },
-      "Destiny.Definitions.DestinyDamageTypeDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "type": "object",
-            "allOf": [
-              {
-                "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-              }
-            ],
-            "description": "The description of the damage type, icon etc..."
-          },
-          "transparentIconPath": {
-            "type": "string",
-            "description": "A variant of the icon that is transparent and colorless."
-          },
-          "showIcon": {
-            "type": "boolean",
-            "description": "If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether you show it or not is up to you."
-          },
-          "enumValue": {
-            "type": "integer",
-            "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.DamageType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "All damage types that are possible in the game are defined here, along with localized info and icons as needed.",
-        "x-mobile-manifest-name": "DamageTypes"
-      },
       "Destiny.Definitions.DestinyTalentNodeExclusiveSetDefinition": {
         "type": "object",
         "properties": {
@@ -19022,35 +19148,6 @@
           {
             "numericValue": "29",
             "identifier": "Finisher"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.DestinyClass": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Titan"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Hunter"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Warlock"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Unknown"
           }
         ],
         "x-enum-is-bitmask": false
@@ -25534,7 +25631,10 @@
             "type": "integer",
             "description": "The identifier for the currently-selected metric definition, to be displayed on the emblem nameplate.",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Metrics.DestinyMetricDefinition"
+            }
           },
           "metricObjective": {
             "type": "object",
@@ -26950,7 +27050,10 @@
           "vendorHash": {
             "type": "integer",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
           },
           "vendorInteractionIndex": {
             "type": "integer",
@@ -28186,76 +28289,6 @@
         },
         "description": "In Destiny, \"Races\" are really more like \"Species\". Sort of. I mean, are the Awoken a separate species from humans? I'm not sure. But either way, they're defined here. You'll see Exo, Awoken, and Human as examples of these Species. Players will choose one for their character.",
         "x-mobile-manifest-name": "Races"
-      },
-      "Destiny.Definitions.DestinyClassDefinition": {
-        "type": "object",
-        "properties": {
-          "classType": {
-            "type": "integer",
-            "description": "In Destiny 1, we added a convenience Enumeration for referring to classes. We've kept it, though mostly for posterity. This is the enum value for this definition's class.",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.DestinyClass"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "genderedClassNames": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "description": "A localized string referring to the singular form of the Class's name when referred to in gendered form. Keyed by the DestinyGender.",
-            "x-dictionary-key": {
-              "type": "integer",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/Destiny.DestinyGender"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          "genderedClassNamesByGenderHash": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
-            },
-            "x-dictionary-key": {
-              "type": "integer",
-              "format": "uint32"
-            }
-          },
-          "mentorVendorHash": {
-            "type": "integer",
-            "description": "Mentors don't really mean anything anymore. Don't expect this to be populated.",
-            "format": "uint32",
-            "nullable": true,
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
-            }
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "Defines a Character Class in Destiny 2. These are types of characters you can play, like Titan, Warlock, and Hunter.",
-        "x-mobile-manifest-name": "Classes"
       },
       "DictionaryComponentResponseOfint64AndDestinyCharacterComponent": {
         "type": "object",
@@ -30229,7 +30262,10 @@
           "activityHash": {
             "type": "integer",
             "description": "The activity for which this challenge is active.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
+            }
           },
           "challenges": {
             "type": "array",
@@ -30259,7 +30295,10 @@
           "challengeObjectiveHash": {
             "type": "integer",
             "description": "The challenge related to this milestone.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyObjectiveDefinition"
+            }
           }
         }
       },
@@ -34968,7 +35007,10 @@
         "properties": {
           "itemReferenceHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           },
           "stackSize": {
             "type": "integer",
@@ -35001,7 +35043,10 @@
         "properties": {
           "itemReferenceHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           },
           "stackSize": {
             "type": "integer",
@@ -35487,15 +35532,24 @@
           },
           "classHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyClassDefinition"
+            }
           },
           "raceHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyRaceDefinition"
+            }
           },
           "genderHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyGenderDefinition"
+            }
           },
           "characterLevel": {
             "type": "integer",
@@ -35527,7 +35581,10 @@
           "emblemHash": {
             "type": "integer",
             "description": "If we know the emblem's hash, this can be used to look up the player's emblem at the time of a match when receiving PGCR data, or otherwise their currently equipped emblem (if we are able to obtain it).",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
           }
         }
       },
@@ -35804,7 +35861,10 @@
             "type": "integer",
             "description": "The tier associated with this medal - be it implicitly or explicitly.",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyMedalTierDefinition"
+            }
           }
         },
         "x-mobile-manifest-name": "HistoricalStats"
@@ -36098,6 +36158,36 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.DestinyMedalTierDefinition": {
+        "type": "object",
+        "properties": {
+          "tierName": {
+            "type": "string",
+            "description": "The name of the tier."
+          },
+          "order": {
+            "type": "integer",
+            "description": "If you're rendering medals by tier, render them in this order (ascending)",
+            "format": "int32"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "An artificial construct of our own creation, to try and put some order on top of Medals and keep them from being one giant, unmanageable and unsorted blob of stats.\r\nUnfortunately, we haven't had time to do this evaluation yet in Destiny 2, so we're short on Medal Tiers. This will hopefully be updated over time, if Medals continue to exist.",
+        "x-mobile-manifest-name": "MedalTiers"
       },
       "Destiny.HistoricalStats.DestinyLeaderboard": {
         "type": "object",
@@ -37102,7 +37192,10 @@
           "activityHash": {
             "type": "integer",
             "description": "The hash identifier of this activity variant. Examine the activity's definition in the Manifest database to determine what makes it a distinct variant. Usually it will be difficulty level or whether or not it is a guided game variant of the activity, but theoretically it could be distinguished in any arbitrary way.",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
+            }
           },
           "activityModeHash": {
             "type": "integer",
@@ -39121,57 +39214,96 @@
         "properties": {
           "collectionRootNode": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "badgesRootNode": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "recordsRootNode": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "medalsRootNode": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "metricsRootNode": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "activeTriumphsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "activeSealsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "legacyTriumphsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "legacySealsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "medalsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "exoticCatalystsRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "loreRootNodeHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
           },
           "currentRankProgressionHashes": {
             "type": "array",
             "items": {
               "type": "integer",
               "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyProgressionDefinition"
             }
           },
           "insertPlugFreeProtectedPlugItemHashes": {
@@ -39179,6 +39311,9 @@
             "items": {
               "type": "integer",
               "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
           },
           "insertPlugFreeBlockedSocketTypeHashes": {
@@ -39186,6 +39321,9 @@
             "items": {
               "type": "integer",
               "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Sockets.DestinySocketTypeDefinition"
             }
           },
           "undiscoveredCollectibleImage": {
@@ -39202,12 +39340,18 @@
           },
           "currentSeasonalArtifactHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
           },
           "currentSeasonHash": {
             "type": "integer",
             "format": "uint32",
-            "nullable": true
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+            }
           },
           "seasonalChallengesPresentationNodeHash": {
             "type": "integer",
@@ -39222,6 +39366,9 @@
             "items": {
               "type": "integer",
               "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
             }
           },
           "pastSeasonHashes": {
@@ -39229,6 +39376,9 @@
             "items": {
               "type": "integer",
               "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
             }
           }
         }
