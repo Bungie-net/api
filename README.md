@@ -6,6 +6,35 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-02-22 Update for The Witch Queen
+
+- Items
+  - Added new `ItemState` flag values for Shaped (`Crafted`) and Deepsight (`HighlightedObjective`) weapons.
+  - Added `DestinyItemCraftingBlockDefinition` for more details in crafting recipe (Pattern) item definitions.
+  - Added `recipeItemHash` to `DestinyItemInventoryBlockDefinition` for a reference to the crafted item's recipe (Pattern) definition.
+  - Added `craftingRequirements` to `DestinyItemSocketEntryPlugItemRandomizedDefinition` for plugs used in crafting.
+    - New 'Enhanced Trait' plug item definitions have an `inventory.tierType` value of `Common` (3) instead of `Basic` (2).
+  - Added a new `DestinyItemSubType` for `Glaive` weapons.
+- Objectives
+  - Added `uiLabel` and `uiState` properties to `DestinyObjectiveDefinition`.
+  - Added `DestinyObjectiveUiStyle` enum values for highlighted objectives (Deepsight), crafted item objectives (date, level, progress), and memento reward objectives.
+  - Added `LevelAndReward` to `DestinyUnlockValueUIStyle` for memento reward objectives.
+- Craftables
+  - Added the `craftingRootNodeHash` to `Destiny2CoreSettings` for the display of Shaping progress.
+    - The `exoticCatalystsRootNodeHash` now includes unlock progress records for weapon shaping 'Patterns' as well as Exotic Catalysts.
+  - Added `craftables` (crafting recipe items) as children of `DestinyPresentationNodeDefinition`.
+  - Added a new `Craftables` enum value for `DestinyComponentType` for use with `GetProfile`.
+  - Added `characterCraftables` state to `DestinyProfileResponse`.
+    - Only initial Shaping state is returned, not Reshaping state.
+- Material Requirements can now have non-constant values.
+  - Added `countIsConstant` for constant `count` values.
+  - Non-constant counts will have a value of `0` in the definition.
+  - We plan to add support for non-constant counts in the API, but we don't have an ETA.
+- Activities
+  - Added `activityWasStartedFromBeginning` to `DestinyPostGameCarnageReportData` as an alternative to `startingPhaseIndex`.
+  - Added a new `DestinyActivityModeType` enum value for `Offensive` activities.
+    - We plan to add another enum value for Master and Legend `LostSector` activities soon.
+
 ## 2022-01-06 Update for Mapped Definition Attributes
 
 Added hash-to-definition-type mapping attributes that were missing for many contract class properties.
