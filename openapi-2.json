@@ -12475,7 +12475,7 @@
           "format": "uint32",
           "type": "integer",
           "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinySocketTypeDefinition"
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
         }
       }
@@ -12896,7 +12896,7 @@
           "description": "A reference to the associated crafting 'recipe' item definition, if this item can be crafted.",
           "type": "integer",
           "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyUnlockValueDefinition"
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
         }
       }
@@ -13143,26 +13143,6 @@
           "format": "int32",
           "description": "As long as InfuserQuality > InfuseeQuality, the amount of quality bestowed is guaranteed to be at least this value, even if the transferRatio would dictate that it should be less. The total amount of quality that ends up in the Infusee cannot exceed the Infuser's quality however (for instance, if you infuse a 300 item with a 301 item and the minimum quality increment is 10, the infused item will not end up with 310 quality)",
           "type": "integer"
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyUnlockValueDefinition": {
-      "description": "An Unlock Value is an internal integer value, stored on the server and used in a variety of ways, most frequently for the gating/requirement checks that the game performs across all of its main features. They can also be used as the storage data for mapped Progressions, Objectives, and other features that require storage of variable numeric values.",
-      "type": "object",
-      "properties": {
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
         }
       }
     },
@@ -19970,6 +19950,26 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyUnlockValueDefinition"
           }
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyUnlockValueDefinition": {
+      "description": "An Unlock Value is an internal integer value, stored on the server and used in a variety of ways, most frequently for the gating/requirement checks that the game performs across all of its main features. They can also be used as the storage data for mapped Progressions, Objectives, and other features that require storage of variable numeric values.",
+      "type": "object",
+      "properties": {
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
         }
       }
     },
@@ -34067,7 +34067,7 @@
           }
         },
         "sockets": {
-          "description": "Plug item state for the crafting sockets, keyed by socket type hash.",
+          "description": "Plug item state for the crafting sockets.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Destiny.Components.Craftables.DestinyCraftableSocketComponent"

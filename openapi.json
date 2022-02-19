@@ -9672,7 +9672,7 @@
             "type": "integer",
             "format": "uint32",
             "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Sockets.DestinySocketTypeDefinition"
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
           }
         }
@@ -10100,7 +10100,7 @@
             "format": "uint32",
             "nullable": true,
             "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyUnlockValueDefinition"
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
             }
           }
         },
@@ -10357,26 +10357,6 @@
             "format": "int32"
           }
         }
-      },
-      "Destiny.Definitions.DestinyUnlockValueDefinition": {
-        "type": "object",
-        "properties": {
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "An Unlock Value is an internal integer value, stored on the server and used in a variety of ways, most frequently for the gating/requirement checks that the game performs across all of its main features. They can also be used as the storage data for mapped Progressions, Objectives, and other features that require storage of variable numeric values."
       },
       "Destiny.Definitions.DestinyItemSetBlockDefinition": {
         "type": "object",
@@ -17330,6 +17310,26 @@
             }
           }
         }
+      },
+      "Destiny.Definitions.DestinyUnlockValueDefinition": {
+        "type": "object",
+        "properties": {
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "An Unlock Value is an internal integer value, stored on the server and used in a variety of ways, most frequently for the gating/requirement checks that the game performs across all of its main features. They can also be used as the storage data for mapped Progressions, Objectives, and other features that require storage of variable numeric values."
       },
       "Destiny.Definitions.Collectibles.DestinyCollectibleStateBlock": {
         "type": "object",
@@ -31929,7 +31929,7 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Components.Craftables.DestinyCraftableSocketComponent"
             },
-            "description": "Plug item state for the crafting sockets, keyed by socket type hash."
+            "description": "Plug item state for the crafting sockets."
           }
         }
       },
