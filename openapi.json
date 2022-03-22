@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.14.0"
+    "version": "2.14.1"
   },
   "servers": [
     {
@@ -118,6 +118,35 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/User.GeneralUser"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/User/GetSanitizedPlatformDisplayNames/{membershipId}/": {
+      "summary": "User.GetSanitizedPlatformDisplayNames",
+      "description": "Gets a list of all display names linked to this membership id but sanitized (profanity filtered). Obeys all visibility rules of calling user and is heavily cached.",
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Gets a list of all display names linked to this membership id but sanitized (profanity filtered). Obeys all visibility rules of calling user and is heavily cached.",
+        "operationId": "User.GetSanitizedPlatformDisplayNames",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The requested membership id to load.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/CEDictionaryOfBungieCredentialTypeAndstring"
           }
         },
         "deprecated": false
@@ -6556,28 +6585,6 @@
         ],
         "x-enum-is-bitmask": true
       },
-      "User.Models.GetCredentialTypesForAccountResponse": {
-        "type": "object",
-        "properties": {
-          "credentialType": {
-            "type": "integer",
-            "format": "byte",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/BungieCredentialType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "credentialDisplayName": {
-            "type": "string"
-          },
-          "isPublic": {
-            "type": "boolean"
-          },
-          "credentialAsString": {
-            "type": "string"
-          }
-        }
-      },
       "BungieCredentialType": {
         "enum": [
           "0",
@@ -6652,6 +6659,28 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "User.Models.GetCredentialTypesForAccountResponse": {
+        "type": "object",
+        "properties": {
+          "credentialType": {
+            "type": "integer",
+            "format": "byte",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/BungieCredentialType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "credentialDisplayName": {
+            "type": "string"
+          },
+          "isPublic": {
+            "type": "boolean"
+          },
+          "credentialAsString": {
+            "type": "string"
+          }
+        }
       },
       "Config.UserTheme": {
         "type": "object",
@@ -12856,7 +12885,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -13179,6 +13209,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -13286,6 +13320,12 @@
         "properties": {
           "displayProperties": {
             "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "displayInNavMode": {
+            "type": "boolean"
+          },
+          "displayInActivitySelection": {
+            "type": "boolean"
           },
           "hash": {
             "type": "integer",
@@ -14514,7 +14554,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -14837,6 +14878,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -14948,7 +14993,8 @@
           "83",
           "84",
           "85",
-          "86"
+          "86",
+          "87"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -15270,6 +15316,10 @@
           {
             "numericValue": "86",
             "identifier": "Offensive"
+          },
+          {
+            "numericValue": "87",
+            "identifier": "LostSector"
           }
         ],
         "x-enum-is-bitmask": false
@@ -18585,6 +18635,12 @@
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyPlugItemCraftingUnlockRequirement"
             }
           },
+          "requiredLevel": {
+            "type": "integer",
+            "description": "If the plug has a known level requirement, it'll be available here.",
+            "format": "int32",
+            "nullable": true
+          },
           "materialRequirementHashes": {
             "type": "array",
             "items": {
@@ -19302,7 +19358,8 @@
           "26",
           "27",
           "28",
-          "29"
+          "29",
+          "30"
         ],
         "type": "integer",
         "description": "An enumeration that indicates the high-level \"type\" of the item, attempting to iron out the context specific differences for specific instances of an entity. For instance, though a weapon may be of various weapon \"Types\", in DestinyItemType they are all classified as \"Weapon\". This allows for better filtering on a higher level of abstraction for the concept of types.\r\n This enum is provided for historical compatibility with Destiny 1, but an ideal alternative is to use DestinyItemCategoryDefinitions and the DestinyItemDefinition.itemCategories property instead. Item Categories allow for arbitrary hierarchies of specificity, and for items to belong to multiple categories across multiple hierarchies simultaneously. For this enum, we pick a single type as a \"best guess\" fit.\r\n NOTE: This is not all of the item types available, and some of these are holdovers from Destiny 1 that may or may not still exist.\r\n I keep updating these because they're so damn convenient. I guess I shouldn't fight it.",
@@ -19415,6 +19472,10 @@
           {
             "numericValue": "29",
             "identifier": "Finisher"
+          },
+          {
+            "numericValue": "30",
+            "identifier": "Pattern"
           }
         ],
         "x-enum-is-bitmask": false
@@ -21250,6 +21311,10 @@
           "235",
           "236",
           "237",
+          "238",
+          "239",
+          "240",
+          "241",
           "300",
           "301",
           "302",
@@ -21807,6 +21872,12 @@
           "3030",
           "3031",
           "3032",
+          "3033",
+          "3034",
+          "3035",
+          "3036",
+          "3037",
+          "3038",
           "3200",
           "3201",
           "3202",
@@ -22614,6 +22685,22 @@
           {
             "numericValue": "237",
             "identifier": "DuplicateGlobalDisplayName"
+          },
+          {
+            "numericValue": "238",
+            "identifier": "ErrorRunningNameValidationChecks"
+          },
+          {
+            "numericValue": "239",
+            "identifier": "ErrorDatabaseGlobalName"
+          },
+          {
+            "numericValue": "240",
+            "identifier": "ErrorNoAvailableNameChanges"
+          },
+          {
+            "numericValue": "241",
+            "identifier": "ErrorNameAlreadySetToInput"
           },
           {
             "numericValue": "300",
@@ -24843,6 +24930,30 @@
           {
             "numericValue": "3032",
             "identifier": "ClanFireteamJoinNoAccountSpecified"
+          },
+          {
+            "numericValue": "3033",
+            "identifier": "ClanFireteamMinDestiny2ProgressForCreation"
+          },
+          {
+            "numericValue": "3034",
+            "identifier": "ClanFireteamMinDestiny2ProgressForJoin"
+          },
+          {
+            "numericValue": "3035",
+            "identifier": "ClanFireteamSMSOrPurchaseRequiredCreate"
+          },
+          {
+            "numericValue": "3036",
+            "identifier": "ClanFireteamPurchaseRequiredCreate"
+          },
+          {
+            "numericValue": "3037",
+            "identifier": "ClanFireteamSMSOrPurchaseRequiredJoin"
+          },
+          {
+            "numericValue": "3038",
+            "identifier": "ClanFireteamPurchaseRequiredJoin"
           },
           {
             "numericValue": "3200",
@@ -29139,7 +29250,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -29462,6 +29574,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -29596,7 +29712,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -29919,6 +30036,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -31026,7 +31147,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -31349,6 +31471,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -35744,13 +35870,13 @@
           },
           "startingPhaseIndex": {
             "type": "integer",
-            "description": "OBSOLETE - If this activity has \"phases\", this is the phase at which the activity was started.",
+            "description": "If this activity has \"phases\", this is the phase at which the activity was started. This value is only valid for activities before the Beyond Light expansion shipped. Subsequent activities will not have a valid value here.",
             "format": "int32",
             "nullable": true
           },
           "activityWasStartedFromBeginning": {
             "type": "boolean",
-            "description": "True if the activity was started from the beginning, if that information is available.",
+            "description": "True if the activity was started from the beginning, if that information is available and the activity was played post Witch Queen release.",
             "nullable": true
           },
           "activityDetails": {
@@ -37295,7 +37421,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -37618,6 +37745,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -37725,7 +37856,8 @@
               "83",
               "84",
               "85",
-              "86"
+              "86",
+              "87"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -38048,6 +38180,10 @@
               {
                 "numericValue": "86",
                 "identifier": "Offensive"
+              },
+              {
+                "numericValue": "87",
+                "identifier": "LostSector"
               }
             ],
             "x-enum-is-bitmask": false
@@ -40276,6 +40412,63 @@
               "properties": {
                 "Response": {
                   "$ref": "#/components/schemas/User.GeneralUser"
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "CEDictionaryOfBungieCredentialTypeAndstring": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "integer",
+                    "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
+                    "format": "byte",
+                    "x-enum-reference": {
+                      "$ref": "#/components/schemas/BungieCredentialType"
+                    },
+                    "x-enum-is-bitmask": false
+                  }
                 },
                 "ErrorCode": {
                   "type": "integer",

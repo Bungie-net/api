@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.14.0"
+    "version": "2.14.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -180,6 +180,68 @@
               "properties": {
                 "Response": {
                   "$ref": "#/definitions/User.GeneralUser"
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/User/GetSanitizedPlatformDisplayNames/{membershipId}/": {
+      "get": {
+        "tags": [
+          "User"
+        ],
+        "description": "Gets a list of all display names linked to this membership id but sanitized (profanity filtered). Obeys all visibility rules of calling user and is heavily cached.",
+        "operationId": "User.GetSanitizedPlatformDisplayNames",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "The requested membership id to load.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
                 },
                 "ErrorCode": {
                   "format": "int32",
@@ -9462,27 +9524,6 @@
         }
       ]
     },
-    "User.Models.GetCredentialTypesForAccountResponse": {
-      "type": "object",
-      "properties": {
-        "credentialType": {
-          "format": "byte",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/BungieCredentialType"
-          }
-        },
-        "credentialDisplayName": {
-          "type": "string"
-        },
-        "isPublic": {
-          "type": "boolean"
-        },
-        "credentialAsString": {
-          "type": "string"
-        }
-      }
-    },
     "BungieCredentialType": {
       "format": "byte",
       "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
@@ -9556,6 +9597,27 @@
           "identifier": "TwitchId"
         }
       ]
+    },
+    "User.Models.GetCredentialTypesForAccountResponse": {
+      "type": "object",
+      "properties": {
+        "credentialType": {
+          "format": "byte",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/BungieCredentialType"
+          }
+        },
+        "credentialDisplayName": {
+          "type": "string"
+        },
+        "isPublic": {
+          "type": "boolean"
+        },
+        "credentialAsString": {
+          "type": "string"
+        }
+      }
     },
     "Config.UserTheme": {
       "type": "object",
@@ -15581,7 +15643,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -15901,6 +15964,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         },
@@ -16006,6 +16073,12 @@
       "properties": {
         "displayProperties": {
           "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "displayInNavMode": {
+          "type": "boolean"
+        },
+        "displayInActivitySelection": {
+          "type": "boolean"
         },
         "hash": {
           "format": "uint32",
@@ -17209,7 +17282,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -17529,6 +17603,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         },
@@ -17639,7 +17717,8 @@
         "83",
         "84",
         "85",
-        "86"
+        "86",
+        "87"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -17959,6 +18038,10 @@
         {
           "numericValue": "86",
           "identifier": "Offensive"
+        },
+        {
+          "numericValue": "87",
+          "identifier": "LostSector"
         }
       ]
     },
@@ -21187,6 +21270,11 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyPlugItemCraftingUnlockRequirement"
           }
         },
+        "requiredLevel": {
+          "format": "int32",
+          "description": "If the plug has a known level requirement, it'll be available here.",
+          "type": "integer"
+        },
         "materialRequirementHashes": {
           "type": "array",
           "items": {
@@ -21893,7 +21981,8 @@
         "26",
         "27",
         "28",
-        "29"
+        "29",
+        "30"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -22004,6 +22093,10 @@
         {
           "numericValue": "29",
           "identifier": "Finisher"
+        },
+        {
+          "numericValue": "30",
+          "identifier": "Pattern"
         }
       ]
     },
@@ -23769,6 +23862,10 @@
         "235",
         "236",
         "237",
+        "238",
+        "239",
+        "240",
+        "241",
         "300",
         "301",
         "302",
@@ -24326,6 +24423,12 @@
         "3030",
         "3031",
         "3032",
+        "3033",
+        "3034",
+        "3035",
+        "3036",
+        "3037",
+        "3038",
         "3200",
         "3201",
         "3202",
@@ -25132,6 +25235,22 @@
         {
           "numericValue": "237",
           "identifier": "DuplicateGlobalDisplayName"
+        },
+        {
+          "numericValue": "238",
+          "identifier": "ErrorRunningNameValidationChecks"
+        },
+        {
+          "numericValue": "239",
+          "identifier": "ErrorDatabaseGlobalName"
+        },
+        {
+          "numericValue": "240",
+          "identifier": "ErrorNoAvailableNameChanges"
+        },
+        {
+          "numericValue": "241",
+          "identifier": "ErrorNameAlreadySetToInput"
         },
         {
           "numericValue": "300",
@@ -27361,6 +27480,30 @@
         {
           "numericValue": "3032",
           "identifier": "ClanFireteamJoinNoAccountSpecified"
+        },
+        {
+          "numericValue": "3033",
+          "identifier": "ClanFireteamMinDestiny2ProgressForCreation"
+        },
+        {
+          "numericValue": "3034",
+          "identifier": "ClanFireteamMinDestiny2ProgressForJoin"
+        },
+        {
+          "numericValue": "3035",
+          "identifier": "ClanFireteamSMSOrPurchaseRequiredCreate"
+        },
+        {
+          "numericValue": "3036",
+          "identifier": "ClanFireteamPurchaseRequiredCreate"
+        },
+        {
+          "numericValue": "3037",
+          "identifier": "ClanFireteamSMSOrPurchaseRequiredJoin"
+        },
+        {
+          "numericValue": "3038",
+          "identifier": "ClanFireteamPurchaseRequiredJoin"
         },
         {
           "numericValue": "3200",
@@ -31415,7 +31558,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -31735,6 +31879,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         },
@@ -31869,7 +32017,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -32189,6 +32338,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         }
@@ -33247,7 +33400,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33567,6 +33721,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         },
@@ -37563,11 +37721,11 @@
         },
         "startingPhaseIndex": {
           "format": "int32",
-          "description": "OBSOLETE - If this activity has \"phases\", this is the phase at which the activity was started.",
+          "description": "If this activity has \"phases\", this is the phase at which the activity was started. This value is only valid for activities before the Beyond Light expansion shipped. Subsequent activities will not have a valid value here.",
           "type": "integer"
         },
         "activityWasStartedFromBeginning": {
-          "description": "True if the activity was started from the beginning, if that information is available.",
+          "description": "True if the activity was started from the beginning, if that information is available and the activity was played post Witch Queen release.",
           "type": "boolean"
         },
         "activityDetails": {
@@ -39044,7 +39202,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -39364,6 +39523,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         }
@@ -39471,7 +39634,8 @@
             "83",
             "84",
             "85",
-            "86"
+            "86",
+            "87"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -39791,6 +39955,10 @@
             {
               "numericValue": "86",
               "identifier": "Offensive"
+            },
+            {
+              "numericValue": "87",
+              "identifier": "LostSector"
             }
           ]
         }
