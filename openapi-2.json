@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.14.1"
+    "version": "2.14.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -13717,7 +13717,10 @@
         },
         "weaponPatternHash": {
           "format": "uint32",
-          "type": "integer"
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinySandboxPatternDefinition"
+          }
         },
         "defaultDyes": {
           "type": "array",
@@ -16166,7 +16169,7 @@
         },
         "valueStyle": {
           "format": "int32",
-          "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
+          "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.\r\nDEPRECATED: This is no longer populated by Destiny 2 game content. Please use inProgressValueStyle and completedValueStyle instead.",
           "type": "integer",
           "x-enum-reference": {
             "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
@@ -18847,6 +18850,83 @@
         }
       }
     },
+    "Destiny.Definitions.DestinySandboxPatternDefinition": {
+      "type": "object",
+      "properties": {
+        "patternHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "patternGlobalTagIdHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "weaponContentGroupHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "weaponTranslationGroupHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "weaponTypeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "weaponType": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemSubType"
+          }
+        },
+        "filters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyArrangementRegionFilterDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "SandboxPatterns"
+    },
+    "Destiny.Definitions.DestinyArrangementRegionFilterDefinition": {
+      "type": "object",
+      "properties": {
+        "artArrangementRegionHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "artArrangementRegionIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "statHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "arrangementIndexByStatValue": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
     "Destiny.Definitions.DestinyItemPreviewBlockDefinition": {
       "description": "Items like Sacks or Boxes can have items that it shows in-game when you view details that represent the items you can obtain if you use or acquire the item.\r\nThis defines those categories, and gives some insights into that data's source.",
       "type": "object",
@@ -19605,7 +19685,7 @@
             "type": "integer"
           },
           "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitCategoryDefinition"
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
           }
         },
         "traitIds": {
@@ -28674,7 +28754,7 @@
         },
         "progress": {
           "format": "int32",
-          "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
+          "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle before rendering progress.",
           "type": "integer"
         },
         "completionValue": {

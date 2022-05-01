@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.14.1"
+    "version": "2.14.2"
   },
   "servers": [
     {
@@ -10914,7 +10914,10 @@
           },
           "weaponPatternHash": {
             "type": "integer",
-            "format": "uint32"
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinySandboxPatternDefinition"
+            }
           },
           "defaultDyes": {
             "type": "array",
@@ -13414,7 +13417,7 @@
           },
           "valueStyle": {
             "type": "integer",
-            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
+            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.\r\nDEPRECATED: This is no longer populated by Destiny 2 game content. Please use inProgressValueStyle and completedValueStyle instead.",
             "format": "int32",
             "x-enum-reference": {
               "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
@@ -16146,6 +16149,89 @@
         },
         "description": "These definitions represent faction vendors at different points in the game.\r\nA single faction may contain multiple vendors, or the same vendor available at two different locations."
       },
+      "Destiny.Definitions.DestinySandboxPatternDefinition": {
+        "type": "object",
+        "properties": {
+          "patternHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "patternGlobalTagIdHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "weaponContentGroupHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "weaponTranslationGroupHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "weaponTypeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "nullable": true
+          },
+          "weaponType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyItemSubType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "filters": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyArrangementRegionFilterDefinition"
+            }
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "SandboxPatterns"
+      },
+      "Destiny.Definitions.DestinyArrangementRegionFilterDefinition": {
+        "type": "object",
+        "properties": {
+          "artArrangementRegionHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "artArrangementRegionIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "statHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "arrangementIndexByStatValue": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        }
+      },
       "Destiny.Definitions.DestinyItemPreviewBlockDefinition": {
         "type": "object",
         "properties": {
@@ -16916,7 +17002,7 @@
               "format": "uint32"
             },
             "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Traits.DestinyTraitCategoryDefinition"
+              "$ref": "#/components/schemas/Destiny.Definitions.Traits.DestinyTraitDefinition"
             }
           },
           "traitIds": {
@@ -26178,7 +26264,7 @@
           },
           "progress": {
             "type": "integer",
-            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
+            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle before rendering progress.",
             "format": "int32",
             "nullable": true
           },

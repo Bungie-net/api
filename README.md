@@ -6,6 +6,13 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-02-22 Update for housekeeping
+
+- Added a definition mapping and specification for `DestinySandboxPatternDefinition`.
+- Fixed the `DestinyTraitCategoryDefinition.traitHashes` mapping to properly reference `DestinyTraitDefinition`.
+- Added a deprecation warning to `DestinyObjectiveDefinition.valueStyle`, which is no longer populated by game content.
+  - Please use `inProgressValueStyle` and `completedValueStyle` instead.
+
 ## 2022-02-22 Update for The Witch Queen
 
 - Items
