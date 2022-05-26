@@ -13,7 +13,7 @@ This section will be added to as time goes by - we're working with it as we go!
 - Added a `shouldShowLargeIcons` boolean property to `DestinyRecordDefinition`.
 - Added a new `DestinyVendorItemState` enum value for `Locked` sale items.
 
-## 2022-02-22 Update for housekeeping
+## 2022-05-01 Update for housekeeping
 
 - Added a definition mapping and specification for `DestinySandboxPatternDefinition`.
 - Fixed the `DestinyTraitCategoryDefinition.traitHashes` mapping to properly reference `DestinyTraitDefinition`.
