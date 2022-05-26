@@ -6,6 +6,13 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-05-24 Update for the Season of the Haunted
+
+- Added new `DestinyActivityModeType` enum values for Zone Control, Rift, and Iron Banner: Rift.
+- Added a `displayHint` string property to `DestinyTraitDefinition`.
+- Added a `shouldShowLargeIcons` boolean property to `DestinyRecordDefinition`.
+- Added a new `DestinyVendorItemState` enum value for `Locked` sale items.
+
 ## 2022-02-22 Update for housekeeping
 
 - Added a definition mapping and specification for `DestinySandboxPatternDefinition`.

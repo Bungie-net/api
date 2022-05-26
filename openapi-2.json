@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.14.2"
+    "version": "2.15.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -4541,6 +4541,128 @@
                   "type": "array",
                   "items": {
                     "$ref": "#/definitions/Tokens.PartnerOfferSkuHistoryResponse"
+                  }
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tokens/Rewards/GetRewardsForUser/{membershipId}/": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns the bungie rewards for the targeted user.",
+        "operationId": "Tokens.GetBungieRewardsForUser",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "bungie.net user membershipId for requested user rewards. If not self, elevated permissions are required.",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadAndApplyTokens"
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/Tokens.BungieRewardDisplay"
+                  }
+                },
+                "ErrorCode": {
+                  "format": "int32",
+                  "type": "integer",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  }
+                },
+                "ThrottleSeconds": {
+                  "format": "int32",
+                  "type": "integer"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/Tokens/Rewards/BungieRewards/": {
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns a list of the current bungie rewards",
+        "operationId": "Tokens.GetBungieRewardsList",
+        "parameters": [],
+        "deprecated": false,
+        "responses": {
+          "200": {
+            "description": "Look at the Response property for more information about the nature of this response",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/definitions/Tokens.BungieRewardDisplay"
                   }
                 },
                 "ErrorCode": {
@@ -15647,7 +15769,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -15971,6 +16096,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         },
@@ -17286,7 +17423,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -17610,6 +17750,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         },
@@ -17721,7 +17873,10 @@
         "84",
         "85",
         "86",
-        "87"
+        "87",
+        "88",
+        "89",
+        "90"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -18045,6 +18200,18 @@
         {
           "numericValue": "87",
           "identifier": "LostSector"
+        },
+        {
+          "numericValue": "88",
+          "identifier": "Rift"
+        },
+        {
+          "numericValue": "89",
+          "identifier": "ZoneControl"
+        },
+        {
+          "numericValue": "90",
+          "identifier": "IronBannerRift"
         }
       ]
     },
@@ -19655,6 +19822,10 @@
             "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitCategoryDefinition"
           }
         },
+        "displayHint": {
+          "description": "An identifier for how this trait can be displayed. For example: a 'keyword' hint to show an explanation for certain related terms.",
+          "type": "string"
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -20284,6 +20455,10 @@
           }
         },
         "forTitleGilding": {
+          "type": "boolean"
+        },
+        "shouldShowLargeIcons": {
+          "description": "A hint to show a large icon for a reward",
           "type": "boolean"
         },
         "titleInfo": {
@@ -28217,6 +28392,106 @@
         }
       }
     },
+    "Tokens.BungieRewardDisplay": {
+      "type": "object",
+      "properties": {
+        "UserRewardAvailabilityModel": {
+          "$ref": "#/definitions/Tokens.UserRewardAvailabilityModel"
+        },
+        "ObjectiveDisplayProperties": {
+          "$ref": "#/definitions/Tokens.RewardDisplayProperties"
+        },
+        "RewardDisplayProperties": {
+          "$ref": "#/definitions/Tokens.RewardDisplayProperties"
+        }
+      }
+    },
+    "Tokens.UserRewardAvailabilityModel": {
+      "type": "object",
+      "properties": {
+        "AvailabilityModel": {
+          "$ref": "#/definitions/Tokens.RewardAvailabilityModel"
+        },
+        "IsAvailableForUser": {
+          "type": "boolean"
+        },
+        "IsUnlockedForUser": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Tokens.RewardAvailabilityModel": {
+      "type": "object",
+      "properties": {
+        "HasExistingCode": {
+          "type": "boolean"
+        },
+        "RecordDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Records.DestinyRecordDefinition"
+          }
+        },
+        "CollectibleDefinitions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Tokens.CollectibleDefinitions"
+          }
+        },
+        "IsOffer": {
+          "type": "boolean"
+        },
+        "HasOffer": {
+          "type": "boolean"
+        },
+        "OfferApplied": {
+          "type": "boolean"
+        },
+        "DecryptedToken": {
+          "type": "string"
+        },
+        "IsLoyaltyReward": {
+          "type": "boolean"
+        },
+        "ShopifyEndDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "GameEarnByDate": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "RedemptionEndDate": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "Tokens.CollectibleDefinitions": {
+      "type": "object",
+      "properties": {
+        "CollectibleDefinition": {
+          "$ref": "#/definitions/Destiny.Definitions.Collectibles.DestinyCollectibleDefinition"
+        },
+        "DestinyInventoryItemDefinition": {
+          "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+        }
+      }
+    },
+    "Tokens.RewardDisplayProperties": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Description": {
+          "type": "string"
+        },
+        "ImagePath": {
+          "type": "string"
+        }
+      }
+    },
     "Destiny.Config.DestinyManifest": {
       "description": "DestinyManifest is the external-facing contract for just the properties needed by those calling the Destiny Platform.",
       "type": "object",
@@ -31639,7 +31914,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -31963,6 +32241,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         },
@@ -32098,7 +32388,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -32422,6 +32715,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         }
@@ -33481,7 +33786,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33805,6 +34113,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         },
@@ -36475,7 +36795,8 @@
         "16384",
         "32768",
         "65536",
-        "131072"
+        "131072",
+        "262144"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -36573,6 +36894,11 @@
           "numericValue": "131072",
           "identifier": "Free",
           "description": "This indicates that the sale item is free."
+        },
+        {
+          "numericValue": "262144",
+          "identifier": "Locked",
+          "description": "This indicates that the sale item is locked."
         }
       ]
     },
@@ -39283,7 +39609,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -39607,6 +39936,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         }
@@ -39715,7 +40056,10 @@
             "84",
             "85",
             "86",
-            "87"
+            "87",
+            "88",
+            "89",
+            "90"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -40039,6 +40383,18 @@
             {
               "numericValue": "87",
               "identifier": "LostSector"
+            },
+            {
+              "numericValue": "88",
+              "identifier": "Rift"
+            },
+            {
+              "numericValue": "89",
+              "identifier": "ZoneControl"
+            },
+            {
+              "numericValue": "90",
+              "identifier": "IronBannerRift"
             }
           ]
         }
