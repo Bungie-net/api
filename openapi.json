@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.15.0"
+    "version": "2.15.1"
   },
   "servers": [
     {
@@ -697,6 +697,34 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/IReadOnlyCollectionOfContentItemPublicContract"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/Content/Rss/NewsArticles/{pageToken}/": {
+      "summary": "Content.RssNewsArticles",
+      "description": "Returns a JSON string response that is the RSS feed for news articles.",
+      "get": {
+        "tags": [
+          "Content"
+        ],
+        "description": "Returns a JSON string response that is the RSS feed for news articles.",
+        "operationId": "Content.RssNewsArticles",
+        "parameters": [
+          {
+            "name": "pageToken",
+            "in": "path",
+            "description": "Zero-based pagination token for paging through result sets.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Content.NewsArticleRssResponse"
           }
         },
         "deprecated": false
@@ -3108,6 +3136,57 @@
         ]
       }
     },
+    "/Tokens/Rewards/GetRewardsForPlatformUser/{membershipId}/{membershipType}/": {
+      "summary": "Tokens.GetBungieRewardsForPlatformUser",
+      "description": "Returns the bungie rewards for the targeted user when a platform membership Id and Type are used.",
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns the bungie rewards for the targeted user when a platform membership Id and Type are used.",
+        "operationId": "Tokens.GetBungieRewardsForPlatformUser",
+        "parameters": [
+          {
+            "name": "membershipId",
+            "in": "path",
+            "description": "users platform membershipId for requested user rewards. If not self, elevated permissions are required.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "membershipType",
+            "in": "path",
+            "description": "The target Destiny 2 membership type.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
+              "format": "int32",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/BungieMembershipType"
+              },
+              "x-enum-is-bitmask": false
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/DictionaryOfstringAndBungieRewardDisplay"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "ReadAndApplyTokens"
+            ]
+          }
+        ]
+      }
+    },
     "/Tokens/Rewards/BungieRewards/": {
       "summary": "Tokens.GetBungieRewardsList",
       "description": "Returns a list of the current bungie rewards",
@@ -4077,7 +4156,7 @@
         ],
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "0.5"
+          "ThrottleSecondsBetweenActionPerUser": "1"
         }
       }
     },
@@ -4117,7 +4196,7 @@
         ],
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "0.5"
+          "ThrottleSecondsBetweenActionPerUser": "1"
         }
       }
     },
@@ -7533,6 +7612,51 @@
           "useTotalResults": {
             "type": "boolean",
             "description": "If useTotalResults is true, then totalResults represents an accurate count.\r\nIf False, it does not, and may be estimated/only the size of the current page.\r\nEither way, you should probably always only trust hasMore.\r\nThis is a long-held historical throwback to when we used to do paging with known total results. Those queries toasted our database, and we were left to hastily alter our endpoints and create backward- compatible shims, of which useTotalResults is one."
+          }
+        }
+      },
+      "Content.NewsArticleRssResponse": {
+        "type": "object",
+        "properties": {
+          "NewsArticles": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Content.NewsArticleRssItem"
+            }
+          },
+          "CurrentPaginationToken": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "NextPaginationToken": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "ResultCountThisPage": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Content.NewsArticleRssItem": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Link": {
+            "type": "string"
+          },
+          "PubDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "UniqueIdentifier": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
           }
         }
       },
@@ -13486,7 +13610,7 @@
           },
           "valueStyle": {
             "type": "integer",
-            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.\r\nDEPRECATED: This is no longer populated by Destiny 2 game content. Please use inProgressValueStyle and completedValueStyle instead.",
+            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
             "format": "int32",
             "x-enum-reference": {
               "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
@@ -21466,6 +21590,12 @@
           "173",
           "174",
           "175",
+          "176",
+          "177",
+          "178",
+          "179",
+          "180",
+          "181",
           "200",
           "201",
           "202",
@@ -22726,6 +22856,30 @@
           {
             "numericValue": "175",
             "identifier": "ContentLocaleEditPermissionDenied"
+          },
+          {
+            "numericValue": "176",
+            "identifier": "ContentStackUnknownError"
+          },
+          {
+            "numericValue": "177",
+            "identifier": "ContentStackNotFound"
+          },
+          {
+            "numericValue": "178",
+            "identifier": "ContentStackRateLimited"
+          },
+          {
+            "numericValue": "179",
+            "identifier": "ContentStackTimeout"
+          },
+          {
+            "numericValue": "180",
+            "identifier": "ContentStackServiceError"
+          },
+          {
+            "numericValue": "181",
+            "identifier": "ContentStackDeserializationFailure"
           },
           {
             "numericValue": "200",
@@ -26472,7 +26626,7 @@
           },
           "progress": {
             "type": "integer",
-            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle before rendering progress.",
+            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
             "format": "int32",
             "nullable": true
           },
@@ -27321,6 +27475,17 @@
               "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
             }
           },
+          "eventCardHashesOwned": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "A list of hashes for event cards that a profile owns. Unlike most values in versionsOwned, these stay with the profile across all platforms.",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinyEventCardDefinition"
+            }
+          },
           "currentSeasonHash": {
             "type": "integer",
             "description": "If populated, this is a reference to the season that is currently active.",
@@ -27335,10 +27500,114 @@
             "description": "If populated, this is the reward power cap for the current season.",
             "format": "int32",
             "nullable": true
+          },
+          "activeEventCardHash": {
+            "type": "integer",
+            "description": "If populated, this is a reference to the event card that is currently active.",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinyEventCardDefinition"
+            }
           }
         },
         "description": "The most essential summary information about a Profile (in Destiny 1, we called these \"Accounts\").",
         "x-destiny-component-type-dependency": "Profiles"
+      },
+      "Destiny.Definitions.Seasons.DestinyEventCardDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "linkRedirectPath": {
+            "type": "string"
+          },
+          "color": {
+            "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
+          },
+          "images": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinyEventCardImages"
+          },
+          "triumphsPresentationNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "sealPresentationNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "ticketCurrencyItemHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
+          },
+          "ticketVendorHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorDefinition"
+            }
+          },
+          "ticketVendorCategoryHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "endTime": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "Defines the properties of an 'Event Card' in Destiny 2, to coincide with a seasonal event for additional challenges, premium rewards, a new seal, and a special title. For example: Solstice of Heroes 2022.",
+        "x-mobile-manifest-name": "EventCards"
+      },
+      "Destiny.Definitions.Seasons.DestinyEventCardImages": {
+        "type": "object",
+        "properties": {
+          "unownedCardSleeveImagePath": {
+            "type": "string"
+          },
+          "unownedCardSleeveWrapImagePath": {
+            "type": "string"
+          },
+          "cardIncompleteImagePath": {
+            "type": "string"
+          },
+          "cardCompleteImagePath": {
+            "type": "string"
+          },
+          "cardCompleteWrapImagePath": {
+            "type": "string"
+          },
+          "progressIconImagePath": {
+            "type": "string"
+          },
+          "themeBackgroundImagePath": {
+            "type": "string"
+          }
+        }
       },
       "SingleComponentResponseOfDestinyProfileComponent": {
         "type": "object",
@@ -41255,6 +41524,51 @@
               "properties": {
                 "Response": {
                   "type": "object"
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
+      "Content.NewsArticleRssResponse": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/Content.NewsArticleRssResponse"
                 },
                 "ErrorCode": {
                   "type": "integer",

@@ -6,6 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-07-19 Update for Solstice 2022
+
+- Added `DestinyEventCardDefinition` for the new seasonal Event Card feature.
+  - The Event Card challenges root node has three child nodes (one for each character class), so clients should respect node visibility to show the appropriate records.
+- Added new properties for `eventCardHashesOwned` and `activeEventCardHash` to `DestinyProfileComponent`.
+
 ## 2022-05-24 Update for the Season of the Haunted
 
 - Added new `DestinyActivityModeType` enum values for Zone Control, Rift, and Iron Banner: Rift.
