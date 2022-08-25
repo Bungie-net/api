@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.15.1"
+    "version": "2.16.0"
   },
   "servers": [
     {
@@ -2973,6 +2973,31 @@
         ]
       }
     },
+    "/Tokens/Partner/ForceDropsRepair/": {
+      "summary": "Tokens.ForceDropsRepair",
+      "description": "Twitch Drops self-repair function - scans twitch for drops not marked as fulfilled and resyncs them.",
+      "post": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Twitch Drops self-repair function - scans twitch for drops not marked as fulfilled and resyncs them.",
+        "operationId": "Tokens.ForceDropsRepair",
+        "parameters": [],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/boolean"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "PartnerOfferGrant"
+            ]
+          }
+        ]
+      }
+    },
     "/Tokens/Partner/ClaimOffer/": {
       "summary": "Tokens.ClaimPartnerOffer",
       "description": "Claim a partner offer as the authenticated user.",
@@ -3088,6 +3113,52 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/CEListOfPartnerOfferSkuHistoryResponse"
+          }
+        },
+        "deprecated": false,
+        "security": [
+          {
+            "oauth2": [
+              "PartnerOfferGrant"
+            ]
+          }
+        ]
+      }
+    },
+    "/Tokens/Partner/History/{targetBnetMembershipId}/Application/{partnerApplicationId}/": {
+      "summary": "Tokens.GetPartnerRewardHistory",
+      "description": "Returns the partner rewards history of the targeted user, both partner offers and Twitch drops.",
+      "get": {
+        "tags": [
+          "Tokens"
+        ],
+        "description": "Returns the partner rewards history of the targeted user, both partner offers and Twitch drops.",
+        "operationId": "Tokens.GetPartnerRewardHistory",
+        "parameters": [
+          {
+            "name": "partnerApplicationId",
+            "in": "path",
+            "description": "The partner application identifier.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          {
+            "name": "targetBnetMembershipId",
+            "in": "path",
+            "description": "The bungie.net user to return reward history for.",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "$ref": "#/components/responses/Tokens.PartnerRewardHistoryResponse"
           }
         },
         "deprecated": false,
@@ -4156,7 +4227,7 @@
         ],
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "1"
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
         }
       }
     },
@@ -4196,7 +4267,7 @@
         ],
         "x-preview": true,
         "x-documentation-attributes": {
-          "ThrottleSecondsBetweenActionPerUser": "1"
+          "ThrottleSecondsBetweenActionPerUser": "0.5"
         }
       }
     },
@@ -6080,7 +6151,7 @@
           {
             "numericValue": "4096",
             "identifier": "PartnerOfferGrant",
-            "description": "Can user the partner offer api to claim rewards defined for a partner"
+            "description": "Can use the partner offer api to claim rewards defined for a partner"
           },
           {
             "numericValue": "8192",
@@ -6337,6 +6408,7 @@
           "3",
           "4",
           "5",
+          "6",
           "10",
           "254",
           "-1"
@@ -6368,6 +6440,10 @@
           {
             "numericValue": "5",
             "identifier": "TigerStadia"
+          },
+          {
+            "numericValue": "6",
+            "identifier": "TigerEgs"
           },
           {
             "numericValue": "10",
@@ -6639,6 +6715,9 @@
             "type": "integer",
             "format": "int16",
             "nullable": true
+          },
+          "egsDisplayName": {
+            "type": "string"
           }
         }
       },
@@ -6732,7 +6811,8 @@
           "12",
           "14",
           "16",
-          "18"
+          "18",
+          "20"
         ],
         "type": "integer",
         "description": "The types of credentials the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.CredentialType.",
@@ -6789,6 +6869,10 @@
           {
             "numericValue": "18",
             "identifier": "TwitchId"
+          },
+          {
+            "numericValue": "20",
+            "identifier": "EgsId"
           }
         ],
         "x-enum-is-bitmask": false
@@ -13610,7 +13694,7 @@
           },
           "valueStyle": {
             "type": "integer",
-            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.",
+            "description": "The UI style applied to the objective. It's an enum, take a look at DestinyUnlockValueUIStyle for details of the possible styles. Use this info as you wish to customize your UI.\r\nDEPRECATED: This is no longer populated by Destiny 2 game content. Please use inProgressValueStyle and completedValueStyle instead.",
             "format": "int32",
             "x-enum-reference": {
               "$ref": "#/components/schemas/Destiny.DestinyUnlockValueUIStyle"
@@ -21739,6 +21823,7 @@
           "593",
           "594",
           "595",
+          "596",
           "601",
           "602",
           "603",
@@ -22145,6 +22230,8 @@
           "2504",
           "2505",
           "2506",
+          "2507",
+          "2508",
           "2600",
           "2601",
           "2700",
@@ -22267,7 +22354,17 @@
           "3907",
           "3908",
           "3910",
-          "3911"
+          "3911",
+          "4000",
+          "4001",
+          "4002",
+          "4003",
+          "4004",
+          "4005",
+          "4006",
+          "4007",
+          "4008",
+          "4009"
         ],
         "type": "integer",
         "format": "int32",
@@ -23452,6 +23549,10 @@
           {
             "numericValue": "595",
             "identifier": "ForumRequiresDestiny2Progress"
+          },
+          {
+            "numericValue": "596",
+            "identifier": "ForumRequiresDestiny2EntitlementPurchase"
           },
           {
             "numericValue": "601",
@@ -25079,6 +25180,14 @@
             "identifier": "TwitchNoPlatformChosen"
           },
           {
+            "numericValue": "2507",
+            "identifier": "TwitchDropHistoryPermissionFailure"
+          },
+          {
+            "numericValue": "2508",
+            "identifier": "TwitchDropsRepairPartialFailure"
+          },
+          {
             "numericValue": "2600",
             "identifier": "TrendingCategoryNotFound"
           },
@@ -25569,6 +25678,46 @@
           {
             "numericValue": "3911",
             "identifier": "ErrorBungieBlockListFull"
+          },
+          {
+            "numericValue": "4000",
+            "identifier": "ErrorEgsUnknown"
+          },
+          {
+            "numericValue": "4001",
+            "identifier": "ErrorEgsBadRequest"
+          },
+          {
+            "numericValue": "4002",
+            "identifier": "ErrorEgsNotAuthorized"
+          },
+          {
+            "numericValue": "4003",
+            "identifier": "ErrorEgsForbidden"
+          },
+          {
+            "numericValue": "4004",
+            "identifier": "ErrorEgsAccountNotFound"
+          },
+          {
+            "numericValue": "4005",
+            "identifier": "ErrorEgsWebException"
+          },
+          {
+            "numericValue": "4006",
+            "identifier": "ErrorEgsUnavailable"
+          },
+          {
+            "numericValue": "4007",
+            "identifier": "ErrorEgsJwksMissing"
+          },
+          {
+            "numericValue": "4008",
+            "identifier": "ErrorEgsJwtMalformedHeader"
+          },
+          {
+            "numericValue": "4009",
+            "identifier": "ErrorEgsJwtMalformedPayload"
           }
         ],
         "x-enum-is-bitmask": false
@@ -25877,6 +26026,7 @@
               "3",
               "4",
               "5",
+              "6",
               "10",
               "254",
               "-1"
@@ -25908,6 +26058,10 @@
               {
                 "numericValue": "5",
                 "identifier": "TigerStadia"
+              },
+              {
+                "numericValue": "6",
+                "identifier": "TigerEgs"
               },
               {
                 "numericValue": "10",
@@ -25944,6 +26098,88 @@
             "nullable": true
           }
         }
+      },
+      "Tokens.PartnerRewardHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "PartnerOffers": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tokens.PartnerOfferSkuHistoryResponse"
+            }
+          },
+          "TwitchDrops": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Tokens.TwitchDropHistoryResponse"
+            }
+          }
+        }
+      },
+      "Tokens.TwitchDropHistoryResponse": {
+        "type": "object",
+        "properties": {
+          "Title": {
+            "type": "string"
+          },
+          "Description": {
+            "type": "string"
+          },
+          "CreatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "ClaimState": {
+            "enum": [
+              "0",
+              "1",
+              "2"
+            ],
+            "type": "integer",
+            "format": "byte",
+            "nullable": true,
+            "x-enum-values": [
+              {
+                "numericValue": "0",
+                "identifier": "Claimed"
+              },
+              {
+                "numericValue": "1",
+                "identifier": "Applied"
+              },
+              {
+                "numericValue": "2",
+                "identifier": "Fulfilled"
+              }
+            ],
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "Streaming.DropStateEnum": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "byte",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Claimed"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Applied"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Fulfilled"
+          }
+        ],
+        "x-enum-is-bitmask": false
       },
       "Tokens.BungieRewardDisplay": {
         "type": "object",
@@ -26626,7 +26862,7 @@
           },
           "progress": {
             "type": "integer",
-            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.valueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.valueStyle before rendering progress.",
+            "description": "If progress has been made, and the progress can be measured numerically, this will be the value of that progress. You can compare it to the DestinyObjectiveDefinition.completionValue property for current vs. upper bounds, and use DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle to determine how this should be rendered. Note that progress, in Destiny 2, need not be a literal numeric progression. It could be one of a number of possible values, even a Timestamp. Always examine DestinyObjectiveDefinition.inProgressValueStyle or completedValueStyle before rendering progress.",
             "format": "int32",
             "nullable": true
           },
@@ -39588,7 +39824,8 @@
           "2",
           "3",
           "4",
-          "5"
+          "5",
+          "6"
         ],
         "type": "integer",
         "format": "byte",
@@ -39616,6 +39853,10 @@
           {
             "numericValue": "5",
             "identifier": "Stadia"
+          },
+          {
+            "numericValue": "6",
+            "identifier": "Egs"
           }
         ],
         "x-enum-is-bitmask": false
@@ -40129,7 +40370,8 @@
           "0",
           "1",
           "2",
-          "3"
+          "3",
+          "4"
         ],
         "type": "integer",
         "format": "int32",
@@ -40149,6 +40391,10 @@
           {
             "numericValue": "3",
             "identifier": "Steam"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "Egs"
           }
         ],
         "x-enum-is-bitmask": false
@@ -40202,6 +40448,7 @@
               "3",
               "4",
               "5",
+              "6",
               "10",
               "254",
               "-1"
@@ -40233,6 +40480,10 @@
               {
                 "numericValue": "5",
                 "identifier": "TigerStadia"
+              },
+              {
+                "numericValue": "6",
+                "identifier": "TigerEgs"
               },
               {
                 "numericValue": "10",
@@ -40297,6 +40548,9 @@
             "items": {
               "$ref": "#/components/schemas/Common.Models.CoreSetting"
             }
+          },
+          "defaultGroupTheme": {
+            "$ref": "#/components/schemas/Common.Models.CoreSetting"
           },
           "destinyMembershipTypes": {
             "type": "array",
@@ -42625,6 +42879,51 @@
           }
         }
       },
+      "Tokens.PartnerRewardHistoryResponse": {
+        "description": "Look at the Response property for more information about the nature of this response",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "Response": {
+                  "$ref": "#/components/schemas/Tokens.PartnerRewardHistoryResponse"
+                },
+                "ErrorCode": {
+                  "type": "integer",
+                  "format": "int32",
+                  "x-enum-reference": {
+                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
+                  },
+                  "x-enum-is-bitmask": false
+                },
+                "ThrottleSeconds": {
+                  "type": "integer",
+                  "format": "int32"
+                },
+                "ErrorStatus": {
+                  "type": "string"
+                },
+                "Message": {
+                  "type": "string"
+                },
+                "MessageData": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  },
+                  "x-dictionary-key": {
+                    "type": "string"
+                  }
+                },
+                "DetailedErrorTrace": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      },
       "DictionaryOfstringAndBungieRewardDisplay": {
         "description": "Look at the Response property for more information about the nature of this response",
         "content": {
@@ -44657,7 +44956,7 @@
               "ReadDestinyVendorsAndAdvisors": "Access vendor and advisor data specific to a user. OBSOLETE. This scope is only used on the Destiny 1 API.",
               "ReadAndApplyTokens": "Read offer history and claim and apply tokens for the user.",
               "AdvancedWriteActions": "Can perform actions that will result in a prompt to the user via the Destiny app.",
-              "PartnerOfferGrant": "Can user the partner offer api to claim rewards defined for a partner",
+              "PartnerOfferGrant": "Can use the partner offer api to claim rewards defined for a partner",
               "DestinyUnlockValueQuery": "Allows an app to query sensitive information like unlock flags and values not available through normal methods.",
               "UserPiiRead": "Allows an app to query sensitive user PII, most notably email information."
             }

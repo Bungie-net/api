@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-08-23 Update for the Season of Plunder
+
+- Added Support for Epic Games accounts.
+
 ## 2022-07-19 Update for Solstice 2022
 
 - Added `DestinyEventCardDefinition` for the new seasonal Event Card feature.
