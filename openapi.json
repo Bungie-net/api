@@ -8499,10 +8499,12 @@
         "properties": {
           "supplementalDisplayName": {
             "type": "string",
+            "nullable": true,
             "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc."
           },
           "iconPath": {
             "type": "string",
+            "nullable": true,
             "description": "URL the Icon if available."
           },
           "crossSaveOverride": {
@@ -8573,7 +8575,8 @@
             "type": "string"
           },
           "normalizedName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "displayName": {
             "type": "string"
@@ -8619,13 +8622,16 @@
             "$ref": "#/components/schemas/User.UserToUserContext"
           },
           "psnDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "xboxDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "fbDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "showActivity": {
             "type": "boolean",
@@ -8649,7 +8655,8 @@
             "type": "string"
           },
           "profilePictureWidePath": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "profileThemeName": {
             "type": "string"
@@ -8670,16 +8677,20 @@
             "nullable": true
           },
           "blizzardDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "steamDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "stadiaDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "twitchDisplayName": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "cachedBungieGlobalDisplayName": {
             "type": "string"
@@ -8926,10 +8937,12 @@
           },
           "supplementalDisplayName": {
             "type": "string",
+            "nullable": true,
             "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc."
           },
           "iconPath": {
             "type": "string",
+            "nullable": true,
             "description": "URL the Icon if available."
           },
           "crossSaveOverride": {
@@ -10854,6 +10867,7 @@
           },
           "seasonResets": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.DestinyProgressionResetEntry"
             },
@@ -10861,6 +10875,7 @@
           },
           "rewardItemStates": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "description": "Represents the different states a progression reward item can be in.",
@@ -11032,23 +11047,27 @@
         "type": "object",
         "properties": {
           "description": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "name": {
             "type": "string"
           },
           "icon": {
             "type": "string",
+            "nullable": true,
             "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images."
           },
           "iconSequences": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyIconSequenceDefinition"
             }
           },
           "highResIcon": {
             "type": "string",
+            "nullable": true,
             "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here."
           },
           "hasIcon": {
@@ -11087,12 +11106,14 @@
           },
           "iconSequences": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyIconSequenceDefinition"
             }
           },
           "highResIcon": {
             "type": "string",
+            "nullable": true,
             "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here."
           },
           "hasIcon": {
@@ -11268,26 +11289,32 @@
           },
           "iconWatermark": {
             "type": "string",
+            "nullable": true,
             "description": "If available, this is the original 'active' release watermark overlay for the icon. If the item has different versions, this can be overridden by the 'display version watermark icon' from the 'quality' block. Alternatively, if there is no watermark for the version, and the item version has a power cap below the current season power cap, this can be overridden by the iconWatermarkShelved property."
           },
           "iconWatermarkShelved": {
             "type": "string",
+            "nullable": true,
             "description": "If available, this is the 'shelved' release watermark overlay for the icon. If the item version has a power cap below the current season power cap, it can be treated as 'shelved', and should be shown with this 'shelved' watermark overlay."
           },
           "secondaryIcon": {
             "type": "string",
+            "nullable": true,
             "description": "A secondary icon associated with the item. Currently this is used in very context specific applications, such as Emblem Nameplates."
           },
           "secondaryOverlay": {
             "type": "string",
+            "nullable": true,
             "description": "Pulled from the secondary icon, this is the \"secondary background\" of the secondary icon. Confusing? Sure, that's why I call it \"overlay\" here: because as far as it's been used thus far, it has been for an optional overlay image. We'll see if that holds up, but at least for now it explains what this image is a bit better."
           },
           "secondarySpecial": {
             "type": "string",
+            "nullable": true,
             "description": "Pulled from the Secondary Icon, this is the \"special\" background for the item. For Emblems, this is the background image used on the Details view: but it need not be limited to that for other types of items."
           },
           "backgroundColor": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
@@ -11297,6 +11324,7 @@
           },
           "screenshot": {
             "type": "string",
+            "nullable": true,
             "description": "If we were able to acquire an in-game screenshot for the item, the path to that screenshot will be returned here. Note that not all items have screenshots: particularly not any non-equippable items."
           },
           "itemTypeDisplayName": {
@@ -11320,10 +11348,12 @@
           },
           "tooltipStyle": {
             "type": "string",
+            "nullable": true,
             "description": "An identifier that the game UI uses to determine what type of tooltip to show for the item. These have no corresponding definitions that BNet can link to: so it'll be up to you to interpret and display your UI differently according to these styles (or ignore it)."
           },
           "action": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemActionBlockDefinition"
@@ -11333,6 +11363,7 @@
           },
           "crafting": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemCraftingBlockDefinition"
@@ -11351,6 +11382,7 @@
           },
           "setData": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemSetBlockDefinition"
@@ -11360,6 +11392,7 @@
           },
           "stats": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemStatBlockDefinition"
@@ -11375,6 +11408,7 @@
           },
           "equippingBlock": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyEquippingBlockDefinition"
@@ -11384,6 +11418,7 @@
           },
           "translationBlock": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemTranslationBlockDefinition"
@@ -11393,6 +11428,7 @@
           },
           "preview": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemPreviewBlockDefinition"
@@ -11402,6 +11438,7 @@
           },
           "quality": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemQualityBlockDefinition"
@@ -11411,6 +11448,7 @@
           },
           "value": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemValueBlockDefinition"
@@ -11420,6 +11458,7 @@
           },
           "sourceData": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemSourceBlockDefinition"
@@ -11429,6 +11468,7 @@
           },
           "objectives": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemObjectiveBlockDefinition"
@@ -11438,6 +11478,7 @@
           },
           "metrics": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemMetricBlockDefinition"
@@ -11447,6 +11488,7 @@
           },
           "plug": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyItemPlugDefinition"
@@ -11456,6 +11498,7 @@
           },
           "gearset": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemGearsetBlockDefinition"
@@ -11465,6 +11508,7 @@
           },
           "sack": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemSackBlockDefinition"
@@ -11474,6 +11518,7 @@
           },
           "sockets": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemSocketBlockDefinition"
@@ -11483,6 +11528,7 @@
           },
           "summary": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemSummaryBlockDefinition"
@@ -11492,6 +11538,7 @@
           },
           "talentGrid": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemTalentGridBlockDefinition"
@@ -11533,6 +11580,7 @@
           },
           "animations": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Animations.DestinyAnimationReference"
             },
@@ -11544,6 +11592,7 @@
           },
           "links": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Links.HyperlinkReference"
             },
@@ -11628,6 +11677,7 @@
           },
           "damageTypeHashes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "uint32"
@@ -11639,6 +11689,7 @@
           },
           "damageTypes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "int32",
@@ -11682,6 +11733,7 @@
           },
           "traitIds": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "string"
             },
@@ -11689,6 +11741,7 @@
           },
           "traitHashes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "uint32"
@@ -11728,19 +11781,19 @@
         "type": "object",
         "properties": {
           "red": {
-            "type": "string",
+            "type": "integer",
             "format": "byte"
           },
           "green": {
-            "type": "string",
+            "type": "integer",
             "format": "byte"
           },
           "blue": {
-            "type": "string",
+            "type": "integer",
             "format": "byte"
           },
           "alpha": {
-            "type": "string",
+            "type": "integer",
             "format": "byte"
           }
         },
@@ -11763,10 +11816,12 @@
           },
           "overlayScreenName": {
             "type": "string",
+            "nullable": true,
             "description": "If the action has an overlay screen associated with it, this is the name of that screen. Unfortunately, we cannot return the screen's data itself."
           },
           "overlayIcon": {
             "type": "string",
+            "nullable": true,
             "description": "The icon associated with the overlay screen for the action, if any."
           },
           "requiredCooldownSeconds": {
@@ -11790,10 +11845,12 @@
           },
           "actionTypeLabel": {
             "type": "string",
+            "nullable": true,
             "description": "The internal identifier for the action."
           },
           "requiredLocation": {
             "type": "string",
+            "nullable": true,
             "description": "Theoretically, an item could have a localized string for a hint about the location in which the action should be performed. In practice, no items yet have this property."
           },
           "requiredCooldownHash": {
@@ -12108,6 +12165,7 @@
               "type": "integer",
               "format": "uint32"
             },
+            "nullable": true,
             "description": "The list of all plug items (DestinyInventoryItemDefinition) that the socket may randomly be populated with when reinitialized.\r\nWhich ones you should actually show are determined by the plug being inserted into the socket, and the socket’s type.\r\nWhen you inspect the plug that could go into a Masterwork Socket, look up the socket type of the socket being inspected and find the DestinySocketTypeDefinition.\r\nThen, look at the Plugs that can fit in that socket. Find the Whitelist in the DestinySocketTypeDefinition that matches the plug item’s categoryhash.\r\nThat whitelist entry will potentially have a new “reinitializationPossiblePlugHashes” property.If it does, that means we know what it will roll if you try to insert this plug into this socket."
           }
         },
@@ -12315,6 +12373,7 @@
         "properties": {
           "stackUniqueLabel": {
             "type": "string",
+            "nullable": true,
             "description": "If this string is populated, you can't have more than one stack with this label in a given inventory. Note that this is different from the equipping block's unique label, which is used for equipping uniqueness."
           },
           "maxStackSize": {
@@ -12352,6 +12411,7 @@
           },
           "tierTypeName": {
             "type": "string",
+            "nullable": true,
             "description": "The localized name of the tier type, which is a useful shortcut so you don't have to look up the definition every time. However, it's mostly a holdover from days before we had a DestinyItemTierTypeDefinition to refer to."
           },
           "tierType": {
@@ -12716,6 +12776,7 @@
           },
           "stats": {
             "type": "object",
+            "nullable": true,
             "additionalProperties": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemStatDefinition"
             },
@@ -12750,22 +12811,26 @@
             "type": "integer",
             "description": "The hash for the DestinyStatDefinition representing this stat.",
             "format": "uint32",
+            "nullable": true,
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyStatDefinition"
             }
           },
           "value": {
             "type": "integer",
+            "nullable": true,
             "description": "This value represents the stat value assuming the minimum possible roll but accounting for any mandatory bonuses that should be applied to the stat on item creation.\r\nIn Destiny 1, this was different from the \"minimum\" value because there were certain conditions where an item could be theoretically lower level/value than the initial roll. \r\nIn Destiny 2, this is not possible unless Talent Grids begin to be used again for these purposes or some other system change occurs... thus in practice, value and minimum should be the same in Destiny 2. Good riddance.",
             "format": "int32"
           },
           "minimum": {
             "type": "integer",
+            "nullable": true,
             "description": "The minimum possible value for this stat that we think the item can roll.",
             "format": "int32"
           },
           "maximum": {
             "type": "integer",
+            "nullable": true,
             "description": "The maximum possible value for this stat that we think the item can roll.\r\nWARNING: In Destiny 1, this field was calculated using the potential stat rolls on the item's talent grid. In Destiny 2, items no longer have meaningful talent grids and instead have sockets: but the calculation of this field was never altered to adapt to this change. As such, this field should be considered deprecated until we can address this oversight.",
             "format": "int32"
           },
@@ -13008,6 +13073,7 @@
           },
           "uniqueLabel": {
             "type": "string",
+            "nullable": true,
             "description": "If defined, this is the label used to check if the item has other items of matching types already equipped. \r\nFor instance, when you aren't allowed to equip more than one Exotic Weapon, that's because all exotic weapons have identical uniqueLabels and the game checks the to-be-equipped item's uniqueLabel vs. all other already equipped items (other than the item in the slot that's about to be occupied)."
           },
           "uniqueLabelHash": {
@@ -13165,7 +13231,8 @@
         "type": "object",
         "properties": {
           "weaponPatternIdentifier": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "weaponPatternHash": {
             "type": "integer",
@@ -13255,12 +13322,7 @@
             },
             "description": "A localized string referring to the singular form of the Class's name when referred to in gendered form. Keyed by the DestinyGender.",
             "x-dictionary-key": {
-              "type": "integer",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/Destiny.DestinyGender"
-              },
-              "x-enum-is-bitmask": false
+              "type": "string"
             }
           },
           "genderedClassNamesByGenderHash": {
@@ -13406,10 +13468,12 @@
           },
           "buyString": {
             "type": "string",
+            "nullable": true,
             "description": "If the vendor has a custom localized string describing the \"buy\" action, that is returned here."
           },
           "sellString": {
             "type": "string",
+            "nullable": true,
             "description": "Ditto for selling. Not that you can sell items to a vendor anymore. Will it come back? Who knows. The string's still there."
           },
           "displayItemHash": {
@@ -13466,10 +13530,12 @@
           },
           "vendorPortrait": {
             "type": "string",
+            "nullable": true,
             "description": "A portrait of the Vendor's smiling mug. Or frothing tentacles."
           },
           "vendorBanner": {
             "type": "string",
+            "nullable": true,
             "description": "If the vendor has a custom banner image, that can be found here."
           },
           "enabled": {
@@ -13482,6 +13548,7 @@
           },
           "vendorSubcategoryIdentifier": {
             "type": "string",
+            "nullable": true,
             "description": "The identifier of the VendorCategoryDefinition for this vendor's subcategory."
           },
           "consolidateCategories": {
@@ -13600,6 +13667,7 @@
         "properties": {
           "largeIcon": {
             "type": "string",
+            "nullable": true,
             "description": "I regret calling this a \"large icon\". It's more like a medium-sized image with a picture of the vendor's mug on it, trying their best to look cool. Not what one would call an icon."
           },
           "subtitle": {
@@ -13607,6 +13675,7 @@
           },
           "originalIcon": {
             "type": "string",
+            "nullable": true,
             "description": "If we replaced the icon with something more glitzy, this is the original icon that the vendor had according to the game's content. It may be more lame and/or have less razzle-dazzle. But who am I to tell you which icon to use."
           },
           "requirementsDisplay": {
@@ -13618,14 +13687,17 @@
           },
           "smallTransparentIcon": {
             "type": "string",
+            "nullable": true,
             "description": "This is the icon used in parts of the game UI such as the vendor's waypoint."
           },
           "mapIcon": {
             "type": "string",
+            "nullable": true,
             "description": "This is the icon used in the map overview, when the vendor is located on the map."
           },
           "largeTransparentIcon": {
             "type": "string",
+            "nullable": true,
             "description": "This is apparently the \"Watermark\". I am not certain offhand where this is actually used in the Game UI, but some people may find it useful."
           },
           "description": {
@@ -13636,16 +13708,19 @@
           },
           "icon": {
             "type": "string",
+            "nullable": true,
             "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images."
           },
           "iconSequences": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyIconSequenceDefinition"
             }
           },
           "highResIcon": {
             "type": "string",
+            "nullable": true,
             "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here."
           },
           "hasIcon": {
@@ -13792,10 +13867,12 @@
           },
           "displayTitle": {
             "type": "string",
+            "nullable": true,
             "description": "The localized title of the category."
           },
           "overlay": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorCategoryOverlayDefinition"
@@ -13840,7 +13917,8 @@
             "type": "string"
           },
           "icon": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "title": {
             "type": "string"
@@ -13905,6 +13983,7 @@
           },
           "displayStyleIdentifier": {
             "type": "string",
+            "nullable": true,
             "description": "An indicator of how the category will be displayed in the UI. It's up to you to do something cool or interesting in response to this, or just to treat it as a normal category."
           }
         },
@@ -14352,6 +14431,7 @@
           },
           "action": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyVendorSaleItemActionBlockDefinition"
@@ -14634,6 +14714,7 @@
           },
           "backgroundImagePath": {
             "type": "string",
+            "nullable": true,
             "description": "The relative path to the background image representing this Vendor at this location, for use in a banner."
           }
         },
@@ -15953,7 +16034,8 @@
           },
           "perkIdentifier": {
             "type": "string",
-            "description": "The string identifier for the perk."
+            "description": "The string identifier for the perk.",
+            "nullable": true
           },
           "isDisplayable": {
             "type": "boolean",
@@ -15976,6 +16058,16 @@
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyDamageTypeDefinition"
             }
+          },
+          "perkGroups": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Definitions.DestinyTalentNodeStepGroups"
+              }
+            ],
+            "description": "An old holdover from the original Armory, this was an attempt to group perks by functionality.\r\nIt is as yet unpopulated, and there will be quite a bit of work needed to restore it to its former working order.",
+            "nullable": true
           },
           "hash": {
             "type": "integer",
@@ -18301,6 +18393,7 @@
           },
           "derivedItemCategories": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyDerivedItemCategoryDefinition"
             },
@@ -18337,18 +18430,22 @@
           },
           "itemName": {
             "type": "string",
+            "nullable": true,
             "description": "The name of the derived item."
           },
           "itemDetail": {
             "type": "string",
+            "nullable": true,
             "description": "Additional details about the derived item, in addition to the description."
           },
           "itemDescription": {
             "type": "string",
+            "nullable": true,
             "description": "A brief description of the item."
           },
           "iconPath": {
             "type": "string",
+            "nullable": true,
             "description": "An icon for the item."
           },
           "vendorItemIndex": {
@@ -18373,6 +18470,7 @@
           },
           "translationBlock": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemTranslationBlockDefinition"
@@ -18415,6 +18513,7 @@
           },
           "displayTitle": {
             "type": "string",
+            "nullable": true,
             "description": "The human readable title of this tier, if any."
           },
           "progressRequirementMessage": {
@@ -19369,7 +19468,8 @@
             "$ref": "#/components/schemas/Destiny.Definitions.Collectibles.DestinyCollectibleStateBlock"
           },
           "presentationInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationChildBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationChildBlock",
+            "nullable": true
           },
           "presentationNodeType": {
             "type": "integer",
@@ -20296,6 +20396,7 @@
           },
           "parentItemOverride": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyParentItemOverride"
@@ -20305,6 +20406,7 @@
           },
           "energyCapacity": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyEnergyCapacityEntry"
@@ -20314,6 +20416,7 @@
           },
           "energyCost": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Definitions.Items.DestinyEnergyCostEntry"
@@ -20596,7 +20699,8 @@
             "format": "int32"
           },
           "vendorSackType": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           },
           "openOnAcquire": {
             "type": "boolean"
@@ -20929,6 +21033,7 @@
           },
           "buildName": {
             "type": "string",
+            "nullable": true,
             "description": "A shortcut string identifier for the \"build\" in question, if this talent grid has an associated build. Doesn't map to anything we can expose at the moment."
           },
           "hudDamageType": {
@@ -20942,6 +21047,7 @@
           },
           "hudIcon": {
             "type": "string",
+            "nullable": true,
             "description": "If the talent grid has a special icon that's shown in the game UI (like builds, funny that), this is the identifier for that icon. Sadly, we don't actually get that icon right now. I'll be looking to replace this with a path to the actual icon itself."
           }
         },
@@ -22048,6 +22154,7 @@
           },
           "itemTypeRegex": {
             "type": "string",
+            "nullable": true,
             "description": "The janky regular expression we used against the item type to try and discern whether the item belongs to this category."
           },
           "grantDestinyBreakerType": {
@@ -22061,14 +22168,17 @@
           },
           "plugCategoryIdentifier": {
             "type": "string",
+            "nullable": true,
             "description": "If the item is a plug, this is the identifier we expect to find associated with it if it is in this category."
           },
           "itemTypeRegexNot": {
             "type": "string",
+            "nullable": true,
             "description": "If the item type matches this janky regex, it does *not* belong to this category."
           },
           "originBucketIdentifier": {
             "type": "string",
+            "nullable": true,
             "description": "If the item belongs to this bucket, it does belong to this category."
           },
           "grantDestinyItemType": {
@@ -22100,6 +22210,7 @@
           },
           "traitId": {
             "type": "string",
+            "nullable": true,
             "description": "The traitId that can be found on items that belong to this category."
           },
           "groupedCategoryHashes": {
@@ -22326,6 +22437,7 @@
           },
           "highResImage": {
             "type": "string",
+            "nullable": true,
             "description": "An optional path to a high-resolution image, probably 1920x1080."
           }
         },
@@ -29056,10 +29168,12 @@
           },
           "supplementalDisplayName": {
             "type": "string",
+            "nullable": true,
             "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc."
           },
           "iconPath": {
             "type": "string",
+            "nullable": true,
             "description": "URL the Icon if available."
           },
           "crossSaveOverride": {
@@ -29128,13 +29242,8 @@
             },
             "description": "If a Profile is played on multiple platforms, this is the silver they have for each platform, keyed by Membership Type.",
             "x-dictionary-key": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
+              "type": "string",
+              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType."
             }
           }
         },
@@ -29231,6 +29340,7 @@
           },
           "tooltipNotificationIndexes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "int32"
@@ -29248,6 +29358,7 @@
           },
           "metricObjective": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
@@ -29263,6 +29374,7 @@
           },
           "itemValueVisibility": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "boolean"
             },
@@ -30605,6 +30717,7 @@
                 "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
               }
             ],
+            "nullable": true,
             "description": "I may regret naming it this way - but this represents when an item has an objective that doesn't serve a beneficial purpose, but rather is used for \"flavor\" or additional information. For instance, when Emblems track specific stats, those stats are represented as Objectives on the item."
           }
         }
@@ -30679,7 +30792,8 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted."
+            "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
+            "nullable": true
           },
           "enableFailIndexes": {
             "type": "array",
@@ -30687,7 +30801,8 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+            "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
+            "nullable": true
           }
         }
       },
@@ -30696,6 +30811,7 @@
         "properties": {
           "plugObjectives": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
             },
@@ -30719,6 +30835,7 @@
           },
           "insertFailIndexes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "int32"
@@ -30727,6 +30844,7 @@
           },
           "enableFailIndexes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "int32"
@@ -30997,6 +31115,7 @@
           },
           "objective": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
@@ -31115,6 +31234,7 @@
           },
           "objectives": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
             }
@@ -31123,7 +31243,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
-            }
+            },
+            "nullable": true
           },
           "intervalsRedeemedCount": {
             "type": "integer",
@@ -31137,6 +31258,7 @@
           },
           "rewardVisibilty": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "boolean"
             },
@@ -31405,6 +31527,7 @@
           },
           "newnessFlaggedCollectibleHashes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "uint32"
@@ -31533,7 +31656,8 @@
           },
           "displayName": {
             "type": "string",
-            "description": "The player's last known display name."
+            "description": "The player's last known display name.",
+            "nullable": true
           },
           "status": {
             "type": "integer",
@@ -31800,7 +31924,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Components.Profiles.DestinyProfileTransitoryComponent"
+            "$ref": "#/components/schemas/Destiny.Components.Profiles.DestinyProfileTransitoryComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -32774,6 +32899,7 @@
           },
           "seasonResets": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.DestinyProgressionResetEntry"
             },
@@ -32781,6 +32907,7 @@
           },
           "rewardItemStates": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "description": "Represents the different states a progression reward item can be in.",
@@ -32808,6 +32935,7 @@
           },
           "availableQuests": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneQuest"
             },
@@ -32815,6 +32943,7 @@
           },
           "activities": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneChallengeActivity"
             },
@@ -32822,6 +32951,7 @@
           },
           "values": {
             "type": "object",
+            "nullable": true,
             "additionalProperties": {
               "type": "number",
               "format": "float"
@@ -32833,6 +32963,7 @@
           },
           "vendorHashes": {
             "type": "array",
+            "nullable": true,
             "items": {
               "type": "integer",
               "format": "uint32"
@@ -32844,6 +32975,7 @@
           },
           "vendors": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneVendor"
             },
@@ -32851,6 +32983,7 @@
           },
           "rewards": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneRewardCategory"
             },
@@ -32898,6 +33031,7 @@
           },
           "activity": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneActivity"
@@ -32907,6 +33041,7 @@
           },
           "challenges": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Challenges.DestinyChallengeStatus"
             },
@@ -33437,7 +33572,8 @@
             "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data. Note that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "variants": {
             "type": "array",
@@ -33927,6 +34063,7 @@
           },
           "phases": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneActivityPhase"
             },
@@ -33990,7 +34127,8 @@
             "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "booleanActivityOptions": {
             "type": "object",
@@ -34001,7 +34139,8 @@
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
-            }
+            },
+            "nullable": true
           },
           "loadoutRequirementIndex": {
             "type": "integer",
@@ -34011,6 +34150,7 @@
           },
           "phases": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyMilestoneActivityPhase"
             },
@@ -34579,6 +34719,7 @@
           },
           "phases": {
             "type": "array",
+            "nullable": true,
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.Milestones.DestinyMilestoneChallengeActivityPhase"
             },
@@ -35394,7 +35535,8 @@
             "description": "If the user is in an activity, this will be the hashes of the DestinyActivityModeDefinition being played. Combine with currentActivityHash to give a person a full picture of what they're doing right now.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
-            }
+            },
+            "nullable": true
           },
           "currentActivityModeTypes": {
             "type": "array",
@@ -35407,7 +35549,8 @@
               },
               "x-enum-is-bitmask": false
             },
-            "description": "All Activity Modes that apply to the current activity being played, in enum form."
+            "description": "All Activity Modes that apply to the current activity being played, in enum form.",
+            "nullable": true
           },
           "currentPlaylistActivityHash": {
             "type": "integer",
@@ -35486,7 +35629,8 @@
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Challenges.DestinyChallengeStatus"
-            }
+            },
+            "nullable": true
           },
           "modifierHashes": {
             "type": "array",
@@ -35497,7 +35641,8 @@
             "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "booleanActivityOptions": {
             "type": "object",
@@ -35508,7 +35653,8 @@
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
-            }
+            },
+            "nullable": true
           },
           "loadoutRequirementIndex": {
             "type": "integer",
@@ -35744,6 +35890,7 @@
                 "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
               }
             ],
+            "nullable": true,
             "description": "I may regret naming it this way - but this represents when an item has an objective that doesn't serve a beneficial purpose, but rather is used for \"flavor\" or additional information. For instance, when Emblems track specific stats, those stats are represented as Objectives on the item."
           },
           "dateCompleted": {
@@ -36038,7 +36185,8 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Components.Craftables.DestinyCraftableSocketPlugComponent"
             },
-            "description": "Unlock state for plugs in the socket plug set definition"
+            "description": "Unlock state for plugs in the socket plug set definition",
+            "nullable": true
           }
         }
       },
@@ -36235,7 +36383,8 @@
                 "$ref": "#/components/schemas/Destiny.DestinyStat"
               }
             ],
-            "description": "The item stat that we consider to be \"primary\" for the item. For instance, this would be \"Attack\" for Weapons or \"Defense\" for armor."
+            "description": "The item stat that we consider to be \"primary\" for the item. For instance, this would be \"Attack\" for Weapons or \"Defense\" for armor.",
+            "nullable": true
           },
           "itemLevel": {
             "type": "integer",
@@ -36327,7 +36476,8 @@
                 "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemInstanceEnergy"
               }
             ],
-            "description": "IF populated, this item supports Energy mechanics (i.e. Armor 2.0), and these are the current details of its energy type and available capacity to spend energy points."
+            "description": "IF populated, this item supports Energy mechanics (i.e. Armor 2.0), and these are the current details of its energy type and available capacity to spend energy points.",
+            "nullable": true
           }
         },
         "description": "If an item is \"instanced\", this will contain information about the item's instance that doesn't fit easily into other components. One might say this is the \"essential\" instance data for the item.\r\nItems are instanced if they require information or state that can vary. For instance, weapons are Instanced: they are given a unique identifier, uniquely generated stats, and can have their properties altered. Non-instanced items have none of these things: for instance, Glimmer has no unique properties aside from how much of it you own.\r\nYou can tell from an item's definition whether it will be instanced or not by looking at the DestinyInventoryItemDefinition's definition.inventory.isInstanceItem property.",
@@ -36654,7 +36804,8 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "If a plug is inserted but not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled."
+            "description": "If a plug is inserted but not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.",
+            "nullable": true
           }
         },
         "description": "The status of a given item's socket. (which plug is inserted, if any: whether it is enabled, what \"reusable\" plugs can be inserted, etc...)\r\nIf I had it to do over, this would probably have a DestinyItemPlug representing the inserted item instead of most of these properties. :shrug:"
@@ -36818,7 +36969,8 @@
                 "$ref": "#/components/schemas/Destiny.DestinyProgression"
               }
             ],
-            "description": "If the item has a progression, it will be detailed here. A progression means that the item can gain experience. Thresholds of experience are what determines whether and when a talent node can be activated."
+            "description": "If the item has a progression, it will be detailed here. A progression means that the item can gain experience. Thresholds of experience are what determines whether and when a talent node can be activated.",
+            "nullable": true
           }
         },
         "description": "Well, we're here in Destiny 2, and Talent Grids are unfortunately still around.\r\nThe good news is that they're pretty much only being used for certain base information on items and for Builds/Subclasses. The bad news is that they still suck. If you really want this information, grab this component.\r\nAn important note is that talent grids are defined as such:\r\nA Grid has 1:M Nodes, which has 1:M Steps.\r\nAny given node can only have a single step active at one time, which represents the actual visual contents and effects of the Node (for instance, if you see a \"Super Cool Bonus\" node, the actual icon and text for the node is coming from the current Step of that node).\r\nNodes can be grouped into exclusivity sets *and* as of D2, exclusivity groups (which are collections of exclusivity sets that affect each other).\r\nSee DestinyTalentGridDefinition for more information. Brace yourself, the water's cold out there in the deep end.",
@@ -36883,7 +37035,8 @@
                 "$ref": "#/components/schemas/Destiny.DestinyTalentNodeStatBlock"
               }
             ],
-            "description": "This property has some history. A talent grid can provide stats on both the item it's related to and the character equipping the item. This returns data about those stat bonuses."
+            "description": "This property has some history. A talent grid can provide stats on both the item it's related to and the character equipping the item. This returns data about those stat bonuses.",
+            "nullable": true
           }
         },
         "description": "I see you've come to find out more about Talent Nodes. I'm so sorry. Talent Nodes are the conceptual, visual nodes that appear on Talent Grids. Talent Grids, in Destiny 1, were found on almost every instanced item: they had Nodes that could be activated to change the properties of the item. In Destiny 2, Talent Grids only exist for Builds/Subclasses, and while the basic concept is the same (Nodes can be activated once you've gained sufficient Experience on the Item, and provide effects), there are some new concepts from Destiny 1. Examine DestinyTalentGridDefinition and its subordinates for more information. This is the \"Live\" information for the current status of a Talent Node on a specific item. Talent Nodes have many Steps, but only one can be active at any one time: and it is the Step that determines both the visual and the game state-changing properties that the Node provides. Examine this and DestinyTalentNodeStepDefinition carefully. *IMPORTANT NOTE* Talent Nodes are, unfortunately, Content Version DEPENDENT. Though they refer to hashes for Nodes and Steps, those hashes are not guaranteed to be immutable across content versions. This is a source of great exasperation for me, but as a result anyone using Talent Grid data must ensure that the content version of their static content matches that of the server responses before showing or making decisions based on talent grid data."
@@ -37024,7 +37177,8 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Quests.DestinyObjectiveProgress"
             },
-            "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data."
+            "description": "Sometimes, Plugs may have objectives: these are often used for flavor and display purposes, but they can be used for any arbitrary purpose (both fortunately and unfortunately). Recently (with Season 2) they were expanded in use to be used as the \"gating\" for whether the plug can be inserted at all. For instance, a Plug might be tracking the number of PVP kills you have made. It will use the parent item's data about that tracking status to determine what to show, and will generally show it using the DestinyObjectiveDefinition's progressDescription property. Refer to the plug's itemHash and objective property for more information if you would like to display even more data.",
+            "nullable": true
           },
           "plugItemHash": {
             "type": "integer",
@@ -37048,7 +37202,8 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted."
+            "description": "If the plug cannot be inserted for some reason, this will have the indexes into the plug item definition's plug.insertionRules property, so you can show the reasons why it can't be inserted.\r\nThis list will be empty if the plug can be inserted.",
+            "nullable": true
           },
           "enableFailIndexes": {
             "type": "array",
@@ -37056,7 +37211,8 @@
               "type": "integer",
               "format": "int32"
             },
-            "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+            "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled.",
+            "nullable": true
           }
         },
         "description": "Plugs are non-instanced items that can provide Stat and Perk benefits when socketed into an instanced item. Items have Sockets, and Plugs are inserted into Sockets.\r\nThis component finds all items that are considered \"Plugs\" in your inventory, and return information about the plug aside from any specific Socket into which it could be inserted.",
@@ -37552,6 +37708,7 @@
           },
           "talentGrid": {
             "type": "object",
+            "nullable": true,
             "allOf": [
               {
                 "$ref": "#/components/schemas/SingleComponentResponseOfDestinyItemTalentGridComponent"
@@ -37639,7 +37796,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemObjectivesComponent"
+            "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemObjectivesComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -37765,7 +37923,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent"
+            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemReusablePlugsComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -37786,7 +37945,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent"
+            "$ref": "#/components/schemas/Destiny.Components.Items.DestinyItemPlugObjectivesComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -41427,7 +41587,8 @@
             "description": "The activity may have 0-to-many modifiers: if it does, this will contain the hashes to the DestinyActivityModifierDefinition that defines the modifier being applied.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "variants": {
             "type": "array",
@@ -42394,7 +42555,8 @@
             "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "loadoutRequirementIndex": {
             "type": "integer",
@@ -42419,7 +42581,8 @@
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
-            }
+            },
+            "nullable": true
           }
         }
       },
@@ -42971,7 +43134,8 @@
             "description": "The active modifiers on this activity, if any - represented as hashes for DestinyActivityModifierDefinitions.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
-            }
+            },
+            "nullable": true
           },
           "rewardTooltipItems": {
             "type": "array",
@@ -43381,10 +43545,12 @@
           },
           "supplementalDisplayName": {
             "type": "string",
+            "nullable": true,
             "description": "A platform specific additional display name - ex: psn Real Name, bnet Unique Name, etc."
           },
           "iconPath": {
             "type": "string",
+            "nullable": true,
             "description": "URL the Icon if available."
           },
           "crossSaveOverride": {
