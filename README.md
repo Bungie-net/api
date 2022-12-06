@@ -6,6 +6,14 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2022-12-06 Update for the Season of the Seraph
+
+- Added `responseMintedTimestamp` and `secondaryComponentsMintedTimestamp` to DestinyProfileResponse.
+  - Use these new values to handle stale cached responses from the `Destiny2.GetProfile` API.
+- Added new EquipFailureReason enum flag values, and renamed `ItemNotOnCharacter` to `ItemWrapped`.
+- Added new `categoryfilter` and `includebody` parameters to the `/Content/Rss/NewsArticle/<page>/` API.
+  - Going forward, new news content will be available via the RSS feeds and this API.
+
 ## 2022-08-23 Update for the Season of Plunder
 
 - Added Support for Epic Games accounts.

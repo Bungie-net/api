@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.16.0"
+    "version": "2.17.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -1173,6 +1173,18 @@
         "description": "Returns a JSON string response that is the RSS feed for news articles.",
         "operationId": "Content.RssNewsArticles",
         "parameters": [
+          {
+            "name": "categoryfilter",
+            "in": "query",
+            "description": "Optionally filter response to only include news items in a certain category.",
+            "type": "string"
+          },
+          {
+            "name": "includebody",
+            "in": "query",
+            "description": "Optionally include full content body for each news item.",
+            "type": "boolean"
+          },
           {
             "name": "pageToken",
             "in": "path",
@@ -10815,6 +10827,9 @@
         "ResultCountThisPage": {
           "format": "int32",
           "type": "integer"
+        },
+        "CategoryFilter": {
+          "type": "string"
         }
       }
     },
@@ -10835,6 +10850,15 @@
           "type": "string"
         },
         "Description": {
+          "type": "string"
+        },
+        "HtmlContent": {
+          "type": "string"
+        },
+        "ImagePath": {
+          "type": "string"
+        },
+        "OptionalMobileImagePath": {
           "type": "string"
         }
       }
@@ -16095,7 +16119,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -16431,6 +16456,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         },
@@ -17749,7 +17778,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -18085,6 +18115,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         },
@@ -18199,7 +18233,8 @@
         "87",
         "88",
         "89",
-        "90"
+        "90",
+        "91"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -18535,6 +18570,10 @@
         {
           "numericValue": "90",
           "identifier": "IronBannerRift"
+        },
+        {
+          "numericValue": "91",
+          "identifier": "IronBannerZoneControl"
         }
       ]
     },
@@ -24450,6 +24489,9 @@
         "239",
         "240",
         "241",
+        "242",
+        "243",
+        "244",
         "300",
         "301",
         "302",
@@ -24660,6 +24702,8 @@
         "751",
         "752",
         "753",
+        "754",
+        "755",
         "801",
         "802",
         "803",
@@ -24960,6 +25004,8 @@
         "2506",
         "2507",
         "2508",
+        "2509",
+        "2510",
         "2600",
         "2601",
         "2700",
@@ -25154,8 +25200,7 @@
         },
         {
           "numericValue": "14",
-          "identifier": "UnknownSqlResult",
-          "description": "Deprecated, please do not check for this value anywhere."
+          "identifier": "UnknownSqlResult"
         },
         {
           "numericValue": "15",
@@ -25872,6 +25917,18 @@
         {
           "numericValue": "241",
           "identifier": "ErrorNameAlreadySetToInput"
+        },
+        {
+          "numericValue": "242",
+          "identifier": "UserDisplayNameLessThanMinLength"
+        },
+        {
+          "numericValue": "243",
+          "identifier": "UserDisplayNameGreaterThanMaxLength"
+        },
+        {
+          "numericValue": "244",
+          "identifier": "UserDisplayNameContainsUnacceptableOrInvalidContent"
         },
         {
           "numericValue": "300",
@@ -26712,6 +26769,14 @@
         {
           "numericValue": "753",
           "identifier": "ClanCreationTenureRequirementsNotMet"
+        },
+        {
+          "numericValue": "754",
+          "identifier": "ClanFieldContainsReservedTerms"
+        },
+        {
+          "numericValue": "755",
+          "identifier": "ClanFieldContainsInappropriateContent"
         },
         {
           "numericValue": "801",
@@ -27913,6 +27978,14 @@
         {
           "numericValue": "2508",
           "identifier": "TwitchDropsRepairPartialFailure"
+        },
+        {
+          "numericValue": "2509",
+          "identifier": "TwitchNotAuthorized"
+        },
+        {
+          "numericValue": "2510",
+          "identifier": "TwitchUnknownAuthorizationFailure"
         },
         {
           "numericValue": "2600",
@@ -29154,7 +29227,8 @@
             "32",
             "64",
             "128",
-            "256"
+            "256",
+            "512"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -29197,6 +29271,10 @@
             {
               "numericValue": "256",
               "identifier": "TheWitchQueen"
+            },
+            {
+              "numericValue": "512",
+              "identifier": "Lightfall"
             }
           ]
         },
@@ -29561,7 +29639,8 @@
         "32",
         "64",
         "128",
-        "256"
+        "256",
+        "512"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -29604,6 +29683,10 @@
         {
           "numericValue": "256",
           "identifier": "TheWitchQueen"
+        },
+        {
+          "numericValue": "512",
+          "identifier": "Lightfall"
         }
       ]
     },
@@ -29858,6 +29941,16 @@
       "description": "The response for GetDestinyProfile, with components for character and item-level data.",
       "type": "object",
       "properties": {
+        "responseMintedTimestamp": {
+          "format": "date-time",
+          "description": "Records the timestamp of when most components were last generated from the world server source. Unless the component type is specified in the documentation for secondaryComponentsMintedTimestamp, this value is sufficient to do data freshness.",
+          "type": "string"
+        },
+        "secondaryComponentsMintedTimestamp": {
+          "format": "date-time",
+          "description": "Some secondary components are not tracked in the primary response timestamp and have their timestamp tracked here. If your component is any of the following, this field is where you will find your timestamp value:\r\n PresentationNodes, Records, Collectibles, Metrics, StringVariables, Craftables, Transitory\r\n All other component types may use the primary timestamp property.",
+          "type": "string"
+        },
         "vendorReceipts": {
           "description": "Recent, refundable purchases you have made from vendors. When will you use it? Couldn't say...\r\nCOMPONENT TYPE: VendorReceipts",
           "type": "object",
@@ -32532,7 +32625,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -32868,6 +32962,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         },
@@ -33006,7 +33104,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -33342,6 +33441,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         }
@@ -34404,7 +34507,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -34740,6 +34844,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         },
@@ -35562,7 +35670,10 @@
         "2",
         "4",
         "8",
-        "16"
+        "16",
+        "32",
+        "64",
+        "128"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -35593,8 +35704,23 @@
         },
         {
           "numericValue": "16",
-          "identifier": "ItemNotOnCharacter",
-          "description": "This item can't be equipped on the character requested, because it must be in that character's inventory first. Transfer the item to the character you want to equip it before you attempt to equip it."
+          "identifier": "ItemWrapped",
+          "description": "This item is 'wrapped' and must be unwrapped before being equipped. NOTE: This value used to be called ItemNotOnCharacter but that is no longer accurate."
+        },
+        {
+          "numericValue": "32",
+          "identifier": "ItemNotLoaded",
+          "description": "This item is not yet loaded and cannot be equipped yet."
+        },
+        {
+          "numericValue": "64",
+          "identifier": "ItemEquipBlocklisted",
+          "description": "This item is block-listed and cannot be equipped."
+        },
+        {
+          "numericValue": "128",
+          "identifier": "ItemLoadoutRequirementNotMet",
+          "description": "This item does not meet the loadout requirements for the current activity"
         }
       ]
     },
@@ -37411,7 +37537,9 @@
         "32768",
         "65536",
         "131072",
-        "262144"
+        "262144",
+        "524288",
+        "1048576"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -37514,6 +37642,15 @@
           "numericValue": "262144",
           "identifier": "Locked",
           "description": "This indicates that the sale item is locked."
+        },
+        {
+          "numericValue": "524288",
+          "identifier": "Paracausal",
+          "description": "This indicates that the sale item is paracausal."
+        },
+        {
+          "numericValue": "1048576",
+          "identifier": "Cryptarch"
         }
       ]
     },
@@ -40227,7 +40364,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -40563,6 +40701,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         }
@@ -40674,7 +40816,8 @@
             "87",
             "88",
             "89",
-            "90"
+            "90",
+            "91"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -41010,6 +41153,10 @@
             {
               "numericValue": "90",
               "identifier": "IronBannerRift"
+            },
+            {
+              "numericValue": "91",
+              "identifier": "IronBannerZoneControl"
             }
           ]
         }

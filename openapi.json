@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.16.0"
+    "version": "2.17.0"
   },
   "servers": [
     {
@@ -712,6 +712,22 @@
         "description": "Returns a JSON string response that is the RSS feed for news articles.",
         "operationId": "Content.RssNewsArticles",
         "parameters": [
+          {
+            "name": "categoryfilter",
+            "in": "query",
+            "description": "Optionally filter response to only include news items in a certain category.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "includebody",
+            "in": "query",
+            "description": "Optionally include full content body for each news item.",
+            "schema": {
+              "type": "boolean"
+            }
+          },
           {
             "name": "pageToken",
             "in": "path",
@@ -7720,6 +7736,9 @@
           "ResultCountThisPage": {
             "type": "integer",
             "format": "int32"
+          },
+          "CategoryFilter": {
+            "type": "string"
           }
         }
       },
@@ -7740,6 +7759,15 @@
             "type": "string"
           },
           "Description": {
+            "type": "string"
+          },
+          "HtmlContent": {
+            "type": "string"
+          },
+          "ImagePath": {
+            "type": "string"
+          },
+          "OptionalMobileImagePath": {
             "type": "string"
           }
         }
@@ -13154,7 +13182,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "If the activity had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -13493,6 +13522,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -14838,7 +14871,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "If the playlist entry had an activity mode directly defined on it, this will be the enum value of that mode.",
@@ -15177,6 +15211,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -15292,7 +15330,8 @@
           "87",
           "88",
           "89",
-          "90"
+          "90",
+          "91"
         ],
         "type": "integer",
         "description": "For historical reasons, this list will have both D1 and D2-relevant Activity Modes in it. Please don't take this to mean that some D1-only feature is coming back!",
@@ -15630,6 +15669,10 @@
           {
             "numericValue": "90",
             "identifier": "IronBannerRift"
+          },
+          {
+            "numericValue": "91",
+            "identifier": "IronBannerZoneControl"
           }
         ],
         "x-enum-is-bitmask": false
@@ -21722,6 +21765,9 @@
           "239",
           "240",
           "241",
+          "242",
+          "243",
+          "244",
           "300",
           "301",
           "302",
@@ -21932,6 +21978,8 @@
           "751",
           "752",
           "753",
+          "754",
+          "755",
           "801",
           "802",
           "803",
@@ -22232,6 +22280,8 @@
           "2506",
           "2507",
           "2508",
+          "2509",
+          "2510",
           "2600",
           "2601",
           "2700",
@@ -22427,8 +22477,7 @@
           },
           {
             "numericValue": "14",
-            "identifier": "UnknownSqlResult",
-            "description": "Deprecated, please do not check for this value anywhere."
+            "identifier": "UnknownSqlResult"
           },
           {
             "numericValue": "15",
@@ -23145,6 +23194,18 @@
           {
             "numericValue": "241",
             "identifier": "ErrorNameAlreadySetToInput"
+          },
+          {
+            "numericValue": "242",
+            "identifier": "UserDisplayNameLessThanMinLength"
+          },
+          {
+            "numericValue": "243",
+            "identifier": "UserDisplayNameGreaterThanMaxLength"
+          },
+          {
+            "numericValue": "244",
+            "identifier": "UserDisplayNameContainsUnacceptableOrInvalidContent"
           },
           {
             "numericValue": "300",
@@ -23985,6 +24046,14 @@
           {
             "numericValue": "753",
             "identifier": "ClanCreationTenureRequirementsNotMet"
+          },
+          {
+            "numericValue": "754",
+            "identifier": "ClanFieldContainsReservedTerms"
+          },
+          {
+            "numericValue": "755",
+            "identifier": "ClanFieldContainsInappropriateContent"
           },
           {
             "numericValue": "801",
@@ -25186,6 +25255,14 @@
           {
             "numericValue": "2508",
             "identifier": "TwitchDropsRepairPartialFailure"
+          },
+          {
+            "numericValue": "2509",
+            "identifier": "TwitchNotAuthorized"
+          },
+          {
+            "numericValue": "2510",
+            "identifier": "TwitchUnknownAuthorizationFailure"
           },
           {
             "numericValue": "2600",
@@ -26456,7 +26533,8 @@
               "32",
               "64",
               "128",
-              "256"
+              "256",
+              "512"
             ],
             "type": "integer",
             "description": "If this profile is not in a cross save pairing, this will return the game versions that we believe this profile has access to.\r\n For the time being, we will not return this information for any membership that is in a cross save pairing. The gist is that, once the pairing occurs, we do not currently have a consistent way to get that information for the profile's original Platform, and thus gameVersions would be too inconsistent (based on the last platform they happened to play on) for the info to be useful.\r\n If we ever can get this data, this field will be deprecated and replaced with data on the DestinyLinkedProfileResponse itself, with game versions per linked Platform. But since we can't get that, we have this as a stop-gap measure for getting the data in the only situation that we currently need it.",
@@ -26502,6 +26580,10 @@
               {
                 "numericValue": "256",
                 "identifier": "TheWitchQueen"
+              },
+              {
+                "numericValue": "512",
+                "identifier": "Lightfall"
               }
             ],
             "x-enum-is-bitmask": true
@@ -26893,7 +26975,8 @@
           "32",
           "64",
           "128",
-          "256"
+          "256",
+          "512"
         ],
         "type": "integer",
         "description": "A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.",
@@ -26938,6 +27021,10 @@
           {
             "numericValue": "256",
             "identifier": "TheWitchQueen"
+          },
+          {
+            "numericValue": "512",
+            "identifier": "Lightfall"
           }
         ],
         "x-enum-is-bitmask": true
@@ -27194,6 +27281,16 @@
       "Destiny.Responses.DestinyProfileResponse": {
         "type": "object",
         "properties": {
+          "responseMintedTimestamp": {
+            "type": "string",
+            "description": "Records the timestamp of when most components were last generated from the world server source. Unless the component type is specified in the documentation for secondaryComponentsMintedTimestamp, this value is sufficient to do data freshness.",
+            "format": "date-time"
+          },
+          "secondaryComponentsMintedTimestamp": {
+            "type": "string",
+            "description": "Some secondary components are not tracked in the primary response timestamp and have their timestamp tracked here. If your component is any of the following, this field is where you will find your timestamp value:\r\n PresentationNodes, Records, Collectibles, Metrics, StringVariables, Craftables, Transitory\r\n All other component types may use the primary timestamp property.",
+            "format": "date-time"
+          },
           "vendorReceipts": {
             "type": "object",
             "allOf": [
@@ -30053,7 +30150,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -30392,6 +30490,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -30530,7 +30632,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -30869,6 +30972,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -31980,7 +32087,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "And the current activity's most specific mode type, if it can be found.",
@@ -32319,6 +32427,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -33239,7 +33351,10 @@
           "2",
           "4",
           "8",
-          "16"
+          "16",
+          "32",
+          "64",
+          "128"
         ],
         "type": "integer",
         "description": "The reasons why an item cannot be equipped, if any. Many flags can be set, or \"None\" if",
@@ -33272,8 +33387,23 @@
           },
           {
             "numericValue": "16",
-            "identifier": "ItemNotOnCharacter",
-            "description": "This item can't be equipped on the character requested, because it must be in that character's inventory first. Transfer the item to the character you want to equip it before you attempt to equip it."
+            "identifier": "ItemWrapped",
+            "description": "This item is 'wrapped' and must be unwrapped before being equipped. NOTE: This value used to be called ItemNotOnCharacter but that is no longer accurate."
+          },
+          {
+            "numericValue": "32",
+            "identifier": "ItemNotLoaded",
+            "description": "This item is not yet loaded and cannot be equipped yet."
+          },
+          {
+            "numericValue": "64",
+            "identifier": "ItemEquipBlocklisted",
+            "description": "This item is block-listed and cannot be equipped."
+          },
+          {
+            "numericValue": "128",
+            "identifier": "ItemLoadoutRequirementNotMet",
+            "description": "This item does not meet the loadout requirements for the current activity"
           }
         ],
         "x-enum-is-bitmask": true
@@ -35231,7 +35361,9 @@
           "32768",
           "65536",
           "131072",
-          "262144"
+          "262144",
+          "524288",
+          "1048576"
         ],
         "type": "integer",
         "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration/bitmask for v3.2.0.",
@@ -35336,6 +35468,15 @@
             "numericValue": "262144",
             "identifier": "Locked",
             "description": "This indicates that the sale item is locked."
+          },
+          {
+            "numericValue": "524288",
+            "identifier": "Paracausal",
+            "description": "This indicates that the sale item is paracausal."
+          },
+          {
+            "numericValue": "1048576",
+            "identifier": "Cryptarch"
           }
         ],
         "x-enum-is-bitmask": true
@@ -38275,7 +38416,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -38614,6 +38756,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
@@ -38725,7 +38871,8 @@
               "87",
               "88",
               "89",
-              "90"
+              "90",
+              "91"
             ],
             "type": "integer",
             "description": "The enumeration equivalent of the most specific Activity Mode under which this activity is played.",
@@ -39064,6 +39211,10 @@
               {
                 "numericValue": "90",
                 "identifier": "IronBannerRift"
+              },
+              {
+                "numericValue": "91",
+                "identifier": "IronBannerZoneControl"
               }
             ],
             "x-enum-is-bitmask": false
