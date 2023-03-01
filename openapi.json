@@ -15004,7 +15004,8 @@
                 "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
               }
             ],
-            "description": "The title, subtitle, and icon for the activity. We do a little post-processing on this to try and account for Activities where the designers have left this data too minimal to determine what activity is actually being played."
+            "description": "The title, subtitle, and icon for the activity. We do a little post-processing on this to try and account for Activities where the designers have left this data too minimal to determine what activity is actually being played.",
+            "nullable": true
           },
           "originalDisplayProperties": {
             "type": "object",
@@ -15118,7 +15119,8 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityGraphListEntryDefinition"
             },
-            "description": "Unfortunately, in practice this is almost never populated. In theory, this is supposed to tell which Activity Graph to show if you bring up the director while in this activity."
+            "description": "Unfortunately, in practice this is almost never populated. In theory, this is supposed to tell which Activity Graph to show if you bring up the director while in this activity.",
+            "nullable": true
           },
           "matchmaking": {
             "type": "object",
@@ -15136,7 +15138,8 @@
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityGuidedBlockDefinition"
               }
             ],
-            "description": "This block of data, if it exists, provides information about the guided game experience and restrictions for this activity. If it doesn't exist, the game is not able to be played as a guided game."
+            "description": "This block of data, if it exists, provides information about the guided game experience and restrictions for this activity. If it doesn't exist, the game is not able to be played as a guided game.",
+            "nullable": true
           },
           "directActivityModeHash": {
             "type": "integer",
@@ -15589,7 +15592,8 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityLoadoutRequirementSet"
             },
-            "description": "The set of all possible loadout requirements that could be active for this activity. Only one will be active at any given time, and you can discover which one through activity-associated data such as Milestones that have activity info on them."
+            "description": "The set of all possible loadout requirements that could be active for this activity. Only one will be active at any given time, and you can discover which one through activity-associated data such as Milestones that have activity info on them.",
+            "nullable": true
           },
           "activityModeHashes": {
             "type": "array",
@@ -15600,7 +15604,8 @@
             "description": "The hash identifiers for Activity Modes relevant to this activity.  Note that if this is a playlist, the specific playlist entry chosen will determine the actual activity modes that end up being relevant.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityModeDefinition"
-            }
+            },
+            "nullable": true
           },
           "activityModeTypes": {
             "type": "array",
@@ -15613,7 +15618,8 @@
               },
               "x-enum-is-bitmask": false
             },
-            "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums."
+            "description": "The activity modes - if any - in enum form. Because we can't seem to escape the enums.",
+            "nullable": true
           },
           "isPvP": {
             "type": "boolean",
@@ -15656,7 +15662,8 @@
         "properties": {
           "rewardText": {
             "type": "string",
-            "description": "The header for the reward set, if any."
+            "description": "The header for the reward set, if any.",
+            "nullable": true
           },
           "rewardItems": {
             "type": "array",
@@ -16202,7 +16209,8 @@
                 "$ref": "#/components/schemas/Destiny.Definitions.DestinyItemInvestmentStatDefinition"
               }
             ],
-            "description": "The stat being modified, and the value used."
+            "description": "The stat being modified, and the value used.",
+            "nullable": true
           },
           "style": {
             "type": "integer",
@@ -18605,7 +18613,8 @@
             "items": {
               "type": "string"
             },
-            "description": "Icon overlays to denote the item version and power cap status."
+            "description": "Icon overlays to denote the item version and power cap status.",
+            "nullable": true
           }
         },
         "description": "An item's \"Quality\" determines its calculated stats. The Level at which the item spawns is combined with its \"qualityLevel\" along with some additional calculations to determine the value of those stats.\r\nIn Destiny 2, most items don't have default item levels and quality, making this property less useful: these apparently are almost always determined by the complex mechanisms of the Reward system rather than statically. They are still provided here in case they are still useful for people. This also contains some information about Infusion."
@@ -19187,11 +19196,13 @@
           },
           "originalIcon": {
             "type": "string",
-            "description": "The original icon for this presentation node, before we futzed with it."
+            "description": "The original icon for this presentation node, before we futzed with it.",
+            "nullable": true
           },
           "rootViewIcon": {
             "type": "string",
-            "description": "Some presentation nodes are meant to be explicitly shown on the \"root\" or \"entry\" screens for the feature to which they are related. You should use this icon when showing them on such a view, if you have a similar \"entry point\" view in your UI. If you don't have a UI, then I guess it doesn't matter either way does it?"
+            "description": "Some presentation nodes are meant to be explicitly shown on the \"root\" or \"entry\" screens for the feature to which they are related. You should use this icon when showing them on such a view, if you have a similar \"entry point\" view in your UI. If you don't have a UI, then I guess it doesn't matter either way does it?",
+            "nullable": true
           },
           "nodeType": {
             "type": "integer",
@@ -19771,7 +19782,8 @@
             "x-enum-is-bitmask": false
           },
           "presentationInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationChildBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationChildBlock",
+            "nullable": true
           },
           "loreHash": {
             "type": "integer",
@@ -19789,7 +19801,8 @@
             },
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.DestinyObjectiveDefinition"
-            }
+            },
+            "nullable": true
           },
           "recordValueStyle": {
             "type": "integer",
@@ -19807,19 +19820,24 @@
             "description": "A hint to show a large icon for a reward"
           },
           "titleInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordTitleBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordTitleBlock",
+            "nullable": true
           },
           "completionInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordCompletionBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordCompletionBlock",
+            "nullable": true
           },
           "stateInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Records.SchemaRecordStateBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Records.SchemaRecordStateBlock",
+            "nullable": true
           },
           "requirements": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeRequirementsBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeRequirementsBlock",
+            "nullable": true
           },
           "expirationInfo": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordExpirationBlock"
+            "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordExpirationBlock",
+            "nullable": true
           },
           "intervalInfo": {
             "type": "object",
@@ -19828,18 +19846,16 @@
                 "$ref": "#/components/schemas/Destiny.Definitions.Records.DestinyRecordIntervalBlock"
               }
             ],
-            "description": "Some records have multiple 'interval' objectives, and the record may be claimed at each completed interval"
+            "description": "Some records have multiple 'interval' objectives, and the record may be claimed at each completed interval",
+            "nullable": true
           },
           "rewardItems": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.DestinyItemQuantity"
             },
-            "description": "If there is any publicly available information about rewards earned for achieving this record, this is the list of those items.\r\n However, note that some records intentionally have \"hidden\" rewards. These will not be returned in this list."
-          },
-          "recordTypeName": {
-            "type": "string",
-            "description": "A display name for the type of record this is (Triumphs, Lore, Medals, Seasonal Challenge, etc.)."
+            "description": "If there is any publicly available information about rewards earned for achieving this record, this is the list of those items.\r\n However, note that some records intentionally have \"hidden\" rewards. These will not be returned in this list.",
+            "nullable": true
           },
           "presentationNodeType": {
             "type": "integer",
@@ -19853,7 +19869,8 @@
             "type": "array",
             "items": {
               "type": "string"
-            }
+            },
+            "nullable": true
           },
           "traitHashes": {
             "type": "array",
@@ -19863,7 +19880,8 @@
             },
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.Traits.DestinyTraitDefinition"
-            }
+            },
+            "nullable": true
           },
           "parentNodeHashes": {
             "type": "array",
@@ -19874,7 +19892,8 @@
             "description": "A quick reference to presentation nodes that have this node as a child. Presentation nodes can be parented under multiple parents.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
-            }
+            },
+            "nullable": true
           },
           "hash": {
             "type": "integer",
@@ -19944,7 +19963,8 @@
               "x-enum-reference": {
                 "$ref": "#/components/schemas/Destiny.DestinyGender"
               },
-              "x-enum-is-bitmask": false
+              "x-enum-is-bitmask": false,
+              "nullable": true
             }
           },
           "titlesByGenderHash": {
@@ -19959,7 +19979,8 @@
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
-            }
+            },
+            "nullable": true
           },
           "gildingTrackingRecordHash": {
             "type": "integer",
@@ -20072,13 +20093,9 @@
             "type": "integer",
             "format": "int32"
           },
-          "obscuredName": {
+          "obscuredString": {
             "type": "string",
-            "description": "A display name override to show when this record is 'obscured' instead of the default obscured display name."
-          },
-          "obscuredDescription": {
-            "type": "string",
-            "description": "A display description override to show when this record is 'obscured' instead of the default obscured display description."
+            "nullable": true
           }
         }
       },
@@ -20092,7 +20109,8 @@
             "type": "string"
           },
           "icon": {
-            "type": "string"
+            "type": "string",
+            "nullable": true
           }
         },
         "description": "If this record has an expiration after which it cannot be earned, this is some information about that expiration."
@@ -20871,7 +20889,8 @@
                 "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
               }
             ],
-            "description": "If you want to show these plugs in isolation, these are the display properties for them."
+            "description": "If you want to show these plugs in isolation, these are the display properties for them.",
+            "nullable": true
           },
           "reusablePlugItems": {
             "type": "array",
@@ -20906,7 +20925,8 @@
         "type": "object",
         "properties": {
           "craftingRequirements": {
-            "$ref": "#/components/schemas/Destiny.Definitions.DestinyPlugItemCraftingRequirements"
+            "$ref": "#/components/schemas/Destiny.Definitions.DestinyPlugItemCraftingRequirements",
+            "nullable": true
           },
           "currentlyCanRoll": {
             "type": "boolean",
@@ -30327,7 +30347,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Entities.Profiles.DestinyVendorReceiptsComponent"
+            "$ref": "#/components/schemas/Destiny.Entities.Profiles.DestinyVendorReceiptsComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -30361,7 +30382,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Entities.Inventory.DestinyInventoryComponent"
+            "$ref": "#/components/schemas/Destiny.Entities.Inventory.DestinyInventoryComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -30649,7 +30671,8 @@
         "type": "object",
         "properties": {
           "data": {
-            "$ref": "#/components/schemas/Destiny.Components.Inventory.DestinyPlatformSilverComponent"
+            "$ref": "#/components/schemas/Destiny.Components.Inventory.DestinyPlatformSilverComponent",
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -37281,7 +37304,8 @@
             "x-dictionary-key": {
               "type": "integer",
               "format": "int64"
-            }
+            },
+            "nullable": true
           },
           "privacy": {
             "type": "integer",
@@ -38834,7 +38858,8 @@
         "properties": {
           "instances": {
             "x-destiny-component-type-dependency": "ItemInstances",
-            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent"
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent",
+            "nullable": true
           },
           "renderData": {
             "x-destiny-component-type-dependency": "ItemRenderData",
@@ -38846,7 +38871,8 @@
           },
           "sockets": {
             "x-destiny-component-type-dependency": "ItemSockets",
-            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent"
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent",
+            "nullable": true
           },
           "reusablePlugs": {
             "x-destiny-component-type-dependency": "ItemReusablePlugs",
@@ -38866,7 +38892,8 @@
           },
           "objectives": {
             "x-destiny-component-type-dependency": "ItemObjectives",
-            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent"
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent",
+            "nullable": true
           },
           "perks": {
             "x-destiny-component-type-dependency": "ItemPerks",
@@ -40287,7 +40314,8 @@
         "properties": {
           "statId": {
             "type": "string",
-            "description": "Unique ID for this stat"
+            "description": "Unique ID for this stat",
+            "nullable": true
           },
           "basic": {
             "type": "object",
@@ -40305,7 +40333,8 @@
                 "$ref": "#/components/schemas/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
               }
             ],
-            "description": "Per game average for the statistic, if applicable"
+            "description": "Per game average for the statistic, if applicable",
+            "nullable": true
           },
           "weighted": {
             "type": "object",
@@ -40314,7 +40343,8 @@
                 "$ref": "#/components/schemas/Destiny.HistoricalStats.DestinyHistoricalStatsValuePair"
               }
             ],
-            "description": "Weighted value of the stat if a weight greater than 1 has been assigned."
+            "description": "Weighted value of the stat if a weight greater than 1 has been assigned.",
+            "nullable": true
           },
           "activityId": {
             "type": "integer",
@@ -40392,15 +40422,18 @@
                 "$ref": "#/components/schemas/User.UserInfoCard"
               }
             ],
-            "description": "Details about the player as they are known on BungieNet. This will be undefined if the player has marked their credential private, or does not have a BungieNet account."
+            "description": "Details about the player as they are known on BungieNet. This will be undefined if the player has marked their credential private, or does not have a BungieNet account.",
+            "nullable": true
           },
           "clanName": {
             "type": "string",
-            "description": "Current clan name for the player. This value may be null or an empty string if the user does not have a clan."
+            "description": "Current clan name for the player. This value may be null or an empty string if the user does not have a clan.",
+            "nullable": true
           },
           "clanTag": {
             "type": "string",
-            "description": "Current clan tag for the player. This value may be null or an empty string if the user does not have a clan."
+            "description": "Current clan tag for the player. This value may be null or an empty string if the user does not have a clan.",
+            "nullable": true
           },
           "emblemHash": {
             "type": "integer",
@@ -41381,7 +41414,8 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.HistoricalStats.DestinyHistoricalStatsPeriodGroup"
             },
-            "description": "List of activities, the most recent activity first."
+            "description": "List of activities, the most recent activity first.",
+            "nullable": true
           }
         }
       },
@@ -41495,13 +41529,15 @@
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneQuest"
             },
-            "description": "A milestone not need have even a single quest, but if there are active quests they will be returned here."
+            "description": "A milestone not need have even a single quest, but if there are active quests they will be returned here.",
+            "nullable": true
           },
           "activities": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneChallengeActivity"
-            }
+            },
+            "nullable": true
           },
           "vendorHashes": {
             "type": "array",
@@ -41509,14 +41545,16 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "Sometimes milestones - or activities active in milestones - will have relevant vendors. These are the vendors that are currently relevant.\r\nDeprecated, already, for the sake of the new \"vendors\" property that has more data. What was I thinking."
+            "description": "Sometimes milestones - or activities active in milestones - will have relevant vendors. These are the vendors that are currently relevant.\r\nDeprecated, already, for the sake of the new \"vendors\" property that has more data. What was I thinking.",
+            "nullable": true
           },
           "vendors": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneVendor"
             },
-            "description": "This is why we can't have nice things. This is the ordered list of vendors to be shown that relate to this milestone, potentially along with other interesting data."
+            "description": "This is why we can't have nice things. This is the ordered list of vendors to be shown that relate to this milestone, potentially along with other interesting data.",
+            "nullable": true
           },
           "startDate": {
             "type": "string",
@@ -41556,14 +41594,16 @@
                 "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneActivity"
               }
             ],
-            "description": "A milestone need not have an active activity, but if there is one it will be returned here, along with any variant and additional information."
+            "description": "A milestone need not have an active activity, but if there is one it will be returned here, along with any variant and additional information.",
+            "nullable": true
           },
           "challenges": {
             "type": "array",
             "items": {
               "$ref": "#/components/schemas/Destiny.Milestones.DestinyPublicMilestoneChallenge"
             },
-            "description": "For the given quest there could be 0-to-Many challenges: mini quests that you can perform in the course of doing this quest, that may grant you rewards and benefits."
+            "description": "For the given quest there could be 0-to-Many challenges: mini quests that you can perform in the course of doing this quest, that may grant you rewards and benefits.",
+            "nullable": true
           }
         }
       },
@@ -42570,7 +42610,8 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "The ordered list of phases for this activity, if any. Note that we have no human readable info for phases, nor any entities to relate them to: relating these hashes to something human readable is up to you unfortunately."
+            "description": "The ordered list of phases for this activity, if any. Note that we have no human readable info for phases, nor any entities to relate them to: relating these hashes to something human readable is up to you unfortunately.",
+            "nullable": true
           },
           "booleanActivityOptions": {
             "type": "object",
