@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2023-02-28 Update for Lightfall
+
+- Added Loadouts, Guardian Ranks, and Commendations!
+
 ## 2022-12-06 Update for the Season of the Seraph
 
 - Added `responseMintedTimestamp` and `secondaryComponentsMintedTimestamp` to DestinyProfileResponse.
