@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.19.0"
+    "version": "2.19.1"
   },
   "servers": [
     {
@@ -34925,6 +34925,13 @@
             },
             "description": "The list of activities that the user can play."
           },
+          "availableActivityInteractables": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference"
+            },
+            "description": "The list of activity interactables that the player can interact with."
+          },
           "currentActivityHash": {
             "type": "integer",
             "description": "If the user is in an activity, this will be the hash of the Activity being played. Note that you must combine this info with currentActivityModeHash to get a real picture of what the user is doing right now. For instance, PVP \"Activities\" are just maps: it's the ActivityMode that determines what type of PVP game they're playing.",
@@ -35561,6 +35568,64 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference": {
+        "type": "object",
+        "properties": {
+          "activityInteractableHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivityInteractableDefinition"
+            }
+          },
+          "activityInteractableElementIndex": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Destiny.Definitions.Activities.DestinyActivityInteractableDefinition": {
+        "type": "object",
+        "properties": {
+          "entries": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivityInteractableEntryDefinition"
+            },
+            "description": "The possible interactables in this activity interactable definition."
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "There are times in every Activity's life when interacting with an object in the world will result in another Activity activating. Well, not every Activity. Just certain ones.\r\nAnyways, this defines a set of interactable components, the activities that they spawn when you interact with them, and the conditions under which they can be interacted with.\r\nSadly, we don't get any *really* good data for them, like positional data... yet. I have hopes for future data that we could put on this.",
+        "x-mobile-manifest-name": "ActivityInteractables"
+      },
+      "Destiny.Definitions.Activities.DestinyActivityInteractableEntryDefinition": {
+        "type": "object",
+        "properties": {
+          "activityHash": {
+            "type": "integer",
+            "description": "The activity that will trigger when you interact with this interactable.",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
+            }
+          }
+        },
+        "description": "Defines a specific interactable and the action that can occur when triggered."
       },
       "DictionaryComponentResponseOfint64AndDestinyCharacterActivitiesComponent": {
         "type": "object",
@@ -43879,60 +43944,6 @@
             }
           }
         }
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference": {
-        "type": "object",
-        "properties": {
-          "activityInteractableHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivityInteractableDefinition"
-            }
-          },
-          "activityInteractableElementIndex": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Destiny.Definitions.Activities.DestinyActivityInteractableDefinition": {
-        "type": "object",
-        "properties": {
-          "entries": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivityInteractableEntryDefinition"
-            },
-            "description": "The possible interactables in this activity interactable definition."
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "There are times in every Activity's life when interacting with an object in the world will result in another Activity activating. Well, not every Activity. Just certain ones.\r\nAnyways, this defines a set of interactable components, the activities that they spawn when you interact with them, and the conditions under which they can be interacted with.\r\nSadly, we don't get any *really* good data for them, like positional data... yet. I have hopes for future data that we could put on this."
-      },
-      "Destiny.Definitions.Activities.DestinyActivityInteractableEntryDefinition": {
-        "type": "object",
-        "properties": {
-          "activityHash": {
-            "type": "integer",
-            "description": "The activity that will trigger when you interact with this interactable.",
-            "format": "uint32"
-          }
-        },
-        "description": "Defines a specific interactable and the action that can occur when triggered."
       },
       "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition": {
         "type": "object",

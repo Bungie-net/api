@@ -6,6 +6,13 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2024-07-16 Update for Lost Sectors
+
+- Added `availableActivityInteractables` to `DestinyCharacterActivitiesComponent`.
+  - Finally adds support for today's Expert and Master Lost Sector activities.
+  - Also includes in-world activity interactables (totems) for campaign missions and the like.
+  - Cross-reference with `availableActivities` for those that can also be launched from the Director.
+
 ## 2024-07-10 Update for The Final Shape
 
 - Added `acts` to `DestinySeasonDefinition` for the new Episodes.
