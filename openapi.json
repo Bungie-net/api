@@ -1851,7 +1851,7 @@
         "parameters": [
           {
             "name": "currentpage",
-            "in": "path",
+            "in": "query",
             "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
             "required": true,
             "schema": {
@@ -1912,7 +1912,7 @@
         "parameters": [
           {
             "name": "currentpage",
-            "in": "path",
+            "in": "query",
             "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
             "required": true,
             "schema": {
@@ -2220,7 +2220,7 @@
         "parameters": [
           {
             "name": "currentpage",
-            "in": "path",
+            "in": "query",
             "description": "Page number (starting with 1). Each page has a fixed size of 50 entries.",
             "required": true,
             "schema": {
@@ -2366,7 +2366,7 @@
         "parameters": [
           {
             "name": "currentpage",
-            "in": "path",
+            "in": "query",
             "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
             "required": true,
             "schema": {
@@ -2412,7 +2412,7 @@
         "parameters": [
           {
             "name": "currentpage",
-            "in": "path",
+            "in": "query",
             "description": "Page number (starting with 1). Each page has a fixed size of 50 items per page.",
             "required": true,
             "schema": {
