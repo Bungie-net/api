@@ -8,6 +8,7 @@ This section will be added to as time goes by - we're working with it as we go!
 
 ## 2024-10-08 Update for Episode: Revenant
 - Added `DestinyVendorItemComponentSet` to return `DestinyItemComponent` objects for Vendor sale items.
+  - Request the `itemComponents` with the `ItemCommonData` component type.
   - `DestinyItemComponent.state` provides Deepsight red-border status.
   - `DestinyItemComponent.tooltipNotificationIndexes` provides tooltips, relevant for the new potions.
 - Added `stackSize` and `maxStackSize` to socket plugs.
