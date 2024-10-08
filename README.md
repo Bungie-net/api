@@ -6,6 +6,13 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2024-10-08 Update for Episode: Revenant
+- Added `DestinyVendorItemComponentSet` to return `DestinyItemComponent` objects for Vendor sale items.
+  - `DestinyItemComponent.state` provides Deepsight red-border status.
+  - `DestinyItemComponent.tooltipNotificationIndexes` provides tooltips, relevant for the new potions.
+- Added `stackSize` and `maxStackSize` to socket plugs.
+  - The `stackSize` shows the number of potions you've brewed in the Tonic Capsule sockets.
+
 ## 2024-07-16 Update for Lost Sectors
 
 - Added `availableActivityInteractables` to `DestinyCharacterActivitiesComponent`.

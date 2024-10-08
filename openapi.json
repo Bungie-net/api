@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.19.1"
+    "version": "2.20.0"
   },
   "servers": [
     {
@@ -19909,7 +19909,10 @@
           "8",
           "9",
           "10",
-          "11"
+          "11",
+          "12",
+          "13",
+          "14"
         ],
         "type": "integer",
         "format": "int32",
@@ -19961,6 +19964,18 @@
           {
             "numericValue": "11",
             "identifier": "PathfinderObjectiveCompleteSchism"
+          },
+          {
+            "numericValue": "12",
+            "identifier": "PathfinderObjectiveCompletePvp"
+          },
+          {
+            "numericValue": "13",
+            "identifier": "PathfinderObjectiveCompleteStrikes"
+          },
+          {
+            "numericValue": "14",
+            "identifier": "PathfinderObjectiveCompleteGambit"
           }
         ],
         "x-enum-is-bitmask": false
@@ -30688,6 +30703,18 @@
               "format": "int32"
             },
             "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+          },
+          "stackSize": {
+            "type": "integer",
+            "description": "If available, this is the stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxStackSize": {
+            "type": "integer",
+            "description": "If available, this is the maximum stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -30732,6 +30759,18 @@
               "format": "int32"
             },
             "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+          },
+          "stackSize": {
+            "type": "integer",
+            "description": "If available, this is the stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxStackSize": {
+            "type": "integer",
+            "description": "If available, this is the maximum stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
           }
         }
       },
@@ -37057,6 +37096,18 @@
               "format": "int32"
             },
             "description": "If a plug is not enabled, this will be populated with indexes into the plug item definition's plug.enabledRules property, so that you can show the reasons why it is not enabled.\r\nThis list will be empty if the plug is enabled."
+          },
+          "stackSize": {
+            "type": "integer",
+            "description": "If available, this is the stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
+          },
+          "maxStackSize": {
+            "type": "integer",
+            "description": "If available, this is the maximum stack size to display for the socket plug item.",
+            "format": "int32",
+            "nullable": true
           }
         },
         "description": "Plugs are non-instanced items that can provide Stat and Perk benefits when socketed into an instanced item. Items have Sockets, and Plugs are inserted into Sockets.\r\nThis component finds all items that are considered \"Plugs\" in your inventory, and return information about the plug aside from any specific Socket into which it could be inserted.",
@@ -37863,13 +37914,13 @@
                 "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndPersonalDestinyVendorSaleItemSetComponent"
               }
             ],
-            "description": "Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.\r\nNote that within the Sale Item Set component, the sales are themselves keyed by the vendorSaleIndex, so you can relate it to the corrent sale item definition within the Vendor's definition.\r\nCOMPONENT TYPE: VendorSales",
+            "description": "Sales, keyed by the vendorItemIndex of the item being sold. These are keyed by the Vendor Hash, so you will get one Sale Item Set Component per vendor returned.\r\nNote that within the Sale Item Set component, the sales are themselves keyed by the vendorSaleIndex, so you can relate it to the current sale item definition within the Vendor's definition.\r\nCOMPONENT TYPE: VendorSales",
             "x-destiny-component-type-dependency": "VendorSales"
           },
           "itemComponents": {
             "type": "object",
             "additionalProperties": {
-              "$ref": "#/components/schemas/DestinyItemComponentSetOfint32"
+              "$ref": "#/components/schemas/DestinyVendorItemComponentSetOfint32"
             },
             "description": "The set of item detail components, one set of item components per Vendor. These are keyed by the Vendor Hash, so you will get one Item Component Set per vendor returned.\r\nThe components contained inside are themselves keyed by the vendorSaleIndex, and will have whatever item-level components you requested (Sockets, Stats, Instance data etc...) per item being sold by the vendor.",
             "x-dictionary-key": {
@@ -38405,7 +38456,8 @@
           "1048576",
           "2097152",
           "4194304",
-          "8388608"
+          "8388608",
+          "16777216"
         ],
         "type": "integer",
         "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration/bitmask for v3.2.0.",
@@ -38531,6 +38583,10 @@
           {
             "numericValue": "8388608",
             "identifier": "Ineligible"
+          },
+          {
+            "numericValue": "16777216",
+            "identifier": "ArtifactPerkBoosted"
           }
         ],
         "x-enum-is-bitmask": true
@@ -38917,6 +38973,83 @@
           }
         }
       },
+      "DestinyVendorItemComponentSetOfint32": {
+        "type": "object",
+        "properties": {
+          "itemComponents": {
+            "x-destiny-component-type-dependency": "ItemCommonData",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemComponent"
+          },
+          "instances": {
+            "x-destiny-component-type-dependency": "ItemInstances",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemInstanceComponent"
+          },
+          "renderData": {
+            "x-destiny-component-type-dependency": "ItemRenderData",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemRenderComponent"
+          },
+          "stats": {
+            "x-destiny-component-type-dependency": "ItemStats",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemStatsComponent"
+          },
+          "sockets": {
+            "x-destiny-component-type-dependency": "ItemSockets",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemSocketsComponent"
+          },
+          "reusablePlugs": {
+            "x-destiny-component-type-dependency": "ItemReusablePlugs",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemReusablePlugsComponent"
+          },
+          "plugObjectives": {
+            "x-destiny-component-type-dependency": "ItemPlugObjectives",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemPlugObjectivesComponent"
+          },
+          "talentGrids": {
+            "x-destiny-component-type-dependency": "ItemTalentGrids",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemTalentGridComponent"
+          },
+          "plugStates": {
+            "x-destiny-component-type-dependency": "ItemPlugStates",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfuint32AndDestinyItemPlugComponent"
+          },
+          "objectives": {
+            "x-destiny-component-type-dependency": "ItemObjectives",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemObjectivesComponent"
+          },
+          "perks": {
+            "x-destiny-component-type-dependency": "ItemPerks",
+            "$ref": "#/components/schemas/DictionaryComponentResponseOfint32AndDestinyItemPerksComponent"
+          }
+        }
+      },
+      "DictionaryComponentResponseOfint32AndDestinyItemComponent": {
+        "type": "object",
+        "properties": {
+          "data": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Destiny.Entities.Items.DestinyItemComponent"
+            },
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "privacy": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Components.ComponentPrivacySetting"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "disabled": {
+            "type": "boolean",
+            "description": "If true, this component is disabled.",
+            "nullable": true
+          }
+        }
+      },
       "Destiny.Responses.DestinyVendorResponse": {
         "type": "object",
         "properties": {
@@ -38954,10 +39087,10 @@
             "type": "object",
             "allOf": [
               {
-                "$ref": "#/components/schemas/DestinyItemComponentSetOfint32"
+                "$ref": "#/components/schemas/DestinyVendorItemComponentSetOfint32"
               }
             ],
-            "description": "Item components, keyed by the vendorItemIndex of the active sale items.\r\nCOMPONENT TYPE: [See inside the DestinyItemComponentSet contract for component types.]"
+            "description": "Item components, keyed by the vendorItemIndex of the active sale items.\r\nCOMPONENT TYPE: [See inside the DestinyVendorItemComponentSet contract for component types.]"
           },
           "currencyLookups": {
             "type": "object",
