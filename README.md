@@ -6,6 +6,16 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2024-12-08 Update for the Dawning
+- Added support for socket override definitions and states on season passes.
+  - Added `socketOverrides` to `DestinyProgressionRewardItemQuantity` definitions to reference socket types and plug items.
+  - Added `rewardItemSocketOverrideStates` to `DestinyProgression` for season pass rewards.
+    - This includes `rewardItemStats` for armor rolls and `itemState` for Deepsight red-border weapons.
+- Added support for virtual stack sizes on material requirements.
+  - Added `hasVirtualStackSize` to `DestinyMaterialRequirement` definitions, which would require the new material requirement states.
+  - Added `materialRequirementSetStates` to `DestinyCurrenciesComponent` with the `CurrencyLookups` component.
+    - The `materialRequirementStates` include an `itemHash`, a required `count` and a current `stackSize` (which may be virtual).
+
 ## 2024-10-08 Update for Episode: Revenant
 - Added `DestinyVendorItemComponentSet` to return `DestinyItemComponent` objects for Vendor sale items.
   - Request the `itemComponents` with the `ItemCommonData` component type.

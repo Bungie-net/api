@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.20.0"
+    "version": "2.20.1"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -10788,6 +10788,12 @@
             "required": true,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "overrideOfflineFilter",
+            "in": "query",
+            "description": "Optional boolean to bypass the offline-only check, so the client can pull fireteam from the game.",
+            "type": "boolean"
           }
         ],
         "deprecated": false,
@@ -14392,6 +14398,13 @@
               "$ref": "#/components/schemas/Destiny.DestinyProgressionRewardItemState"
             }
           }
+        },
+        "rewardItemSocketOverrideStates": {
+          "description": "Information about items stats and states that have socket overrides, if there is any data for it.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.DestinyProgressionRewardItemSocketOverrideState"
+          }
         }
       }
     },
@@ -14447,6 +14460,49 @@
         }
       ]
     },
+    "Destiny.DestinyProgressionRewardItemSocketOverrideState": {
+      "description": "Represents the stats and item state if applicable for progression reward items with socket overrides",
+      "type": "object",
+      "properties": {
+        "rewardItemStats": {
+          "description": "Information about the computed stats from socket and plug overrides for this progression, if there is any data for it.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.DestinyStat"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyStatDefinition"
+          }
+        },
+        "itemState": {
+          "format": "int32",
+          "description": "Information about the item state, specifically deepsight if there is any data for it",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.ItemState"
+          }
+        }
+      }
+    },
+    "Destiny.DestinyStat": {
+      "description": "Represents a stat on an item *or* Character (NOT a Historical Stat, but a physical attribute stat like Attack, Defense etc...)",
+      "type": "object",
+      "properties": {
+        "statHash": {
+          "format": "uint32",
+          "description": "The hash identifier for the Stat. Use it to look up the DestinyStatDefinition for static data about the stat.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyStatDefinition"
+          }
+        },
+        "value": {
+          "format": "int32",
+          "description": "The current value of the Stat.",
+          "type": "integer"
+        }
+      }
+    },
     "Destiny.Definitions.DestinyDefinition": {
       "description": "Provides common properties for destiny definitions.",
       "type": "object",
@@ -14466,6 +14522,187 @@
           "type": "boolean"
         }
       }
+    },
+    "Destiny.Definitions.DestinyStatDefinition": {
+      "description": "This represents a stat that's applied to a character or an item (such as a weapon, piece of armor, or a vehicle).\r\nAn example of a stat might be Attack Power on a weapon.\r\nStats go through a complex set of transformations before they end up being shown to the user as a number or a progress bar, and those transformations are fundamentally intertwined with the concept of a \"Stat Group\" (DestinyStatGroupDefinition). Items have both Stats and a reference to a Stat Group, and it is the Stat Group that takes the raw stat information and gives it both rendering metadata (such as whether to show it as a number or a progress bar) and the final transformation data (interpolation tables to turn the raw investment stat into a display stat). Please see DestinyStatGroupDefinition for more information on that transformational process.\r\nStats are segregated from Stat Groups because different items and types of items can refer to the same stat, but have different \"scales\" for the stat while still having the same underlying value. For example, both a Shotgun and an Auto Rifle may have a \"raw\" impact stat of 50, but the Auto Rifle's Stat Group will scale that 50 down so that, when it is displayed, it is a smaller value relative to the shotgun. (this is a totally made up example, don't assume shotguns have naturally higher impact than auto rifles because of this)\r\nA final caveat is that some stats, even after this \"final\" transformation, go through yet another set of transformations directly in the game as a result of dynamic, stateful scripts that get run. BNet has no access to these scripts, nor any way to know which scripts get executed. As a result, the stats for an item that you see in-game - particularly for stats that are often impacted by Perks, like Magazine Size - can change dramatically from what we return on Bungie.Net. This is a known issue with no fix coming down the pipeline. Take these stats with a grain of salt.\r\nStats actually go through four transformations, for those interested:\r\n1) \"Sandbox\" stat, the \"most raw\" form. These are pretty much useless without transformations applied, and thus are not currently returned in the API. If you really want these, we can provide them. Maybe someone could do something cool with it?\r\n2) \"Investment\" stat (the stat's value after DestinyStatDefinition's interpolation tables and aggregation logic is applied to the \"Sandbox\" stat value)\r\n3) \"Display\" stat (the stat's base UI-visible value after DestinyStatGroupDefinition's interpolation tables are applied to the Investment Stat value. For most stats, this is what is displayed.)\r\n4) Underlying in-game stat (the stat's actual value according to the game, after the game runs dynamic scripts based on the game and character's state. This is the final transformation that BNet does not have access to. For most stats, this is not actually displayed to the user, with the exception of Magazine Size which is then piped back to the UI for display in-game, but not to BNet.)",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "aggregationType": {
+          "format": "int32",
+          "description": "Stats can exist on a character or an item, and they may potentially be aggregated in different ways. The DestinyStatAggregationType enum value indicates the way that this stat is being aggregated.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyStatAggregationType"
+          }
+        },
+        "hasComputedBlock": {
+          "description": "True if the stat is computed rather than being delivered as a raw value on items.\r\nFor instance, the Light stat in Destiny 1 was a computed stat.",
+          "type": "boolean"
+        },
+        "statCategory": {
+          "format": "int32",
+          "description": "The category of the stat, according to the game.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyStatCategory"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Stats"
+    },
+    "Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition": {
+      "description": "Many Destiny*Definition contracts - the \"first order\" entities of Destiny that have their own tables in the Manifest Database - also have displayable information. This is the base class for that display information.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "icon": {
+          "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
+          "type": "string"
+        },
+        "iconSequences": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Common.DestinyIconSequenceDefinition"
+          }
+        },
+        "highResIcon": {
+          "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here.",
+          "type": "string"
+        },
+        "hasIcon": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Destiny.Definitions.Common.DestinyIconSequenceDefinition": {
+      "type": "object",
+      "properties": {
+        "frames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "Destiny.DestinyStatAggregationType": {
+      "format": "int32",
+      "description": "When a Stat (DestinyStatDefinition) is aggregated, this is the rules used for determining the level and formula used for aggregation.\r\n* CharacterAverage = apply a weighted average using the related DestinyStatGroupDefinition on the DestinyInventoryItemDefinition across the character's equipped items. See both of those definitions for details. * Character = don't aggregate: the stat should be located and used directly on the character. * Item = don't aggregate: the stat should be located and used directly on the item.",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "CharacterAverage"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Character"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Item"
+        }
+      ]
+    },
+    "Destiny.DestinyStatCategory": {
+      "format": "int32",
+      "description": "At last, stats have categories. Use this for whatever purpose you might wish.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Gameplay"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Weapon"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Defense"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Primary"
+        }
+      ]
+    },
+    "Destiny.ItemState": {
+      "format": "int32",
+      "description": "A flags enumeration/bitmask where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "4",
+        "8",
+        "16"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Locked",
+          "description": "If this bit is set, the item has been \"locked\" by the user and cannot be deleted. You may want to represent this visually with a \"lock\" icon."
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Tracked",
+          "description": "If this bit is set, the item is a quest that's being tracked by the user. You may want a visual indicator to show that this is a tracked quest."
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Masterwork",
+          "description": "If this bit is set, the item has a Masterwork plug inserted. This usually coincides with having a special \"glowing\" effect applied to the item's icon."
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Crafted",
+          "description": "If this bit is set, the item has been 'crafted' by the player. You may want to represent this visually with a \"crafted\" icon overlay."
+        },
+        {
+          "numericValue": "16",
+          "identifier": "HighlightedObjective",
+          "description": "If this bit is set, the item has a 'highlighted' objective. You may want to represent this with an orange-red icon border color."
+        }
+      ]
     },
     "Destiny.Definitions.DestinyProgressionDefinition": {
       "description": "A \"Progression\" in Destiny is best explained by an example.\r\nA Character's \"Level\" is a progression: it has Experience that can be earned, levels that can be gained, and is evaluated and displayed at various points in the game. A Character's \"Faction Reputation\" is also a progression for much the same reason.\r\nProgression is used by a variety of systems, and the definition of a Progression will generally only be useful if combining with live data (such as a character's DestinyCharacterProgressionComponent.progressions property, which holds that character's live Progression states).\r\nFundamentally, a Progression measures your \"Level\" by evaluating the thresholds in its Steps (one step per level, except for the last step which can be repeated indefinitely for \"Levels\" that have no ceiling) against the total earned \"progression points\"/experience. (for simplicity purposes, we will henceforth refer to earned progression points as experience, though it need not be a mechanic that in any way resembles Experience in a traditional sense).\r\nEarned experience is calculated in a variety of ways, determined by the Progression's scope. These go from looking up a stored value to performing exceedingly obtuse calculations. This is why we provide live data in DestinyCharacterProgressionComponent.progressions, so you don't have to worry about those.",
@@ -14544,46 +14781,6 @@
         }
       },
       "x-mobile-manifest-name": "Progressions"
-    },
-    "Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition": {
-      "description": "Many Destiny*Definition contracts - the \"first order\" entities of Destiny that have their own tables in the Manifest Database - also have displayable information. This is the base class for that display information.",
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "icon": {
-          "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
-          "type": "string"
-        },
-        "iconSequences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Destiny.Definitions.Common.DestinyIconSequenceDefinition"
-          }
-        },
-        "highResIcon": {
-          "description": "If this item has a high-res icon (at least for now, many things won't), then the path to that icon will be here.",
-          "type": "string"
-        },
-        "hasIcon": {
-          "type": "boolean"
-        }
-      }
-    },
-    "Destiny.Definitions.Common.DestinyIconSequenceDefinition": {
-      "type": "object",
-      "properties": {
-        "frames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
     },
     "Destiny.Definitions.DestinyProgressionDisplayPropertiesDefinition": {
       "type": "object",
@@ -15799,6 +15996,10 @@
         "omitFromRequirements": {
           "description": "If True, this requirement is \"silent\": don't bother showing it in a material requirements display. I mean, I'm not your mom: I'm not going to tell you you *can't* show it. But we won't show it in our UI.",
           "type": "boolean"
+        },
+        "hasVirtualStackSize": {
+          "description": "If true, this material requirement references a virtual item stack size value. You can get that value from a corresponding DestinyMaterialRequirementSetState.",
+          "type": "boolean"
         }
       }
     },
@@ -16254,103 +16455,6 @@
           "type": "integer"
         }
       }
-    },
-    "Destiny.Definitions.DestinyStatDefinition": {
-      "description": "This represents a stat that's applied to a character or an item (such as a weapon, piece of armor, or a vehicle).\r\nAn example of a stat might be Attack Power on a weapon.\r\nStats go through a complex set of transformations before they end up being shown to the user as a number or a progress bar, and those transformations are fundamentally intertwined with the concept of a \"Stat Group\" (DestinyStatGroupDefinition). Items have both Stats and a reference to a Stat Group, and it is the Stat Group that takes the raw stat information and gives it both rendering metadata (such as whether to show it as a number or a progress bar) and the final transformation data (interpolation tables to turn the raw investment stat into a display stat). Please see DestinyStatGroupDefinition for more information on that transformational process.\r\nStats are segregated from Stat Groups because different items and types of items can refer to the same stat, but have different \"scales\" for the stat while still having the same underlying value. For example, both a Shotgun and an Auto Rifle may have a \"raw\" impact stat of 50, but the Auto Rifle's Stat Group will scale that 50 down so that, when it is displayed, it is a smaller value relative to the shotgun. (this is a totally made up example, don't assume shotguns have naturally higher impact than auto rifles because of this)\r\nA final caveat is that some stats, even after this \"final\" transformation, go through yet another set of transformations directly in the game as a result of dynamic, stateful scripts that get run. BNet has no access to these scripts, nor any way to know which scripts get executed. As a result, the stats for an item that you see in-game - particularly for stats that are often impacted by Perks, like Magazine Size - can change dramatically from what we return on Bungie.Net. This is a known issue with no fix coming down the pipeline. Take these stats with a grain of salt.\r\nStats actually go through four transformations, for those interested:\r\n1) \"Sandbox\" stat, the \"most raw\" form. These are pretty much useless without transformations applied, and thus are not currently returned in the API. If you really want these, we can provide them. Maybe someone could do something cool with it?\r\n2) \"Investment\" stat (the stat's value after DestinyStatDefinition's interpolation tables and aggregation logic is applied to the \"Sandbox\" stat value)\r\n3) \"Display\" stat (the stat's base UI-visible value after DestinyStatGroupDefinition's interpolation tables are applied to the Investment Stat value. For most stats, this is what is displayed.)\r\n4) Underlying in-game stat (the stat's actual value according to the game, after the game runs dynamic scripts based on the game and character's state. This is the final transformation that BNet does not have access to. For most stats, this is not actually displayed to the user, with the exception of Magazine Size which is then piped back to the UI for display in-game, but not to BNet.)",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "aggregationType": {
-          "format": "int32",
-          "description": "Stats can exist on a character or an item, and they may potentially be aggregated in different ways. The DestinyStatAggregationType enum value indicates the way that this stat is being aggregated.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.DestinyStatAggregationType"
-          }
-        },
-        "hasComputedBlock": {
-          "description": "True if the stat is computed rather than being delivered as a raw value on items.\r\nFor instance, the Light stat in Destiny 1 was a computed stat.",
-          "type": "boolean"
-        },
-        "statCategory": {
-          "format": "int32",
-          "description": "The category of the stat, according to the game.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.DestinyStatCategory"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "Stats"
-    },
-    "Destiny.DestinyStatAggregationType": {
-      "format": "int32",
-      "description": "When a Stat (DestinyStatDefinition) is aggregated, this is the rules used for determining the level and formula used for aggregation.\r\n* CharacterAverage = apply a weighted average using the related DestinyStatGroupDefinition on the DestinyInventoryItemDefinition across the character's equipped items. See both of those definitions for details. * Character = don't aggregate: the stat should be located and used directly on the character. * Item = don't aggregate: the stat should be located and used directly on the item.",
-      "enum": [
-        "0",
-        "1",
-        "2"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "CharacterAverage"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Character"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Item"
-        }
-      ]
-    },
-    "Destiny.DestinyStatCategory": {
-      "format": "int32",
-      "description": "At last, stats have categories. Use this for whatever purpose you might wish.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "Gameplay"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Weapon"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Defense"
-        },
-        {
-          "numericValue": "3",
-          "identifier": "Primary"
-        }
-      ]
     },
     "Destiny.Definitions.DestinyStatGroupDefinition": {
       "description": "When an inventory item (DestinyInventoryItemDefinition) has Stats (such as Attack Power), the item will refer to a Stat Group. This definition enumerates the properties used to transform the item's \"Investment\" stats into \"Display\" stats.\r\nSee DestinyStatDefinition's documentation for information about the transformation of Stats, and the meaning of an Investment vs. a Display stat.\r\nIf you don't want to do these calculations on your own, fear not: pulling live data from the BNet endpoints will return display stat values pre-computed and ready for you to use. I highly recommend this approach, saves a lot of time and also accounts for certain stat modifiers that can't easily be accounted for without live data (such as stat modifiers on Talent Grids and Socket Plugs)",
@@ -25651,6 +25755,10 @@
     "Destiny.Definitions.DestinyProgressionRewardItemQuantity": {
       "type": "object",
       "properties": {
+        "rewardItemIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
         "rewardedAtProgressionLevel": {
           "format": "int32",
           "type": "integer"
@@ -25669,6 +25777,12 @@
           "type": "array",
           "items": {
             "type": "string"
+          }
+        },
+        "socketOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionSocketPlugOverride"
           }
         },
         "itemHash": {
@@ -25713,6 +25827,23 @@
           "identifier": "PlayerClaimRequired"
         }
       ]
+    },
+    "Destiny.Definitions.DestinyProgressionSocketPlugOverride": {
+      "description": "The information for how progression item definitions should override a given socket with custom plug data.",
+      "type": "object",
+      "properties": {
+        "socketTypeHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "overrideSingleItemHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        }
+      }
     },
     "GroupsV2.GroupUserBase": {
       "type": "object",
@@ -32492,50 +32623,6 @@
         }
       ]
     },
-    "Destiny.ItemState": {
-      "format": "int32",
-      "description": "A flags enumeration/bitmask where each bit represents a different possible state that the item can be in that may effect how the item is displayed to the user and what actions can be performed against it.",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "4",
-        "8",
-        "16"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Locked",
-          "description": "If this bit is set, the item has been \"locked\" by the user and cannot be deleted. You may want to represent this visually with a \"lock\" icon."
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Tracked",
-          "description": "If this bit is set, the item is a quest that's being tracked by the user. You may want a visual indicator to show that this is a tracked quest."
-        },
-        {
-          "numericValue": "4",
-          "identifier": "Masterwork",
-          "description": "If this bit is set, the item has a Masterwork plug inserted. This usually coincides with having a special \"glowing\" effect applied to the item's icon."
-        },
-        {
-          "numericValue": "8",
-          "identifier": "Crafted",
-          "description": "If this bit is set, the item has been 'crafted' by the player. You may want to represent this visually with a \"crafted\" icon overlay."
-        },
-        {
-          "numericValue": "16",
-          "identifier": "HighlightedObjective",
-          "description": "If this bit is set, the item has a 'highlighted' objective. You may want to represent this with an orange-red icon border color."
-        }
-      ]
-    },
     "Destiny.Quests.DestinyObjectiveProgress": {
       "description": "Returns data about a character's status with a given Objective. Combine with DestinyObjectiveDefinition static data for display purposes.",
       "type": "object",
@@ -35762,6 +35849,13 @@
             "x-enum-reference": {
               "$ref": "#/components/schemas/Destiny.DestinyProgressionRewardItemState"
             }
+          }
+        },
+        "rewardItemSocketOverrideStates": {
+          "description": "Information about items stats and states that have socket overrides, if there is any data for it.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.DestinyProgressionRewardItemSocketOverrideState"
           }
         }
       }
@@ -39142,25 +39236,6 @@
       },
       "x-destiny-component-type-dependency": "ItemInstances"
     },
-    "Destiny.DestinyStat": {
-      "description": "Represents a stat on an item *or* Character (NOT a Historical Stat, but a physical attribute stat like Attack, Defense etc...)",
-      "type": "object",
-      "properties": {
-        "statHash": {
-          "format": "uint32",
-          "description": "The hash identifier for the Stat. Use it to look up the DestinyStatDefinition for static data about the stat.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyStatDefinition"
-          }
-        },
-        "value": {
-          "format": "int32",
-          "description": "The current value of the Stat.",
-          "type": "integer"
-        }
-      }
-    },
     "Destiny.EquipFailureReason": {
       "format": "int32",
       "description": "The reasons why an item cannot be equipped, if any. Many flags can be set, or \"None\" if",
@@ -39842,7 +39917,7 @@
       }
     },
     "Destiny.Components.Inventory.DestinyCurrenciesComponent": {
-      "description": "This component provides a quick lookup of every item the requested character has and how much of that item they have.\r\nRequesting this component will allow you to circumvent manually putting together the list of which currencies you have for the purpose of testing currency requirements on an item being purchased, or operations that have costs.\r\nYou *could* figure this out yourself by doing a GetCharacter or GetProfile request and forming your own lookup table, but that is inconvenient enough that this feels like a worthwhile (and optional) redundency. Don't bother requesting it if you have already created your own lookup from prior GetCharacter/GetProfile calls.",
+      "description": "This component provides a quick lookup of every item the requested character has and how much of that item they have.\r\nRequesting this component will allow you to circumvent manually putting together the list of which currencies you have for the purpose of testing currency requirements on an item being purchased, or operations that have costs.\r\nYou *could* figure this out yourself by doing a GetCharacter or GetProfile request and forming your own lookup table, but that is inconvenient enough that this feels like a worthwhile (and optional) redundancy. Don't bother requesting it if you have already created your own lookup from prior GetCharacter/GetProfile calls.",
       "type": "object",
       "properties": {
         "itemQuantities": {
@@ -39855,9 +39930,56 @@
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
           }
+        },
+        "materialRequirementSetStates": {
+          "description": "A map of material requirement hashes and their status information.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.Components.Inventory.DestinyMaterialRequirementSetState"
+          }
         }
       },
       "x-destiny-component-type-dependency": "CurrencyLookups"
+    },
+    "Destiny.Components.Inventory.DestinyMaterialRequirementSetState": {
+      "type": "object",
+      "properties": {
+        "materialRequirementSetHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the material requirement set. Use it to look up the DestinyMaterialRequirementSetDefinition.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyMaterialRequirementSetDefinition"
+          }
+        },
+        "materialRequirementStates": {
+          "description": "The dynamic state values for individual material requirements.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Components.Inventory.DestinyMaterialRequirementState"
+          }
+        }
+      }
+    },
+    "Destiny.Components.Inventory.DestinyMaterialRequirementState": {
+      "type": "object",
+      "properties": {
+        "itemHash": {
+          "format": "uint32",
+          "description": "The hash identifier of the material required. Use it to look up the material's DestinyInventoryItemDefinition.",
+          "type": "integer"
+        },
+        "count": {
+          "format": "int32",
+          "description": "The amount of the material required.",
+          "type": "integer"
+        },
+        "stackSize": {
+          "format": "int32",
+          "description": "A value for the amount of a (possibly virtual) material on some scope. For example: Dawning cookie baking material requirements.",
+          "type": "integer"
+        }
+      }
     },
     "DictionaryComponentResponseOfint64AndDestinyCurrenciesComponent": {
       "type": "object",
