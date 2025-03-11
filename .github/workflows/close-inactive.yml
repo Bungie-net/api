@@ -1,10 +1,11 @@
 name: Close inactive issues
 on:
   schedule:
-    - cron: "0 30 * * *"
+    - cron: "0 8 * * *"
 
 jobs:
   close-issues:
+    name: Close Stale Issues
     runs-on: ubuntu-latest
     permissions:
       issues: write
@@ -19,5 +20,21 @@ jobs:
           close-issue-message: "This issue was closed because it has been inactive for one week since being marked as stale."
           days-before-pr-stale: -1
           days-before-pr-close: -1
-          operations-per-run: 200
+          operations-per-run: 100
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+  close-answered-issues:
+    name: Close Answered Issues
+    runs-on: ubuntu-latest
+    permissions:
+      issues: write
+      pull-requests: write
+    steps:
+      - uses: actions/stale@v5
+        with:
+          days-before-issue-close: 14
+          stale-issue-label: "answered"
+          stale-issue-message: ""
+          close-issue-message: "This issue was closed because it has been inactive for two weeks since being marked as answered."
+          days-before-pr-stale: -1
+          days-before-pr-close: -1
           repo-token: ${{ secrets.GITHUB_TOKEN }}
