@@ -6,6 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2025-05-09 Update for Rites of the Nine 
+- Added new fields to `DestinyEventCardDefinition` to support Heavy Metal event cards. 
+  - These fields are `eventCardCurrencyList`, `weeklyChallengesPresentationNodeHash`, and `rewardProgressionHash`.
+- Fixed the `FireteamFinderApplicantNotInGame` Fireteam Finder error code. 
+  - Now it is unique, rather than the same integer as another error code. 
+
 ## 2024-12-08 Update for the Dawning
 - Added support for socket override definitions and states on season passes.
   - Added `socketOverrides` to `DestinyProgressionRewardItemQuantity` definitions to reference socket types and plug items.
