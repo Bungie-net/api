@@ -6,7 +6,20 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
-## 2025-05-09 Update for Rites of the Nine 
+## 2025-07-15 Update for The Edge of Fate
+- Items
+  - Added support for featured items and armor sets in `DestinyInventoryItemDefinition`.
+  - Added the gear tier to `DestinyItemInstanceComponent`.
+  - Added `DestinyInventoryItemConstantsDefinition` for gear tier icon overlays.
+  - Added the featured items list and armor archetype plug set hash to `Destiny2CoreSettings`.
+- Activities
+  - Added support for activity families, traits, difficulty tiers, and selectable skulls in `DestinyActivityDefinition`.
+  - Added the difficulty tier index and selected skull hashes to `DestinyPostGameCarnageReportData`.
+- Seasons
+  - Added `seasonPassList` to support two reward passes in a `DestinySeasonDefinition`.
+  - Added the `seasonalHubEventCardHash` to `Destiny2CoreSettings`.
+
+## 2025-05-09 Update for Rite of the Nine 
 - Added new fields to `DestinyEventCardDefinition` to support Heavy Metal event cards. 
   - These fields are `eventCardCurrencyList`, `weeklyChallengesPresentationNodeHash`, and `rewardProgressionHash`.
 - Fixed the `FireteamFinderApplicantNotInGame` Fireteam Finder error code. 

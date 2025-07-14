@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.20.2"
+    "version": "2.21.0"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -12013,6 +12013,7 @@
         "5",
         "6",
         "10",
+        "20",
         "254",
         "-1"
       ],
@@ -12049,6 +12050,10 @@
         {
           "numericValue": "10",
           "identifier": "TigerDemon"
+        },
+        {
+          "numericValue": "20",
+          "identifier": "GoliathGame"
         },
         {
           "numericValue": "254",
@@ -12507,6 +12512,11 @@
         "primaryMembershipId": {
           "format": "int64",
           "description": "If this property is populated, it will have the membership ID of the account considered to be \"primary\" in this user's cross save relationship.\r\n If null, this user has no cross save relationship, nor primary account.",
+          "type": "integer"
+        },
+        "marathonMembershipId": {
+          "format": "int64",
+          "description": "If this property is populated, it will have the membershipId for the Marathon Membership on this user's account\r\n If null, this user has no Marathon (i.e. \"GoliathGame\") membership.",
           "type": "integer"
         },
         "bungieNetUser": {
@@ -14984,6 +14994,10 @@
           "description": "If available, this is the 'shelved' release watermark overlay for the icon. If the item version has a power cap below the current season power cap, it can be treated as 'shelved', and should be shown with this 'shelved' watermark overlay.",
           "type": "string"
         },
+        "iconWatermarkFeatured": {
+          "description": "This is the active watermark for the item if it is currently Featured in-game. Clients should use the isFeaturedItem boolean to decide whether or not to show this as opposed to iconWatermark.",
+          "type": "string"
+        },
         "secondaryIcon": {
           "description": "A secondary icon associated with the item. Currently this is used in very context specific applications, such as Emblem Nameplates.",
           "type": "string"
@@ -15004,6 +15018,10 @@
               "$ref": "#/definitions/Destiny.Misc.DestinyColor"
             }
           ]
+        },
+        "isFeaturedItem": {
+          "description": "Whether or not this item is currently featured in the game, giving it a special watermark",
+          "type": "boolean"
         },
         "screenshot": {
           "description": "If we were able to acquire an in-game screenshot for the item, the path to that screenshot will be returned here. Note that not all items have screenshots: particularly not any non-equippable items.",
@@ -16618,6 +16636,14 @@
           "items": {
             "type": "string"
           }
+        },
+        "equipableItemSetHash": {
+          "format": "uint32",
+          "description": "If this item is part of an item set with bonus perks, this will the hash of that set.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Items.DestinyEquipableItemSetDefinition"
+          }
         }
       }
     },
@@ -16728,6 +16754,229 @@
           "type": "integer"
         }
       }
+    },
+    "Destiny.Definitions.Items.DestinyEquipableItemSetDefinition": {
+      "description": "Perks that are active only when you have a certain number of set items equipped.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "description": "Display Properties, including name and icon, for this item set",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
+        "setItems": {
+          "description": "The items that confer these perks.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "setPerks": {
+          "description": "The perks conferred by this set of armor pieces.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Items.DestinyItemSetPerkDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "EquipableItemSets"
+    },
+    "Destiny.Definitions.Items.DestinyItemSetPerkDefinition": {
+      "type": "object",
+      "properties": {
+        "requiredSetCount": {
+          "format": "int32",
+          "description": "The number of set pieces required to activate the perk.",
+          "type": "integer"
+        },
+        "sandboxPerkHash": {
+          "format": "uint32",
+          "description": "The perk this set confers.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinySandboxPerkDefinition"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.DestinySandboxPerkDefinition": {
+      "description": "Perks are modifiers to a character or item that can be applied situationally.\r\n- Perks determine a weapon's damage type.\r\n- Perks put the Mods in Modifiers (they are literally the entity that bestows the Sandbox benefit for whatever fluff text about the modifier in the Socket, Plug or Talent Node)\r\n- Perks are applied for unique alterations of state in Objectives\r\nAnyways, I'm sure you can see why perks are so interesting.\r\nWhat Perks often don't have is human readable information, so we attempt to reverse engineer that by pulling that data from places that uniquely refer to these perks: namely, Talent Nodes and Plugs. That only gives us a subset of perks that are human readable, but those perks are the ones people generally care about anyways. The others are left as a mystery, their true purpose mostly unknown and undocumented.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "description": "These display properties are by no means guaranteed to be populated. Usually when it is, it's only because we back-filled them with the displayProperties of some Talent Node or Plug item that happened to be uniquely providing that perk.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
+        "perkIdentifier": {
+          "description": "The string identifier for the perk.",
+          "type": "string"
+        },
+        "isDisplayable": {
+          "description": "If true, you can actually show the perk in the UI. Otherwise, it doesn't have useful player-facing information.",
+          "type": "boolean"
+        },
+        "damageType": {
+          "format": "int32",
+          "description": "If this perk grants a damage type to a weapon, the damage type will be defined here.\r\nUnless you have a compelling reason to use this enum value, use the damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
+        },
+        "damageTypeHash": {
+          "format": "uint32",
+          "description": "The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk has a damage type.\r\nThis is preferred over using the damageType enumeration value, which has been left purely because it is occasionally convenient.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyDamageTypeDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "SandboxPerks"
+    },
+    "Destiny.DamageType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Kinetic"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Arc"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Thermal"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Void"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Raid"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Stasis"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Strand"
+        }
+      ]
+    },
+    "Destiny.Definitions.DestinyDamageTypeDefinition": {
+      "description": "All damage types that are possible in the game are defined here, along with localized info and icons as needed.",
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "description": "The description of the damage type, icon etc...",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+            }
+          ]
+        },
+        "transparentIconPath": {
+          "description": "A variant of the icon that is transparent and colorless.",
+          "type": "string"
+        },
+        "showIcon": {
+          "description": "If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether you show it or not is up to you.",
+          "type": "boolean"
+        },
+        "enumValue": {
+          "format": "int32",
+          "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DamageType"
+          }
+        },
+        "color": {
+          "description": "A color associated with the damage type. The displayProperties icon is tinted with a color close to this.",
+          "type": "object",
+          "allOf": [
+            {
+              "$ref": "#/definitions/Destiny.Misc.DestinyColor"
+            }
+          ]
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "DamageTypes"
     },
     "Destiny.Definitions.DestinyItemTranslationBlockDefinition": {
       "description": "This Block defines the rendering data associated with the item, if any.",
@@ -18545,8 +18794,45 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyActivityUnlockStringDefinition"
           }
         },
+        "activityFamilyHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityFamilyDefinition"
+          }
+        },
+        "traitHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
+          }
+        },
         "requirements": {
           "$ref": "#/definitions/Destiny.Definitions.DestinyActivityRequirementsBlock"
+        },
+        "difficultyTierCollectionHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityDifficultyTierCollectionDefinition"
+          }
+        },
+        "selectableSkullCollectionHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionDefinition"
+          }
         },
         "playlistItems": {
           "description": "Represents all of the possible activities that could be played in the Playlist, along with information that we can use to determine if they are active at the present time.",
@@ -19449,163 +19735,6 @@
         }
       ]
     },
-    "Destiny.Definitions.DestinySandboxPerkDefinition": {
-      "description": "Perks are modifiers to a character or item that can be applied situationally.\r\n- Perks determine a weapon's damage type.\r\n- Perks put the Mods in Modifiers (they are literally the entity that bestows the Sandbox benefit for whatever fluff text about the modifier in the Socket, Plug or Talent Node)\r\n- Perks are applied for unique alterations of state in Objectives\r\nAnyways, I'm sure you can see why perks are so interesting.\r\nWhat Perks often don't have is human readable information, so we attempt to reverse engineer that by pulling that data from places that uniquely refer to these perks: namely, Talent Nodes and Plugs. That only gives us a subset of perks that are human readable, but those perks are the ones people generally care about anyways. The others are left as a mystery, their true purpose mostly unknown and undocumented.",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "description": "These display properties are by no means guaranteed to be populated. Usually when it is, it's only because we back-filled them with the displayProperties of some Talent Node or Plug item that happened to be uniquely providing that perk.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
-        },
-        "perkIdentifier": {
-          "description": "The string identifier for the perk.",
-          "type": "string"
-        },
-        "isDisplayable": {
-          "description": "If true, you can actually show the perk in the UI. Otherwise, it doesn't have useful player-facing information.",
-          "type": "boolean"
-        },
-        "damageType": {
-          "format": "int32",
-          "description": "If this perk grants a damage type to a weapon, the damage type will be defined here.\r\nUnless you have a compelling reason to use this enum value, use the damageTypeHash instead to look up the actual DestinyDamageTypeDefinition.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.DamageType"
-          }
-        },
-        "damageTypeHash": {
-          "format": "uint32",
-          "description": "The hash identifier for looking up the DestinyDamageTypeDefinition, if this perk has a damage type.\r\nThis is preferred over using the damageType enumeration value, which has been left purely because it is occasionally convenient.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyDamageTypeDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "SandboxPerks"
-    },
-    "Destiny.DamageType": {
-      "format": "int32",
-      "enum": [
-        "0",
-        "1",
-        "2",
-        "3",
-        "4",
-        "5",
-        "6",
-        "7"
-      ],
-      "type": "integer",
-      "x-enum-values": [
-        {
-          "numericValue": "0",
-          "identifier": "None"
-        },
-        {
-          "numericValue": "1",
-          "identifier": "Kinetic"
-        },
-        {
-          "numericValue": "2",
-          "identifier": "Arc"
-        },
-        {
-          "numericValue": "3",
-          "identifier": "Thermal"
-        },
-        {
-          "numericValue": "4",
-          "identifier": "Void"
-        },
-        {
-          "numericValue": "5",
-          "identifier": "Raid"
-        },
-        {
-          "numericValue": "6",
-          "identifier": "Stasis"
-        },
-        {
-          "numericValue": "7",
-          "identifier": "Strand"
-        }
-      ]
-    },
-    "Destiny.Definitions.DestinyDamageTypeDefinition": {
-      "description": "All damage types that are possible in the game are defined here, along with localized info and icons as needed.",
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "description": "The description of the damage type, icon etc...",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-            }
-          ]
-        },
-        "transparentIconPath": {
-          "description": "A variant of the icon that is transparent and colorless.",
-          "type": "string"
-        },
-        "showIcon": {
-          "description": "If TRUE, the game shows this damage type's icon. Otherwise, it doesn't. Whether you show it or not is up to you.",
-          "type": "boolean"
-        },
-        "enumValue": {
-          "format": "int32",
-          "description": "We have an enumeration for damage types for quick reference. This is the current definition's damage type enum value.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.DamageType"
-          }
-        },
-        "color": {
-          "description": "A color associated with the damage type. The displayProperties icon is tinted with a color close to this.",
-          "type": "object",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Destiny.Misc.DestinyColor"
-            }
-          ]
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "DamageTypes"
-    },
     "Destiny.Definitions.DestinyObjectiveStatEntryDefinition": {
       "description": "Defines the conditions under which stat modifications will be applied to a Character while participating in an objective.",
       "type": "object",
@@ -19662,7 +19791,13 @@
         "3",
         "4",
         "5",
-        "6"
+        "6",
+        "7",
+        "8",
+        "9",
+        "10",
+        "11",
+        "12"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -19693,6 +19828,30 @@
         {
           "numericValue": "6",
           "identifier": "CraftingMementoTitle"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "DiscoverableMystery0"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "DiscoverableMystery1"
+        },
+        {
+          "numericValue": "9",
+          "identifier": "DiscoverableMystery2"
+        },
+        {
+          "numericValue": "10",
+          "identifier": "DiscoverableMystery3"
+        },
+        {
+          "numericValue": "11",
+          "identifier": "DiscoverableMystery4"
+        },
+        {
+          "numericValue": "12",
+          "identifier": "DiscoverableExotic"
         }
       ]
     },
@@ -21344,6 +21503,726 @@
       },
       "x-mobile-manifest-name": "ActivityTypes"
     },
+    "Destiny.Definitions.Activities.DestinyActivityFamilyDefinition": {
+      "type": "object",
+      "properties": {
+        "traits": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
+          }
+        },
+        "disabledSkullCategoryHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullCategoryDefinition"
+          }
+        },
+        "disabledSkullSubcategoryHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullSubcategoryDefinition"
+          }
+        },
+        "fixedSkullSubcategoryHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullSubcategoryDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivityFamilies"
+    },
+    "Destiny.Definitions.Traits.DestinyTraitDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "displayHint": {
+          "description": "An identifier for how this trait can be displayed. For example: a 'keyword' hint to show an explanation for certain related terms.",
+          "type": "string"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "Traits"
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySkullCategoryDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivitySkullCategories"
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySkullSubcategoryDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "parentSkullCategoryHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullCategoryDefinition"
+          }
+        },
+        "availabilityTierRank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "defaultSkullHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivitySkullSubcategories"
+    },
+    "Destiny.Definitions.Activities.DestinyActivityDifficultyTierCollectionDefinition": {
+      "type": "object",
+      "properties": {
+        "difficultyTiers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityDifficultyTierDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivityDifficultyTierCollections"
+    },
+    "Destiny.Definitions.Activities.DestinyActivityDifficultyTierDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "recommendedActivityLevelOffset": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "fixedActivitySkulls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkull"
+          }
+        },
+        "tierEnabledUnlockExpression": {
+          "$ref": "#/definitions/Destiny.Definitions.DestinyUnlockExpressionDefinition"
+        },
+        "tierType": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityDifficultyTierType"
+          }
+        },
+        "optionalRequiredTrait": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
+          }
+        },
+        "activityLevel": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "tierRank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "minimumFireteamLeaderPower": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximumFireteamLeaderPower": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "scoreTimeLimitMultiplier": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "selectableSkullCollectionHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionDefinition"
+          }
+        },
+        "skullSubcategoryOverrides": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityDifficultyTierSubcategoryOverride"
+          }
+        }
+      }
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySkull": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "skullIdentifierHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "skullOptions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullOption"
+          }
+        },
+        "dynamicUse": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivitySkullDynamicUse"
+          }
+        },
+        "modifierPowerContribution": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "modifierMultiplierContribution": {
+          "format": "float",
+          "type": "number"
+        },
+        "skullExclusionGroupHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkullExclusionGroupDefinition"
+          }
+        },
+        "hasUi": {
+          "type": "boolean"
+        },
+        "displayDescriptionOverrideForNavMode": {
+          "type": "string"
+        },
+        "activityModifierDisplayCategory": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityModifierDisplayCategory"
+          }
+        },
+        "activityModifierConnotation": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityModifierConnotation"
+          }
+        },
+        "displayInNavMode": {
+          "type": "boolean"
+        },
+        "displayInActivitySelection": {
+          "type": "boolean"
+        }
+      }
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySkullOption": {
+      "type": "object",
+      "properties": {
+        "optionHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "stringValue": {
+          "type": "string"
+        },
+        "boolValue": {
+          "type": "boolean"
+        },
+        "integerValue": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "floatValue": {
+          "format": "float",
+          "type": "number"
+        },
+        "minDisplayDifficultyId": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityDifficultyId"
+          }
+        }
+      }
+    },
+    "Destiny.DestinyActivityDifficultyId": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7",
+        "8"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Trivial"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Easy"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Normal"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Challenging"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Hard"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Brave"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "AlmostImpossible"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Impossible"
+        },
+        {
+          "numericValue": "8",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.DestinyActivitySkullDynamicUse": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Unknown"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Allowed"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Disallowed"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.DestinyActivityModifierDisplayCategory": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "None"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "ModeRules"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "SelfBuildcraft"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "EnemyAdjustment"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "EnemyBuildcraft"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Seasonal"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Fun"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.DestinyActivityModifierConnotation": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "7"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Neutral"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Positive"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Negative"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "Affix"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Informational"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "Reward"
+        },
+        {
+          "numericValue": "6",
+          "identifier": "Event"
+        },
+        {
+          "numericValue": "7",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySelectableSkullExclusionGroupDefinition": {
+      "type": "object",
+      "properties": {
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivitySelectableSkullExclusionGroups"
+    },
+    "Destiny.Definitions.DestinyUnlockExpressionDefinition": {
+      "description": "Where the sausage gets made. Unlock Expressions are the foundation of the game's gating mechanics and investment-related restrictions. They can test Unlock Flags and Unlock Values for certain states, using a sufficient amount of logical operators such that unlock expressions are effectively Turing complete.\r\nUse UnlockExpressionParser to evaluate expressions using an IUnlockContext parsed from Babel.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "format": "int32",
+          "description": "A shortcut for determining the most restrictive gating that this expression performs. See the DestinyGatingScope enum's documentation for more details.",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
+          }
+        }
+      }
+    },
+    "Destiny.DestinyActivityDifficultyTierType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Default"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Training"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.Definitions.Activities.DestinyActivityDifficultyTierSubcategoryOverride": {
+      "type": "object",
+      "properties": {
+        "skullSubcategoryHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "refreshTimeMinutes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "refreshTimeOffsetMinutes": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "skullSubcategoryHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkullSubcategoryDefinition"
+          }
+        },
+        "selectionType": {
+          "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionSelectionType"
+        },
+        "selectableActivitySkulls": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkull"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivitySelectableSkullCollections"
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionSelectionType": {
+      "type": "object",
+      "properties": {
+        "selectionCount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "refreshTimeMinutes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "refreshTimeOffsetMinutes": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "Destiny.Definitions.Activities.DestinyActivitySelectableSkull": {
+      "type": "object",
+      "properties": {
+        "requiredTraitHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Traits.DestinyTraitDefinition"
+          }
+        },
+        "requiredTraitExistence": {
+          "type": "boolean"
+        },
+        "isEmptySkull": {
+          "type": "boolean"
+        },
+        "loadoutRestrictionHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityLoadoutRestrictionDefinition"
+          }
+        },
+        "activitySkull": {
+          "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySkull"
+        }
+      }
+    },
+    "Destiny.Definitions.Activities.DestinyActivityLoadoutRestrictionDefinition": {
+      "type": "object",
+      "properties": {
+        "restrictedItemFilterHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "restrictedEquipmentSlotHashes": {
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyEquipmentSlotDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "ActivityLoadoutRestrictionDefinitions"
+    },
     "Destiny.Definitions.Director.DestinyActivityGraphNodeStateEntry": {
       "description": "Represents a single state that a graph node might end up in. Depending on what's going on in the game, graph nodes could be shown in different ways or even excluded from view entirely.",
       "type": "object",
@@ -21478,20 +22357,6 @@
         },
         "overview": {
           "type": "string"
-        }
-      }
-    },
-    "Destiny.Definitions.DestinyUnlockExpressionDefinition": {
-      "description": "Where the sausage gets made. Unlock Expressions are the foundation of the game's gating mechanics and investment-related restrictions. They can test Unlock Flags and Unlock Values for certain states, using a sufficient amount of logical operators such that unlock expressions are effectively Turing complete.\r\nUse UnlockExpressionParser to evaluate expressions using an IUnlockContext parsed from Babel.",
-      "type": "object",
-      "properties": {
-        "scope": {
-          "format": "int32",
-          "description": "A shortcut for determining the most restrictive gating that this expression performs. See the DestinyGatingScope enum's documentation for more details.",
-          "type": "integer",
-          "x-enum-reference": {
-            "$ref": "#/components/schemas/Destiny.DestinyGatingScope"
-          }
         }
       }
     },
@@ -22454,33 +23319,6 @@
         }
       ]
     },
-    "Destiny.Definitions.Traits.DestinyTraitDefinition": {
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "displayHint": {
-          "description": "An identifier for how this trait can be displayed. For example: a 'keyword' hint to show an explanation for certain related terms.",
-          "type": "string"
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "Traits"
-    },
     "Destiny.Definitions.Presentation.DestinyScoredPresentationNodeBaseDefinition": {
       "type": "object",
       "properties": {
@@ -23335,7 +24173,9 @@
         "11",
         "12",
         "13",
-        "14"
+        "14",
+        "15",
+        "16"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -23398,6 +24238,14 @@
         {
           "numericValue": "14",
           "identifier": "PathfinderObjectiveCompleteGambit"
+        },
+        {
+          "numericValue": "15",
+          "identifier": "SeasonWeeklyComplete"
+        },
+        {
+          "numericValue": "16",
+          "identifier": "SeasonDailyComplete"
         }
       ]
     },
@@ -25593,6 +26441,15 @@
             "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
           }
         },
+        "seasonPassList": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassReference"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
+          }
+        },
         "seasonPassProgressionHash": {
           "format": "uint32",
           "type": "integer",
@@ -25654,6 +26511,89 @@
       },
       "x-mobile-manifest-name": "Seasons"
     },
+    "Destiny.Definitions.Seasons.DestinySeasonPassReference": {
+      "description": "Defines the hash, unlock flag and start time of season passes",
+      "type": "object",
+      "properties": {
+        "seasonPassHash": {
+          "format": "uint32",
+          "description": "The Season Pass Hash",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
+          }
+        },
+        "seasonPassStartDate": {
+          "format": "date-time",
+          "description": "The Season Pass Start Date",
+          "type": "string"
+        },
+        "seasonPassEndDate": {
+          "format": "date-time",
+          "description": "The Season Pass End Date",
+          "type": "string"
+        }
+      }
+    },
+    "Destiny.Definitions.Seasons.DestinySeasonPassDefinition": {
+      "type": "object",
+      "properties": {
+        "displayProperties": {
+          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+        },
+        "rewardProgressionHash": {
+          "format": "uint32",
+          "description": "This is the progression definition related to the progression for the initial levels 1-100 that provide item rewards for the Season pass. Further experience after you reach the limit is provided in the \"Prestige\" progression referred to by prestigeProgressionHash.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
+          }
+        },
+        "prestigeProgressionHash": {
+          "format": "uint32",
+          "description": "I know what you're thinking, but I promise we're not going to duplicate and drown you. Instead, we're giving you sweet, sweet power bonuses.\r\n Prestige progression is further progression that you can make on the Season pass after you gain max ranks, that will ultimately increase your power/light level over the theoretical limit.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
+          }
+        },
+        "linkRedirectPath": {
+          "type": "string"
+        },
+        "color": {
+          "$ref": "#/definitions/Destiny.Misc.DestinyColor"
+        },
+        "images": {
+          "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassImages"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "SeasonPasses"
+    },
+    "Destiny.Definitions.Seasons.DestinySeasonPassImages": {
+      "type": "object",
+      "properties": {
+        "iconImagePath": {
+          "type": "string"
+        },
+        "themeBackgroundImagePath": {
+          "type": "string"
+        }
+      }
+    },
     "Destiny.Definitions.Seasons.DestinySeasonActDefinition": {
       "description": "Defines the name, start time and ranks included in an Act of an Episode.",
       "type": "object",
@@ -25712,45 +26652,6 @@
           "type": "string"
         }
       }
-    },
-    "Destiny.Definitions.Seasons.DestinySeasonPassDefinition": {
-      "type": "object",
-      "properties": {
-        "displayProperties": {
-          "$ref": "#/definitions/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-        },
-        "rewardProgressionHash": {
-          "format": "uint32",
-          "description": "This is the progression definition related to the progression for the initial levels 1-100 that provide item rewards for the Season pass. Further experience after you reach the limit is provided in the \"Prestige\" progression referred to by prestigeProgressionHash.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
-          }
-        },
-        "prestigeProgressionHash": {
-          "format": "uint32",
-          "description": "I know what you're thinking, but I promise we're not going to duplicate and drown you. Instead, we're giving you sweet, sweet power bonuses.\r\n Prestige progression is further progression that you can make on the Season pass after you gain max ranks, that will ultimately increase your power/light level over the theoretical limit.",
-          "type": "integer",
-          "x-mapped-definition": {
-            "$ref": "#/definitions/Destiny.Definitions.DestinyProgressionDefinition"
-          }
-        },
-        "hash": {
-          "format": "uint32",
-          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-          "type": "integer"
-        },
-        "index": {
-          "format": "int32",
-          "description": "The index of the entity as it was found in the investment tables.",
-          "type": "integer"
-        },
-        "redacted": {
-          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
-          "type": "boolean"
-        }
-      },
-      "x-mobile-manifest-name": "SeasonPasses"
     },
     "Destiny.Definitions.DestinyProgressionRewardItemQuantity": {
       "type": "object",
@@ -31910,6 +32811,7 @@
             "5",
             "6",
             "10",
+            "20",
             "254",
             "-1"
           ],
@@ -31946,6 +32848,10 @@
             {
               "numericValue": "10",
               "identifier": "TigerDemon"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "GoliathGame"
             },
             {
               "numericValue": "254",
@@ -32318,7 +33224,9 @@
             "128",
             "256",
             "512",
-            "1024"
+            "1024",
+            "28535",
+            "28536"
           ],
           "type": "integer",
           "x-enum-values": [
@@ -32369,6 +33277,14 @@
             {
               "numericValue": "1024",
               "identifier": "TheFinalShape"
+            },
+            {
+              "numericValue": "28535",
+              "identifier": "EdgeOfFate"
+            },
+            {
+              "numericValue": "28536",
+              "identifier": "Renegades"
             }
           ]
         },
@@ -32691,7 +33607,9 @@
         "128",
         "256",
         "512",
-        "1024"
+        "1024",
+        "28535",
+        "28536"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -32742,6 +33660,14 @@
         {
           "numericValue": "1024",
           "identifier": "TheFinalShape"
+        },
+        {
+          "numericValue": "28535",
+          "identifier": "EdgeOfFate"
+        },
+        {
+          "numericValue": "28536",
+          "identifier": "Renegades"
         }
       ]
     },
@@ -39261,6 +40187,11 @@
               "$ref": "#/definitions/Destiny.Entities.Items.DestinyItemInstanceEnergy"
             }
           ]
+        },
+        "gearTier": {
+          "format": "int32",
+          "description": "Gear Tier, if applicable, fished up from the unlock value items.gear_tier",
+          "type": "integer"
         }
       },
       "x-destiny-component-type-dependency": "ItemInstances"
@@ -42720,6 +43651,19 @@
         "activityWasStartedFromBeginning": {
           "description": "True if the activity was started from the beginning, if that information is available and the activity was played post Witch Queen release.",
           "type": "boolean"
+        },
+        "activityDifficultyTier": {
+          "format": "int32",
+          "description": "Difficulty tier index value for the activity.",
+          "type": "integer"
+        },
+        "selectedSkullHashes": {
+          "description": "Collection of player-selected skull hashes active for the activity.",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          }
         },
         "activityDetails": {
           "description": "Details about the activity.",
@@ -46524,6 +47468,30 @@
             "$ref": "#/definitions/Destiny.Definitions.DestinyLocationDefinition"
           }
         },
+        "sortMatchmadeActivitiesToFront": {
+          "type": "boolean"
+        },
+        "enabledOnTreeTypesListEnum": {
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyActivityTreeType"
+            }
+          }
+        },
+        "activityTreeChildSortMode": {
+          "format": "int32",
+          "type": "integer",
+          "x-enum-reference": {
+            "$ref": "#/components/schemas/Destiny.DestinyActivityTreeChildSortMode"
+          }
+        },
+        "sortPriority": {
+          "format": "int32",
+          "type": "integer"
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -46552,6 +47520,62 @@
           }
         }
       }
+    },
+    "Destiny.DestinyActivityTreeType": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2",
+        "3",
+        "4"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "FireteamFinder"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "Curator"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "EventHome"
+        },
+        {
+          "numericValue": "3",
+          "identifier": "SeasonHome"
+        },
+        {
+          "numericValue": "4",
+          "identifier": "Count"
+        }
+      ]
+    },
+    "Destiny.DestinyActivityTreeChildSortMode": {
+      "format": "int32",
+      "enum": [
+        "0",
+        "1",
+        "2"
+      ],
+      "type": "integer",
+      "x-enum-values": [
+        {
+          "numericValue": "0",
+          "identifier": "Investment"
+        },
+        {
+          "numericValue": "1",
+          "identifier": "FocusFirst"
+        },
+        {
+          "numericValue": "2",
+          "identifier": "BonusAndFocusFirst"
+        }
+      ]
     },
     "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition": {
       "type": "object",
@@ -46968,7 +47992,8 @@
         "1",
         "2",
         "3",
-        "4"
+        "4",
+        "5"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -46991,6 +48016,10 @@
         {
           "numericValue": "4",
           "identifier": "FireteamFinderActivityGraph"
+        },
+        {
+          "numericValue": "5",
+          "identifier": "FireteamFinderUIActivityTree"
         }
       ]
     },
@@ -48154,6 +49183,7 @@
             "5",
             "6",
             "10",
+            "20",
             "254",
             "-1"
           ],
@@ -48190,6 +49220,10 @@
             {
               "numericValue": "10",
               "identifier": "TigerDemon"
+            },
+            {
+              "numericValue": "20",
+              "identifier": "GoliathGame"
             },
             {
               "numericValue": "254",
@@ -48493,6 +49527,34 @@
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderConstantsDefinition"
+          }
+        },
+        "inventoryItemConstantsHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Items.DestinyInventoryItemConstantsDefinition"
+          }
+        },
+        "featuredItemsListHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Inventory.DestinyItemFilterDefinition"
+          }
+        },
+        "armorArchetypePlugSetHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Sockets.DestinyPlugSetDefinition"
+          }
+        },
+        "seasonalHubEventCardHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinyEventCardDefinition"
           }
         },
         "guardianRanksRootNodeHash": {
@@ -48830,6 +49892,65 @@
         }
       },
       "x-mobile-manifest-name": "FireteamFinderConstants"
+    },
+    "Destiny.Definitions.Items.DestinyInventoryItemConstantsDefinition": {
+      "type": "object",
+      "properties": {
+        "gearTierOverlayImagePaths": {
+          "description": "Gear tier overlay images",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "InventoryItemConstants"
+    },
+    "Destiny.Definitions.Inventory.DestinyItemFilterDefinition": {
+      "description": "Lists of items that can be used for a variety of purposes, including featuring them as new gear",
+      "type": "object",
+      "properties": {
+        "setItems": {
+          "description": "The items in this set",
+          "type": "array",
+          "items": {
+            "format": "uint32",
+            "type": "integer"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyInventoryItemDefinition"
+          }
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "itemFilters"
     },
     "User.EmailSettings": {
       "description": "The set of all email subscription/opt-in settings and definitions.",
