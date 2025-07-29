@@ -6,6 +6,12 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2025-07-29 Follow-up for The Edge of Fate
+- Added account-owned `seasonPassHashes` to `DestinyProfileComponent`.
+- Added `visibleRewards` to `DestinyActvity`, which includes Bonus Focus rewards from the Portal.
+- Fixed the incorrect enum flag values for `DestinyGameVersions`.
+- Removed Fireteam Finder API specs that are not available to 3rd-party apps.
+
 ## 2025-07-15 Update for The Edge of Fate
 - Items
   - Added support for featured items and armor sets in `DestinyInventoryItemDefinition`.

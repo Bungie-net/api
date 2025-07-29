@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.0"
+    "version": "2.21.1"
   },
   "servers": [
     {
@@ -5944,1723 +5944,6 @@
             ]
           }
         ]
-      }
-    },
-    "/FireteamFinder/Lobby/Activate/{lobbyId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.ActivateLobby",
-      "description": "Activates a lobby and initializes it as an active Fireteam.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Activates a lobby and initializes it as an active Fireteam.",
-        "operationId": "FireteamFinder.ActivateLobby",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "forceActivation",
-            "in": "query",
-            "description": "Optional boolean to forcibly activate the lobby, kicking pending applicants.",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to activate.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/boolean"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/ActivateForNewListingId/{lobbyId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.ActivateLobbyForNewListingId",
-      "description": "Activates a lobby and initializes it as an active Fireteam, returning the updated Listing ID.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Activates a lobby and initializes it as an active Fireteam, returning the updated Listing ID.",
-        "operationId": "FireteamFinder.ActivateLobbyForNewListingId",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "forceActivation",
-            "in": "query",
-            "description": "Optional boolean to forcibly activate the lobby, kicking pending applicants.",
-            "schema": {
-              "type": "boolean"
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to activate.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/boolean"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Listing/{listingId}/Apply/{applicationType}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.ApplyToListing",
-      "description": "Applies to have a character join a fireteam.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Applies to have a character join a fireteam.",
-        "operationId": "FireteamFinder.ApplyToListing",
-        "parameters": [
-          {
-            "name": "applicationType",
-            "in": "path",
-            "description": "The type of application to apply",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicationType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "listingId",
-            "in": "path",
-            "description": "The id of the listing to apply to",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderApplyToListingResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Listing/BulkStatus/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.BulkGetListingStatus",
-      "description": "Retrieves Fireteam listing statuses in bulk.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves Fireteam listing statuses in bulk.",
-        "operationId": "FireteamFinder.BulkGetListingStatus",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderBulkGetListingStatusRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderBulkGetListingStatusResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Application/{applicationId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetApplication",
-      "description": "Retrieves a Fireteam application.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves a Fireteam application.",
-        "operationId": "FireteamFinder.GetApplication",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "description": "",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetApplicationResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Listing/{listingId}/": {
-      "summary": "FireteamFinder.GetListing",
-      "description": "Retrieves a Fireteam listing.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves a Fireteam listing.",
-        "operationId": "FireteamFinder.GetListing",
-        "parameters": [
-          {
-            "name": "listingId",
-            "in": "path",
-            "description": "The ID of the listing to retrieve.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderListing"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Listing/{listingId}/Applications/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetListingApplications",
-      "description": "Retrieves all applications to a Fireteam Finder listing.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves all applications to a Fireteam Finder listing.",
-        "operationId": "FireteamFinder.GetListingApplications",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "flags",
-            "in": "query",
-            "description": "Optional flag representing a filter on the state of the application.",
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "listingId",
-            "in": "path",
-            "description": "The ID of the listing whose applications to retrieve.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "nextPageToken",
-            "in": "query",
-            "description": "An optional token from a previous response to fetch the next page of results.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The maximum number of results to be returned with this page.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetListingApplicationsResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/{lobbyId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetLobby",
-      "description": "Retrieves the information for a Fireteam lobby.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves the information for a Fireteam lobby.",
-        "operationId": "FireteamFinder.GetLobby",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to retrieve.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderLobbyResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/PlayerLobbies/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetPlayerLobbies",
-      "description": "Retrieves the information for a Fireteam lobby.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves the information for a Fireteam lobby.",
-        "operationId": "FireteamFinder.GetPlayerLobbies",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "nextPageToken",
-            "in": "query",
-            "description": "An optional token from a previous response to fetch the next page of results.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The maximum number of results to be returned with this page.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetPlayerLobbiesResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/PlayerApplications/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetPlayerApplications",
-      "description": "Retrieves Fireteam applications that this player has sent or recieved.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves Fireteam applications that this player has sent or recieved.",
-        "operationId": "FireteamFinder.GetPlayerApplications",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "nextPageToken",
-            "in": "query",
-            "description": "An optional token from a previous response to fetch the next page of results.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The maximum number of results to be returned with this page.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetPlayerApplicationsResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/PlayerOffers/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetPlayerOffers",
-      "description": "Retrieves Fireteam offers that this player has recieved.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves Fireteam offers that this player has recieved.",
-        "operationId": "FireteamFinder.GetPlayerOffers",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "nextPageToken",
-            "in": "query",
-            "description": "An optional token from a previous response to fetch the next page of results.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The maximum number of results to be returned with this page.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetPlayerOffersResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/CharacterActivityAccess/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetCharacterActivityAccess",
-      "description": "Retrieves the information for a Fireteam lobby.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves the information for a Fireteam lobby.",
-        "operationId": "FireteamFinder.GetCharacterActivityAccess",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetCharacterActivityAccessResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Offer/{offerId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetOffer",
-      "description": "Retrieves an offer to a Fireteam lobby.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves an offer to a Fireteam lobby.",
-        "operationId": "FireteamFinder.GetOffer",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "offerId",
-            "in": "path",
-            "description": "The unique ID of the offer.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderOffer"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/{lobbyId}/Offers/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.GetLobbyOffers",
-      "description": "Retrieves all offers relevant to a Fireteam lobby.",
-      "get": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Retrieves all offers relevant to a Fireteam lobby.",
-        "operationId": "FireteamFinder.GetLobbyOffers",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The unique ID of the lobby.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "nextPageToken",
-            "in": "query",
-            "description": "An optional token from a previous response to fetch the next page of results.",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "description": "The maximum number of results to be returned with this page.",
-            "schema": {
-              "type": "integer",
-              "format": "int32"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderGetLobbyOffersResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/Host/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.HostLobby",
-      "description": "Creates a new Fireteam lobby and Fireteam Finder listing.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Creates a new Fireteam lobby and Fireteam Finder listing.",
-        "operationId": "FireteamFinder.HostLobby",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderHostLobbyRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderHostLobbyResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/Join/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.JoinLobby",
-      "description": "Sends a request to join an available Fireteam lobby.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Sends a request to join an available Fireteam lobby.",
-        "operationId": "FireteamFinder.JoinLobby",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderJoinLobbyRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderLobbyResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/{lobbyId}/KickPlayer/{targetMembershipId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.KickPlayer",
-      "description": "Kicks a player from a Fireteam Finder lobby.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Kicks a player from a Fireteam Finder lobby.",
-        "operationId": "FireteamFinder.KickPlayer",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to kick the player from.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "targetMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID of the player to kick.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderKickPlayerRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/boolean"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Application/Leave/{applicationId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.LeaveApplication",
-      "description": "Sends a request to leave a Fireteam listing application.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Sends a request to leave a Fireteam listing application.",
-        "operationId": "FireteamFinder.LeaveApplication",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "description": "The ID of the application to leave.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/boolean"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/Leave/{lobbyId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.LeaveLobby",
-      "description": "Sends a request to leave a Fireteam lobby.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Sends a request to leave a Fireteam lobby.",
-        "operationId": "FireteamFinder.LeaveLobby",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to leave.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/boolean"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Application/Respond/{applicationId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.RespondToApplication",
-      "description": "Responds to an application sent to a Fireteam lobby.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Responds to an application sent to a Fireteam lobby.",
-        "operationId": "FireteamFinder.RespondToApplication",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "description": "The application ID to respond to.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToApplicationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderRespondToApplicationResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Authentication/Respond/{applicationId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.RespondToAuthentication",
-      "description": "Responds to an authentication request for a Fireteam.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Responds to an authentication request for a Fireteam.",
-        "operationId": "FireteamFinder.RespondToAuthentication",
-        "parameters": [
-          {
-            "name": "applicationId",
-            "in": "path",
-            "description": "The ID of the application whose authentication to confirm.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToAuthenticationRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderRespondToAuthenticationResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Offer/Respond/{offerId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.RespondToOffer",
-      "description": "Responds to a Fireteam lobby offer.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Responds to a Fireteam lobby offer.",
-        "operationId": "FireteamFinder.RespondToOffer",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "offerId",
-            "in": "path",
-            "description": "The unique ID of the offer.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToOfferRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderRespondToOfferResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Search/Clan/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.SearchListingsByClan",
-      "description": "Returns search results for available Fireteams provided a clan.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Returns search results for available Fireteams provided a clan.",
-        "operationId": "FireteamFinder.SearchListingsByClan",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderSearchListingsByClanRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderSearchListingsByClanResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Search/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.SearchListingsByFilters",
-      "description": "Returns search results for available Fireteams provided search filters.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Returns search results for available Fireteams provided search filters.",
-        "operationId": "FireteamFinder.SearchListingsByFilters",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "overrideOfflineFilter",
-            "in": "query",
-            "description": "Optional boolean to bypass the offline-only check, so the client can pull fireteam from the game.",
-            "schema": {
-              "type": "boolean"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersResponse"
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/FireteamFinder/Lobby/UpdateSettings/{lobbyId}/{destinyMembershipType}/{destinyMembershipId}/{destinyCharacterId}/": {
-      "summary": "FireteamFinder.UpdateLobbySettings",
-      "description": "Updates the settings for a Fireteam lobby.",
-      "post": {
-        "tags": [
-          "FireteamFinder"
-        ],
-        "description": "Updates the settings for a Fireteam lobby.",
-        "operationId": "FireteamFinder.UpdateLobbySettings",
-        "parameters": [
-          {
-            "name": "destinyCharacterId",
-            "in": "path",
-            "description": "A valid Destiny character ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipId",
-            "in": "path",
-            "description": "A valid Destiny membership ID.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          },
-          {
-            "name": "destinyMembershipType",
-            "in": "path",
-            "description": "A valid Destiny membership type.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "description": "The types of membership the Accounts system supports. This is the external facing enum used in place of the internal-only Bungie.SharedDefinitions.MembershipType.",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/BungieMembershipType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          {
-            "name": "lobbyId",
-            "in": "path",
-            "description": "The ID of the lobby to update.",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "$ref": "#/components/responses/FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsResponse"
-          }
-        },
-        "deprecated": false
       }
     },
     "/Social/Friends/": {
@@ -30086,8 +28369,8 @@
               "256",
               "512",
               "1024",
-              "28535",
-              "28536"
+              "2048",
+              "4096"
             ],
             "type": "integer",
             "description": "If this profile is not in a cross save pairing, this will return the game versions that we believe this profile has access to.\r\n For the time being, we will not return this information for any membership that is in a cross save pairing. The gist is that, once the pairing occurs, we do not currently have a consistent way to get that information for the profile's original Platform, and thus gameVersions would be too inconsistent (based on the last platform they happened to play on) for the info to be useful.\r\n If we ever can get this data, this field will be deprecated and replaced with data on the DestinyLinkedProfileResponse itself, with game versions per linked Platform. But since we can't get that, we have this as a stop-gap measure for getting the data in the only situation that we currently need it.",
@@ -30143,11 +28426,11 @@
                 "identifier": "TheFinalShape"
               },
               {
-                "numericValue": "28535",
+                "numericValue": "2048",
                 "identifier": "EdgeOfFate"
               },
               {
-                "numericValue": "28536",
+                "numericValue": "4096",
                 "identifier": "Renegades"
               }
             ],
@@ -30498,8 +28781,8 @@
           "256",
           "512",
           "1024",
-          "28535",
-          "28536"
+          "2048",
+          "4096"
         ],
         "type": "integer",
         "description": "A flags enumeration/bitmask indicating the versions of the game that a given user has purchased.",
@@ -30554,11 +28837,11 @@
             "identifier": "TheFinalShape"
           },
           {
-            "numericValue": "28535",
+            "numericValue": "2048",
             "identifier": "EdgeOfFate"
           },
           {
-            "numericValue": "28536",
+            "numericValue": "4096",
             "identifier": "Renegades"
           }
         ],
@@ -31373,6 +29656,17 @@
             "description": "A list of seasons that this profile owns. Unlike versionsOwned, these stay with the profile across Platforms, and thus will be valid.\r\n It turns out that Stadia Pro subscriptions will give access to seasons but only while playing on Stadia and with an active subscription. So some users (users who have Stadia Pro but choose to play on some other platform) won't see these as available: it will be whatever seasons are available for the platform on which they last played.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+            }
+          },
+          "seasonPassHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "A list of season passes aka reward passes that this profile owns. Unlike versionsOwned, these stay with the profile across Platforms, and thus will be valid.",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
             }
           },
           "eventCardHashesOwned": {
@@ -34559,7 +32853,7 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data. Note that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
+            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data. Note that, in the DestinyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
             }
@@ -35112,7 +33406,7 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
+            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestinyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
             }
@@ -35122,7 +33416,7 @@
             "additionalProperties": {
               "type": "boolean"
             },
-            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but saavy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
+            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but savvy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
@@ -36619,7 +34913,7 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
+            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestinyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
             }
@@ -36629,7 +34923,7 @@
             "additionalProperties": {
               "type": "boolean"
             },
-            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but saavy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
+            "description": "The set of activity options for this activity, keyed by an identifier that's unique for this activity (not guaranteed to be unique between or across all activities, though should be unique for every *variant* of a given *conceptual* activity: for instance, the original D2 Raid has many variant DestinyActivityDefinitions. While other activities could potentially have the same option hashes, for any given D2 base Raid variant the hash will be unique).\r\nAs a concrete example of this data, the hashes you get for Raids will correspond to the currently active \"Challenge Mode\".\r\nWe don't have any human readable information for these, but savvy 3rd party app users could manually associate the key (a hash identifier for the \"option\" that is enabled/disabled) and the value (whether it's enabled or disabled presently)\r\nOn our side, we don't necessarily even know what these are used for (the game designers know, but we don't), and we have no human readable data for them. In order to use them, you will have to do some experimentation.",
             "x-dictionary-key": {
               "type": "integer",
               "format": "uint32"
@@ -36640,6 +34934,13 @@
             "description": "If returned, this is the index into the DestinyActivityDefinition's \"loadouts\" property, indicating the currently active loadout requirements.",
             "format": "int32",
             "nullable": true
+          },
+          "visibleRewards": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityRewardMapping"
+            },
+            "description": "A filtered list of reward mappings with only the currently visible reward items."
           }
         },
         "description": "Represents the \"Live\" data that we can obtain about a Character's status with a specific Activity. This will tell you whether the character can participate in the activity, as well as some other basic mutable information. \r\nMeant to be combined with static DestinyActivityDefinition data for a full picture of the Activity."
@@ -36693,6 +34994,60 @@
           }
         ],
         "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.DestinyActivityRewardMapping": {
+        "type": "object",
+        "properties": {
+          "displayBehavior": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyActivityRewardDisplayMode"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "rewardItems": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityRewardItem"
+            }
+          }
+        }
+      },
+      "Destiny.DestinyActivityRewardDisplayMode": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Aggregate"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "PickFirst"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Count"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.DestinyActivityRewardItem": {
+        "type": "object",
+        "properties": {
+          "itemQuantity": {
+            "$ref": "#/components/schemas/Destiny.DestinyItemQuantity"
+          },
+          "uiStyle": {
+            "type": "string"
+          }
+        }
       },
       "Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference": {
         "type": "object",
@@ -43662,7 +42017,7 @@
               "type": "integer",
               "format": "uint32"
             },
-            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestiyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
+            "description": "If the activity has modifiers, this will be the list of modifiers that all variants have in common. Perform lookups against DestinyActivityModifierDefinition which defines the modifier being applied to get at the modifier data.\r\nNote that, in the DestinyActivityDefinition, you will see many more modifiers than this being referred to: those are all *possible* modifiers for the activity, not the active ones. Use only the active ones to match what's really live.",
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.ActivityModifiers.DestinyActivityModifierDefinition"
             }
@@ -44776,1949 +43131,6 @@
           }
         }
       },
-      "FireteamFinder.DestinyFireteamFinderApplicationType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Creator"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Search"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Invite"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Friend"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Encounter"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "Public"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderApplyToListingResponse": {
-        "type": "object",
-        "properties": {
-          "isApplied": {
-            "type": "boolean"
-          },
-          "application": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplication"
-          },
-          "listing": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderApplication": {
-        "type": "object",
-        "properties": {
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicationState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "submitterId": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "referralToken": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "applicantSet": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicantSet"
-          },
-          "applicationType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicationType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderApplicationState": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "WaitingForApplicants"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "WaitingForLobbyOwner"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Accepted"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Rejected"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Deleted"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "Expired"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderPlayerId": {
-        "type": "object",
-        "properties": {
-          "membershipId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "membershipType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/BungieMembershipType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "characterId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderApplicantSet": {
-        "type": "object",
-        "properties": {
-          "applicants": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicant"
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderApplicant": {
-        "type": "object"
-      },
-      "FireteamFinder.DestinyFireteamFinderListing": {
-        "type": "object",
-        "properties": {
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "ownerId": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbySettings"
-          },
-          "availableSlots": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "lobbyState": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbySettings": {
-        "type": "object",
-        "properties": {
-          "maxPlayerCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "onlinePlayersOnly": {
-            "type": "boolean"
-          },
-          "privacyScope": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyPrivacyScope"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "scheduledDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "clanId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "listingValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingValue"
-            }
-          },
-          "activityGraphHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "activityHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyPrivacyScope": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Open"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Applications"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Clan"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Friends"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderListingValue": {
-        "type": "object",
-        "properties": {
-          "valueType": {
-            "type": "integer",
-            "format": "uint32"
-          },
-          "values": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            }
-          }
-        }
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "color": {
-            "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
-          },
-          "isPlayerElectedDifficultyNode": {
-            "type": "boolean"
-          },
-          "parentHash": {
-            "type": "integer",
-            "format": "uint32",
-            "nullable": true,
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "children": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "selfAndAllDescendantHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "relatedActivitySetHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition"
-            }
-          },
-          "specificActivitySetHash": {
-            "type": "integer",
-            "format": "uint32",
-            "nullable": true,
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition"
-            }
-          },
-          "relatedActivityHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
-            }
-          },
-          "relatedDirectorNodes": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyActivityGraphReference"
-            }
-          },
-          "relatedInteractableActivities": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference"
-            }
-          },
-          "relatedLocationHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyLocationDefinition"
-            }
-          },
-          "sortMatchmadeActivitiesToFront": {
-            "type": "boolean"
-          },
-          "enabledOnTreeTypesListEnum": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32",
-              "x-enum-reference": {
-                "$ref": "#/components/schemas/Destiny.DestinyActivityTreeType"
-              },
-              "x-enum-is-bitmask": false
-            }
-          },
-          "activityTreeChildSortMode": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.DestinyActivityTreeChildSortMode"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "sortPriority": {
-            "type": "integer",
-            "format": "int32",
-            "nullable": true
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderActivityGraphs"
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyActivityGraphReference": {
-        "type": "object",
-        "properties": {
-          "activityGraphHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.Director.DestinyActivityGraphDefinition"
-            }
-          }
-        }
-      },
-      "Destiny.DestinyActivityTreeType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "FireteamFinder"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Curator"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "EventHome"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "SeasonHome"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Count"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.DestinyActivityTreeChildSortMode": {
-        "enum": [
-          "0",
-          "1",
-          "2"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Investment"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "FocusFirst"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "BonusAndFocusFirst"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition": {
-        "type": "object",
-        "properties": {
-          "maximumPartySize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "optionHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionDefinition"
-            }
-          },
-          "labelHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelDefinition"
-            }
-          },
-          "activityGraphHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "activityHashes": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
-            }
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderActivitySets"
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "descendingSortPriority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "groupHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionGroupDefinition"
-            }
-          },
-          "codeOptionType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderCodeOptionType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "availability": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionAvailability"
-            },
-            "x-enum-is-bitmask": true
-          },
-          "visibility": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionVisibility"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "uiDisplayStyle": {
-            "type": "string"
-          },
-          "creatorSettings": {
-            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionCreatorSettings"
-          },
-          "searcherSettings": {
-            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSearcherSettings"
-          },
-          "values": {
-            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValues"
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderOptions"
-      },
-      "Destiny.FireteamFinderCodeOptionType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "ApplicationOnly"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "OnlineOnly"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "PlayerCount"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Title"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Tags"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "FinderActivityGraph"
-          },
-          {
-            "numericValue": "7",
-            "identifier": "MicrophoneRequired"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.FireteamFinderOptionAvailability": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "4",
-          "8"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "CreateListingBuilder"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "SearchListingBuilder"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "ListingViewer"
-          },
-          {
-            "numericValue": "8",
-            "identifier": "LobbyViewer"
-          }
-        ],
-        "x-enum-is-bitmask": true
-      },
-      "Destiny.FireteamFinderOptionVisibility": {
-        "enum": [
-          "0",
-          "1"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Always"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "ShowWhenChangedFromDefault"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionCreatorSettings": {
-        "type": "object",
-        "properties": {
-          "control": {
-            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl"
-          }
-        }
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl": {
-        "type": "object",
-        "properties": {
-          "type": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionControlType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "minSelectedItems": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "maxSelectedItems": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "Destiny.FireteamFinderOptionControlType": {
-        "enum": [
-          "0",
-          "1",
-          "2"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "ValueCollection"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "RadioButton"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSearcherSettings": {
-        "type": "object",
-        "properties": {
-          "control": {
-            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl"
-          },
-          "searchFilterType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionSearchFilterType"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "Destiny.FireteamFinderOptionSearchFilterType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "All"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Any"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "InRangeInclusive"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "InRangeExclusive"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "GreaterThan"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "GreaterThanOrEqualTo"
-          },
-          {
-            "numericValue": "7",
-            "identifier": "LessThan"
-          },
-          {
-            "numericValue": "8",
-            "identifier": "LessThanOrEqualTo"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValues": {
-        "type": "object",
-        "properties": {
-          "optionalNull": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "optionalFormatString": {
-            "type": "string"
-          },
-          "displayFormatType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionDisplayFormat"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "type": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionValueProviderType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "valueDefinitions": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValueDefinition"
-            }
-          }
-        }
-      },
-      "Destiny.FireteamFinderOptionDisplayFormat": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Text"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Integer"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Bool"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "FormatString"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.FireteamFinderOptionValueProviderType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Values"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "PlayerCount"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "FireteamFinderLabels"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "FireteamFinderActivityGraph"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "FireteamFinderUIActivityTree"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValueDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "value": {
-            "type": "integer",
-            "format": "uint32"
-          },
-          "flags": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionValueFlags"
-            },
-            "x-enum-is-bitmask": true
-          }
-        }
-      },
-      "Destiny.FireteamFinderOptionValueFlags": {
-        "enum": [
-          "0",
-          "1",
-          "2"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "None"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "CreateListingDefaultValue"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "SearchFilterDefaultValue"
-          }
-        ],
-        "x-enum-is-bitmask": true
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionGroupDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "descendingSortPriority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderOptionGroups"
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "descendingSortPriority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "groupHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelGroupDefinition"
-            }
-          },
-          "allowInFields": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/Destiny.FireteamFinderLabelFieldType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderLabels"
-      },
-      "Destiny.FireteamFinderLabelFieldType": {
-        "enum": [
-          "0",
-          "1"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Title"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Label"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelGroupDefinition": {
-        "type": "object",
-        "properties": {
-          "displayProperties": {
-            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
-          },
-          "descendingSortPriority": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "x-mobile-manifest-name": "FireteamFinderLabelGroups"
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyState": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Inactive"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Active"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Expired"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Closed"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Canceled"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "Deleted"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderBulkGetListingStatusResponse": {
-        "type": "object",
-        "properties": {
-          "listingStatus": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingStatus"
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderListingStatus": {
-        "type": "object",
-        "properties": {
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "listingRevision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "availableSlots": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderBulkGetListingStatusRequest": {
-        "type": "object"
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyListingReference": {
-        "type": "object",
-        "properties": {
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetApplicationResponse": {
-        "type": "object",
-        "properties": {
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicationState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "submitterId": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "referralToken": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "applicantSet": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicantSet"
-          },
-          "applicationType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplicationType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetListingApplicationsResponse": {
-        "type": "object",
-        "properties": {
-          "applications": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplication"
-            }
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "nextPageToken": {
-            "type": "string"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyResponse": {
-        "type": "object",
-        "properties": {
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "owner": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "settings": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbySettings"
-          },
-          "players": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyPlayer"
-            }
-          },
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyPlayer": {
-        "type": "object",
-        "properties": {
-          "playerId": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "referralToken": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerReadinessState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "offerId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderPlayerReadinessState": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Reserved"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Disconnected"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "InLobbyUnready"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "InLobbyReady"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Summoned"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerLobbiesResponse": {
-        "type": "object",
-        "properties": {
-          "lobbies": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyResponse"
-            },
-            "description": "All available lobbies that this player has created or is a member of."
-          },
-          "pageSize": {
-            "type": "integer",
-            "description": "The number of results requested.",
-            "format": "int32"
-          },
-          "nextPageToken": {
-            "type": "string",
-            "description": "A string token required to get the next page of results. This will be null or empty if there are no more results."
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerApplicationsResponse": {
-        "type": "object",
-        "properties": {
-          "applications": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplication"
-            },
-            "description": "All applications that this player has sent."
-          },
-          "nextPageToken": {
-            "type": "string",
-            "description": "String token to request next page of results."
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerOffersResponse": {
-        "type": "object",
-        "properties": {
-          "offers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOffer"
-            },
-            "description": "All offers that this player has recieved."
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderOffer": {
-        "type": "object",
-        "properties": {
-          "offerId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOfferState"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "targetId": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderPlayerId"
-          },
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "createdDateTime": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderOfferState": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5"
-        ],
-        "type": "integer",
-        "format": "int32",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "Pending"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Accepted"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Rejected"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "Deleted"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "Expired"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderGetCharacterActivityAccessResponse": {
-        "type": "object",
-        "properties": {
-          "fireteamFinderActivityGraphStates": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderActivityGraphState"
-            },
-            "description": "A map of fireteam finder activity graph hashes to visibility and availability states.",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            },
-            "x-dictionary-key": {
-              "type": "integer",
-              "format": "uint32"
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderActivityGraphState": {
-        "type": "object",
-        "properties": {
-          "isVisible": {
-            "type": "boolean",
-            "description": "Indicates if this fireteam finder activity graph node is visible for this character."
-          },
-          "isAvailable": {
-            "type": "boolean",
-            "description": "Indicates if this fireteam finder activity graph node is available to select for this character."
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetLobbyOffersResponse": {
-        "type": "object",
-        "properties": {
-          "offers": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOffer"
-            }
-          },
-          "pageToken": {
-            "type": "string"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderHostLobbyResponse": {
-        "type": "object",
-        "properties": {
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "listingId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "offerId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderHostLobbyRequest": {
-        "type": "object",
-        "properties": {
-          "maxPlayerCount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "onlinePlayersOnly": {
-            "type": "boolean"
-          },
-          "privacyScope": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyPrivacyScope"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "scheduledDateTime": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "clanId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "listingValues": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingValue"
-            }
-          },
-          "activityGraphHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
-            }
-          },
-          "activityHash": {
-            "type": "integer",
-            "format": "uint32",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderJoinLobbyRequest": {
-        "type": "object",
-        "properties": {
-          "lobbyId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "offerId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderKickPlayerRequest": {
-        "type": "object",
-        "properties": {
-          "targetMembershipType": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/BungieMembershipType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "targetCharacterId": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToApplicationResponse": {
-        "type": "object",
-        "properties": {
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "applicationRevision": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToApplicationRequest": {
-        "type": "object",
-        "properties": {
-          "accepted": {
-            "type": "boolean"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToAuthenticationResponse": {
-        "type": "object",
-        "properties": {
-          "applicationId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "applicationRevision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "offer": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOffer"
-          },
-          "listing": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToAuthenticationRequest": {
-        "type": "object",
-        "properties": {
-          "confirmed": {
-            "type": "boolean"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToOfferResponse": {
-        "type": "object",
-        "properties": {
-          "offerId": {
-            "type": "integer",
-            "format": "int64"
-          },
-          "revision": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "state": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOfferState"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToOfferRequest": {
-        "type": "object",
-        "properties": {
-          "accepted": {
-            "type": "boolean"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByClanResponse": {
-        "type": "object",
-        "properties": {
-          "listings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-            }
-          },
-          "pageToken": {
-            "type": "string"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByClanRequest": {
-        "type": "object",
-        "properties": {
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageToken": {
-            "type": "string"
-          },
-          "lobbyState": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyState"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersResponse": {
-        "type": "object",
-        "properties": {
-          "listings": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-            }
-          },
-          "pageToken": {
-            "type": "string"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersRequest": {
-        "type": "object",
-        "properties": {
-          "filters": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingFilter"
-            }
-          },
-          "pageSize": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "pageToken": {
-            "type": "string"
-          },
-          "lobbyState": {
-            "type": "integer",
-            "format": "int32",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyState"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderListingFilter": {
-        "type": "object",
-        "properties": {
-          "listingValue": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingValue"
-          },
-          "rangeType": {
-            "type": "integer",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingFilterRangeType"
-            },
-            "x-enum-is-bitmask": false
-          },
-          "matchType": {
-            "type": "integer",
-            "x-enum-reference": {
-              "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListingFilterMatchType"
-            },
-            "x-enum-is-bitmask": false
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderListingFilterRangeType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3",
-          "4",
-          "5",
-          "6",
-          "7",
-          "8"
-        ],
-        "type": "integer",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "All"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Any"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "InRangeInclusive"
-          },
-          {
-            "numericValue": "4",
-            "identifier": "InRangeExclusive"
-          },
-          {
-            "numericValue": "5",
-            "identifier": "GreaterThan"
-          },
-          {
-            "numericValue": "6",
-            "identifier": "GreaterThanOrEqualTo"
-          },
-          {
-            "numericValue": "7",
-            "identifier": "LessThan"
-          },
-          {
-            "numericValue": "8",
-            "identifier": "LessThanOrEqualTo"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderListingFilterMatchType": {
-        "enum": [
-          "0",
-          "1",
-          "2",
-          "3"
-        ],
-        "type": "integer",
-        "x-enum-values": [
-          {
-            "numericValue": "0",
-            "identifier": "Unknown"
-          },
-          {
-            "numericValue": "1",
-            "identifier": "MustNot"
-          },
-          {
-            "numericValue": "2",
-            "identifier": "Should"
-          },
-          {
-            "numericValue": "3",
-            "identifier": "Filter"
-          }
-        ],
-        "x-enum-is-bitmask": false
-      },
-      "FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsResponse": {
-        "type": "object",
-        "properties": {
-          "updatedLobby": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyResponse"
-          },
-          "updatedListing": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsRequest": {
-        "type": "object",
-        "properties": {
-          "updatedSettings": {
-            "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbySettings"
-          }
-        }
-      },
       "Social.Friends.BungieFriendListResponse": {
         "type": "object",
         "properties": {
@@ -47678,6 +44090,829 @@
           }
         },
         "x-mobile-manifest-name": "FireteamFinderConstants"
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "color": {
+            "$ref": "#/components/schemas/Destiny.Misc.DestinyColor"
+          },
+          "isPlayerElectedDifficultyNode": {
+            "type": "boolean"
+          },
+          "parentHash": {
+            "type": "integer",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
+            }
+          },
+          "children": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
+            }
+          },
+          "selfAndAllDescendantHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
+            }
+          },
+          "relatedActivitySetHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition"
+            }
+          },
+          "specificActivitySetHash": {
+            "type": "integer",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition"
+            }
+          },
+          "relatedActivityHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
+            }
+          },
+          "relatedDirectorNodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyActivityGraphReference"
+            }
+          },
+          "relatedInteractableActivities": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyActivityInteractableReference"
+            }
+          },
+          "relatedLocationHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyLocationDefinition"
+            }
+          },
+          "sortMatchmadeActivitiesToFront": {
+            "type": "boolean"
+          },
+          "enabledOnTreeTypesListEnum": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "x-enum-reference": {
+                "$ref": "#/components/schemas/Destiny.DestinyActivityTreeType"
+              },
+              "x-enum-is-bitmask": false
+            }
+          },
+          "activityTreeChildSortMode": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.DestinyActivityTreeChildSortMode"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "sortPriority": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderActivityGraphs"
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyActivityGraphReference": {
+        "type": "object",
+        "properties": {
+          "activityGraphHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Director.DestinyActivityGraphDefinition"
+            }
+          }
+        }
+      },
+      "Destiny.DestinyActivityTreeType": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "FireteamFinder"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Curator"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "EventHome"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "SeasonHome"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "Count"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.DestinyActivityTreeChildSortMode": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Investment"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "FocusFirst"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "BonusAndFocusFirst"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivitySetDefinition": {
+        "type": "object",
+        "properties": {
+          "maximumPartySize": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "optionHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionDefinition"
+            }
+          },
+          "labelHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelDefinition"
+            }
+          },
+          "activityGraphHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderActivityGraphDefinition"
+            }
+          },
+          "activityHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivityDefinition"
+            }
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderActivitySets"
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "descendingSortPriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionGroupDefinition"
+            }
+          },
+          "codeOptionType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderCodeOptionType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "availability": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionAvailability"
+            },
+            "x-enum-is-bitmask": true
+          },
+          "visibility": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionVisibility"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "uiDisplayStyle": {
+            "type": "string"
+          },
+          "creatorSettings": {
+            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionCreatorSettings"
+          },
+          "searcherSettings": {
+            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSearcherSettings"
+          },
+          "values": {
+            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValues"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderOptions"
+      },
+      "Destiny.FireteamFinderCodeOptionType": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "ApplicationOnly"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "OnlineOnly"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "PlayerCount"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "Title"
+          },
+          {
+            "numericValue": "5",
+            "identifier": "Tags"
+          },
+          {
+            "numericValue": "6",
+            "identifier": "FinderActivityGraph"
+          },
+          {
+            "numericValue": "7",
+            "identifier": "MicrophoneRequired"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.FireteamFinderOptionAvailability": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "4",
+          "8"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "CreateListingBuilder"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "SearchListingBuilder"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "ListingViewer"
+          },
+          {
+            "numericValue": "8",
+            "identifier": "LobbyViewer"
+          }
+        ],
+        "x-enum-is-bitmask": true
+      },
+      "Destiny.FireteamFinderOptionVisibility": {
+        "enum": [
+          "0",
+          "1"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Always"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "ShowWhenChangedFromDefault"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionCreatorSettings": {
+        "type": "object",
+        "properties": {
+          "control": {
+            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl"
+          }
+        }
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionControlType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "minSelectedItems": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maxSelectedItems": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "Destiny.FireteamFinderOptionControlType": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "ValueCollection"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "RadioButton"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSearcherSettings": {
+        "type": "object",
+        "properties": {
+          "control": {
+            "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionSettingsControl"
+          },
+          "searchFilterType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionSearchFilterType"
+            },
+            "x-enum-is-bitmask": false
+          }
+        }
+      },
+      "Destiny.FireteamFinderOptionSearchFilterType": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5",
+          "6",
+          "7",
+          "8"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "All"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Any"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "InRangeInclusive"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "InRangeExclusive"
+          },
+          {
+            "numericValue": "5",
+            "identifier": "GreaterThan"
+          },
+          {
+            "numericValue": "6",
+            "identifier": "GreaterThanOrEqualTo"
+          },
+          {
+            "numericValue": "7",
+            "identifier": "LessThan"
+          },
+          {
+            "numericValue": "8",
+            "identifier": "LessThanOrEqualTo"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValues": {
+        "type": "object",
+        "properties": {
+          "optionalNull": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "optionalFormatString": {
+            "type": "string"
+          },
+          "displayFormatType": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionDisplayFormat"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "type": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionValueProviderType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "valueDefinitions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValueDefinition"
+            }
+          }
+        }
+      },
+      "Destiny.FireteamFinderOptionDisplayFormat": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Text"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Integer"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "Bool"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "FormatString"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.FireteamFinderOptionValueProviderType": {
+        "enum": [
+          "0",
+          "1",
+          "2",
+          "3",
+          "4",
+          "5"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Values"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "PlayerCount"
+          },
+          {
+            "numericValue": "3",
+            "identifier": "FireteamFinderLabels"
+          },
+          {
+            "numericValue": "4",
+            "identifier": "FireteamFinderActivityGraph"
+          },
+          {
+            "numericValue": "5",
+            "identifier": "FireteamFinderUIActivityTree"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionValueDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "value": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "flags": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderOptionValueFlags"
+            },
+            "x-enum-is-bitmask": true
+          }
+        }
+      },
+      "Destiny.FireteamFinderOptionValueFlags": {
+        "enum": [
+          "0",
+          "1",
+          "2"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "None"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "CreateListingDefaultValue"
+          },
+          {
+            "numericValue": "2",
+            "identifier": "SearchFilterDefaultValue"
+          }
+        ],
+        "x-enum-is-bitmask": true
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderOptionGroupDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "descendingSortPriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderOptionGroups"
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "descendingSortPriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "groupHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelGroupDefinition"
+            }
+          },
+          "allowInFields": {
+            "type": "integer",
+            "format": "int32",
+            "x-enum-reference": {
+              "$ref": "#/components/schemas/Destiny.FireteamFinderLabelFieldType"
+            },
+            "x-enum-is-bitmask": false
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderLabels"
+      },
+      "Destiny.FireteamFinderLabelFieldType": {
+        "enum": [
+          "0",
+          "1"
+        ],
+        "type": "integer",
+        "format": "int32",
+        "x-enum-values": [
+          {
+            "numericValue": "0",
+            "identifier": "Title"
+          },
+          {
+            "numericValue": "1",
+            "identifier": "Label"
+          }
+        ],
+        "x-enum-is-bitmask": false
+      },
+      "Destiny.Definitions.FireteamFinder.DestinyFireteamFinderLabelGroupDefinition": {
+        "type": "object",
+        "properties": {
+          "displayProperties": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyDisplayPropertiesDefinition"
+          },
+          "descendingSortPriority": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "FireteamFinderLabelGroups"
       },
       "Destiny.Definitions.Items.DestinyInventoryItemConstantsDefinition": {
         "type": "object",
@@ -51502,861 +48737,6 @@
           }
         }
       },
-      "FireteamFinder.DestinyFireteamFinderApplyToListingResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderApplyToListingResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderBulkGetListingStatusResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderBulkGetListingStatusResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetApplicationResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetApplicationResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderListing": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderListing"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetListingApplicationsResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetListingApplicationsResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderLobbyResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderLobbyResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerLobbiesResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetPlayerLobbiesResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerApplicationsResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetPlayerApplicationsResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetPlayerOffersResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetPlayerOffersResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetCharacterActivityAccessResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetCharacterActivityAccessResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderOffer": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderOffer"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderGetLobbyOffersResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderGetLobbyOffersResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderHostLobbyResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderHostLobbyResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToApplicationResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToApplicationResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToAuthenticationResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToAuthenticationResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderRespondToOfferResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderRespondToOfferResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByClanResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderSearchListingsByClanResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderSearchListingsByFiltersResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
-      "FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsResponse": {
-        "description": "Look at the Response property for more information about the nature of this response",
-        "content": {
-          "application/json": {
-            "schema": {
-              "type": "object",
-              "properties": {
-                "Response": {
-                  "$ref": "#/components/schemas/FireteamFinder.DestinyFireteamFinderUpdateLobbySettingsResponse"
-                },
-                "ErrorCode": {
-                  "type": "integer",
-                  "format": "int32",
-                  "x-enum-reference": {
-                    "$ref": "#/components/schemas/Exceptions.PlatformErrorCodes"
-                  },
-                  "x-enum-is-bitmask": false
-                },
-                "ThrottleSeconds": {
-                  "type": "integer",
-                  "format": "int32"
-                },
-                "ErrorStatus": {
-                  "type": "string"
-                },
-                "Message": {
-                  "type": "string"
-                },
-                "MessageData": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "string"
-                  },
-                  "x-dictionary-key": {
-                    "type": "string"
-                  }
-                },
-                "DetailedErrorTrace": {
-                  "type": "string"
-                }
-              }
-            }
-          }
-        }
-      },
       "Social.Friends.BungieFriendListResponse": {
         "description": "Look at the Response property for more information about the nature of this response",
         "content": {
@@ -52775,10 +49155,6 @@
     {
       "name": "Fireteam",
       "description": "fireteam"
-    },
-    {
-      "name": "FireteamFinder",
-      "description": "fireteamfinder"
     },
     {
       "name": "Social",
