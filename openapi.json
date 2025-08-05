@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.1"
+    "version": "2.21.2"
   },
   "servers": [
     {
@@ -9809,6 +9809,14 @@
           "isFeaturedItem": {
             "type": "boolean",
             "description": "Whether or not this item is currently featured in the game, giving it a special watermark"
+          },
+          "isHolofoil": {
+            "type": "boolean",
+            "description": "Whether or not this item is holofoil, which has special icon treatment and in-game appearance."
+          },
+          "isAdept": {
+            "type": "boolean",
+            "description": "Whether or not this item is adept, which has increased stats and/or perks."
           },
           "screenshot": {
             "type": "string",
@@ -44944,7 +44952,7 @@
       "Destiny.Definitions.Inventory.DestinyItemFilterDefinition": {
         "type": "object",
         "properties": {
-          "setItems": {
+          "allowedItems": {
             "type": "array",
             "items": {
               "type": "integer",

@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.1"
+    "version": "2.21.2"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -12936,6 +12936,14 @@
         },
         "isFeaturedItem": {
           "description": "Whether or not this item is currently featured in the game, giving it a special watermark",
+          "type": "boolean"
+        },
+        "isHolofoil": {
+          "description": "Whether or not this item is holofoil, which has special icon treatment and in-game appearance.",
+          "type": "boolean"
+        },
+        "isAdept": {
+          "description": "Whether or not this item is adept, which has increased stats and/or perks.",
           "type": "boolean"
         },
         "screenshot": {
@@ -46818,7 +46826,7 @@
       "description": "Lists of items that can be used for a variety of purposes, including featuring them as new gear",
       "type": "object",
       "properties": {
-        "setItems": {
+        "allowedItems": {
           "description": "The items in this set",
           "type": "array",
           "items": {
