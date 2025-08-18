@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.2"
+    "version": "2.21.3"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -12531,6 +12531,42 @@
           }
         }
       }
+    },
+    "Destiny.Definitions.Inventory.DestinyIconDefinition": {
+      "description": "Lists of icons that can be used for a variety of purposes",
+      "type": "object",
+      "properties": {
+        "foreground": {
+          "type": "string"
+        },
+        "background": {
+          "type": "string"
+        },
+        "secondaryBackground": {
+          "type": "string"
+        },
+        "specialBackground": {
+          "type": "string"
+        },
+        "highResForeground": {
+          "type": "string"
+        },
+        "hash": {
+          "format": "uint32",
+          "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+          "type": "integer"
+        },
+        "index": {
+          "format": "int32",
+          "description": "The index of the entity as it was found in the investment tables.",
+          "type": "integer"
+        },
+        "redacted": {
+          "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!",
+          "type": "boolean"
+        }
+      },
+      "x-mobile-manifest-name": "icons"
     },
     "Destiny.DestinyStatAggregationType": {
       "format": "int32",
@@ -41936,6 +41972,13 @@
           "additionalProperties": {
             "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
           }
+        },
+        "scoreboardValues": {
+          "description": "Collection of stats from the player scoreboard in this activity.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
+          }
         }
       }
     },
@@ -46804,6 +46847,46 @@
           "items": {
             "type": "string"
           }
+        },
+        "watermarkDropShadowPath": {
+          "description": "Watermark drop shadow",
+          "type": "string"
+        },
+        "craftedBackgroundPath": {
+          "description": "Reverse drop shadow for crafted icon identifier",
+          "type": "string"
+        },
+        "featuredItemFlagPath": {
+          "description": "Teal flag for featured item watermarks",
+          "type": "string"
+        },
+        "masterworkOverlayPath": {
+          "description": "Gold masterwork glow",
+          "type": "string"
+        },
+        "craftedOverlayPath": {
+          "description": "Crafted weapon overlay path",
+          "type": "string"
+        },
+        "enhancedItemOverlayPath": {
+          "description": "Enhanced item overlay",
+          "type": "string"
+        },
+        "holofoilBackgroundOverlayPath": {
+          "description": "Layer between item and color background to denote holofoil status, introduced in v736",
+          "type": "string"
+        },
+        "holofoil900BackgroundOverlayPath": {
+          "description": "Layer between item and color background to denote holofoil status, introduced in v900",
+          "type": "string"
+        },
+        "holofoil900AnimatedBackgroundOverlayPath": {
+          "description": "Layer between item and color background to denote holofoil status, introduced in v900, animated",
+          "type": "string"
+        },
+        "universalOrnamentBackgroundOverlayPath": {
+          "description": "Layer between item and color background to denote universal ornament status",
+          "type": "string"
         },
         "hash": {
           "format": "uint32",

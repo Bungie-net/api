@@ -6,6 +6,10 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2025-08-19 Icon Library 
+- Added several useful layers for Inventory Item Icons to `DestinyInventoryItemConstantsDefinition`.
+- Added content table `DestinyIconDefinition` with icon layer URL Strings. Currently only Inventory Item Icons will have their layers available. 
+
 ## 2025-08-05 Follow-up for The Edge of Fate
 - Added `isHolofoil` and `isAdept` to `DestinyInventoryItemDefinition`.
 - Fixed `DestinyItemFilterDefinition` and renamed `setItems` to `allowedItems`.

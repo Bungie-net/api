@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.2"
+    "version": "2.21.3"
   },
   "servers": [
     {
@@ -9394,6 +9394,42 @@
             }
           }
         }
+      },
+      "Destiny.Definitions.Inventory.DestinyIconDefinition": {
+        "type": "object",
+        "properties": {
+          "foreground": {
+            "type": "string"
+          },
+          "background": {
+            "type": "string"
+          },
+          "secondaryBackground": {
+            "type": "string"
+          },
+          "specialBackground": {
+            "type": "string"
+          },
+          "highResForeground": {
+            "type": "string"
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "Lists of icons that can be used for a variety of purposes",
+        "x-mobile-manifest-name": "icons"
       },
       "Destiny.DestinyStatAggregationType": {
         "enum": [
@@ -39905,6 +39941,16 @@
             "x-dictionary-key": {
               "type": "string"
             }
+          },
+          "scoreboardValues": {
+            "type": "object",
+            "additionalProperties": {
+              "$ref": "#/components/schemas/Destiny.HistoricalStats.DestinyHistoricalStatsValue"
+            },
+            "description": "Collection of stats from the player scoreboard in this activity.",
+            "x-dictionary-key": {
+              "type": "string"
+            }
           }
         }
       },
@@ -44931,6 +44977,46 @@
               "type": "string"
             },
             "description": "Gear tier overlay images"
+          },
+          "watermarkDropShadowPath": {
+            "type": "string",
+            "description": "Watermark drop shadow"
+          },
+          "craftedBackgroundPath": {
+            "type": "string",
+            "description": "Reverse drop shadow for crafted icon identifier"
+          },
+          "featuredItemFlagPath": {
+            "type": "string",
+            "description": "Teal flag for featured item watermarks"
+          },
+          "masterworkOverlayPath": {
+            "type": "string",
+            "description": "Gold masterwork glow"
+          },
+          "craftedOverlayPath": {
+            "type": "string",
+            "description": "Crafted weapon overlay path"
+          },
+          "enhancedItemOverlayPath": {
+            "type": "string",
+            "description": "Enhanced item overlay"
+          },
+          "holofoilBackgroundOverlayPath": {
+            "type": "string",
+            "description": "Layer between item and color background to denote holofoil status, introduced in v736"
+          },
+          "holofoil900BackgroundOverlayPath": {
+            "type": "string",
+            "description": "Layer between item and color background to denote holofoil status, introduced in v900"
+          },
+          "holofoil900AnimatedBackgroundOverlayPath": {
+            "type": "string",
+            "description": "Layer between item and color background to denote holofoil status, introduced in v900, animated"
+          },
+          "universalOrnamentBackgroundOverlayPath": {
+            "type": "string",
+            "description": "Layer between item and color background to denote universal ornament status"
           },
           "hash": {
             "type": "integer",
