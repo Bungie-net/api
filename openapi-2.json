@@ -12506,6 +12506,13 @@
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
           "type": "string"
         },
+        "iconHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Inventory.DestinyIconDefinition"
+          }
+        },
         "iconSequences": {
           "type": "array",
           "items": {
@@ -12759,6 +12766,13 @@
         "icon": {
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
           "type": "string"
+        },
+        "iconHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Inventory.DestinyIconDefinition"
+          }
         },
         "iconSequences": {
           "type": "array",
@@ -15395,6 +15409,13 @@
         "icon": {
           "description": "Note that \"icon\" is sometimes misleading, and should be interpreted in the context of the entity. For instance, in Destiny 1 the DestinyRecordBookDefinition's icon was a big picture of a book.\r\nBut usually, it will be a small square image that you can use as... well, an icon.\r\nThey are currently represented as 96px x 96px images.",
           "type": "string"
+        },
+        "iconHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Inventory.DestinyIconDefinition"
+          }
         },
         "iconSequences": {
           "type": "array",
