@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.3"
+    "version": "2.21.4"
   },
   "servers": [
     {
@@ -43932,6 +43932,274 @@
           }
         }
       },
+      "Destiny.Definitions.Common.DestinyGlobalConstantsDefinition": {
+        "type": "object",
+        "properties": {
+          "pathfinderConstants": {
+            "type": "object",
+            "allOf": [
+              {
+                "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyPathfinderConstantsDefinition"
+              }
+            ],
+            "description": "Assorted constants for Pathfinder objectives"
+          },
+          "collectionsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "collectionBadgesRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "activeTriumphsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "activeSealsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "legacyTriumphsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "legacySealsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "medalsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "exoticCatalystsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "loreRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "metricsRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "craftingRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "guardianRanksRootNodeHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "seasonalHubEventCardHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinyEventCardDefinition"
+            }
+          },
+          "destinyRewardPassRankSealImages": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyRewardPassRankSealImages"
+          },
+          "destinySeasonalHubRankIconImages": {
+            "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinySeasonalHubRankIconImages"
+          },
+          "armorArchetypePlugSetHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Sockets.DestinyPlugSetDefinition"
+            }
+          },
+          "featuredItemsListHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Inventory.DestinyItemFilterDefinition"
+            }
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "x-mobile-manifest-name": "GlobalConstants"
+      },
+      "Destiny.Definitions.Common.DestinyPathfinderConstantsDefinition": {
+        "type": "object",
+        "properties": {
+          "thePaleHeartPathfinderRootNodeHash": {
+            "type": "integer",
+            "description": "Pathfinder root node for The Pale Heart",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "allPathfinderRootNodeHashes": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "Root presentation nodes for all currently valid Pathfinder boards",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
+            }
+          },
+          "pathfinderTreeTiers": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "The current shape of Pathfinder boards, where a Pathfinder board is stored as as flat list of Records. The key of this dictionary is the index at which a tier starts, and the value is the total number of objectives in the tier.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "pathfinderTopology": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "integer",
+                "format": "uint32"
+              }
+            },
+            "description": "The topology of the Pathfinder board. The key is the index of the Record in the Pathfinder board, and the value is a list of the indices of Records that are connected to the Key Record. Using this topology, clients can ascertain if a Record can be unlocked, by checking if the objective of any connected Record has been completed and/or claimed.",
+            "x-dictionary-key": {
+              "type": "integer",
+              "format": "uint32"
+            }
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        }
+      },
+      "Destiny.Definitions.Common.DestinyRewardPassRankSealImages": {
+        "type": "object",
+        "properties": {
+          "rewardPassRankSealImagePath": {
+            "type": "string"
+          },
+          "rewardPassRankSealPremiumImagePath": {
+            "type": "string"
+          },
+          "rewardPassRankSealPrestigeImagePath": {
+            "type": "string"
+          },
+          "rewardPassRankSealPremiumPrestigeImagePath": {
+            "type": "string"
+          }
+        }
+      },
+      "Destiny.Definitions.Common.DestinySeasonalHubRankIconImages": {
+        "type": "object",
+        "properties": {
+          "seasonalHubRankIconUnearned": {
+            "type": "string"
+          },
+          "seasonalHubRankIconEarning": {
+            "type": "string"
+          },
+          "seasonalHubRankIconActive": {
+            "type": "string"
+          }
+        }
+      },
+      "Destiny.Definitions.Inventory.DestinyItemFilterDefinition": {
+        "type": "object",
+        "properties": {
+          "allowedItems": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "uint32"
+            },
+            "description": "The items in this set",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
+            }
+          },
+          "hash": {
+            "type": "integer",
+            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
+            "format": "uint32"
+          },
+          "index": {
+            "type": "integer",
+            "description": "The index of the entity as it was found in the investment tables.",
+            "format": "int32"
+          },
+          "redacted": {
+            "type": "boolean",
+            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
+          }
+        },
+        "description": "Lists of items that can be used for a variety of purposes, including featuring them as new gear",
+        "x-mobile-manifest-name": "itemFilters"
+      },
       "Destiny.Definitions.Loadouts.DestinyLoadoutConstantsDefinition": {
         "type": "object",
         "properties": {
@@ -45055,38 +45323,6 @@
           }
         },
         "x-mobile-manifest-name": "InventoryItemConstants"
-      },
-      "Destiny.Definitions.Inventory.DestinyItemFilterDefinition": {
-        "type": "object",
-        "properties": {
-          "allowedItems": {
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "uint32"
-            },
-            "description": "The items in this set",
-            "x-mapped-definition": {
-              "$ref": "#/components/schemas/Destiny.Definitions.DestinyInventoryItemDefinition"
-            }
-          },
-          "hash": {
-            "type": "integer",
-            "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
-            "format": "uint32"
-          },
-          "index": {
-            "type": "integer",
-            "description": "The index of the entity as it was found in the investment tables.",
-            "format": "int32"
-          },
-          "redacted": {
-            "type": "boolean",
-            "description": "If this is true, then there is an entity with this identifier/type combination, but BNet is not yet allowed to show it. Sorry!"
-          }
-        },
-        "description": "Lists of items that can be used for a variety of purposes, including featuring them as new gear",
-        "x-mobile-manifest-name": "itemFilters"
       },
       "User.EmailSettings": {
         "type": "object",

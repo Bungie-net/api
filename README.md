@@ -6,6 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2025-08-26 Destiny Global Constants Definition
+- Finally added specs for `DestinyGlobalConstantsDefinition`, but this has existed for a while now. Sorry!
+
 ## 2025-08-19 Item Icon Layers and PGCR Scoreboards
 - Added `DestinyIconDefinition` for individual inventory item icon layers.
   - Added `iconHash` to `DestinyDisplayPropertiesDefinition` for inventory item icons only.
