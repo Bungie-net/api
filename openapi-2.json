@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.4"
+    "version": "2.21.5"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -16814,6 +16814,15 @@
             "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionDefinition"
           }
         },
+        "selectableSkullCollections": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Destiny.Definitions.DestinyActivitySelectableSkullCollections"
+          },
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Activities.DestinyActivityDifficultyTierCollectionDefinition"
+          }
+        },
         "playlistItems": {
           "description": "Represents all of the possible activities that could be played in the Playlist, along with information that we can use to determine if they are active at the present time.",
           "type": "array",
@@ -18084,6 +18093,23 @@
       "properties": {
         "displayString": {
           "type": "string"
+        }
+      }
+    },
+    "Destiny.Definitions.DestinyActivitySelectableSkullCollections": {
+      "type": "object",
+      "properties": {
+        "selectableSkullCollectionHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
+        "minimumTierRank": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "maximumTierRank": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     },
@@ -32478,6 +32504,14 @@
             "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonDefinition"
           }
         },
+        "currentSeasonPassHash": {
+          "format": "uint32",
+          "description": "If populated, this is a reference to the season pass that is currently active.",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
+          }
+        },
         "currentSeasonRewardPowerCap": {
           "format": "int32",
           "description": "If populated, this is the reward power cap for the current season.",
@@ -40159,7 +40193,8 @@
         },
         {
           "numericValue": "4096",
-          "identifier": "AlreadyOwned"
+          "identifier": "AlreadyOwned",
+          "description": "DEPRECATED - Owned items use the NoUnlock state and a failure string indicating the proper display state."
         },
         {
           "numericValue": "8192",
@@ -40214,7 +40249,8 @@
         "2097152",
         "4194304",
         "8388608",
-        "16777216"
+        "16777216",
+        "33554432"
       ],
       "type": "integer",
       "x-enum-values": [
@@ -40342,6 +40378,10 @@
         {
           "numericValue": "16777216",
           "identifier": "ArtifactPerkBoosted"
+        },
+        {
+          "numericValue": "33554432",
+          "identifier": "SeasonalArchiveFree"
         }
       ]
     },
@@ -45676,6 +45716,13 @@
             "$ref": "#/definitions/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
           }
         },
+        "globalConstantsHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Common.DestinyGlobalConstantsDefinition"
+          }
+        },
         "loadoutConstantsHash": {
           "format": "uint32",
           "type": "integer",
@@ -45796,6 +45843,13 @@
           "type": "integer",
           "x-mapped-definition": {
             "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+          }
+        },
+        "currentSeasonPassHash": {
+          "format": "uint32",
+          "type": "integer",
+          "x-mapped-definition": {
+            "$ref": "#/definitions/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
           }
         },
         "seasonalChallengesPresentationNodeHash": {

@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.4"
+    "version": "2.21.5"
   },
   "servers": [
     {
@@ -13782,6 +13782,15 @@
               "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivitySelectableSkullCollectionDefinition"
             }
           },
+          "selectableSkullCollections": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Destiny.Definitions.DestinyActivitySelectableSkullCollections"
+            },
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Activities.DestinyActivityDifficultyTierCollectionDefinition"
+            }
+          },
           "playlistItems": {
             "type": "array",
             "items": {
@@ -15069,6 +15078,23 @@
         "properties": {
           "displayString": {
             "type": "string"
+          }
+        }
+      },
+      "Destiny.Definitions.DestinyActivitySelectableSkullCollections": {
+        "type": "object",
+        "properties": {
+          "selectableSkullCollectionHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
+          "minimumTierRank": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "maximumTierRank": {
+            "type": "integer",
+            "format": "int32"
           }
         }
       },
@@ -29754,6 +29780,15 @@
               "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
             }
           },
+          "currentSeasonPassHash": {
+            "type": "integer",
+            "description": "If populated, this is a reference to the season pass that is currently active.",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
+            }
+          },
           "currentSeasonRewardPowerCap": {
             "type": "integer",
             "description": "If populated, this is the reward power cap for the current season.",
@@ -37947,7 +37982,8 @@
           },
           {
             "numericValue": "4096",
-            "identifier": "AlreadyOwned"
+            "identifier": "AlreadyOwned",
+            "description": "DEPRECATED - Owned items use the NoUnlock state and a failure string indicating the proper display state."
           },
           {
             "numericValue": "8192",
@@ -38001,7 +38037,8 @@
           "2097152",
           "4194304",
           "8388608",
-          "16777216"
+          "16777216",
+          "33554432"
         ],
         "type": "integer",
         "description": "The possible states of Destiny Profile Records. IMPORTANT: Any given item can theoretically have many of these states simultaneously: as a result, this was altered to be a flags enumeration/bitmask for v3.2.0.",
@@ -38131,6 +38168,10 @@
           {
             "numericValue": "16777216",
             "identifier": "ArtifactPerkBoosted"
+          },
+          {
+            "numericValue": "33554432",
+            "identifier": "SeasonalArchiveFree"
           }
         ],
         "x-enum-is-bitmask": true
@@ -43779,6 +43820,13 @@
               "$ref": "#/components/schemas/Destiny.Definitions.Presentation.DestinyPresentationNodeDefinition"
             }
           },
+          "globalConstantsHash": {
+            "type": "integer",
+            "format": "uint32",
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Common.DestinyGlobalConstantsDefinition"
+            }
+          },
           "loadoutConstantsHash": {
             "type": "integer",
             "format": "uint32",
@@ -43900,6 +43948,14 @@
             "nullable": true,
             "x-mapped-definition": {
               "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonDefinition"
+            }
+          },
+          "currentSeasonPassHash": {
+            "type": "integer",
+            "format": "uint32",
+            "nullable": true,
+            "x-mapped-definition": {
+              "$ref": "#/components/schemas/Destiny.Definitions.Seasons.DestinySeasonPassDefinition"
             }
           },
           "seasonalChallengesPresentationNodeHash": {
