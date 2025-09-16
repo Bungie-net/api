@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.5"
+    "version": "2.21.6"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -47196,7 +47196,19 @@
           "type": "string"
         },
         "masterworkOverlayPath": {
-          "description": "Gold masterwork glow",
+          "description": "Gold masterwork glow for non-Exotic items",
+          "type": "string"
+        },
+        "masterworkExoticOverlayPath": {
+          "description": "Gold masterwork glow for Exotic items",
+          "type": "string"
+        },
+        "masterworkBorderedOverlayPath": {
+          "description": "Gold masterwork glow for non-Exotic Items, with a gold border",
+          "type": "string"
+        },
+        "masterworkExoticBorderedOverlayPath": {
+          "description": "Gold masterwork glow for Exotic items, with a gold border",
           "type": "string"
         },
         "craftedOverlayPath": {
@@ -47221,6 +47233,14 @@
         },
         "universalOrnamentBackgroundOverlayPath": {
           "description": "Layer between item and color background to denote universal ornament status",
+          "type": "string"
+        },
+        "universalOrnamentLegendaryBackgroundOverlayPath": {
+          "description": "Layer between a legendary item and its color background to denote universal ornament status",
+          "type": "string"
+        },
+        "universalOrnamentExoticBackgroundOverlayPath": {
+          "description": "Layer between an exotic item and its color background to denote universal ornament status",
           "type": "string"
         },
         "hash": {

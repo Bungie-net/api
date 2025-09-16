@@ -6,6 +6,9 @@ Documentation as one single, gigantic page: https://bungie-net.github.io
 
 This section will be added to as time goes by - we're working with it as we go!
 
+## 2025-09-10 Extra Item Icon Layers 
+- Added extra static item icon layer image paths to `DestinyInventoryItemConstantsDefinition`.
+
 ## 2025-09-10 Update for Ash & Iron
 - Added `selectableSkullCollections` to `DestinyActivityDefinition`.
 - Added `currentSeasonPassHash` to `DestinyProfileComponent` and `Destiny2CoreSettings`.
