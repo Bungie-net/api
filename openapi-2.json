@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.9"
+    "version": "2.21.10"
   },
   "host": "www.bungie.net",
   "basePath": "/Platform",
@@ -55,6 +55,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -468,6 +469,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadBasicUserProfile"
             ]
@@ -2138,6 +2140,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -2212,6 +2215,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -2568,6 +2572,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2635,6 +2640,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2702,6 +2708,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2769,6 +2776,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2844,6 +2852,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3082,6 +3091,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3165,6 +3175,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3247,6 +3258,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3330,6 +3342,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3405,6 +3418,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3479,6 +3493,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3628,6 +3643,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3702,6 +3718,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3768,6 +3785,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3837,6 +3855,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3906,6 +3925,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3991,6 +4011,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4057,6 +4078,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4223,6 +4245,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -4383,6 +4411,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4465,6 +4494,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -4522,6 +4552,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -4579,6 +4610,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -4653,6 +4685,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -4727,6 +4760,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -4804,6 +4838,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -4870,6 +4905,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadAndApplyTokens"
             ]
@@ -4947,6 +4983,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadAndApplyTokens"
             ]
@@ -5378,7 +5415,8 @@
               }
             }
           }
-        }
+        },
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/": {
@@ -5429,6 +5467,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "The response contract for GetDestinyCharacter, with components that can be returned for character and item-level data.",
@@ -5488,6 +5532,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Represents a runtime instance of a user's milestone status. Live Milestone data should be combined with DestinyMilestoneDefinition data to show the user a picture of what is available for them to do in the game, and their status in regards to said \"things to do.\" Consider it a big, wonky to-do list, or Advisors 3.0 for those who remember the Destiny 1 API.",
@@ -5723,6 +5773,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "A response containing all of the components for all requested vendors.",
@@ -5761,7 +5817,8 @@
               }
             }
           }
-        }
+        },
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Vendors/{vendorHash}/": {
@@ -5820,6 +5877,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "A response containing all of the components for a vendor.",
@@ -5858,7 +5921,8 @@
               }
             }
           }
-        }
+        },
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/Vendors/": {
@@ -5984,6 +6048,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Returns the detailed information about a Collectible Presentation Node and any Collectibles that are direct descendants.",
@@ -6036,6 +6106,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6097,6 +6168,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6158,6 +6230,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6219,6 +6292,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6279,6 +6353,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6340,6 +6415,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6401,6 +6477,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6462,6 +6539,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6523,6 +6601,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6584,6 +6663,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6646,6 +6726,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -6708,6 +6789,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -6837,6 +6919,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6975,6 +7058,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -7048,6 +7137,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -7139,6 +7234,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -7241,6 +7342,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -7938,6 +8045,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -7993,6 +8101,12 @@
         "operationId": "Destiny2.AwaProvideAuthorizationResult",
         "parameters": [],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -8054,6 +8168,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -8377,6 +8492,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -8504,6 +8620,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -8614,6 +8731,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -8716,6 +8834,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -8790,6 +8909,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -8847,6 +8967,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -8904,6 +9025,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -8969,6 +9091,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -9034,6 +9157,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -9099,6 +9223,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -9164,6 +9289,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -9229,6 +9355,7 @@
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -9300,6 +9427,12 @@
           }
         ],
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "responses": {
           "200": {
             "description": "Look at the Response property for more information about the nature of this response",
@@ -42856,6 +42989,10 @@
             "type": "string"
           }
         },
+        "currentReleaseTraitHash": {
+          "format": "uint32",
+          "type": "integer"
+        },
         "hash": {
           "format": "uint32",
           "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -44461,6 +44598,11 @@
       }
     }
   },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "tags": [
     {
       "name": "App",

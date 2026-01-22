@@ -13,7 +13,7 @@
       "name": "BSD License 2.0",
       "url": "https://github.com/Bungie-net/api/blob/master/LICENSE"
     },
-    "version": "2.21.9"
+    "version": "2.21.10"
   },
   "servers": [
     {
@@ -64,11 +64,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Applications.ApiUsage"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -256,11 +263,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/User.UserMembershipData"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadBasicUserProfile"
             ]
@@ -1377,11 +1391,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -1431,11 +1452,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfGroupV2Card"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -1633,11 +1661,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -1679,11 +1714,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -1725,11 +1767,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -1771,11 +1820,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int64"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -1827,11 +1883,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int64"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2003,11 +2066,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2064,11 +2134,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GroupsV2.GroupMemberLeaveResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2135,11 +2212,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2196,11 +2280,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2242,11 +2333,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfGroupBan"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2288,11 +2386,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfGroupEditHistory"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2388,11 +2493,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfGroupMemberApplication"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2434,11 +2546,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfGroupMemberApplication"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2480,11 +2599,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfEntityActionResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2526,11 +2652,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfEntityActionResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2572,11 +2705,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfEntityActionResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2643,11 +2783,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2689,11 +2836,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfEntityActionResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -2826,9 +2980,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GroupsV2.GroupMembershipSearchResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/GroupV2/User/Potential/{membershipType}/{membershipId}/{filter}/{groupType}/": {
@@ -2962,11 +3128,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GroupsV2.GroupApplicationResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3023,11 +3196,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/GroupsV2.GroupApplicationResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdminGroups"
             ]
@@ -3048,11 +3228,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -3083,11 +3270,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -3129,11 +3323,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -3175,11 +3376,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/CEListOfPartnerOfferSkuHistoryResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -3221,11 +3429,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Tokens.PartnerRewardHistoryResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "PartnerOfferGrant"
             ]
@@ -3257,11 +3472,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/DictionaryOfstringAndBungieRewardDisplay"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadAndApplyTokens"
             ]
@@ -3308,11 +3530,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/DictionaryOfstringAndBungieRewardDisplay"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadAndApplyTokens"
             ]
@@ -3548,7 +3777,8 @@
             "$ref": "#/components/responses/Destiny.Responses.DestinyProfileResponse"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/": {
@@ -3617,9 +3847,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyCharacterResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/Destiny2/Clan/{groupId}/WeeklyRewardState/": {
@@ -3646,9 +3888,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Milestones.DestinyMilestone"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/Destiny2/Clan/ClanBannerDictionary/": {
@@ -3820,9 +4074,22 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyVendorsResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/{membershipType}/Profile/{destinyMembershipId}/Character/{characterId}/Vendors/{vendorHash}/": {
@@ -3901,9 +4168,22 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyVendorResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
+        "x-auth-context-dependent": true
       }
     },
     "/Destiny2/Vendors/": {
@@ -4020,9 +4300,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyCollectibleNodeDetailResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/Destiny2/Actions/Items/TransferItem/": {
@@ -4048,11 +4340,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4086,11 +4385,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4124,11 +4430,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4162,11 +4475,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.DestinyEquipItemResults"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4200,11 +4520,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4238,11 +4565,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4276,11 +4610,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4314,11 +4655,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4352,11 +4700,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4390,11 +4745,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4429,11 +4791,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyItemChangeResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -4469,11 +4838,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Responses.DestinyItemChangeResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "MoveEquipDestinyItems"
             ]
@@ -4548,11 +4924,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -4628,9 +5011,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.HistoricalStats.DestinyLeaderboardResults"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "x-preview": true
       }
     },
@@ -4667,9 +5062,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/ListOfDestinyClanAggregateStat"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "x-preview": true
       }
     },
@@ -4738,9 +5145,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.HistoricalStats.DestinyLeaderboardResults"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "x-preview": true
       }
     },
@@ -4819,9 +5238,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.HistoricalStats.DestinyLeaderboardResults"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ],
         "x-preview": true
       }
     },
@@ -5315,11 +5746,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Advanced.AwaInitializeResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -5350,9 +5788,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/Destiny2/Awa/GetActionToken/{correlationId}/": {
@@ -5378,11 +5828,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Destiny.Advanced.AwaAuthorizationResult"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "AdvancedWriteActions"
             ]
@@ -5570,11 +6027,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/int32"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -5698,11 +6162,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfFireteamSummary"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -5802,11 +6273,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfFireteamSummary"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -5888,11 +6366,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/SearchResultOfFireteamResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -5934,11 +6419,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Fireteam.FireteamResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadGroups"
             ]
@@ -5959,11 +6451,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Social.Friends.BungieFriendListResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -5984,11 +6483,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Social.Friends.BungieFriendRequestListResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "ReadUserData"
             ]
@@ -6019,11 +6525,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6054,11 +6567,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6089,11 +6609,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6124,11 +6651,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6159,11 +6693,18 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/boolean"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
         "deprecated": false,
         "security": [
           {
+            "apiKey": [],
             "oauth2": [
               "BnetWrite"
             ]
@@ -6208,9 +6749,21 @@
         "responses": {
           "200": {
             "$ref": "#/components/responses/Social.Friends.PlatformFriendResponse"
+          },
+          "401": {
+            "$ref": "#/components/responses/Unauthorized"
+          },
+          "403": {
+            "$ref": "#/components/responses/Forbidden"
           }
         },
-        "deprecated": false
+        "deprecated": false,
+        "security": [
+          {
+            "apiKey": [],
+            "oauth2": []
+          }
+        ]
       }
     },
     "/GetAvailableLocales/": {
@@ -40980,6 +41533,10 @@
               "format": "uint32"
             }
           },
+          "currentReleaseTraitHash": {
+            "type": "integer",
+            "format": "uint32"
+          },
           "hash": {
             "type": "integer",
             "description": "The unique identifier for this entity. Guaranteed to be unique for the type of entity, but not globally.\r\nWhen entities refer to each other in Destiny content, it is this hash that they are referring to.",
@@ -46371,6 +46928,12 @@
         "schema": {
           "type": "string"
         }
+      },
+      "WWW-Authenticate": {
+        "description": "Auth challenge details for 401 responses.",
+        "schema": {
+          "type": "string"
+        }
       }
     },
     "securitySchemes": {
@@ -46410,6 +46973,11 @@
       }
     }
   },
+  "security": [
+    {
+      "apiKey": []
+    }
+  ],
   "tags": [
     {
       "name": "App",

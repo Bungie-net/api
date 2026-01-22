@@ -1,10 +1,274 @@
 # Changelog
 
+## 2026-01-13 - 2.21.10 Release
+- Resolved certain Renegades activities PGCR screenshots and activity modes to be incorrect
+- Added Latest Release Trait hash to Constants which can be used to drive the New label for activities
+- Resolved [###Destiny...###: Internal String Replacement #2047](https://github.com/Bungie-net/api/issues/2047)
+- Resolved [EquipableItemSet.displayProperties.name do not match contemporary armor set names #2040](https://github.com/Bungie-net/api/issues/2040)
+- Resolved [Instances of items having the wrong iconHash def properties #2038](https://github.com/Bungie-net/api/issues/2038)
+- Resolved [Bug: Fully Masterworked Armor V3 Items Return Incorrect Stats via API #2000](https://github.com/Bungie-net/api/issues/2000)
+- Added PGCR screenshot for D2 Equilibrium Dungeon
+- Implemented [Add new API attributes to indentify endpoints with authorization #2008](https://github.com/Bungie-net/api/issues/2008)
+- Added vanguardAlertsFireteamFinderActivityGraphRootNodeHash to GlobalConstants for the convenience of getting the vanguard alerts root node
+
+## 2025-12-02 Update for Renegades 
+- Added `unclaimedOrderRewards` and `orderRewardsUnlockValueHashesToRewardItemHashes` to offer a method of getting the number of type of earned, unclaimed rewards from Orders. 
+- Added images for Featured Quests. 
+
+## 2025-11-18 Portal Root Nodes and enum value fixes 
+- Added `portalActivityGraphRootNodesWithIcons` to `DestinyGlobalConstantsDefinition` to assist Portal representation.
+- Fix enum values being when Strings when intended to be Integers.
+
+## 2025-10-14 Update for Portal Activities
+- Added `curatorBlockDefinition` and `durationEstimate` to `DestinyActivityDefinition`.
+- Added `difficultyTierCollections` and `selectableSkullCollections` to `DestinyCharacterActivitiesComponent`.
+
+## 2025-09-26 Nullable Enum Properties
+- Updated nullable enum type properties to reference the enum definitions, rather than redefining them.
+
+## 2025-09-16 Extra Item Icon Layers 
+- Added extra static item icon layer image paths to `DestinyInventoryItemConstantsDefinition`.
+
+## 2025-09-10 Update for Ash & Iron
+- Added `selectableSkullCollections` to `DestinyActivityDefinition`.
+- Added `currentSeasonPassHash` to `DestinyProfileComponent` and `Destiny2CoreSettings`.
+
+## 2025-08-26 Destiny Global Constants Definition
+- Finally added specs for `DestinyGlobalConstantsDefinition`, but this has existed for a while now. Sorry!
+
+## 2025-08-19 Item Icon Layers and PGCR Scoreboards
+- Added `DestinyIconDefinition` for individual inventory item icon layers.
+  - Added `iconHash` to `DestinyDisplayPropertiesDefinition` for inventory item icons only.
+  - Also added useful static item icon layer image paths to `DestinyInventoryItemConstantsDefinition`.
+- Added `scoreboardValues` to `DestinyPostGameCarnageReportExtendedData` for Crucible player scores, reward scores, multipliers, and more.
+  - There will be some overlap between `scoreboardValues` and other existing stat values in PGCRs.
+
+## 2025-08-05 Follow-up for The Edge of Fate
+- Added `isHolofoil` and `isAdept` to `DestinyInventoryItemDefinition`.
+- Fixed `DestinyItemFilterDefinition` and renamed `setItems` to `allowedItems`.
+
+## 2025-07-29 Follow-up for The Edge of Fate
+- Added account-owned `seasonPassHashes` to `DestinyProfileComponent`.
+- Added `visibleRewards` to `DestinyActvity`, which includes Bonus Focus rewards from the Portal.
+- Fixed the incorrect enum flag values for `DestinyGameVersions`.
+- Removed Fireteam Finder API specs that are not available to 3rd-party apps.
+
+## 2025-07-15 Update for The Edge of Fate
+- Items
+  - Added support for featured items and armor sets in `DestinyInventoryItemDefinition`.
+  - Added the gear tier to `DestinyItemInstanceComponent`.
+  - Added `DestinyInventoryItemConstantsDefinition` for gear tier icon overlays.
+  - Added the featured items list and armor archetype plug set hash to `Destiny2CoreSettings`.
+- Activities
+  - Added support for activity families, traits, difficulty tiers, and selectable skulls in `DestinyActivityDefinition`.
+  - Added the difficulty tier index and selected skull hashes to `DestinyPostGameCarnageReportData`.
+- Seasons
+  - Added `seasonPassList` to support two reward passes in a `DestinySeasonDefinition`.
+  - Added the `seasonalHubEventCardHash` to `Destiny2CoreSettings`.
+
+## 2025-05-09 Update for Rite of the Nine 
+- Added new fields to `DestinyEventCardDefinition` to support Heavy Metal event cards. 
+  - These fields are `eventCardCurrencyList`, `weeklyChallengesPresentationNodeHash`, and `rewardProgressionHash`.
+- Fixed the `FireteamFinderApplicantNotInGame` Fireteam Finder error code. 
+  - Now it is unique, rather than the same integer as another error code. 
+
+## 2024-12-08 Update for the Dawning
+- Added support for socket override definitions and states on season passes.
+  - Added `socketOverrides` to `DestinyProgressionRewardItemQuantity` definitions to reference socket types and plug items.
+  - Added `rewardItemSocketOverrideStates` to `DestinyProgression` for season pass rewards.
+    - This includes `rewardItemStats` for armor rolls and `itemState` for Deepsight red-border weapons.
+- Added support for virtual stack sizes on material requirements.
+  - Added `hasVirtualStackSize` to `DestinyMaterialRequirement` definitions, which would require the new material requirement states.
+  - Added `materialRequirementSetStates` to `DestinyCurrenciesComponent` with the `CurrencyLookups` component.
+    - The `materialRequirementStates` include an `itemHash`, a required `count` and a current `stackSize` (which may be virtual).
+
+## 2024-10-08 Update for Episode: Revenant
+- Added `DestinyVendorItemComponentSet` to return `DestinyItemComponent` objects for Vendor sale items.
+  - Request the `itemComponents` with the `ItemCommonData` component type.
+  - `DestinyItemComponent.state` provides Deepsight red-border status.
+  - `DestinyItemComponent.tooltipNotificationIndexes` provides tooltips, relevant for the new potions.
+- Added `stackSize` and `maxStackSize` to socket plugs.
+  - The `stackSize` shows the number of potions you've brewed in the Tonic Capsule sockets.
+
+## 2024-07-16 Update for Lost Sectors
+
+- Added `availableActivityInteractables` to `DestinyCharacterActivitiesComponent`.
+  - Finally adds support for today's Expert and Master Lost Sector activities.
+  - Also includes in-world activity interactables (totems) for campaign missions and the like.
+  - Cross-reference with `availableActivities` for those that can also be launched from the Director.
+
+## 2024-07-10 Update for The Final Shape
+
+- Added `acts` to `DestinySeasonDefinition` for the new Episodes.
+- Added an `isVisible` flag to `DestinyArtifactTierItem`.
+- Added a new `DestinyActivityModeType` enum value for 'Relic' activities.
+- Added a `recordTypeName` to `DestinyRecordDefinition`.
+- Replaced `obscuredString` with `obscuredName` and `obscuredDescription` on record definition state blocks.
+- Added `commendationNodePercentagesByHash` to `DestinySocialCommendationsComponent`.
+- Added a `tintedIcon` to `DestinySocialCommendationNodeDefinition`.
+- Added `guardianRankHashes` to `DestinyGuardianRankConstantsDefinition`.
+- Added the `renewedGuardianRank` to `DestinyProfileComponent`.
+
+## 2023-02-28 Update for Lightfall
+
+- Added Loadouts, Guardian Ranks, and Commendations!
+
+## 2022-12-06 Update for the Season of the Seraph
+
+- Added `responseMintedTimestamp` and `secondaryComponentsMintedTimestamp` to DestinyProfileResponse.
+  - Use these new values to handle stale cached responses from the `Destiny2.GetProfile` API.
+- Added new EquipFailureReason enum flag values, and renamed `ItemNotOnCharacter` to `ItemWrapped`.
+- Added new `categoryfilter` and `includebody` parameters to the `/Content/Rss/NewsArticle/<page>/` API.
+  - Going forward, new news content will be available via the RSS feeds and this API.
+
+## 2022-08-23 Update for the Season of Plunder
+
+- Added Support for Epic Games accounts.
+
+## 2022-07-19 Update for Solstice 2022
+
+- Added `DestinyEventCardDefinition` for the new seasonal Event Card feature.
+  - The Event Card challenges root node has three child nodes (one for each character class), so clients should respect node visibility to show the appropriate records.
+- Added new properties for `eventCardHashesOwned` and `activeEventCardHash` to `DestinyProfileComponent`.
+
+## 2022-05-24 Update for the Season of the Haunted
+
+- Added new `DestinyActivityModeType` enum values for Zone Control, Rift, and Iron Banner: Rift.
+- Added a `displayHint` string property to `DestinyTraitDefinition`.
+- Added a `shouldShowLargeIcons` boolean property to `DestinyRecordDefinition`.
+- Added a new `DestinyVendorItemState` enum value for `Locked` sale items.
+
+## 2022-05-01 Update for housekeeping
+
+- Added a definition mapping and specification for `DestinySandboxPatternDefinition`.
+- Fixed the `DestinyTraitCategoryDefinition.traitHashes` mapping to properly reference `DestinyTraitDefinition`.
+- Added a deprecation warning to `DestinyObjectiveDefinition.valueStyle`, which is no longer populated by game content.
+  - Please use `inProgressValueStyle` and `completedValueStyle` instead.
+
+## 2022-02-22 Update for The Witch Queen
+
+- Items
+  - Added new `ItemState` flag values for Shaped (`Crafted`) and Deepsight (`HighlightedObjective`) weapons.
+  - Added `DestinyItemCraftingBlockDefinition` for more details in crafting recipe (Pattern) item definitions.
+  - Added `recipeItemHash` to `DestinyItemInventoryBlockDefinition` for a reference to the crafted item's recipe (Pattern) definition.
+  - Added `craftingRequirements` to `DestinyItemSocketEntryPlugItemRandomizedDefinition` for plugs used in crafting.
+    - New 'Enhanced Trait' plug item definitions have an `inventory.tierType` value of `Common` (3) instead of `Basic` (2).
+  - Added a new `DestinyItemSubType` for `Glaive` weapons.
+- Objectives
+  - Added `uiLabel` and `uiState` properties to `DestinyObjectiveDefinition`.
+  - Added `DestinyObjectiveUiStyle` enum values for highlighted objectives (Deepsight), crafted item objectives (date, level, progress), and memento reward objectives.
+  - Added `LevelAndReward` to `DestinyUnlockValueUIStyle` for memento reward objectives.
+- Craftables
+  - Added the `craftingRootNodeHash` to `Destiny2CoreSettings` for the display of Shaping progress.
+    - The `exoticCatalystsRootNodeHash` now includes unlock progress records for weapon shaping 'Patterns' as well as Exotic Catalysts.
+  - Added `craftables` (crafting recipe items) as children of `DestinyPresentationNodeDefinition`.
+  - Added a new `Craftables` enum value for `DestinyComponentType` for use with `GetProfile`.
+  - Added `characterCraftables` state to `DestinyProfileResponse`.
+    - Only initial Shaping state is returned, not Reshaping state.
+- Material Requirements can now have non-constant values.
+  - Added `countIsConstant` for constant `count` values.
+  - Non-constant counts will have a value of `0` in the definition.
+  - We plan to add support for non-constant counts in the API, but we don't have an ETA.
+- Activities
+  - Added `activityWasStartedFromBeginning` to `DestinyPostGameCarnageReportData` as an alternative to `startingPhaseIndex`.
+  - Added a new `DestinyActivityModeType` enum value for `Offensive` activities.
+    - We plan to add another enum value for Master and Legend `LostSector` activities soon.
+
+## 2022-01-06 Update for Mapped Definition Attributes
+
+Added hash-to-definition-type mapping attributes that were missing for many contract class properties.
+
+## 2021-12-07 Update for Bungie's 30th Anniversary
+
+Added a new `InsertSocketPlugFree` API for 'free and reversible' socket actions available to 3rd-party Destiny 2 apps (no new application scopes required).
+- This includes Armor 2.0 mods, Weapon perks, Stasis abilities, Shaders, Ornaments, and Ghost Projections.
+  - Only 'randomized' or 'reusable' socket plugs items with no 'insertion material requirements' will be allowed.
+  - You will not be able to overwrite a 'non-free' plug item with a 'free' plug item (for example: replacing a Weapon mod with an 'Empty Socket Mod').
+- 3rd-party Destiny 2 apps will still not be able to spend your currencies for socket actions.
+  - As such, 3rd-party Destiny 2 apps won’t be able to apply Weapon and Armor Masterwork tiers, Weapon mods, Armor 1.0 mods, Ghost 2.0 mods, and Ship Transmat effects.
+- `Destiny2CoreSettings` includes new hash arrays for some additional restrictions:
+  - Check `insertPlugFreeProtectedPlugItemHashes` for protected plug item hashes that you can't overwrite (currently just Riven's Curse and Transcendent Blessing mods).
+  - Check `insertPlugFreeBlockedSocketTypeHashes` for blocked socket type hashes that you can't change (currently just Weapon 'Kill Tracker' sockets).
+- The `InsertSocketPlugFree` API will initially be rate-limited to 2 socket actions per-second, per-user.
+  - This rate can be adjusted based on your feedback and service stability.
+
+## 2021-11-18 Update for Bungie Name Search
+
+Added new Bungie Name search APIs with POST requests for special characters.
+- You can call these to find player names that have colons, slashes, angle brackets, etc.
+
+## 2021-10-12 Update for Uninstanced Item Perks
+
+Added support for perk state components on uninstanced items.
+- Mostly just for the Trials of Osiris 'Passage' quest items to show whether a 'Mercy' has been used or not.
+
+## 2021-09-03 Update for Display Name Search and Stasis Energy
+
+Added docs for the new Bungie Name search API and the Stasis Energy type enum value.
+
+## 2021-08-24 Update for Cross Play and the Season of the Lost
+
+Added Bungie Names and Bungie Friends.
+
+## 2021-05-25 Update for Vendor String Variables
+
+Added the 'StringVariables' component option to the D2 Vendor APIs.
+
+## 2021-05-11 Update for the Season of the Splicer
+
+Includes reward item visibility and string variables.
+- String variable placeholders (formatted as {var:1234567890}) are found in Destiny definition localized strings.
+- D2 Profile API clients can request the new StringVariables component to get per-character integer values by hash.
+- Clients can then replace the {var:(hash)} placeholders with the corresponding integer values.
+- String variables are currently used in the following places:
+  - Armor Synthesis bounties from Ada-1 (descriptions, reward names, tooltips, failure strings)
+  - A single Seasonal Challenge record description
+
+## 2021-02-09 Update for the Season of the Chosen
+
+Includes seasonal challenges, item flavor text, gilded titles, record interval rewards, and season preview definitions.
+
+## 2020-12-08 Update for Destiny 2 version 3.0.1
+
+Includes 'ApiPurchasable' values for vendor items, and 'currentlyCanRoll' for randomized socket plugs.
+
+## 2020-11-19 Update for Ghost Energy
+
+Includes new enum values for Ghost and Subclass energy types.
+
+## 2020-11-10 Update for Beyond Light and the Season of the Hunt
+
+Includes changes for Stasis, item icon watermarks, 'Active' and 'Legacy' Triumphs, and scored presentation nodes.
+
+Caveat - The new energy type for Ghost mods is not yet implemented.
+
+## 2020-07-07 Update for Bungie Day 2020
+
+Includes changes for the 'SetTrackedState' API and the current season reward power cap.
+
+## 2020-06-09 Update for Season of Arrivals
+
+Includes changes for Season of Arrivals, item versions, and power caps.
+
 ## [2.8.0] - 2020-03-10
 
 Almost a year since we last touched this changelog!
 
 For this release, we've updated content for the Season of the Worthy and Trials of Osiris, and added support for new Traits, Trait Categories, and Metrics (aka Stat Trackers). We've also added 'icon sequences' to display properties, so that all of the icon frames from the game are now included in the content definitions.
+
+## 2020-02-13 Late Winter Refresh
+
+Upkeep update.  Includes traits info and new activity types.
+
+## 2019-12-05 Winter Wishlist!  File your requests here!
+
+Go here for more information: https://github.com/Bungie-net/api/issues/1158
+
+We would love your input!  Even though we will have a very limited amount of time to work on improvements over the upcoming holiday season, it'll still be useful to know what you folks consider to be the highest priorities so that we can hopefully push in those directions in the coming year!
+
+## 2019-09-26 Pre-release Shadowkeep API Changes
+
+Head here for more information: https://github.com/Bungie-net/api/wiki/2.4.0-(Shadowkeep)-API-Changes
 
 ## [2.3.5] - 2019-03-19
 
